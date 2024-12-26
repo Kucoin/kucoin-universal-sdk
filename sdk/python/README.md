@@ -1,4 +1,7 @@
 # Python SDK Documentation
+![License Badge](https://img.shields.io/badge/license-MIT-green)  
+![Language](https://img.shields.io/badge/Python-blue)
+
 Welcome to the **Python** implementation of the KuCoin Universal SDK. This SDK is built based on KuCoin API specifications to provide a comprehensive and optimized interface for interacting with the KuCoin platform.
 
 For an overview of the project and SDKs in other languages, refer to the [Main README](https://github.com/kucoin/kucoin-universal-sdk).
@@ -9,7 +12,7 @@ For an overview of the project and SDKs in other languages, refer to the [Main R
 Install the Python SDK using `pip`:
 
 ```bash
-pip install kucoin-universal-sdk==0.1.1a
+pip install kucoin-universal-sdk==0.1.1a1
 ```
 
 ## 📖 Getting Started
@@ -80,7 +83,7 @@ if __name__ == "__main__":
 
 ```
 ## 📚 Documentation
-Official Documentation: [KuCoin API Docs](https://www.kucoin.com/docs) 
+Official Documentation: [KuCoin API Docs](https://www.kucoin.com/docs-new)  
 
 ## 📂 Examples
 

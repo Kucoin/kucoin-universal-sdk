@@ -29,8 +29,8 @@ class DefaultWsService(WebSocketService):
 
     def recovery(self):
         def recovery_loop():
-            while not self.stop_event.is_set():
-                event_triggered = self.client.reconnected_event.wait(timeout=1)
+            while not self.stop_event.wait(timeout=1):
+                event_triggered = self.client.reconnected_event.is_set()
                 if self.stop_event.is_set():
                     return
                 if event_triggered:

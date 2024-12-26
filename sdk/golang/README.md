@@ -1,4 +1,7 @@
 # Go SDK Documentation
+![License Badge](https://img.shields.io/badge/license-MIT-green)  
+![Language](https://img.shields.io/badge/Go-blue)
+
 Welcome to the **Go** implementation of the KuCoin Universal SDK. This SDK is built based on KuCoin API specifications to provide a comprehensive and optimized interface for interacting with the KuCoin platform.
 
 For an overview of the project and SDKs in other languages, refer to the [Main README](https://github.com/kucoin/kucoin-universal-sdk).
@@ -79,7 +82,7 @@ func example() {
 }
 ```
 ## 📚 Documentation
-Official Documentation: [KuCoin API Docs](https://www.kucoin.com/docs) 
+Official Documentation: [KuCoin API Docs](https://www.kucoin.com/docs-new)  
 
 ## 📂 Examples
 
