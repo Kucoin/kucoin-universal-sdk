@@ -23,7 +23,7 @@
     }
   ],
   "require": {
-    "php": ">=7.4",
+    "php": ">=7.2",
     "jms/serializer": "^3.32",
     "doctrine/annotations": "^2.0",
     "guzzlehttp/guzzle": "^7.9"

@@ -35,6 +35,10 @@ COPY --from=generator-builder /build/target/sdk-openapi-generator-1.0.0.jar /opt
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
 RUN apt-get install -y nodejs
 RUN npm install -g prettier
+RUN npm install -g @prettier/plugin-php
+RUN echo '#!/bin/sh\n\
+cd $(npm root -g) && prettier --plugin=@prettier/plugin-php --write "$@"' > /usr/local/bin/php-prettier && chmod +x /usr/local/bin/php-prettier
+
 
 ENV CGO_ENABLED=0
 ENV PATH="/usr/local/go/bin:$PATH"
@@ -44,6 +48,7 @@ ENV PATH="$GOPATH/bin:$PATH"
 ENV GO_POST_PROCESS_FILE="/usr/local/go/bin/gofmt -w"
 ENV PYTHON_POST_PROCESS_FILE="/usr/local/bin/yapf -i"
 ENV TS_POST_PROCESS_FILE="/usr/bin/prettier --write --semi --single-quote --tab-width 4 --trailing-comma all --bracket-spacing --arrow-parens always --end-of-line lf --print-width 100"
+ENV PHP_POST_PROCESS_FILE="php-prettier --write"
 
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 
