@@ -18,7 +18,7 @@ type GetStakingProductsData struct {
 	ProductUpperLimit string `json:"productUpperLimit,omitempty"`
 	// Max. user subscription amount
 	UserUpperLimit string `json:"userUpperLimit,omitempty"`
-	// Min. user subscribe amount
+	// Min. user subscription amount
 	UserLowerLimit string `json:"userLowerLimit,omitempty"`
 	// Redemption waiting period (days)
 	RedeemPeriod int32 `json:"redeemPeriod,omitempty"`
@@ -38,7 +38,7 @@ type GetStakingProductsData struct {
 	EarlyRedeemSupported int32 `json:"earlyRedeemSupported,omitempty"`
 	// Remaining product subscription amount
 	ProductRemainAmount string `json:"productRemainAmount,omitempty"`
-	// Product status: ONGOING (Subscription in progress), PENDING (Preheating Subscription), FULL (Subscribed), INTERESTING (Interest in progress)
+	// Product status: ONGOING (Subscription in progress), PENDING (Preheating Subscription), FULL (Subscribed), INTERESTING (Interest accrual in progress)
 	Status string `json:"status,omitempty"`
 	// Redemption channel: MANUAL (manual redemption), TRANS_DEMAND (transfer to corresponding demand product upon maturity), AUTO (redeem to funding account upon maturity)
 	RedeemType string `json:"redeemType,omitempty"`

@@ -16,12 +16,12 @@ class GetDepositAddressV2Req(BaseModel):
 
     Attributes:
         currency (str): currency
-        chain (str): Chain id of currency
+        chain (str): Chain ID of currency
     """
 
     currency: Optional[str] = Field(default=None, description="currency")
     chain: Optional[str] = Field(default=None,
-                                 description="Chain id of currency")
+                                 description="Chain ID of currency")
 
     __properties: ClassVar[List[str]] = ["currency", "chain"]
 
@@ -79,7 +79,7 @@ class GetDepositAddressV2ReqBuilder:
 
     def set_chain(self, value: str) -> GetDepositAddressV2ReqBuilder:
         """
-        Chain id of currency
+        Chain ID of currency
         """
         self.obj['chain'] = value
         return self

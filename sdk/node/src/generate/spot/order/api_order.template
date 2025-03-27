@@ -102,7 +102,7 @@ describe('Auto Test', ()=> {
     * /api/v1/hf/orders/{orderId}
     */
     let builder = CancelOrderByOrderIdReq.builder();
-    builder.setSymbol(?).setOrderId(?);
+    builder.setOrderId(?).setSymbol(?);
     let req = builder.build();
     let resp = api.cancelOrderByOrderId(req);
     return resp.then(result => {
@@ -356,6 +356,26 @@ describe('Auto Test', ()=> {
     let resp = api.getOpenOrders(req);
     return resp.then(result => {
         expect(result.data).toEqual(expect.anything());
+        console.log(resp);
+    });
+    })
+
+    test('getOpenOrdersByPage request test', ()=> {
+    /**
+    * getOpenOrdersByPage
+    * Get Open Orders By Page
+    * /api/v1/hf/orders/active/page
+    */
+    let builder = GetOpenOrdersByPageReq.builder();
+    builder.setSymbol(?).setPageNum(?).setPageSize(?);
+    let req = builder.build();
+    let resp = api.getOpenOrdersByPage(req);
+    return resp.then(result => {
+        expect(result.currentPage).toEqual(expect.anything());
+        expect(result.pageSize).toEqual(expect.anything());
+        expect(result.totalNum).toEqual(expect.anything());
+        expect(result.totalPage).toEqual(expect.anything());
+        expect(result.items).toEqual(expect.anything());
         console.log(resp);
     });
     })

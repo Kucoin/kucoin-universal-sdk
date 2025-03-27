@@ -14,7 +14,7 @@ type GetAnnouncementsItems struct {
 	AnnDesc string `json:"annDesc,omitempty"`
 	// Announcement release time, Unix millisecond timestamp format
 	CTime int64 `json:"cTime,omitempty"`
-	// Language type
+	// language type
 	Language string `json:"language,omitempty"`
 	// Announcement link
 	AnnUrl string `json:"annUrl,omitempty"`

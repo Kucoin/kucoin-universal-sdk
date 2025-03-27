@@ -8,7 +8,7 @@ type GetSpotAccountListData struct {
 	Id string `json:"id,omitempty"`
 	// Currency
 	Currency string `json:"currency,omitempty"`
-	// Account type:，main、trade、isolated(abandon)、margin(abandon)
+	// Account type: main, trade, isolated (abandon), margin (abandon)
 	Type string `json:"type,omitempty"`
 	// Total funds in the account
 	Balance string `json:"balance,omitempty"`

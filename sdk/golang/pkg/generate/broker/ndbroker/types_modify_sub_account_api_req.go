@@ -8,7 +8,7 @@ type ModifySubAccountApiReq struct {
 	Uid string `json:"uid,omitempty"`
 	// IP whitelist list, supports up to 20 IPs
 	IpWhitelist []string `json:"ipWhitelist,omitempty"`
-	// [Permissions](https://www.kucoin.com/docs-new/doc-338144) group list (Only General, Spot and Futures permissions can be set, such as \"General, Trade\").
+	// [Permissions](https://www.kucoin.com/docs-new/doc-338144) group list (only General, Spot and Futures permissions can be set, such as \"General, Trade\").
 	Permissions []string `json:"permissions,omitempty"`
 	// apikey remarks (length 4~32)
 	Label string `json:"label,omitempty"`
@@ -65,7 +65,7 @@ func (builder *ModifySubAccountApiReqBuilder) SetIpWhitelist(value []string) *Mo
 	return builder
 }
 
-// [Permissions](https://www.kucoin.com/docs-new/doc-338144) group list (Only General, Spot and Futures permissions can be set, such as \"General, Trade\").
+// [Permissions](https://www.kucoin.com/docs-new/doc-338144) group list (only General, Spot and Futures permissions can be set, such as \"General, Trade\").
 func (builder *ModifySubAccountApiReqBuilder) SetPermissions(value []string) *ModifySubAccountApiReqBuilder {
 	builder.obj.Permissions = value
 	return builder

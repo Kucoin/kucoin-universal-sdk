@@ -4,7 +4,7 @@ import uuid
 
 from kucoin_universal_sdk.api.client import DefaultClient
 from kucoin_universal_sdk.extension.interceptor.logging import LoggingInterceptor
-from kucoin_universal_sdk.generate.spot.order import CancelOrderByClientOidOldReqBuilder
+from kucoin_universal_sdk.generate.spot.order import CancelOrderByClientOidOldReqBuilder, GetOpenOrdersByPageReqBuilder
 from kucoin_universal_sdk.generate.spot.order.model_add_oco_order_req import AddOcoOrderReqBuilder, AddOcoOrderReq
 from kucoin_universal_sdk.generate.spot.order.model_add_order_old_req import AddOrderOldReqBuilder, AddOrderOldReq
 from kucoin_universal_sdk.generate.spot.order.model_add_order_req import AddOrderReqBuilder, AddOrderReq
@@ -327,6 +327,25 @@ class SpotApiTest(unittest.TestCase):
         req = builder.build()
         try:
             resp = self.api.cancel_all_orders_by_symbol(req)
+            print("code: ", resp.common_response.code)
+            print("msg: ", resp.common_response.message)
+            print("data: ", resp.to_json())
+        except Exception as e:
+            print("error: ", e)
+            raise e
+
+    def test_get_open_orders_by_page_req(self):
+        """
+            get_open_orders_by_page
+            Get Open Orders By Page
+            /api/v1/hf/orders/active/page
+        """
+
+        builder = GetOpenOrdersByPageReqBuilder()
+        builder.set_symbol("BTC-USDT").set_page_num(1).set_page_size(50)
+        req = builder.build()
+        try:
+            resp = self.api.get_open_orders_by_page(req)
             print("code: ", resp.common_response.code)
             print("msg: ", resp.common_response.message)
             print("data: ", resp.to_json())

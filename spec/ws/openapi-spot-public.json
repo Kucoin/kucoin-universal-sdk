@@ -151,7 +151,7 @@
             "trace": {
                 "summary": "CallAuctionOrderbook - Level50",
                 "deprecated": "false",
-                "description": "The system will return the call auction 50 best ask/bid orders data, If there is no change in the market, data will not be pushed",
+                "description": "The system will return the call auction 50 best ask/bid orders data; if there is no change in the market, data will not be pushed",
                 "tags": [],
                 "parameters": [],
                 "x-sdk-service": "Spot",
@@ -319,7 +319,7 @@
             "trace": {
                 "summary": "Market Snapshot",
                 "deprecated": "false",
-                "description": "Subscribe this topic to get snapshot data for the entire market.",
+                "description": "Subscribe to this topic to get snapshot data for the entire market.",
                 "tags": [],
                 "parameters": [],
                 "x-sdk-service": "Spot",
@@ -719,7 +719,7 @@
                             },
                             "buyOrderRangeLowPrice": {
                                 "type": "string",
-                                "description": "Bell ​​order minimum price"
+                                "description": "Buy ​​order minimum price"
                             },
                             "buyOrderRangeHighPrice": {
                                 "type": "string",

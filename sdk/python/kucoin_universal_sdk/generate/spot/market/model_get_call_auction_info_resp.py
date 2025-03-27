@@ -22,7 +22,7 @@ class GetCallAuctionInfoResp(BaseModel, Response):
         estimated_size (str): Estimated size
         sell_order_range_low_price (str): Sell ​​order minimum price
         sell_order_range_high_price (str): Sell ​​order maximum price
-        buy_order_range_low_price (str): Bell ​​order minimum price
+        buy_order_range_low_price (str): Buy order minimum price
         buy_order_range_high_price (str): Buy ​​order maximum price
         time (int): Timestamp (ms)
     """
@@ -46,7 +46,7 @@ class GetCallAuctionInfoResp(BaseModel, Response):
         alias="sellOrderRangeHighPrice")
     buy_order_range_low_price: Optional[str] = Field(
         default=None,
-        description="Bell ​​order minimum price",
+        description="Buy order minimum price",
         alias="buyOrderRangeLowPrice")
     buy_order_range_high_price: Optional[str] = Field(
         default=None,

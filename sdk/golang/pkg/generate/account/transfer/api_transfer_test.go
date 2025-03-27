@@ -119,6 +119,34 @@ func TestTransferInnerTransferRespModel(t *testing.T) {
 	assert.Nil(t, err)
 }
 
+func TestTransferGetFuturesAccountTransferOutLedgerReqModel(t *testing.T) {
+	// GetFuturesAccountTransferOutLedger
+	// Get Futures Account Transfer Out Ledger
+	// /api/v1/transfer-list
+
+	data := "{\"currency\": \"XBT\", \"type\": \"MAIN\", \"tag\": [\"mock_a\", \"mock_b\"], \"startAt\": 1728663338000, \"endAt\": 1728692138000, \"currentPage\": 1, \"pageSize\": 50}"
+	req := &GetFuturesAccountTransferOutLedgerReq{}
+	err := json.Unmarshal([]byte(data), req)
+	req.ToMap()
+	assert.Nil(t, err)
+}
+
+func TestTransferGetFuturesAccountTransferOutLedgerRespModel(t *testing.T) {
+	// GetFuturesAccountTransferOutLedger
+	// Get Futures Account Transfer Out Ledger
+	// /api/v1/transfer-list
+
+	data := "{\"code\":\"200000\",\"data\":{\"currentPage\":1,\"pageSize\":50,\"totalNum\":1,\"totalPage\":1,\"items\":[{\"applyId\":\"670bf84c577f6c00017a1c48\",\"currency\":\"USDT\",\"recRemark\":\"\",\"recSystem\":\"KUCOIN\",\"status\":\"SUCCESS\",\"amount\":\"0.01\",\"reason\":\"\",\"offset\":1519769124134806,\"createdAt\":1728837708000,\"remark\":\"\"}]}}"
+	commonResp := &types.RestResponse{}
+	err := json.Unmarshal([]byte(data), commonResp)
+	assert.Nil(t, err)
+	assert.NotNil(t, commonResp.Data)
+	resp := &GetFuturesAccountTransferOutLedgerResp{}
+	err = json.Unmarshal([]byte(commonResp.Data), resp)
+	resp.ToMap()
+	assert.Nil(t, err)
+}
+
 func TestTransferFuturesAccountTransferOutReqModel(t *testing.T) {
 	// FuturesAccountTransferOut
 	// Futures Account Transfer Out
@@ -170,34 +198,6 @@ func TestTransferFuturesAccountTransferInRespModel(t *testing.T) {
 	assert.Nil(t, err)
 	assert.NotNil(t, commonResp.Data)
 	resp := &FuturesAccountTransferInResp{}
-	err = json.Unmarshal([]byte(commonResp.Data), resp)
-	resp.ToMap()
-	assert.Nil(t, err)
-}
-
-func TestTransferGetFuturesAccountTransferOutLedgerReqModel(t *testing.T) {
-	// GetFuturesAccountTransferOutLedger
-	// Get Futures Account Transfer Out Ledger
-	// /api/v1/transfer-list
-
-	data := "{\"currency\": \"XBT\", \"type\": \"MAIN\", \"tag\": [\"mock_a\", \"mock_b\"], \"startAt\": 1728663338000, \"endAt\": 1728692138000, \"currentPage\": 1, \"pageSize\": 50}"
-	req := &GetFuturesAccountTransferOutLedgerReq{}
-	err := json.Unmarshal([]byte(data), req)
-	req.ToMap()
-	assert.Nil(t, err)
-}
-
-func TestTransferGetFuturesAccountTransferOutLedgerRespModel(t *testing.T) {
-	// GetFuturesAccountTransferOutLedger
-	// Get Futures Account Transfer Out Ledger
-	// /api/v1/transfer-list
-
-	data := "{\"code\":\"200000\",\"data\":{\"currentPage\":1,\"pageSize\":50,\"totalNum\":1,\"totalPage\":1,\"items\":[{\"applyId\":\"670bf84c577f6c00017a1c48\",\"currency\":\"USDT\",\"recRemark\":\"\",\"recSystem\":\"KUCOIN\",\"status\":\"SUCCESS\",\"amount\":\"0.01\",\"reason\":\"\",\"offset\":1519769124134806,\"createdAt\":1728837708000,\"remark\":\"\"}]}}"
-	commonResp := &types.RestResponse{}
-	err := json.Unmarshal([]byte(data), commonResp)
-	assert.Nil(t, err)
-	assert.NotNil(t, commonResp.Data)
-	resp := &GetFuturesAccountTransferOutLedgerResp{}
 	err = json.Unmarshal([]byte(commonResp.Data), resp)
 	resp.ToMap()
 	assert.Nil(t, err)

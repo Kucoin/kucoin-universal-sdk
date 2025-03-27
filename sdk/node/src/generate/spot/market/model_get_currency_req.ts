@@ -6,15 +6,15 @@ import { Serializable } from '@internal/interfaces/serializable';
 
 export class GetCurrencyReq implements Serializable {
     /**
-     * Support for querying the chain of currency, e.g. the available values for USDT are OMNI, ERC20, TRC20. This only applies to multi-chain currencies; no need for single-chain currencies.
-     */
-    chain?: string;
-
-    /**
      * Path parameter, Currency
      */
     @Reflect.metadata('path', 'currency')
     currency?: string;
+
+    /**
+     * Support for querying the chain of currency, e.g. the available values for USDT are OMNI, ERC20, TRC20. This only applies to multi-chain currencies; no need for single-chain currencies.
+     */
+    chain?: string;
 
     /**
      * Private constructor, please use the corresponding static methods to construct the object.
@@ -33,17 +33,17 @@ export class GetCurrencyReq implements Serializable {
      */
     static create(data: {
         /**
-         * Support for querying the chain of currency, e.g. the available values for USDT are OMNI, ERC20, TRC20. This only applies to multi-chain currencies; no need for single-chain currencies.
-         */
-        chain?: string;
-        /**
          * Path parameter, Currency
          */
         currency?: string;
+        /**
+         * Support for querying the chain of currency, e.g. the available values for USDT are OMNI, ERC20, TRC20. This only applies to multi-chain currencies; no need for single-chain currencies.
+         */
+        chain?: string;
     }): GetCurrencyReq {
         let obj = new GetCurrencyReq();
-        obj.chain = data.chain;
         obj.currency = data.currency;
+        obj.chain = data.chain;
         return obj;
     }
 
@@ -72,18 +72,18 @@ export class GetCurrencyReqBuilder {
         this.obj = obj;
     }
     /**
-     * Support for querying the chain of currency, e.g. the available values for USDT are OMNI, ERC20, TRC20. This only applies to multi-chain currencies; no need for single-chain currencies.
-     */
-    setChain(value: string): GetCurrencyReqBuilder {
-        this.obj.chain = value;
-        return this;
-    }
-
-    /**
      * Path parameter, Currency
      */
     setCurrency(value: string): GetCurrencyReqBuilder {
         this.obj.currency = value;
+        return this;
+    }
+
+    /**
+     * Support for querying the chain of currency, e.g. the available values for USDT are OMNI, ERC20, TRC20. This only applies to multi-chain currencies; no need for single-chain currencies.
+     */
+    setChain(value: string): GetCurrencyReqBuilder {
+        this.obj.chain = value;
         return this;
     }
 

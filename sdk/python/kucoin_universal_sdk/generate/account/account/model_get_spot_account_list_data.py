@@ -18,7 +18,7 @@ class GetSpotAccountListData(BaseModel):
     Attributes:
         id (str): Account ID
         currency (str): Currency
-        type (TypeEnum): Account type:，main、trade、isolated(abandon)、margin(abandon) 
+        type (TypeEnum): Account type: main, trade, isolated (abandon), margin (abandon) 
         balance (str): Total funds in the account
         available (str): Funds available to withdraw or trade
         holds (str): Funds on hold (not available for use)
@@ -38,7 +38,7 @@ class GetSpotAccountListData(BaseModel):
     type: Optional[TypeEnum] = Field(
         default=None,
         description=
-        "Account type:，main、trade、isolated(abandon)、margin(abandon) ")
+        "Account type: main, trade, isolated (abandon), margin (abandon) ")
     balance: Optional[str] = Field(default=None,
                                    description="Total funds in the account")
     available: Optional[str] = Field(

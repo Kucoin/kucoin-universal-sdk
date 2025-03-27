@@ -10,7 +10,7 @@ type GetDepositAddressV3Data struct {
 	Memo string `json:"memo,omitempty"`
 	// The chainId of currency
 	ChainId string `json:"chainId,omitempty"`
-	// Deposit account type: MAIN(funding account), TRADE (spot trading account)
+	// Deposit account type: MAIN (funding account), TRADE (spot trading account)
 	To string `json:"to,omitempty"`
 	// Expiration time; Lightning network expiration time; this field is not applicable to non-Lightning networks
 	ExpirationDate int32 `json:"expirationDate,omitempty"`

@@ -15,7 +15,7 @@ export class GetSpotAccountListData implements Serializable {
     currency: string;
 
     /**
-     * Account type:，main、trade、isolated(abandon)、margin(abandon)
+     * Account type: main, trade, isolated (abandon), margin (abandon)
      */
     type: GetSpotAccountListData.TypeEnum;
 

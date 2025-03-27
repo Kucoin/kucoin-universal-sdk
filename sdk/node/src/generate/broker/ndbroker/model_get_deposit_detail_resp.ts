@@ -6,7 +6,7 @@ import { Response } from '@internal/interfaces/serializable';
 
 export class GetDepositDetailResp implements Response<RestResponse> {
     /**
-     * Chain id of currency
+     * Chain ID of currency
      */
     chain: string;
 

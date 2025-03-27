@@ -20,7 +20,7 @@ type SpotPublicWS interface {
 	CallAuctionInfo(symbol string, callback CallAuctionInfoEventCallback) (id string, err error)
 
 	// CallAuctionOrderbookLevel50 CallAuctionOrderbook - Level50
-	// The system will return the call auction 50 best ask/bid orders data, If there is no change in the market, data will not be pushed
+	// The system will return the call auction 50 best ask/bid orders data; if there is no change in the market, data will not be pushed
 	// push frequency: once every 100ms
 	CallAuctionOrderbookLevel50(symbol string, callback CallAuctionOrderbookLevel50EventCallback) (id string, err error)
 
@@ -30,7 +30,7 @@ type SpotPublicWS interface {
 	Klines(symbol string, type_ string, callback KlinesEventCallback) (id string, err error)
 
 	// MarketSnapshot Market Snapshot
-	// Subscribe this topic to get snapshot data for the entire market.
+	// Subscribe to this topic to get snapshot data for the entire market.
 	// push frequency: once every 2s
 	MarketSnapshot(market string, callback MarketSnapshotEventCallback) (id string, err error)
 

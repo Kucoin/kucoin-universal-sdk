@@ -4,9 +4,9 @@ import { GetMarkPriceListResp } from './model_get_mark_price_list_resp';
 import { GetIsolatedMarginSymbolsResp } from './model_get_isolated_margin_symbols_resp';
 import { GetCrossMarginSymbolsReq } from './model_get_cross_margin_symbols_req';
 import { GetMarkPriceDetailResp } from './model_get_mark_price_detail_resp';
+import { GetMarginConfigResp } from './model_get_margin_config_resp';
 import { GetETFInfoResp } from './model_get_etf_info_resp';
 import { GetETFInfoReq } from './model_get_etf_info_req';
-import { GetMarginConfigResp } from './model_get_margin_config_resp';
 import { RestResponse } from '@model/common';
 
 describe('Auto Test', () => {
@@ -41,21 +41,6 @@ describe('Auto Test', () => {
             console.log(resp);
         }
     });
-    test('getMarginConfig request test', () => {
-        /**
-         * getMarginConfig
-         * Get Margin Config
-         * /api/v1/margin/config
-         */
-    });
-
-    test('getMarginConfig response test', () => {
-        /**
-         * getMarginConfig
-         * Get Margin Config
-         * /api/v1/margin/config
-         */
-    });
     test('getETFInfo request test', () => {
         /**
          * getETFInfo
@@ -87,21 +72,6 @@ describe('Auto Test', () => {
             console.log(resp);
         }
     });
-    test('getMarkPriceList request test', () => {
-        /**
-         * getMarkPriceList
-         * Get Mark Price List
-         * /api/v3/mark-price/all-symbols
-         */
-    });
-
-    test('getMarkPriceList response test', () => {
-        /**
-         * getMarkPriceList
-         * Get Mark Price List
-         * /api/v3/mark-price/all-symbols
-         */
-    });
     test('getMarkPriceDetail request test', () => {
         /**
          * getMarkPriceDetail
@@ -132,6 +102,36 @@ describe('Auto Test', () => {
             ).toBe(false);
             console.log(resp);
         }
+    });
+    test('getMarginConfig request test', () => {
+        /**
+         * getMarginConfig
+         * Get Margin Config
+         * /api/v1/margin/config
+         */
+    });
+
+    test('getMarginConfig response test', () => {
+        /**
+         * getMarginConfig
+         * Get Margin Config
+         * /api/v1/margin/config
+         */
+    });
+    test('getMarkPriceList request test', () => {
+        /**
+         * getMarkPriceList
+         * Get Mark Price List
+         * /api/v3/mark-price/all-symbols
+         */
+    });
+
+    test('getMarkPriceList response test', () => {
+        /**
+         * getMarkPriceList
+         * Get Mark Price List
+         * /api/v3/mark-price/all-symbols
+         */
     });
     test('getIsolatedMarginSymbols request test', () => {
         /**

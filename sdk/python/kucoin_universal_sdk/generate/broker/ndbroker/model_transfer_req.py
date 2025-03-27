@@ -20,9 +20,9 @@ class TransferReq(BaseModel):
         amount (str): Transfer Amount (must be a positive integer in the currency's precision)
         direction (DirectionEnum): Fund transfer direction: OUT (Broker account is transferred to Broker sub-account), IN (Broker sub-account is transferred to Broker account)
         account_type (AccountTypeEnum): Broker account types: MAIN (Funding account), TRADE (Spot trading account)
-        special_uid (str): Broker sub-account uid, must be the Broker sub-account created by the current Broker user.
+        special_uid (str): Broker sub-account UID, must be the Broker sub-account created by the current Broker user.
         special_account_type (SpecialAccountTypeEnum): Broker sub-account types: MAIN (Funding account), TRADE (Spot trading account)
-        client_oid (str): Client Order ID, The unique identifier created by the client. It is recommended to use UUID. The maximum length is 128 bits.
+        client_oid (str): Client Order ID, the unique identifier created by the client. It is recommended to use UUID. The maximum length is 128 bits.
     """
 
     class DirectionEnum(Enum):
@@ -71,7 +71,7 @@ class TransferReq(BaseModel):
     special_uid: Optional[str] = Field(
         default=None,
         description=
-        "Broker sub-account uid, must be the Broker sub-account created by the current Broker user.",
+        "Broker sub-account UID, must be the Broker sub-account created by the current Broker user.",
         alias="specialUid")
     special_account_type: Optional[SpecialAccountTypeEnum] = Field(
         default=None,
@@ -81,7 +81,7 @@ class TransferReq(BaseModel):
     client_oid: Optional[str] = Field(
         default=None,
         description=
-        "Client Order ID, The unique identifier created by the client. It is recommended to use UUID. The maximum length is 128 bits.",
+        "Client Order ID, the unique identifier created by the client. It is recommended to use UUID. The maximum length is 128 bits.",
         alias="clientOid")
 
     __properties: ClassVar[List[str]] = [
@@ -176,7 +176,7 @@ class TransferReqBuilder:
 
     def set_special_uid(self, value: str) -> TransferReqBuilder:
         """
-        Broker sub-account uid, must be the Broker sub-account created by the current Broker user.
+        Broker sub-account UID, must be the Broker sub-account created by the current Broker user.
         """
         self.obj['specialUid'] = value
         return self
@@ -192,7 +192,7 @@ class TransferReqBuilder:
 
     def set_client_oid(self, value: str) -> TransferReqBuilder:
         """
-        Client Order ID, The unique identifier created by the client. It is recommended to use UUID. The maximum length is 128 bits.
+        Client Order ID, the unique identifier created by the client. It is recommended to use UUID. The maximum length is 128 bits.
         """
         self.obj['clientOid'] = value
         return self

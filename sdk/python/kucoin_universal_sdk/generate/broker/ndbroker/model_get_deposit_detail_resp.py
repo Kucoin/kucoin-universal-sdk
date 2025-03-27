@@ -18,7 +18,7 @@ class GetDepositDetailResp(BaseModel, Response):
     GetDepositDetailResp
 
     Attributes:
-        chain (str): Chain id of currency
+        chain (str): Chain ID of currency
         hash (str): Hash
         wallet_tx_id (str): Wallet Transaction ID
         uid (int): UID
@@ -48,7 +48,7 @@ class GetDepositDetailResp(BaseModel, Response):
     common_response: Optional[RestResponse] = Field(
         default=None, description="Common response")
     chain: Optional[str] = Field(default=None,
-                                 description="Chain id of currency")
+                                 description="Chain ID of currency")
     hash: Optional[str] = Field(default=None, description="Hash")
     wallet_tx_id: Optional[str] = Field(default=None,
                                         description="Wallet Transaction ID",

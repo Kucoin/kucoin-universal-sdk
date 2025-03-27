@@ -10,7 +10,7 @@ type AddSubAccountApiReq struct {
 	Passphrase string `json:"passphrase,omitempty"`
 	// IP whitelist list, supports up to 20 IPs
 	IpWhitelist []string `json:"ipWhitelist,omitempty"`
-	// Permission group list (Only General, Spot and Futures permissions can be set, such as \"General, Trade\").
+	// Permission group list (only General, Spot and Futures permissions can be set, such as \"General, Trade\").
 	Permissions []string `json:"permissions,omitempty"`
 	// apikey remarks (length 4~32)
 	Label string `json:"label,omitempty"`
@@ -71,7 +71,7 @@ func (builder *AddSubAccountApiReqBuilder) SetIpWhitelist(value []string) *AddSu
 	return builder
 }
 
-// Permission group list (Only General, Spot and Futures permissions can be set, such as \"General, Trade\").
+// Permission group list (only General, Spot and Futures permissions can be set, such as \"General, Trade\").
 func (builder *AddSubAccountApiReqBuilder) SetPermissions(value []string) *AddSubAccountApiReqBuilder {
 	builder.obj.Permissions = value
 	return builder

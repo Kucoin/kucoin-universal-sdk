@@ -24,10 +24,10 @@ class StopOrderEvent(BaseModel):
         order_type (OrderTypeEnum): User-specified order type
         side (SideEnum): buy or sell
         size (str): User-specified order size
-        stop (StopEnum): Order type: stop: stop loss order, oco: oco order
+        stop (StopEnum): Order type: loss: stop loss order, oco: oco order
         stop_price (str): Stop Price
         symbol (str): symbol
-        trade_type (TradeTypeEnum): The type of trading : TRADE（Spot）, MARGIN_TRADE (Cross Margin), MARGIN_ISOLATED_TRADE (Isolated Margin).
+        trade_type (TradeTypeEnum): The type of trading: TRADE (Spot), MARGIN_TRADE (Cross Margin), MARGIN_ISOLATED_TRADE (Isolated Margin).
         ts (int): Push time (nanoseconds)
         type (TypeEnum): Order Type
     """
@@ -35,12 +35,8 @@ class StopOrderEvent(BaseModel):
     class OrderTypeEnum(Enum):
         """
         Attributes:
-            LIMIT: limit
-            MARKET: market
             STOP: stop
         """
-        LIMIT = 'limit'
-        MARKET = 'market'
         STOP = 'stop'
 
     class SideEnum(Enum):
@@ -55,10 +51,10 @@ class StopOrderEvent(BaseModel):
     class StopEnum(Enum):
         """
         Attributes:
-            STOP: stop loss order
+            LOSS: stop loss order
             OCO: oco order
         """
-        STOP = 'stop'
+        LOSS = 'loss'
         OCO = 'oco'
 
     class TradeTypeEnum(Enum):
@@ -75,18 +71,18 @@ class StopOrderEvent(BaseModel):
     class TypeEnum(Enum):
         """
         Attributes:
-            OPEN: the order is in the order book (maker order)
-            MATCH: The message sent when the order is match, 1. When the status is open and the type is match, it is a maker match.  2. When the status is match and the type is match, it is a taker match.
+            OPEN: The order is in the order book (maker order)
+            MATCH: The message sent when the order is matched, 1. When the status is open and the type is match, it is a maker match.  2. When the status is match and the type is match, it is a taker match.
             UPDATE: The message sent due to the order being modified: STP triggering, partial cancellation of the order. Includes these three scenarios:  1. When the status is open and the type is update: partial amounts of the order have been canceled, or STP triggers  2. When the status is match and the type is update: STP triggers  3. When the status is done and the type is update: partial amounts of the order have been filled and the unfilled part got canceled, or STP is triggered.
             FILLED: The message sent when the status of the order changes to DONE after the transaction
-            CANCELED: The message sent when the status of the order changes to DONE due to being canceled
+            CANCEL: The message sent when the status of the order changes to DONE due to being canceled
             RECEIVED: The message sent when the order enters the matching system. When the order has just entered the matching system and has not yet done matching logic with the counterparty, a private message with the message type &quot;received&quot; and the order status &quot;new&quot; will be pushed.
         """
         OPEN = 'open'
         MATCH = 'match'
         UPDATE = 'update'
         FILLED = 'filled'
-        CANCELED = 'canceled'
+        CANCEL = 'cancel'
         RECEIVED = 'received'
 
     common_response: Optional[WsMessage] = Field(default=None,
@@ -111,7 +107,7 @@ class StopOrderEvent(BaseModel):
                                 description="User-specified order size")
     stop: Optional[StopEnum] = Field(
         default=None,
-        description="Order type: stop: stop loss order, oco: oco order")
+        description="Order type: loss: stop loss order, oco: oco order")
     stop_price: Optional[str] = Field(default=None,
                                       description="Stop Price",
                                       alias="stopPrice")
@@ -119,7 +115,7 @@ class StopOrderEvent(BaseModel):
     trade_type: Optional[TradeTypeEnum] = Field(
         default=None,
         description=
-        "The type of trading : TRADE（Spot）, MARGIN_TRADE (Cross Margin), MARGIN_ISOLATED_TRADE (Isolated Margin).",
+        "The type of trading: TRADE (Spot), MARGIN_TRADE (Cross Margin), MARGIN_ISOLATED_TRADE (Isolated Margin).",
         alias="tradeType")
     ts: Optional[int] = Field(default=None,
                               description="Push time (nanoseconds)")

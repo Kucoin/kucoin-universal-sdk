@@ -332,7 +332,7 @@
                                                     },
                                                     "type": {
                                                         "type": "string",
-                                                        "description": "Account type:，main、trade、isolated(abandon)、margin(abandon)\n",
+                                                        "description": "Account type: main, trade, isolated (abandon), margin (abandon)\n",
                                                         "enum": [
                                                             "main",
                                                             "trade"
@@ -1278,7 +1278,7 @@
                                                             },
                                                             "bizType": {
                                                                 "type": "string",
-                                                                "description": "Business type leading to changes in funds, such as exchange, withdrawal, deposit, KUCOIN_BONUS, REFERRAL_BONUS, Lendings etc."
+                                                                "description": "Business type leading to changes in funds, such as exchange, withdrawal, deposit, KUCOIN_BONUS, REFERRAL_BONUS, Lendings, etc."
                                                             },
                                                             "direction": {
                                                                 "type": "string",
@@ -1395,7 +1395,7 @@
                                 {
                                     "value": "TRANSFER",
                                     "name": "TRANSFER",
-                                    "description": "transffer"
+                                    "description": "transfer"
                                 },
                                 {
                                     "value": "RETURNED_FEES",
@@ -1410,7 +1410,7 @@
                                 {
                                     "value": "OTHER",
                                     "name": "OTHER",
-                                    "description": "Other"
+                                    "description": "other"
                                 }
                             ]
                         }
@@ -2422,9 +2422,18 @@
                 "tags": [],
                 "parameters": [
                     {
+                        "name": "subUserId",
+                        "in": "path",
+                        "description": "the userID of a sub-account.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
                         "name": "includeBaseAmount",
                         "in": "query",
-                        "description": "false: do not display the currency which asset is 0, true: display all currency",
+                        "description": "False: Do not display currencies with 0 assets; True: display all currencies",
                         "required": false,
                         "schema": {
                             "type": "boolean",
@@ -2443,17 +2452,8 @@
                     {
                         "name": "baseAmount",
                         "in": "query",
-                        "description": "Specify the currency balance must be greater than or equal to the amount",
+                        "description": "The currency balance specified must be greater than or equal to the amount",
                         "required": false,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "subUserId",
-                        "in": "path",
-                        "description": "the userID of a sub-account.",
-                        "required": true,
                         "schema": {
                             "type": "string"
                         }
@@ -2640,7 +2640,7 @@
                 "x-sdk-method-description": "This endpoint returns the account info of a sub-user specified by the subUserId.",
                 "x-api-rate-limit-weight": 15,
                 "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": {\\n        \\\"subUserId\\\": \\\"63743f07e0c5230001761d08\\\",\\n        \\\"subName\\\": \\\"testapi6\\\",\\n        \\\"mainAccounts\\\": [\\n            {\\n                \\\"currency\\\": \\\"USDT\\\",\\n                \\\"balance\\\": \\\"0.01\\\",\\n                \\\"available\\\": \\\"0.01\\\",\\n                \\\"holds\\\": \\\"0\\\",\\n                \\\"baseCurrency\\\": \\\"BTC\\\",\\n                \\\"baseCurrencyPrice\\\": \\\"62384.3\\\",\\n                \\\"baseAmount\\\": \\\"0.00000016\\\",\\n                \\\"tag\\\": \\\"DEFAULT\\\"\\n            }\\n        ],\\n        \\\"tradeAccounts\\\": [\\n            {\\n                \\\"currency\\\": \\\"USDT\\\",\\n                \\\"balance\\\": \\\"0.01\\\",\\n                \\\"available\\\": \\\"0.01\\\",\\n                \\\"holds\\\": \\\"0\\\",\\n                \\\"baseCurrency\\\": \\\"BTC\\\",\\n                \\\"baseCurrencyPrice\\\": \\\"62384.3\\\",\\n                \\\"baseAmount\\\": \\\"0.00000016\\\",\\n                \\\"tag\\\": \\\"DEFAULT\\\"\\n            }\\n        ],\\n        \\\"marginAccounts\\\": [\\n            {\\n                \\\"currency\\\": \\\"USDT\\\",\\n                \\\"balance\\\": \\\"0.01\\\",\\n                \\\"available\\\": \\\"0.01\\\",\\n                \\\"holds\\\": \\\"0\\\",\\n                \\\"baseCurrency\\\": \\\"BTC\\\",\\n                \\\"baseCurrencyPrice\\\": \\\"62384.3\\\",\\n                \\\"baseAmount\\\": \\\"0.00000016\\\",\\n                \\\"tag\\\": \\\"DEFAULT\\\"\\n            }\\n        ],\\n        \\\"tradeHFAccounts\\\": []\\n    }\\n}",
-                "x-request-example": "{\\\"includeBaseAmount\\\": true, \\\"baseCurrency\\\": \\\"example_string_default_value\\\", \\\"baseAmount\\\": \\\"example_string_default_value\\\", \\\"subUserId\\\": \\\"63743f07e0c5230001761d08\\\"}",
+                "x-request-example": "{\\\"subUserId\\\": \\\"63743f07e0c5230001761d08\\\", \\\"includeBaseAmount\\\": true, \\\"baseCurrency\\\": \\\"example_string_default_value\\\", \\\"baseAmount\\\": \\\"example_string_default_value\\\"}",
                 "operationId": "017"
             }
         },
@@ -3699,7 +3699,7 @@
                                     },
                                     "chain": {
                                         "type": "string",
-                                        "description": "The chainId of currency, e.g. the available values for USDT are OMNI, ERC20, and TRC20; default is ERC20. The available values for BTC are Native, Segwit, TRC20; the parameters are bech32, btc, trx; default is Native. ",
+                                        "description": "The currency chainId, e.g. the available values for USDT are OMNI, ERC20, and TRC20; default is ERC20. The available values for BTC are Native, Segwit, TRC20; the parameters are bech32, btc, trx; default is Native. ",
                                         "default": "eth",
                                         "example": [
                                             "eth",
@@ -3717,19 +3717,19 @@
                                         "type": "string",
                                         "description": "Deposit account type: MAIN (funding account), TRADE (spot trading account); the default is MAIN",
                                         "enum": [
-                                            "MAIN",
-                                            "TRADE"
+                                            "main",
+                                            "trade"
                                         ],
-                                        "default": "MAIN",
+                                        "default": "main",
                                         "x-api-enum": [
                                             {
-                                                "value": "MAIN",
-                                                "name": "MAIN",
+                                                "value": "main",
+                                                "name": "main",
                                                 "description": "Funding account"
                                             },
                                             {
-                                                "value": "TRADE",
-                                                "name": "TRADE",
+                                                "value": "trade",
+                                                "name": "trade",
                                                 "description": "Spot account"
                                             }
                                         ]
@@ -3845,7 +3845,7 @@
                                                     },
                                                     "to": {
                                                         "type": "string",
-                                                        "description": "Deposit account type: MAIN(funding account), TRADE (spot trading account)",
+                                                        "description": "Deposit account type: MAIN (funding account), TRADE (spot trading account)",
                                                         "enum": [
                                                             "MAIN",
                                                             "TRADE"
@@ -4045,7 +4045,7 @@
                                                 },
                                                 "totalPage": {
                                                     "type": "integer",
-                                                    "description": "total page"
+                                                    "description": "total pages"
                                                 },
                                                 "items": {
                                                     "type": "array",
@@ -4123,7 +4123,7 @@
                                                             },
                                                             "createdAt": {
                                                                 "type": "integer",
-                                                                "description": "Creation time of the database record",
+                                                                "description": "Database record creation time",
                                                                 "format": "int64"
                                                             },
                                                             "updatedAt": {
@@ -4708,7 +4708,7 @@
                                                 },
                                                 "totalPage": {
                                                     "type": "integer",
-                                                    "description": "total page"
+                                                    "description": "total pages"
                                                 },
                                                 "items": {
                                                     "type": "array",
@@ -5401,7 +5401,7 @@
                                 {
                                     "value": 0,
                                     "name": "",
-                                    "description": "crypto currency"
+                                    "description": "cryptocurrency"
                                 },
                                 {
                                     "value": 1,
@@ -5520,11 +5520,11 @@
                                                     },
                                                     "sellTaxRate": {
                                                         "type": "string",
-                                                        "description": "Buy tax rate, This field is visible to users in certain countries"
+                                                        "description": "Buy tax rate; this field is visible to users in certain countries"
                                                     },
                                                     "buyTaxRate": {
                                                         "type": "string",
-                                                        "description": "Sell tax rate, This field is visible to users in certain countries"
+                                                        "description": "Sell tax rate; this field is visible to users in certain countries"
                                                     }
                                                 },
                                                 "required": [
@@ -5936,7 +5936,7 @@
                     {
                         "name": "chain",
                         "in": "query",
-                        "description": "Chain id of currency",
+                        "description": "Chain ID of currency",
                         "required": false,
                         "schema": {
                             "type": "string",
@@ -6068,6 +6068,346 @@
                 "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": [\\n        {\\n            \\\"address\\\": \\\"0x02028456*****87ede7a73d7c\\\",\\n            \\\"memo\\\": \\\"\\\",\\n            \\\"chain\\\": \\\"ERC20\\\",\\n            \\\"chainId\\\": \\\"eth\\\",\\n            \\\"to\\\": \\\"MAIN\\\",\\n            \\\"currency\\\": \\\"ETH\\\",\\n            \\\"contractAddress\\\": \\\"\\\"\\n        }\\n    ]\\n}",
                 "x-request-example": "{\\\"currency\\\": \\\"BTC\\\", \\\"chain\\\": \\\"eth\\\"}",
                 "operationId": "038"
+            }
+        },
+        "/api/v1/deposit-addresses": {
+            "get": {
+                "summary": "Get Deposit Addresses - V1",
+                "deprecated": true,
+                "description": "Get all deposit addresses for the currency you intend to deposit. If the returned data is empty, you may need to add the deposit address first.",
+                "tags": [],
+                "parameters": [
+                    {
+                        "name": "currency",
+                        "in": "query",
+                        "description": "currency",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": [
+                                "BTC",
+                                "ETH",
+                                "USDT"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "chain",
+                        "in": "query",
+                        "description": "The chainId of currency, e.g. the available values for USDT are OMNI, ERC20, and TRC20; default is ERC20. The available values for BTC are Native, Segwit, TRC20; the parameters are bech32, btc, trx; default is Native. This only applies to multi-chain currencies; no need for single-chain currencies.",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "default": "eth",
+                            "example": [
+                                "eth",
+                                "bech32",
+                                "btc",
+                                "kcc",
+                                "trx",
+                                "bsc",
+                                "arbitrum",
+                                "ton",
+                                "optimism"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "address": {
+                                                    "type": "string",
+                                                    "description": "Deposit address"
+                                                },
+                                                "memo": {
+                                                    "type": "string",
+                                                    "description": "Address remark. If there’s no remark, it is empty. When you withdraw from other platforms to KuCoin, you need to fill in memo(tag). Be careful: If you do not fill in memo(tag), your deposit may not be available."
+                                                },
+                                                "chain": {
+                                                    "type": "string",
+                                                    "description": "The chainName of currency",
+                                                    "example": [
+                                                        "ERC20",
+                                                        "BTC-Segwit",
+                                                        "BTC",
+                                                        "KCC",
+                                                        "TRC20",
+                                                        "BEP20",
+                                                        "ARBITRUM",
+                                                        "TON",
+                                                        "OPTIMISM"
+                                                    ]
+                                                },
+                                                "chainId": {
+                                                    "type": "string",
+                                                    "description": "The chainId of currency",
+                                                    "example": [
+                                                        "eth",
+                                                        "bech32",
+                                                        "btc",
+                                                        "kcc",
+                                                        "trx",
+                                                        "bsc",
+                                                        "arbitrum",
+                                                        "ton",
+                                                        "optimism"
+                                                    ]
+                                                },
+                                                "to": {
+                                                    "type": "string",
+                                                    "description": "Deposit account type: main (funding account), trade (spot trading account)",
+                                                    "enum": [
+                                                        "MAIN",
+                                                        "TRADE"
+                                                    ],
+                                                    "x-api-enum": [
+                                                        {
+                                                            "value": "MAIN",
+                                                            "name": "",
+                                                            "description": ""
+                                                        },
+                                                        {
+                                                            "value": "TRADE",
+                                                            "name": "",
+                                                            "description": ""
+                                                        }
+                                                    ]
+                                                },
+                                                "currency": {
+                                                    "type": "string",
+                                                    "description": "currency",
+                                                    "example": [
+                                                        "BTC",
+                                                        "ETH",
+                                                        "USDT"
+                                                    ]
+                                                },
+                                                "contractAddress": {
+                                                    "type": "string",
+                                                    "description": "The token contract address."
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "code",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-api-doc": "https://www.kucoin.com/docs-new/api-3470305",
+                "x-abandon": "abandon",
+                "x-domain": "Spot",
+                "x-api-channel": "Private",
+                "x-api-permission": "General",
+                "x-api-rate-limit-pool": "Management",
+                "x-sdk-service": "Account",
+                "x-sdk-sub-service": "Deposit",
+                "x-sdk-method-name": "getDepositAddressV1",
+                "x-sdk-method-description": "Get all deposit addresses for the currency you intend to deposit. If the returned data is empty, you may need to add the deposit address first.",
+                "x-api-rate-limit-weight": 5,
+                "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": {\\n        \\\"address\\\": \\\"0xea220bf61c3c2b0adc2cfa29fec3d2677745a379\\\",\\n        \\\"memo\\\": \\\"\\\",\\n        \\\"chain\\\": \\\"ERC20\\\",\\n        \\\"chainId\\\": \\\"eth\\\",\\n        \\\"to\\\": \\\"MAIN\\\",\\n        \\\"currency\\\": \\\"USDT\\\"\\n    }\\n}",
+                "x-request-example": "{\\\"currency\\\": \\\"BTC\\\", \\\"chain\\\": \\\"eth\\\"}",
+                "operationId": "039"
+            },
+            "post": {
+                "summary": "Add Deposit Address - V1",
+                "deprecated": true,
+                "description": "Request via this endpoint the creation of a deposit address for a currency you intend to deposit.",
+                "tags": [],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "address": {
+                                                    "type": "string",
+                                                    "description": "Deposit address"
+                                                },
+                                                "memo": {
+                                                    "type": "string",
+                                                    "description": "Address remark. If there’s no remark, it is empty. When you withdraw from other platforms to KuCoin, you need to fill in memo(tag). Be careful: If you do not fill in memo(tag), your deposit may not be available."
+                                                },
+                                                "chain": {
+                                                    "type": "string",
+                                                    "description": "The chainName of currency",
+                                                    "example": [
+                                                        "ERC20",
+                                                        "BTC-Segwit",
+                                                        "BTC",
+                                                        "KCC",
+                                                        "TRC20",
+                                                        "BEP20",
+                                                        "ARBITRUM",
+                                                        "TON",
+                                                        "OPTIMISM"
+                                                    ]
+                                                },
+                                                "chainId": {
+                                                    "type": "string",
+                                                    "description": "The chainId of currency",
+                                                    "example": [
+                                                        "eth",
+                                                        "bech32",
+                                                        "btc",
+                                                        "kcc",
+                                                        "trx",
+                                                        "bsc",
+                                                        "arbitrum",
+                                                        "ton",
+                                                        "optimism"
+                                                    ]
+                                                },
+                                                "to": {
+                                                    "type": "string",
+                                                    "description": "Deposit account type: main (funding account), trade (spot trading account)",
+                                                    "enum": [
+                                                        "MAIN",
+                                                        "TRADE"
+                                                    ],
+                                                    "x-api-enum": [
+                                                        {
+                                                            "value": "MAIN",
+                                                            "name": "",
+                                                            "description": ""
+                                                        },
+                                                        {
+                                                            "value": "TRADE",
+                                                            "name": "",
+                                                            "description": ""
+                                                        }
+                                                    ]
+                                                },
+                                                "currency": {
+                                                    "type": "string",
+                                                    "description": "currency",
+                                                    "example": [
+                                                        "BTC",
+                                                        "ETH",
+                                                        "USDT"
+                                                    ]
+                                                }
+                                            },
+                                            "required": [
+                                                "address",
+                                                "memo",
+                                                "chain",
+                                                "to",
+                                                "currency",
+                                                "chainId"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "code",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-api-doc": "https://www.kucoin.com/docs-new/api-3470309",
+                "x-abandon": "abandon",
+                "x-domain": "Spot",
+                "x-api-channel": "Private",
+                "x-api-permission": "General",
+                "x-api-rate-limit-pool": "Management",
+                "x-sdk-service": "Account",
+                "x-sdk-sub-service": "Deposit",
+                "x-sdk-method-name": "addDepositAddressV1",
+                "x-sdk-method-description": "Request via this endpoint the creation of a deposit address for a currency you intend to deposit.",
+                "x-api-rate-limit-weight": 20,
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "title": "",
+                                "type": "object",
+                                "properties": {
+                                    "currency": {
+                                        "type": "string",
+                                        "description": "currency",
+                                        "example": [
+                                            "BTC",
+                                            "ETH",
+                                            "USDT"
+                                        ]
+                                    },
+                                    "chain": {
+                                        "type": "string",
+                                        "description": "The chainId of currency, e.g. the available values for USDT are OMNI, ERC20, and TRC20; default is ERC20. The available values for BTC are Native, Segwit, TRC20; the parameters are bech32, btc, trx; default is Native. This only applies to multi-chain currencies; no need for single-chain currencies.",
+                                        "default": "eth",
+                                        "example": [
+                                            "eth",
+                                            "bech32",
+                                            "btc",
+                                            "kcc",
+                                            "trx",
+                                            "bsc",
+                                            "arbitrum",
+                                            "ton",
+                                            "optimism"
+                                        ]
+                                    },
+                                    "to": {
+                                        "type": "string",
+                                        "description": "Deposit account type: main (funding account), trade (spot trading account); the default is main",
+                                        "enum": [
+                                            "main",
+                                            "trade"
+                                        ],
+                                        "default": "main",
+                                        "x-api-enum": [
+                                            {
+                                                "value": "main",
+                                                "name": "main",
+                                                "description": "Funding account"
+                                            },
+                                            {
+                                                "value": "trade",
+                                                "name": "trade",
+                                                "description": "Spot account"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "currency"
+                                ]
+                            },
+                            "example": "{\n    \"currency\": \"ETH\",\n    \"chain\": \"eth\"\n}"
+                        }
+                    }
+                },
+                "x-response-example": "{\\\"code\\\":\\\"200000\\\",\\\"data\\\":{\\\"address\\\":\\\"0x02028456f38e78609904e8a002c787ede7a73d7c\\\",\\\"memo\\\":null,\\\"chain\\\":\\\"ERC20\\\",\\\"chainId\\\":\\\"eth\\\",\\\"to\\\":\\\"MAIN\\\",\\\"currency\\\":\\\"ETH\\\"}}",
+                "x-request-example": "{\\\"currency\\\": \\\"ETH\\\", \\\"chain\\\": \\\"eth\\\"}",
+                "operationId": "047"
             }
         },
         "/api/v2/accounts/sub-transfer": {
@@ -6267,7 +6607,198 @@
                 },
                 "x-response-example": "{\\\"code\\\":\\\"200000\\\",\\\"data\\\":{\\\"orderId\\\":\\\"670be6b0b1b9080007040a9b\\\"}}",
                 "x-request-example": "{\\\"clientOid\\\": \\\"64ccc0f164781800010d8c09\\\", \\\"currency\\\": \\\"USDT\\\", \\\"amount\\\": \\\"0.01\\\", \\\"direction\\\": \\\"OUT\\\", \\\"accountType\\\": \\\"MAIN\\\", \\\"subAccountType\\\": \\\"MAIN\\\", \\\"subUserId\\\": \\\"63743f07e0c5230001761d08\\\"}",
-                "operationId": "039"
+                "operationId": "040"
+            }
+        },
+        "/api/v1/hist-deposits": {
+            "get": {
+                "summary": "Get Deposit History - Old",
+                "deprecated": true,
+                "description": "Request the V1 historical deposits list on KuCoin via this endpoint. The return value is the data after Pagination, sorted in descending order according to time.",
+                "tags": [],
+                "parameters": [
+                    {
+                        "name": "currency",
+                        "in": "query",
+                        "description": "currency",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": [
+                                "BTC",
+                                "ETH",
+                                "USDT"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Status. Available value: PROCESSING, SUCCESS, and FAILURE",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "PROCESSING",
+                                "SUCCESS",
+                                "FAILURE"
+                            ],
+                            "x-api-enum": [
+                                {
+                                    "value": "PROCESSING",
+                                    "name": "",
+                                    "description": ""
+                                },
+                                {
+                                    "value": "SUCCESS",
+                                    "name": "",
+                                    "description": ""
+                                },
+                                {
+                                    "value": "FAILURE",
+                                    "name": "",
+                                    "description": ""
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "name": "startAt",
+                        "in": "query",
+                        "description": "Start time (milliseconds)",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "endAt",
+                        "in": "query",
+                        "description": "End time (milliseconds)",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "currentPage": {
+                                                    "type": "integer",
+                                                    "description": "current page"
+                                                },
+                                                "pageSize": {
+                                                    "type": "integer",
+                                                    "description": "page size"
+                                                },
+                                                "totalNum": {
+                                                    "type": "integer",
+                                                    "description": "total number"
+                                                },
+                                                "totalPage": {
+                                                    "type": "integer",
+                                                    "description": "total pages"
+                                                },
+                                                "items": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "currency": {
+                                                                "type": "string",
+                                                                "description": "Currency"
+                                                            },
+                                                            "createAt": {
+                                                                "type": "integer",
+                                                                "description": "Database record creation time"
+                                                            },
+                                                            "amount": {
+                                                                "type": "string",
+                                                                "description": "Deposit amount"
+                                                            },
+                                                            "walletTxId": {
+                                                                "type": "string",
+                                                                "description": "Wallet Txid"
+                                                            },
+                                                            "isInner": {
+                                                                "type": "boolean",
+                                                                "description": "Internal deposit or not"
+                                                            },
+                                                            "status": {
+                                                                "type": "string",
+                                                                "enum": [
+                                                                    "PROCESSING",
+                                                                    "SUCCESS",
+                                                                    "FAILURE"
+                                                                ],
+                                                                "x-api-enum": [
+                                                                    {
+                                                                        "value": "PROCESSING",
+                                                                        "name": "",
+                                                                        "description": ""
+                                                                    },
+                                                                    {
+                                                                        "value": "SUCCESS",
+                                                                        "name": "",
+                                                                        "description": ""
+                                                                    },
+                                                                    {
+                                                                        "value": "FAILURE",
+                                                                        "name": "",
+                                                                        "description": ""
+                                                                    }
+                                                                ]
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "required": [
+                                                "currentPage",
+                                                "pageSize",
+                                                "totalNum",
+                                                "totalPage",
+                                                "items"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "code",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-api-doc": "https://www.kucoin.com/docs-new/api-3470306",
+                "x-abandon": "abandon",
+                "x-domain": "Spot",
+                "x-api-channel": "Private",
+                "x-api-permission": "General",
+                "x-api-rate-limit-pool": "Management",
+                "x-sdk-service": "Account",
+                "x-sdk-sub-service": "Deposit",
+                "x-sdk-method-name": "getDepositHistoryOld",
+                "x-sdk-method-description": "Request the V1 historical deposits list on KuCoin via this endpoint. The return value is the data after Pagination, sorted in descending order according to time.",
+                "x-api-rate-limit-weight": 5,
+                "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": {\\n        \\\"currentPage\\\": 1,\\n        \\\"pageSize\\\": 50,\\n        \\\"totalNum\\\": 0,\\n        \\\"totalPage\\\": 0,\\n        \\\"items\\\": [\\n            {\\n                \\\"currency\\\": \\\"BTC\\\",\\n                \\\"createAt\\\": 1528536998,\\n                \\\"amount\\\": \\\"0.03266638\\\",\\n                \\\"walletTxId\\\": \\\"55c643bc2c68d6f17266383ac1be9e454038864b929ae7cee0bc408cc5c869e8@12ffGWmMMD1zA1WbFm7Ho3JZ1w6NYXjpFk@234\\\",\\n                \\\"isInner\\\": false,\\n                \\\"status\\\": \\\"SUCCESS\\\"\\n            }\\n        ]\\n    }\\n}",
+                "x-request-example": "{\\\"currency\\\": \\\"BTC\\\", \\\"status\\\": \\\"SUCCESS\\\", \\\"startAt\\\": 1728663338000, \\\"endAt\\\": 1728692138000}",
+                "operationId": "041"
             }
         },
         "/api/v2/accounts/inner-transfer": {
@@ -6463,827 +6994,7 @@
                 },
                 "x-response-example": "{\\\"code\\\":\\\"200000\\\",\\\"data\\\":{\\\"orderId\\\":\\\"670beb3482a1bb0007dec644\\\"}}",
                 "x-request-example": "{\\\"clientOid\\\": \\\"64ccc0f164781800010d8c09\\\", \\\"currency\\\": \\\"USDT\\\", \\\"amount\\\": \\\"0.01\\\", \\\"from\\\": \\\"main\\\", \\\"to\\\": \\\"trade\\\"}",
-                "operationId": "040"
-            }
-        },
-        "/api/v3/transfer-out": {
-            "post": {
-                "summary": "Futures Account Transfer Out",
-                "deprecated": true,
-                "description": "The amount to be transferred will be deducted from the KuCoin Futures Account. Please ensure that you have sufficient funds in your KuCoin Futures Account, or the transfer will fail.",
-                "tags": [],
-                "parameters": [],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "code": {
-                                            "type": "string"
-                                        },
-                                        "data": {
-                                            "type": "object",
-                                            "properties": {
-                                                "applyId": {
-                                                    "type": "string",
-                                                    "description": "Transfer order ID"
-                                                },
-                                                "bizNo": {
-                                                    "type": "string",
-                                                    "description": "Business number"
-                                                },
-                                                "payAccountType": {
-                                                    "type": "string",
-                                                    "description": "Pay account type"
-                                                },
-                                                "payTag": {
-                                                    "type": "string",
-                                                    "description": "Pay account sub type"
-                                                },
-                                                "remark": {
-                                                    "type": "string",
-                                                    "description": "User remark"
-                                                },
-                                                "recAccountType": {
-                                                    "type": "string",
-                                                    "description": "Receive account type"
-                                                },
-                                                "recTag": {
-                                                    "type": "string",
-                                                    "description": "Receive account sub type"
-                                                },
-                                                "recRemark": {
-                                                    "type": "string",
-                                                    "description": "Receive account tx remark"
-                                                },
-                                                "recSystem": {
-                                                    "type": "string",
-                                                    "description": "Receive system"
-                                                },
-                                                "status": {
-                                                    "type": "string",
-                                                    "description": "Status:APPLY, PROCESSING, PENDING_APPROVAL, APPROVED, REJECTED, PENDING_CANCEL, CANCEL, SUCCESS"
-                                                },
-                                                "currency": {
-                                                    "type": "string",
-                                                    "description": "Currency"
-                                                },
-                                                "amount": {
-                                                    "type": "string",
-                                                    "description": "Transfer amount"
-                                                },
-                                                "fee": {
-                                                    "type": "string",
-                                                    "description": "Transfer fee"
-                                                },
-                                                "sn": {
-                                                    "type": "integer",
-                                                    "description": "Serial number",
-                                                    "format": "int64"
-                                                },
-                                                "reason": {
-                                                    "type": "string",
-                                                    "description": "Fail Reason"
-                                                },
-                                                "createdAt": {
-                                                    "type": "integer",
-                                                    "description": "Create time",
-                                                    "format": "int64"
-                                                },
-                                                "updatedAt": {
-                                                    "type": "integer",
-                                                    "description": "Update time",
-                                                    "format": "int64"
-                                                }
-                                            },
-                                            "required": [
-                                                "applyId",
-                                                "bizNo",
-                                                "payAccountType",
-                                                "payTag",
-                                                "remark",
-                                                "recAccountType",
-                                                "recTag",
-                                                "recRemark",
-                                                "recSystem",
-                                                "status",
-                                                "currency",
-                                                "amount",
-                                                "fee",
-                                                "sn",
-                                                "reason",
-                                                "createdAt",
-                                                "updatedAt"
-                                            ]
-                                        }
-                                    },
-                                    "required": [
-                                        "code",
-                                        "data"
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                },
-                "x-api-doc": "https://www.kucoin.com/docs-new/api-3470303",
-                "x-abandon": "abandon",
-                "x-domain": "Futures",
-                "x-api-channel": "Private",
-                "x-api-permission": "Futures",
-                "x-api-rate-limit-pool": "Management",
-                "x-sdk-service": "Account",
-                "x-sdk-sub-service": "Transfer",
-                "x-sdk-method-name": "futuresAccountTransferOut",
-                "x-sdk-method-description": "The amount to be transferred will be deducted from the KuCoin Futures Account. Please ensure that you have sufficient funds in your KuCoin Futures Account, or the transfer will fail.",
-                "x-api-rate-limit-weight": 20,
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "title": "",
-                                "type": "object",
-                                "properties": {
-                                    "currency": {
-                                        "type": "string",
-                                        "description": "Currency, including XBT, USDT...",
-                                        "example": [
-                                            "XBT",
-                                            "USDT",
-                                            "ETH"
-                                        ]
-                                    },
-                                    "amount": {
-                                        "type": "number",
-                                        "description": "Amount to be transferred out; cannot exceed 1000000000",
-                                        "maximum": 1000000000
-                                    },
-                                    "recAccountType": {
-                                        "type": "string",
-                                        "description": "Receive account type, including MAIN, TRADE",
-                                        "enum": [
-                                            "MAIN",
-                                            "TRADE"
-                                        ],
-                                        "x-api-enum": [
-                                            {
-                                                "value": "MAIN",
-                                                "name": "",
-                                                "description": ""
-                                            },
-                                            {
-                                                "value": "TRADE",
-                                                "name": "",
-                                                "description": ""
-                                            }
-                                        ]
-                                    }
-                                },
-                                "required": [
-                                    "amount",
-                                    "currency",
-                                    "recAccountType"
-                                ]
-                            },
-                            "example": "{\n    \"currency\": \"USDT\",\n    \"amount\": 0.01,\n    \"recAccountType\": \"MAIN\"\n}"
-                        }
-                    }
-                },
-                "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": {\\n        \\\"applyId\\\": \\\"670bf84c577f6c00017a1c48\\\",\\n        \\\"bizNo\\\": \\\"670bf84c577f6c00017a1c47\\\",\\n        \\\"payAccountType\\\": \\\"CONTRACT\\\",\\n        \\\"payTag\\\": \\\"DEFAULT\\\",\\n        \\\"remark\\\": \\\"\\\",\\n        \\\"recAccountType\\\": \\\"MAIN\\\",\\n        \\\"recTag\\\": \\\"DEFAULT\\\",\\n        \\\"recRemark\\\": \\\"\\\",\\n        \\\"recSystem\\\": \\\"KUCOIN\\\",\\n        \\\"status\\\": \\\"PROCESSING\\\",\\n        \\\"currency\\\": \\\"USDT\\\",\\n        \\\"amount\\\": \\\"0.01\\\",\\n        \\\"fee\\\": \\\"0\\\",\\n        \\\"sn\\\": 1519769124134806,\\n        \\\"reason\\\": \\\"\\\",\\n        \\\"createdAt\\\": 1728837708000,\\n        \\\"updatedAt\\\": 1728837708000\\n    }\\n}",
-                "x-request-example": "{\\\"currency\\\": \\\"USDT\\\", \\\"amount\\\": 0.01, \\\"recAccountType\\\": \\\"MAIN\\\"}",
-                "operationId": "041"
-            }
-        },
-        "/api/v1/transfer-in": {
-            "post": {
-                "summary": "Futures Account Transfer In",
-                "deprecated": true,
-                "description": "The amount to be transferred will be deducted from the payAccount. Please ensure that you have sufficient funds in your payAccount account, or the transfer will fail.",
-                "tags": [],
-                "parameters": [],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "code": {
-                                            "type": "string"
-                                        },
-                                        "data": {
-                                            "type": "string"
-                                        }
-                                    },
-                                    "required": [
-                                        "code",
-                                        "data"
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                },
-                "x-api-doc": "https://www.kucoin.com/docs-new/api-3470304",
-                "x-abandon": "abandon",
-                "x-domain": "Futures",
-                "x-api-channel": "Private",
-                "x-api-permission": "Futures",
-                "x-api-rate-limit-pool": "Management",
-                "x-sdk-service": "Account",
-                "x-sdk-sub-service": "Transfer",
-                "x-sdk-method-name": "futuresAccountTransferIn",
-                "x-sdk-method-description": "The amount to be transferred will be deducted from the payAccount. Please ensure that you have sufficient funds in your payAccount account, or the transfer will fail.",
-                "x-api-rate-limit-weight": 20,
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "title": "",
-                                "type": "object",
-                                "properties": {
-                                    "currency": {
-                                        "type": "string",
-                                        "description": "Currency, including XBT, USDT...",
-                                        "example": [
-                                            "XBT",
-                                            "USDT",
-                                            "ETH"
-                                        ]
-                                    },
-                                    "amount": {
-                                        "type": "number",
-                                        "description": "Amount to be transferred in"
-                                    },
-                                    "payAccountType": {
-                                        "type": "string",
-                                        "description": "Payment account type, including MAIN, TRADE",
-                                        "enum": [
-                                            "MAIN",
-                                            "TRADE"
-                                        ],
-                                        "x-api-enum": [
-                                            {
-                                                "value": "MAIN",
-                                                "name": "",
-                                                "description": ""
-                                            },
-                                            {
-                                                "value": "TRADE",
-                                                "name": "",
-                                                "description": ""
-                                            }
-                                        ]
-                                    }
-                                },
-                                "required": [
-                                    "amount",
-                                    "currency",
-                                    "payAccountType"
-                                ]
-                            },
-                            "example": "{\n    \"currency\": \"USDT\",\n    \"amount\": 0.01,\n    \"payAccountType\": \"MAIN\"\n}"
-                        }
-                    }
-                },
-                "x-response-example": "{\\\"code\\\":\\\"200000\\\",\\\"data\\\":null}",
-                "x-request-example": "{\\\"currency\\\": \\\"USDT\\\", \\\"amount\\\": 0.01, \\\"payAccountType\\\": \\\"MAIN\\\"}",
                 "operationId": "042"
-            }
-        },
-        "/api/v1/deposit-addresses": {
-            "get": {
-                "summary": "Get Deposit Addresses - V1",
-                "deprecated": true,
-                "description": "Get all deposit addresses for the currency you intend to deposit. If the returned data is empty, you may need to add the deposit address first.",
-                "tags": [],
-                "parameters": [
-                    {
-                        "name": "currency",
-                        "in": "query",
-                        "description": "currency",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "example": [
-                                "BTC",
-                                "ETH",
-                                "USDT"
-                            ]
-                        }
-                    },
-                    {
-                        "name": "chain",
-                        "in": "query",
-                        "description": "The chainId of currency, e.g. the available values for USDT are OMNI, ERC20, and TRC20; default is ERC20. The available values for BTC are Native, Segwit, TRC20; the parameters are bech32, btc, trx; default is Native. This only applies to multi-chain currencies; no need for single-chain currencies.",
-                        "required": false,
-                        "schema": {
-                            "type": "string",
-                            "default": "eth",
-                            "example": [
-                                "eth",
-                                "bech32",
-                                "btc",
-                                "kcc",
-                                "trx",
-                                "bsc",
-                                "arbitrum",
-                                "ton",
-                                "optimism"
-                            ]
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "code": {
-                                            "type": "string"
-                                        },
-                                        "data": {
-                                            "type": "object",
-                                            "properties": {
-                                                "address": {
-                                                    "type": "string",
-                                                    "description": "Deposit address"
-                                                },
-                                                "memo": {
-                                                    "type": "string",
-                                                    "description": "Address remark. If there’s no remark, it is empty. When you withdraw from other platforms to KuCoin, you need to fill in memo(tag). Be careful: If you do not fill in memo(tag), your deposit may not be available."
-                                                },
-                                                "chain": {
-                                                    "type": "string",
-                                                    "description": "The chainName of currency",
-                                                    "example": [
-                                                        "ERC20",
-                                                        "BTC-Segwit",
-                                                        "BTC",
-                                                        "KCC",
-                                                        "TRC20",
-                                                        "BEP20",
-                                                        "ARBITRUM",
-                                                        "TON",
-                                                        "OPTIMISM"
-                                                    ]
-                                                },
-                                                "chainId": {
-                                                    "type": "string",
-                                                    "description": "The chainId of currency",
-                                                    "example": [
-                                                        "eth",
-                                                        "bech32",
-                                                        "btc",
-                                                        "kcc",
-                                                        "trx",
-                                                        "bsc",
-                                                        "arbitrum",
-                                                        "ton",
-                                                        "optimism"
-                                                    ]
-                                                },
-                                                "to": {
-                                                    "type": "string",
-                                                    "description": "Deposit account type: main (funding account), trade (spot trading account)",
-                                                    "enum": [
-                                                        "MAIN",
-                                                        "TRADE"
-                                                    ],
-                                                    "x-api-enum": [
-                                                        {
-                                                            "value": "MAIN",
-                                                            "name": "",
-                                                            "description": ""
-                                                        },
-                                                        {
-                                                            "value": "TRADE",
-                                                            "name": "",
-                                                            "description": ""
-                                                        }
-                                                    ]
-                                                },
-                                                "currency": {
-                                                    "type": "string",
-                                                    "description": "currency",
-                                                    "example": [
-                                                        "BTC",
-                                                        "ETH",
-                                                        "USDT"
-                                                    ]
-                                                },
-                                                "contractAddress": {
-                                                    "type": "string",
-                                                    "description": "The token contract address."
-                                                }
-                                            }
-                                        }
-                                    },
-                                    "required": [
-                                        "code",
-                                        "data"
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                },
-                "x-api-doc": "https://www.kucoin.com/docs-new/api-3470305",
-                "x-abandon": "abandon",
-                "x-domain": "Spot",
-                "x-api-channel": "Private",
-                "x-api-permission": "General",
-                "x-api-rate-limit-pool": "Management",
-                "x-sdk-service": "Account",
-                "x-sdk-sub-service": "Deposit",
-                "x-sdk-method-name": "getDepositAddressV1",
-                "x-sdk-method-description": "Get all deposit addresses for the currency you intend to deposit. If the returned data is empty, you may need to add the deposit address first.",
-                "x-api-rate-limit-weight": 5,
-                "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": {\\n        \\\"address\\\": \\\"0xea220bf61c3c2b0adc2cfa29fec3d2677745a379\\\",\\n        \\\"memo\\\": \\\"\\\",\\n        \\\"chain\\\": \\\"ERC20\\\",\\n        \\\"chainId\\\": \\\"eth\\\",\\n        \\\"to\\\": \\\"MAIN\\\",\\n        \\\"currency\\\": \\\"USDT\\\"\\n    }\\n}",
-                "x-request-example": "{\\\"currency\\\": \\\"BTC\\\", \\\"chain\\\": \\\"eth\\\"}",
-                "operationId": "043"
-            },
-            "post": {
-                "summary": "Add Deposit Address - V1",
-                "deprecated": true,
-                "description": "Request via this endpoint the creation of a deposit address for a currency you intend to deposit.",
-                "tags": [],
-                "parameters": [],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "code": {
-                                            "type": "string"
-                                        },
-                                        "data": {
-                                            "type": "object",
-                                            "properties": {
-                                                "address": {
-                                                    "type": "string",
-                                                    "description": "Deposit address"
-                                                },
-                                                "memo": {
-                                                    "type": "string",
-                                                    "description": "Address remark. If there’s no remark, it is empty. When you withdraw from other platforms to KuCoin, you need to fill in memo(tag). Be careful: If you do not fill in memo(tag), your deposit may not be available."
-                                                },
-                                                "chain": {
-                                                    "type": "string",
-                                                    "description": "The chainName of currency",
-                                                    "example": [
-                                                        "ERC20",
-                                                        "BTC-Segwit",
-                                                        "BTC",
-                                                        "KCC",
-                                                        "TRC20",
-                                                        "BEP20",
-                                                        "ARBITRUM",
-                                                        "TON",
-                                                        "OPTIMISM"
-                                                    ]
-                                                },
-                                                "chainId": {
-                                                    "type": "string",
-                                                    "description": "The chainId of currency",
-                                                    "example": [
-                                                        "eth",
-                                                        "bech32",
-                                                        "btc",
-                                                        "kcc",
-                                                        "trx",
-                                                        "bsc",
-                                                        "arbitrum",
-                                                        "ton",
-                                                        "optimism"
-                                                    ]
-                                                },
-                                                "to": {
-                                                    "type": "string",
-                                                    "description": "Deposit account type: main (funding account), trade (spot trading account)",
-                                                    "enum": [
-                                                        "MAIN",
-                                                        "TRADE"
-                                                    ],
-                                                    "x-api-enum": [
-                                                        {
-                                                            "value": "MAIN",
-                                                            "name": "",
-                                                            "description": ""
-                                                        },
-                                                        {
-                                                            "value": "TRADE",
-                                                            "name": "",
-                                                            "description": ""
-                                                        }
-                                                    ]
-                                                },
-                                                "currency": {
-                                                    "type": "string",
-                                                    "description": "currency",
-                                                    "example": [
-                                                        "BTC",
-                                                        "ETH",
-                                                        "USDT"
-                                                    ]
-                                                }
-                                            },
-                                            "required": [
-                                                "address",
-                                                "memo",
-                                                "chain",
-                                                "to",
-                                                "currency",
-                                                "chainId"
-                                            ]
-                                        }
-                                    },
-                                    "required": [
-                                        "code",
-                                        "data"
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                },
-                "x-api-doc": "https://www.kucoin.com/docs-new/api-3470309",
-                "x-abandon": "abandon",
-                "x-domain": "Spot",
-                "x-api-channel": "Private",
-                "x-api-permission": "General",
-                "x-api-rate-limit-pool": "Management",
-                "x-sdk-service": "Account",
-                "x-sdk-sub-service": "Deposit",
-                "x-sdk-method-name": "addDepositAddressV1",
-                "x-sdk-method-description": "Request via this endpoint the creation of a deposit address for a currency you intend to deposit.",
-                "x-api-rate-limit-weight": 20,
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "title": "",
-                                "type": "object",
-                                "properties": {
-                                    "currency": {
-                                        "type": "string",
-                                        "description": "currency",
-                                        "example": [
-                                            "BTC",
-                                            "ETH",
-                                            "USDT"
-                                        ]
-                                    },
-                                    "chain": {
-                                        "type": "string",
-                                        "description": "The chainId of currency, e.g. the available values for USDT are OMNI, ERC20, and TRC20; default is ERC20. The available values for BTC are Native, Segwit, TRC20; the parameters are bech32, btc, trx; default is Native. This only applies to multi-chain currencies; no need for single-chain currencies.",
-                                        "default": "eth",
-                                        "example": [
-                                            "eth",
-                                            "bech32",
-                                            "btc",
-                                            "kcc",
-                                            "trx",
-                                            "bsc",
-                                            "arbitrum",
-                                            "ton",
-                                            "optimism"
-                                        ]
-                                    },
-                                    "to": {
-                                        "type": "string",
-                                        "description": "Deposit account type: main (funding account), trade (spot trading account); the default is main",
-                                        "enum": [
-                                            "main",
-                                            "trade"
-                                        ],
-                                        "default": "main",
-                                        "x-api-enum": [
-                                            {
-                                                "value": "main",
-                                                "name": "main",
-                                                "description": "Funding account"
-                                            },
-                                            {
-                                                "value": "trade",
-                                                "name": "trade",
-                                                "description": "Spot account"
-                                            }
-                                        ]
-                                    }
-                                },
-                                "required": [
-                                    "currency"
-                                ]
-                            },
-                            "example": "{\n    \"currency\": \"ETH\",\n    \"chain\": \"eth\"\n}"
-                        }
-                    }
-                },
-                "x-response-example": "{\\\"code\\\":\\\"200000\\\",\\\"data\\\":{\\\"address\\\":\\\"0x02028456f38e78609904e8a002c787ede7a73d7c\\\",\\\"memo\\\":null,\\\"chain\\\":\\\"ERC20\\\",\\\"chainId\\\":\\\"eth\\\",\\\"to\\\":\\\"MAIN\\\",\\\"currency\\\":\\\"ETH\\\"}}",
-                "x-request-example": "{\\\"currency\\\": \\\"ETH\\\", \\\"chain\\\": \\\"eth\\\"}",
-                "operationId": "047"
-            }
-        },
-        "/api/v1/hist-deposits": {
-            "get": {
-                "summary": "Get Deposit History - Old",
-                "deprecated": true,
-                "description": "Request the V1 historical deposits list on KuCoin via this endpoint. The return value is the data after Pagination, sorted in descending order according to time.",
-                "tags": [],
-                "parameters": [
-                    {
-                        "name": "currency",
-                        "in": "query",
-                        "description": "currency",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "example": [
-                                "BTC",
-                                "ETH",
-                                "USDT"
-                            ]
-                        }
-                    },
-                    {
-                        "name": "status",
-                        "in": "query",
-                        "description": "Status. Available value: PROCESSING, SUCCESS, and FAILURE",
-                        "required": false,
-                        "schema": {
-                            "type": "string",
-                            "enum": [
-                                "PROCESSING",
-                                "SUCCESS",
-                                "FAILURE"
-                            ],
-                            "x-api-enum": [
-                                {
-                                    "value": "PROCESSING",
-                                    "name": "",
-                                    "description": ""
-                                },
-                                {
-                                    "value": "SUCCESS",
-                                    "name": "",
-                                    "description": ""
-                                },
-                                {
-                                    "value": "FAILURE",
-                                    "name": "",
-                                    "description": ""
-                                }
-                            ]
-                        }
-                    },
-                    {
-                        "name": "startAt",
-                        "in": "query",
-                        "description": "Start time (milliseconds)",
-                        "required": false,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    },
-                    {
-                        "name": "endAt",
-                        "in": "query",
-                        "description": "End time (milliseconds)",
-                        "required": false,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "code": {
-                                            "type": "string"
-                                        },
-                                        "data": {
-                                            "type": "object",
-                                            "properties": {
-                                                "currentPage": {
-                                                    "type": "integer",
-                                                    "description": "current page"
-                                                },
-                                                "pageSize": {
-                                                    "type": "integer",
-                                                    "description": "page size"
-                                                },
-                                                "totalNum": {
-                                                    "type": "integer",
-                                                    "description": "total number"
-                                                },
-                                                "totalPage": {
-                                                    "type": "integer",
-                                                    "description": "total pages"
-                                                },
-                                                "items": {
-                                                    "type": "array",
-                                                    "items": {
-                                                        "type": "object",
-                                                        "properties": {
-                                                            "currency": {
-                                                                "type": "string",
-                                                                "description": "Currency"
-                                                            },
-                                                            "createAt": {
-                                                                "type": "integer",
-                                                                "description": "Database record creation time"
-                                                            },
-                                                            "amount": {
-                                                                "type": "string",
-                                                                "description": "Deposit amount"
-                                                            },
-                                                            "walletTxId": {
-                                                                "type": "string",
-                                                                "description": "Wallet Txid"
-                                                            },
-                                                            "isInner": {
-                                                                "type": "boolean",
-                                                                "description": "Internal deposit or not"
-                                                            },
-                                                            "status": {
-                                                                "type": "string",
-                                                                "enum": [
-                                                                    "PROCESSING",
-                                                                    "SUCCESS",
-                                                                    "FAILURE"
-                                                                ],
-                                                                "x-api-enum": [
-                                                                    {
-                                                                        "value": "PROCESSING",
-                                                                        "name": "",
-                                                                        "description": ""
-                                                                    },
-                                                                    {
-                                                                        "value": "SUCCESS",
-                                                                        "name": "",
-                                                                        "description": ""
-                                                                    },
-                                                                    {
-                                                                        "value": "FAILURE",
-                                                                        "name": "",
-                                                                        "description": ""
-                                                                    }
-                                                                ]
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            },
-                                            "required": [
-                                                "currentPage",
-                                                "pageSize",
-                                                "totalNum",
-                                                "totalPage",
-                                                "items"
-                                            ]
-                                        }
-                                    },
-                                    "required": [
-                                        "code",
-                                        "data"
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                },
-                "x-api-doc": "https://www.kucoin.com/docs-new/api-3470306",
-                "x-abandon": "abandon",
-                "x-domain": "Spot",
-                "x-api-channel": "Private",
-                "x-api-permission": "General",
-                "x-api-rate-limit-pool": "Management",
-                "x-sdk-service": "Account",
-                "x-sdk-sub-service": "Deposit",
-                "x-sdk-method-name": "getDepositHistoryOld",
-                "x-sdk-method-description": "Request the V1 historical deposits list on KuCoin via this endpoint. The return value is the data after Pagination, sorted in descending order according to time.",
-                "x-api-rate-limit-weight": 5,
-                "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": {\\n        \\\"currentPage\\\": 1,\\n        \\\"pageSize\\\": 50,\\n        \\\"totalNum\\\": 0,\\n        \\\"totalPage\\\": 0,\\n        \\\"items\\\": [\\n            {\\n                \\\"currency\\\": \\\"BTC\\\",\\n                \\\"createAt\\\": 1528536998,\\n                \\\"amount\\\": \\\"0.03266638\\\",\\n                \\\"walletTxId\\\": \\\"55c643bc2c68d6f17266383ac1be9e454038864b929ae7cee0bc408cc5c869e8@12ffGWmMMD1zA1WbFm7Ho3JZ1w6NYXjpFk@234\\\",\\n                \\\"isInner\\\": false,\\n                \\\"status\\\": \\\"SUCCESS\\\"\\n            }\\n        ]\\n    }\\n}",
-                "x-request-example": "{\\\"currency\\\": \\\"BTC\\\", \\\"status\\\": \\\"SUCCESS\\\", \\\"startAt\\\": 1728663338000, \\\"endAt\\\": 1728692138000}",
-                "operationId": "044"
             }
         },
         "/api/v1/transfer-list": {
@@ -7533,7 +7244,7 @@
                 "x-api-rate-limit-weight": 20,
                 "x-response-example": "{\\\"code\\\":\\\"200000\\\",\\\"data\\\":{\\\"currentPage\\\":1,\\\"pageSize\\\":50,\\\"totalNum\\\":1,\\\"totalPage\\\":1,\\\"items\\\":[{\\\"applyId\\\":\\\"670bf84c577f6c00017a1c48\\\",\\\"currency\\\":\\\"USDT\\\",\\\"recRemark\\\":\\\"\\\",\\\"recSystem\\\":\\\"KUCOIN\\\",\\\"status\\\":\\\"SUCCESS\\\",\\\"amount\\\":\\\"0.01\\\",\\\"reason\\\":\\\"\\\",\\\"offset\\\":1519769124134806,\\\"createdAt\\\":1728837708000,\\\"remark\\\":\\\"\\\"}]}}",
                 "x-request-example": "{\\\"currency\\\": \\\"XBT\\\", \\\"type\\\": \\\"MAIN\\\", \\\"tag\\\": [\\\"mock_a\\\", \\\"mock_b\\\"], \\\"startAt\\\": 1728663338000, \\\"endAt\\\": 1728692138000, \\\"currentPage\\\": 1, \\\"pageSize\\\": 50}",
-                "operationId": "045"
+                "operationId": "043"
             }
         },
         "/api/v1/hist-withdrawals": {
@@ -7751,6 +7462,295 @@
                 "x-api-rate-limit-weight": 20,
                 "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": {\\n        \\\"currentPage\\\": 1,\\n        \\\"pageSize\\\": 50,\\n        \\\"totalNum\\\": 1,\\n        \\\"totalPage\\\": 1,\\n        \\\"items\\\": [\\n            {\\n                \\\"currency\\\": \\\"BTC\\\",\\n                \\\"createAt\\\": 1526723468,\\n                \\\"amount\\\": \\\"0.534\\\",\\n                \\\"address\\\": \\\"33xW37ZSW4tQvg443Pc7NLCAs167Yc2XUV\\\",\\n                \\\"walletTxId\\\": \\\"aeacea864c020acf58e51606169240e96774838dcd4f7ce48acf38e3651323f4\\\",\\n                \\\"isInner\\\": false,\\n                \\\"status\\\": \\\"SUCCESS\\\"\\n            }\\n        ]\\n    }\\n}",
                 "x-request-example": "{\\\"currency\\\": \\\"BTC\\\", \\\"status\\\": \\\"SUCCESS\\\", \\\"startAt\\\": 1728663338000, \\\"endAt\\\": 1728692138000, \\\"currentPage\\\": 1, \\\"pageSize\\\": 50}",
+                "operationId": "044"
+            }
+        },
+        "/api/v3/transfer-out": {
+            "post": {
+                "summary": "Futures Account Transfer Out",
+                "deprecated": true,
+                "description": "The amount to be transferred will be deducted from the KuCoin Futures Account. Please ensure that you have sufficient funds in your KuCoin Futures Account, or the transfer will fail.",
+                "tags": [],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "applyId": {
+                                                    "type": "string",
+                                                    "description": "Transfer order ID"
+                                                },
+                                                "bizNo": {
+                                                    "type": "string",
+                                                    "description": "Business number"
+                                                },
+                                                "payAccountType": {
+                                                    "type": "string",
+                                                    "description": "Pay account type"
+                                                },
+                                                "payTag": {
+                                                    "type": "string",
+                                                    "description": "Pay account sub type"
+                                                },
+                                                "remark": {
+                                                    "type": "string",
+                                                    "description": "User remark"
+                                                },
+                                                "recAccountType": {
+                                                    "type": "string",
+                                                    "description": "Receive account type"
+                                                },
+                                                "recTag": {
+                                                    "type": "string",
+                                                    "description": "Receive account sub type"
+                                                },
+                                                "recRemark": {
+                                                    "type": "string",
+                                                    "description": "Receive account tx remark"
+                                                },
+                                                "recSystem": {
+                                                    "type": "string",
+                                                    "description": "Receive system"
+                                                },
+                                                "status": {
+                                                    "type": "string",
+                                                    "description": "Status:APPLY, PROCESSING, PENDING_APPROVAL, APPROVED, REJECTED, PENDING_CANCEL, CANCEL, SUCCESS"
+                                                },
+                                                "currency": {
+                                                    "type": "string",
+                                                    "description": "Currency"
+                                                },
+                                                "amount": {
+                                                    "type": "string",
+                                                    "description": "Transfer amount"
+                                                },
+                                                "fee": {
+                                                    "type": "string",
+                                                    "description": "Transfer fee"
+                                                },
+                                                "sn": {
+                                                    "type": "integer",
+                                                    "description": "Serial number",
+                                                    "format": "int64"
+                                                },
+                                                "reason": {
+                                                    "type": "string",
+                                                    "description": "Fail Reason"
+                                                },
+                                                "createdAt": {
+                                                    "type": "integer",
+                                                    "description": "Create time",
+                                                    "format": "int64"
+                                                },
+                                                "updatedAt": {
+                                                    "type": "integer",
+                                                    "description": "Update time",
+                                                    "format": "int64"
+                                                }
+                                            },
+                                            "required": [
+                                                "applyId",
+                                                "bizNo",
+                                                "payAccountType",
+                                                "payTag",
+                                                "remark",
+                                                "recAccountType",
+                                                "recTag",
+                                                "recRemark",
+                                                "recSystem",
+                                                "status",
+                                                "currency",
+                                                "amount",
+                                                "fee",
+                                                "sn",
+                                                "reason",
+                                                "createdAt",
+                                                "updatedAt"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "code",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-api-doc": "https://www.kucoin.com/docs-new/api-3470303",
+                "x-abandon": "abandon",
+                "x-domain": "Futures",
+                "x-api-channel": "Private",
+                "x-api-permission": "Futures",
+                "x-api-rate-limit-pool": "Management",
+                "x-sdk-service": "Account",
+                "x-sdk-sub-service": "Transfer",
+                "x-sdk-method-name": "futuresAccountTransferOut",
+                "x-sdk-method-description": "The amount to be transferred will be deducted from the KuCoin Futures Account. Please ensure that you have sufficient funds in your KuCoin Futures Account, or the transfer will fail.",
+                "x-api-rate-limit-weight": 20,
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "title": "",
+                                "type": "object",
+                                "properties": {
+                                    "currency": {
+                                        "type": "string",
+                                        "description": "Currency, including XBT, USDT...",
+                                        "example": [
+                                            "XBT",
+                                            "USDT",
+                                            "ETH"
+                                        ]
+                                    },
+                                    "amount": {
+                                        "type": "number",
+                                        "description": "Amount to be transferred out; cannot exceed 1000000000",
+                                        "maximum": 1000000000
+                                    },
+                                    "recAccountType": {
+                                        "type": "string",
+                                        "description": "Receive account type, including MAIN, TRADE",
+                                        "enum": [
+                                            "MAIN",
+                                            "TRADE"
+                                        ],
+                                        "x-api-enum": [
+                                            {
+                                                "value": "MAIN",
+                                                "name": "",
+                                                "description": ""
+                                            },
+                                            {
+                                                "value": "TRADE",
+                                                "name": "",
+                                                "description": ""
+                                            }
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "amount",
+                                    "currency",
+                                    "recAccountType"
+                                ]
+                            },
+                            "example": "{\n    \"currency\": \"USDT\",\n    \"amount\": 0.01,\n    \"recAccountType\": \"MAIN\"\n}"
+                        }
+                    }
+                },
+                "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": {\\n        \\\"applyId\\\": \\\"670bf84c577f6c00017a1c48\\\",\\n        \\\"bizNo\\\": \\\"670bf84c577f6c00017a1c47\\\",\\n        \\\"payAccountType\\\": \\\"CONTRACT\\\",\\n        \\\"payTag\\\": \\\"DEFAULT\\\",\\n        \\\"remark\\\": \\\"\\\",\\n        \\\"recAccountType\\\": \\\"MAIN\\\",\\n        \\\"recTag\\\": \\\"DEFAULT\\\",\\n        \\\"recRemark\\\": \\\"\\\",\\n        \\\"recSystem\\\": \\\"KUCOIN\\\",\\n        \\\"status\\\": \\\"PROCESSING\\\",\\n        \\\"currency\\\": \\\"USDT\\\",\\n        \\\"amount\\\": \\\"0.01\\\",\\n        \\\"fee\\\": \\\"0\\\",\\n        \\\"sn\\\": 1519769124134806,\\n        \\\"reason\\\": \\\"\\\",\\n        \\\"createdAt\\\": 1728837708000,\\n        \\\"updatedAt\\\": 1728837708000\\n    }\\n}",
+                "x-request-example": "{\\\"currency\\\": \\\"USDT\\\", \\\"amount\\\": 0.01, \\\"recAccountType\\\": \\\"MAIN\\\"}",
+                "operationId": "045"
+            }
+        },
+        "/api/v1/transfer-in": {
+            "post": {
+                "summary": "Futures Account Transfer In",
+                "deprecated": true,
+                "description": "The amount to be transferred will be deducted from the payAccount. Please ensure that you have sufficient funds in your payAccount account, or the transfer will fail.",
+                "tags": [],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "code",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-api-doc": "https://www.kucoin.com/docs-new/api-3470304",
+                "x-abandon": "abandon",
+                "x-domain": "Futures",
+                "x-api-channel": "Private",
+                "x-api-permission": "Futures",
+                "x-api-rate-limit-pool": "Management",
+                "x-sdk-service": "Account",
+                "x-sdk-sub-service": "Transfer",
+                "x-sdk-method-name": "futuresAccountTransferIn",
+                "x-sdk-method-description": "The amount to be transferred will be deducted from the payAccount. Please ensure that you have sufficient funds in your payAccount account, or the transfer will fail.",
+                "x-api-rate-limit-weight": 20,
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "title": "",
+                                "type": "object",
+                                "properties": {
+                                    "currency": {
+                                        "type": "string",
+                                        "description": "Currency, including XBT, USDT...",
+                                        "example": [
+                                            "XBT",
+                                            "USDT",
+                                            "ETH"
+                                        ]
+                                    },
+                                    "amount": {
+                                        "type": "number",
+                                        "description": "Amount to be transferred in"
+                                    },
+                                    "payAccountType": {
+                                        "type": "string",
+                                        "description": "Payment account type, including MAIN, TRADE",
+                                        "enum": [
+                                            "MAIN",
+                                            "TRADE"
+                                        ],
+                                        "x-api-enum": [
+                                            {
+                                                "value": "MAIN",
+                                                "name": "",
+                                                "description": ""
+                                            },
+                                            {
+                                                "value": "TRADE",
+                                                "name": "",
+                                                "description": ""
+                                            }
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "amount",
+                                    "currency",
+                                    "payAccountType"
+                                ]
+                            },
+                            "example": "{\n    \"currency\": \"USDT\",\n    \"amount\": 0.01,\n    \"payAccountType\": \"MAIN\"\n}"
+                        }
+                    }
+                },
+                "x-response-example": "{\\\"code\\\":\\\"200000\\\",\\\"data\\\":null}",
+                "x-request-example": "{\\\"currency\\\": \\\"USDT\\\", \\\"amount\\\": 0.01, \\\"payAccountType\\\": \\\"MAIN\\\"}",
                 "operationId": "046"
             }
         },

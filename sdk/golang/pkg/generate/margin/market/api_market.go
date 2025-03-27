@@ -23,20 +23,6 @@ type MarketAPI interface {
 	// +-----------------------+--------+
 	GetCrossMarginSymbols(req *GetCrossMarginSymbolsReq, ctx context.Context) (*GetCrossMarginSymbolsResp, error)
 
-	// GetMarginConfig Get Margin Config
-	// Description: Request the configure info of the cross margin via this endpoint.
-	// Documentation: https://www.kucoin.com/docs-new/api-3470190
-	// +-----------------------+--------+
-	// | Extra API Info        | Value  |
-	// +-----------------------+--------+
-	// | API-DOMAIN            | SPOT   |
-	// | API-CHANNEL           | PUBLIC |
-	// | API-PERMISSION        | NULL   |
-	// | API-RATE-LIMIT-POOL   | SPOT   |
-	// | API-RATE-LIMIT-WEIGHT | 25     |
-	// +-----------------------+--------+
-	GetMarginConfig(ctx context.Context) (*GetMarginConfigResp, error)
-
 	// GetETFInfo Get ETF Info
 	// Description: This interface returns leveraged token information.
 	// Documentation: https://www.kucoin.com/docs-new/api-3470191
@@ -51,20 +37,6 @@ type MarketAPI interface {
 	// +-----------------------+--------+
 	GetETFInfo(req *GetETFInfoReq, ctx context.Context) (*GetETFInfoResp, error)
 
-	// GetMarkPriceList Get Mark Price List
-	// Description: This endpoint returns the current Mark price for all margin trading pairs.
-	// Documentation: https://www.kucoin.com/docs-new/api-3470192
-	// +-----------------------+--------+
-	// | Extra API Info        | Value  |
-	// +-----------------------+--------+
-	// | API-DOMAIN            | SPOT   |
-	// | API-CHANNEL           | PUBLIC |
-	// | API-PERMISSION        | NULL   |
-	// | API-RATE-LIMIT-POOL   | PUBLIC |
-	// | API-RATE-LIMIT-WEIGHT | 10     |
-	// +-----------------------+--------+
-	GetMarkPriceList(ctx context.Context) (*GetMarkPriceListResp, error)
-
 	// GetMarkPriceDetail Get Mark Price Detail
 	// Description: This endpoint returns the current Mark price for specified margin trading pairs.
 	// Documentation: https://www.kucoin.com/docs-new/api-3470193
@@ -78,6 +50,34 @@ type MarketAPI interface {
 	// | API-RATE-LIMIT-WEIGHT | 2      |
 	// +-----------------------+--------+
 	GetMarkPriceDetail(req *GetMarkPriceDetailReq, ctx context.Context) (*GetMarkPriceDetailResp, error)
+
+	// GetMarginConfig Get Margin Config
+	// Description: Request the configure info of the cross margin via this endpoint.
+	// Documentation: https://www.kucoin.com/docs-new/api-3470190
+	// +-----------------------+--------+
+	// | Extra API Info        | Value  |
+	// +-----------------------+--------+
+	// | API-DOMAIN            | SPOT   |
+	// | API-CHANNEL           | PUBLIC |
+	// | API-PERMISSION        | NULL   |
+	// | API-RATE-LIMIT-POOL   | SPOT   |
+	// | API-RATE-LIMIT-WEIGHT | 25     |
+	// +-----------------------+--------+
+	GetMarginConfig(ctx context.Context) (*GetMarginConfigResp, error)
+
+	// GetMarkPriceList Get Mark Price List
+	// Description: This endpoint returns the current Mark price for all margin trading pairs.
+	// Documentation: https://www.kucoin.com/docs-new/api-3470192
+	// +-----------------------+--------+
+	// | Extra API Info        | Value  |
+	// +-----------------------+--------+
+	// | API-DOMAIN            | SPOT   |
+	// | API-CHANNEL           | PUBLIC |
+	// | API-PERMISSION        | NULL   |
+	// | API-RATE-LIMIT-POOL   | PUBLIC |
+	// | API-RATE-LIMIT-WEIGHT | 10     |
+	// +-----------------------+--------+
+	GetMarkPriceList(ctx context.Context) (*GetMarkPriceListResp, error)
 
 	// GetIsolatedMarginSymbols Get Symbols - Isolated Margin
 	// Description: This endpoint allows querying the configuration of isolated margin symbol.
@@ -108,27 +108,27 @@ func (impl *MarketAPIImpl) GetCrossMarginSymbols(req *GetCrossMarginSymbolsReq, 
 	return resp, err
 }
 
-func (impl *MarketAPIImpl) GetMarginConfig(ctx context.Context) (*GetMarginConfigResp, error) {
-	resp := &GetMarginConfigResp{}
-	err := impl.transport.Call(ctx, "spot", false, "Get", "/api/v1/margin/config", nil, resp, false)
-	return resp, err
-}
-
 func (impl *MarketAPIImpl) GetETFInfo(req *GetETFInfoReq, ctx context.Context) (*GetETFInfoResp, error) {
 	resp := &GetETFInfoResp{}
 	err := impl.transport.Call(ctx, "spot", false, "Get", "/api/v3/etf/info", req, resp, false)
 	return resp, err
 }
 
-func (impl *MarketAPIImpl) GetMarkPriceList(ctx context.Context) (*GetMarkPriceListResp, error) {
-	resp := &GetMarkPriceListResp{}
-	err := impl.transport.Call(ctx, "spot", false, "Get", "/api/v3/mark-price/all-symbols", nil, resp, false)
-	return resp, err
-}
-
 func (impl *MarketAPIImpl) GetMarkPriceDetail(req *GetMarkPriceDetailReq, ctx context.Context) (*GetMarkPriceDetailResp, error) {
 	resp := &GetMarkPriceDetailResp{}
 	err := impl.transport.Call(ctx, "spot", false, "Get", "/api/v1/mark-price/{symbol}/current", req, resp, false)
+	return resp, err
+}
+
+func (impl *MarketAPIImpl) GetMarginConfig(ctx context.Context) (*GetMarginConfigResp, error) {
+	resp := &GetMarginConfigResp{}
+	err := impl.transport.Call(ctx, "spot", false, "Get", "/api/v1/margin/config", nil, resp, false)
+	return resp, err
+}
+
+func (impl *MarketAPIImpl) GetMarkPriceList(ctx context.Context) (*GetMarkPriceListResp, error) {
+	resp := &GetMarkPriceListResp{}
+	err := impl.transport.Call(ctx, "spot", false, "Get", "/api/v3/mark-price/all-symbols", nil, resp, false)
 	return resp, err
 }
 

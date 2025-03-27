@@ -40,7 +40,7 @@ export class GetStakingProductsData implements Serializable {
     userUpperLimit: string;
 
     /**
-     * Min. user subscribe amount
+     * Min. user subscription amount
      */
     userLowerLimit: string;
 
@@ -90,7 +90,7 @@ export class GetStakingProductsData implements Serializable {
     productRemainAmount: string;
 
     /**
-     * Product status: ONGOING (Subscription in progress), PENDING (Preheating Subscription), FULL (Subscribed), INTERESTING (Interest in progress)
+     * Product status: ONGOING (Subscription in progress), PENDING (Preheating Subscription), FULL (Subscribed), INTERESTING (Interest accrual in progress)
      */
     status: GetStakingProductsData.StatusEnum;
 

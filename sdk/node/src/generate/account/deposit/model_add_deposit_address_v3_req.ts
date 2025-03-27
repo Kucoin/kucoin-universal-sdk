@@ -10,7 +10,7 @@ export class AddDepositAddressV3Req implements Serializable {
     currency: string;
 
     /**
-     * The chainId of currency, e.g. the available values for USDT are OMNI, ERC20, and TRC20; default is ERC20. The available values for BTC are Native, Segwit, TRC20; the parameters are bech32, btc, trx; default is Native.
+     * The currency chainId, e.g. the available values for USDT are OMNI, ERC20, and TRC20; default is ERC20. The available values for BTC are Native, Segwit, TRC20; the parameters are bech32, btc, trx; default is Native.
      */
     chain: string = 'eth';
 
@@ -50,7 +50,7 @@ export class AddDepositAddressV3Req implements Serializable {
          */
         currency: string;
         /**
-         * The chainId of currency, e.g. the available values for USDT are OMNI, ERC20, and TRC20; default is ERC20. The available values for BTC are Native, Segwit, TRC20; the parameters are bech32, btc, trx; default is Native.
+         * The currency chainId, e.g. the available values for USDT are OMNI, ERC20, and TRC20; default is ERC20. The available values for BTC are Native, Segwit, TRC20; the parameters are bech32, btc, trx; default is Native.
          */
         chain: string;
         /**
@@ -103,11 +103,11 @@ export namespace AddDepositAddressV3Req {
         /**
          * Funding account
          */
-        MAIN = <any>'MAIN',
+        MAIN = <any>'main',
         /**
          * Spot account
          */
-        TRADE = <any>'TRADE',
+        TRADE = <any>'trade',
     }
 }
 
@@ -124,7 +124,7 @@ export class AddDepositAddressV3ReqBuilder {
     }
 
     /**
-     * The chainId of currency, e.g. the available values for USDT are OMNI, ERC20, and TRC20; default is ERC20. The available values for BTC are Native, Segwit, TRC20; the parameters are bech32, btc, trx; default is Native.
+     * The currency chainId, e.g. the available values for USDT are OMNI, ERC20, and TRC20; default is ERC20. The available values for BTC are Native, Segwit, TRC20; the parameters are bech32, btc, trx; default is Native.
      */
     setChain(value: string): AddDepositAddressV3ReqBuilder {
         this.obj.chain = value;

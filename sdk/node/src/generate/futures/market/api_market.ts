@@ -160,7 +160,7 @@ export interface MarketAPI {
 
     /**
      * getMarkPrice Get Mark Price
-     * Description: Get the current mark price.
+     * Description: Get the current mark price (Update snapshots once per second, real-time query).
      * Documentation: https://www.kucoin.com/docs-new/api-3470233
      * +-----------------------+---------+
      * | Extra API Info        | Value   |
@@ -176,7 +176,7 @@ export interface MarketAPI {
 
     /**
      * getSpotIndexPrice Get Spot Index Price
-     * Description: Get Spot Index Price.
+     * Description: Get Spot Index Price (Update snapshots once per second,  and there is a 5s cache when querying).
      * Documentation: https://www.kucoin.com/docs-new/api-3470231
      * +-----------------------+---------+
      * | Extra API Info        | Value   |
@@ -192,7 +192,7 @@ export interface MarketAPI {
 
     /**
      * getInterestRateIndex Get Interest Rate Index
-     * Description: Get interest rate Index.
+     * Description: Get interest rate Index (real-time query).
      * Documentation: https://www.kucoin.com/docs-new/api-3470226
      * +-----------------------+---------+
      * | Extra API Info        | Value   |
@@ -208,7 +208,7 @@ export interface MarketAPI {
 
     /**
      * getPremiumIndex Get Premium Index
-     * Description: Submit request to get premium index.
+     * Description: Submit request to get premium index (Update snapshots once per second, real-time query).
      * Documentation: https://www.kucoin.com/docs-new/api-3470227
      * +-----------------------+---------+
      * | Extra API Info        | Value   |

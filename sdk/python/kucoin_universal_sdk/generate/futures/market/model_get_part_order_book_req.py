@@ -15,21 +15,21 @@ class GetPartOrderBookReq(BaseModel):
     GetPartOrderBookReq
 
     Attributes:
-        symbol (str): Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) 
         size (str): Get the depth layer, optional value: 20, 100
+        symbol (str): Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) 
     """
 
+    size: Optional[str] = Field(
+        default=None,
+        path_variable="True",
+        description="Get the depth layer, optional value: 20, 100")
     symbol: Optional[str] = Field(
         default=None,
         description=
         "Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) "
     )
-    size: Optional[str] = Field(
-        default=None,
-        path_variable="True",
-        description="Get the depth layer, optional value: 20, 100")
 
-    __properties: ClassVar[List[str]] = ["symbol", "size"]
+    __properties: ClassVar[List[str]] = ["size", "symbol"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -65,8 +65,8 @@ class GetPartOrderBookReq(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "symbol": obj.get("symbol"),
-            "size": obj.get("size")
+            "size": obj.get("size"),
+            "symbol": obj.get("symbol")
         })
         return _obj
 
@@ -76,18 +76,18 @@ class GetPartOrderBookReqBuilder:
     def __init__(self):
         self.obj = {}
 
-    def set_symbol(self, value: str) -> GetPartOrderBookReqBuilder:
-        """
-        Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) 
-        """
-        self.obj['symbol'] = value
-        return self
-
     def set_size(self, value: str) -> GetPartOrderBookReqBuilder:
         """
         Get the depth layer, optional value: 20, 100
         """
         self.obj['size'] = value
+        return self
+
+    def set_symbol(self, value: str) -> GetPartOrderBookReqBuilder:
+        """
+        Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) 
+        """
+        self.obj['symbol'] = value
         return self
 
     def build(self) -> GetPartOrderBookReq:

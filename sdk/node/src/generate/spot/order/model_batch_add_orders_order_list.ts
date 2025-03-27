@@ -86,12 +86,12 @@ export class BatchAddOrdersOrderList implements Serializable {
     funds?: string;
 
     /**
-     * Equal to KC-API-TIMESTAMP, Need to be defined if iceberg is specified.
+     * Equal to KC-API-TIMESTAMP. Needs to be defined if iceberg is specified.
      */
     clientTimestamp?: number;
 
     /**
-     * Order failed after timeout of specified milliseconds, If clientTimestamp + allowMaxTimeWindow < the server reaches time, this order will fail.
+     * The order will fail if it times out after the specified duration in milliseconds. Specifically, if clientTimestamp + allowMaxTimeWindow (in milliseconds) is less than the time the server receives the message, the order will fail.
      */
     allowMaxTimeWindow?: number;
 
@@ -185,11 +185,11 @@ export class BatchAddOrdersOrderList implements Serializable {
          */
         funds?: string;
         /**
-         * Equal to KC-API-TIMESTAMP, Need to be defined if iceberg is specified.
+         * Equal to KC-API-TIMESTAMP. Needs to be defined if iceberg is specified.
          */
         clientTimestamp?: number;
         /**
-         * Order failed after timeout of specified milliseconds, If clientTimestamp + allowMaxTimeWindow < the server reaches time, this order will fail.
+         * The order will fail if it times out after the specified duration in milliseconds. Specifically, if clientTimestamp + allowMaxTimeWindow (in milliseconds) is less than the time the server receives the message, the order will fail.
          */
         allowMaxTimeWindow?: number;
     }): BatchAddOrdersOrderList {
@@ -443,7 +443,7 @@ export class BatchAddOrdersOrderListBuilder {
     }
 
     /**
-     * Equal to KC-API-TIMESTAMP, Need to be defined if iceberg is specified.
+     * Equal to KC-API-TIMESTAMP. Needs to be defined if iceberg is specified.
      */
     setClientTimestamp(value: number): BatchAddOrdersOrderListBuilder {
         this.obj.clientTimestamp = value;
@@ -451,7 +451,7 @@ export class BatchAddOrdersOrderListBuilder {
     }
 
     /**
-     * Order failed after timeout of specified milliseconds, If clientTimestamp + allowMaxTimeWindow < the server reaches time, this order will fail.
+     * The order will fail if it times out after the specified duration in milliseconds. Specifically, if clientTimestamp + allowMaxTimeWindow (in milliseconds) is less than the time the server receives the message, the order will fail.
      */
     setAllowMaxTimeWindow(value: number): BatchAddOrdersOrderListBuilder {
         this.obj.allowMaxTimeWindow = value;

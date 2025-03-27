@@ -128,7 +128,7 @@ class MarketAPITest(unittest.TestCase):
        Get Part OrderBook
        /api/v1/level2/depth{size}
        """
-        data = "{\"symbol\": \"XBTUSDM\", \"size\": \"20\"}"
+        data = "{\"size\": \"20\", \"symbol\": \"XBTUSDM\"}"
         req = GetPartOrderBookReq.from_json(data)
 
     def test_get_part_order_book_resp_model(self):

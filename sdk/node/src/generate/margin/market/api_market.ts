@@ -7,9 +7,9 @@ import { GetMarkPriceListResp } from './model_get_mark_price_list_resp';
 import { GetIsolatedMarginSymbolsResp } from './model_get_isolated_margin_symbols_resp';
 import { GetCrossMarginSymbolsReq } from './model_get_cross_margin_symbols_req';
 import { GetMarkPriceDetailResp } from './model_get_mark_price_detail_resp';
+import { GetMarginConfigResp } from './model_get_margin_config_resp';
 import { GetETFInfoResp } from './model_get_etf_info_resp';
 import { GetETFInfoReq } from './model_get_etf_info_req';
-import { GetMarginConfigResp } from './model_get_margin_config_resp';
 
 export interface MarketAPI {
     /**
@@ -29,22 +29,6 @@ export interface MarketAPI {
     getCrossMarginSymbols(req: GetCrossMarginSymbolsReq): Promise<GetCrossMarginSymbolsResp>;
 
     /**
-     * getMarginConfig Get Margin Config
-     * Description: Request the configure info of the cross margin via this endpoint.
-     * Documentation: https://www.kucoin.com/docs-new/api-3470190
-     * +-----------------------+--------+
-     * | Extra API Info        | Value  |
-     * +-----------------------+--------+
-     * | API-DOMAIN            | SPOT   |
-     * | API-CHANNEL           | PUBLIC |
-     * | API-PERMISSION        | NULL   |
-     * | API-RATE-LIMIT-POOL   | SPOT   |
-     * | API-RATE-LIMIT-WEIGHT | 25     |
-     * +-----------------------+--------+
-     */
-    getMarginConfig(): Promise<GetMarginConfigResp>;
-
-    /**
      * getETFInfo Get ETF Info
      * Description: This interface returns leveraged token information.
      * Documentation: https://www.kucoin.com/docs-new/api-3470191
@@ -61,22 +45,6 @@ export interface MarketAPI {
     getETFInfo(req: GetETFInfoReq): Promise<GetETFInfoResp>;
 
     /**
-     * getMarkPriceList Get Mark Price List
-     * Description: This endpoint returns the current Mark price for all margin trading pairs.
-     * Documentation: https://www.kucoin.com/docs-new/api-3470192
-     * +-----------------------+--------+
-     * | Extra API Info        | Value  |
-     * +-----------------------+--------+
-     * | API-DOMAIN            | SPOT   |
-     * | API-CHANNEL           | PUBLIC |
-     * | API-PERMISSION        | NULL   |
-     * | API-RATE-LIMIT-POOL   | PUBLIC |
-     * | API-RATE-LIMIT-WEIGHT | 10     |
-     * +-----------------------+--------+
-     */
-    getMarkPriceList(): Promise<GetMarkPriceListResp>;
-
-    /**
      * getMarkPriceDetail Get Mark Price Detail
      * Description: This endpoint returns the current Mark price for specified margin trading pairs.
      * Documentation: https://www.kucoin.com/docs-new/api-3470193
@@ -91,6 +59,38 @@ export interface MarketAPI {
      * +-----------------------+--------+
      */
     getMarkPriceDetail(req: GetMarkPriceDetailReq): Promise<GetMarkPriceDetailResp>;
+
+    /**
+     * getMarginConfig Get Margin Config
+     * Description: Request the configure info of the cross margin via this endpoint.
+     * Documentation: https://www.kucoin.com/docs-new/api-3470190
+     * +-----------------------+--------+
+     * | Extra API Info        | Value  |
+     * +-----------------------+--------+
+     * | API-DOMAIN            | SPOT   |
+     * | API-CHANNEL           | PUBLIC |
+     * | API-PERMISSION        | NULL   |
+     * | API-RATE-LIMIT-POOL   | SPOT   |
+     * | API-RATE-LIMIT-WEIGHT | 25     |
+     * +-----------------------+--------+
+     */
+    getMarginConfig(): Promise<GetMarginConfigResp>;
+
+    /**
+     * getMarkPriceList Get Mark Price List
+     * Description: This endpoint returns the current Mark price for all margin trading pairs.
+     * Documentation: https://www.kucoin.com/docs-new/api-3470192
+     * +-----------------------+--------+
+     * | Extra API Info        | Value  |
+     * +-----------------------+--------+
+     * | API-DOMAIN            | SPOT   |
+     * | API-CHANNEL           | PUBLIC |
+     * | API-PERMISSION        | NULL   |
+     * | API-RATE-LIMIT-POOL   | PUBLIC |
+     * | API-RATE-LIMIT-WEIGHT | 10     |
+     * +-----------------------+--------+
+     */
+    getMarkPriceList(): Promise<GetMarkPriceListResp>;
 
     /**
      * getIsolatedMarginSymbols Get Symbols - Isolated Margin
@@ -124,18 +124,6 @@ export class MarketAPIImpl implements MarketAPI {
         );
     }
 
-    getMarginConfig(): Promise<GetMarginConfigResp> {
-        return this.transport.call(
-            'spot',
-            false,
-            'GET',
-            '/api/v1/margin/config',
-            null,
-            GetMarginConfigResp,
-            false,
-        );
-    }
-
     getETFInfo(req: GetETFInfoReq): Promise<GetETFInfoResp> {
         return this.transport.call(
             'spot',
@@ -148,18 +136,6 @@ export class MarketAPIImpl implements MarketAPI {
         );
     }
 
-    getMarkPriceList(): Promise<GetMarkPriceListResp> {
-        return this.transport.call(
-            'spot',
-            false,
-            'GET',
-            '/api/v3/mark-price/all-symbols',
-            null,
-            GetMarkPriceListResp,
-            false,
-        );
-    }
-
     getMarkPriceDetail(req: GetMarkPriceDetailReq): Promise<GetMarkPriceDetailResp> {
         return this.transport.call(
             'spot',
@@ -168,6 +144,30 @@ export class MarketAPIImpl implements MarketAPI {
             '/api/v1/mark-price/{symbol}/current',
             req,
             GetMarkPriceDetailResp,
+            false,
+        );
+    }
+
+    getMarginConfig(): Promise<GetMarginConfigResp> {
+        return this.transport.call(
+            'spot',
+            false,
+            'GET',
+            '/api/v1/margin/config',
+            null,
+            GetMarginConfigResp,
+            false,
+        );
+    }
+
+    getMarkPriceList(): Promise<GetMarkPriceListResp> {
+        return this.transport.call(
+            'spot',
+            false,
+            'GET',
+            '/api/v3/mark-price/all-symbols',
+            null,
+            GetMarkPriceListResp,
             false,
         );
     }

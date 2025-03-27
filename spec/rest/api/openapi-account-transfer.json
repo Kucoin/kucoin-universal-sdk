@@ -806,295 +806,6 @@
                 "operationId": "004"
             }
         },
-        "/api/v3/transfer-out": {
-            "post": {
-                "summary": "Futures Account Transfer Out",
-                "deprecated": true,
-                "description": "The amount to be transferred will be deducted from the KuCoin Futures Account. Please ensure that you have sufficient funds in your KuCoin Futures Account, or the transfer will fail.",
-                "tags": [],
-                "parameters": [],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "code": {
-                                            "type": "string"
-                                        },
-                                        "data": {
-                                            "type": "object",
-                                            "properties": {
-                                                "applyId": {
-                                                    "type": "string",
-                                                    "description": "Transfer order ID"
-                                                },
-                                                "bizNo": {
-                                                    "type": "string",
-                                                    "description": "Business number"
-                                                },
-                                                "payAccountType": {
-                                                    "type": "string",
-                                                    "description": "Pay account type"
-                                                },
-                                                "payTag": {
-                                                    "type": "string",
-                                                    "description": "Pay account sub type"
-                                                },
-                                                "remark": {
-                                                    "type": "string",
-                                                    "description": "User remark"
-                                                },
-                                                "recAccountType": {
-                                                    "type": "string",
-                                                    "description": "Receive account type"
-                                                },
-                                                "recTag": {
-                                                    "type": "string",
-                                                    "description": "Receive account sub type"
-                                                },
-                                                "recRemark": {
-                                                    "type": "string",
-                                                    "description": "Receive account tx remark"
-                                                },
-                                                "recSystem": {
-                                                    "type": "string",
-                                                    "description": "Receive system"
-                                                },
-                                                "status": {
-                                                    "type": "string",
-                                                    "description": "Status:APPLY, PROCESSING, PENDING_APPROVAL, APPROVED, REJECTED, PENDING_CANCEL, CANCEL, SUCCESS"
-                                                },
-                                                "currency": {
-                                                    "type": "string",
-                                                    "description": "Currency"
-                                                },
-                                                "amount": {
-                                                    "type": "string",
-                                                    "description": "Transfer amount"
-                                                },
-                                                "fee": {
-                                                    "type": "string",
-                                                    "description": "Transfer fee"
-                                                },
-                                                "sn": {
-                                                    "type": "integer",
-                                                    "description": "Serial number",
-                                                    "format": "int64"
-                                                },
-                                                "reason": {
-                                                    "type": "string",
-                                                    "description": "Fail Reason"
-                                                },
-                                                "createdAt": {
-                                                    "type": "integer",
-                                                    "description": "Create time",
-                                                    "format": "int64"
-                                                },
-                                                "updatedAt": {
-                                                    "type": "integer",
-                                                    "description": "Update time",
-                                                    "format": "int64"
-                                                }
-                                            },
-                                            "required": [
-                                                "applyId",
-                                                "bizNo",
-                                                "payAccountType",
-                                                "payTag",
-                                                "remark",
-                                                "recAccountType",
-                                                "recTag",
-                                                "recRemark",
-                                                "recSystem",
-                                                "status",
-                                                "currency",
-                                                "amount",
-                                                "fee",
-                                                "sn",
-                                                "reason",
-                                                "createdAt",
-                                                "updatedAt"
-                                            ]
-                                        }
-                                    },
-                                    "required": [
-                                        "code",
-                                        "data"
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                },
-                "x-api-doc": "https://www.kucoin.com/docs-new/api-3470303",
-                "x-abandon": "abandon",
-                "x-domain": "Futures",
-                "x-api-channel": "Private",
-                "x-api-permission": "Futures",
-                "x-api-rate-limit-pool": "Management",
-                "x-sdk-service": "Account",
-                "x-sdk-sub-service": "Transfer",
-                "x-sdk-method-name": "futuresAccountTransferOut",
-                "x-sdk-method-description": "The amount to be transferred will be deducted from the KuCoin Futures Account. Please ensure that you have sufficient funds in your KuCoin Futures Account, or the transfer will fail.",
-                "x-api-rate-limit-weight": 20,
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "title": "",
-                                "type": "object",
-                                "properties": {
-                                    "currency": {
-                                        "type": "string",
-                                        "description": "Currency, including XBT, USDT...",
-                                        "example": [
-                                            "XBT",
-                                            "USDT",
-                                            "ETH"
-                                        ]
-                                    },
-                                    "amount": {
-                                        "type": "number",
-                                        "description": "Amount to be transferred out; cannot exceed 1000000000",
-                                        "maximum": 1000000000
-                                    },
-                                    "recAccountType": {
-                                        "type": "string",
-                                        "description": "Receive account type, including MAIN, TRADE",
-                                        "enum": [
-                                            "MAIN",
-                                            "TRADE"
-                                        ],
-                                        "x-api-enum": [
-                                            {
-                                                "value": "MAIN",
-                                                "name": "",
-                                                "description": ""
-                                            },
-                                            {
-                                                "value": "TRADE",
-                                                "name": "",
-                                                "description": ""
-                                            }
-                                        ]
-                                    }
-                                },
-                                "required": [
-                                    "amount",
-                                    "currency",
-                                    "recAccountType"
-                                ]
-                            },
-                            "example": "{\n    \"currency\": \"USDT\",\n    \"amount\": 0.01,\n    \"recAccountType\": \"MAIN\"\n}"
-                        }
-                    }
-                },
-                "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": {\\n        \\\"applyId\\\": \\\"670bf84c577f6c00017a1c48\\\",\\n        \\\"bizNo\\\": \\\"670bf84c577f6c00017a1c47\\\",\\n        \\\"payAccountType\\\": \\\"CONTRACT\\\",\\n        \\\"payTag\\\": \\\"DEFAULT\\\",\\n        \\\"remark\\\": \\\"\\\",\\n        \\\"recAccountType\\\": \\\"MAIN\\\",\\n        \\\"recTag\\\": \\\"DEFAULT\\\",\\n        \\\"recRemark\\\": \\\"\\\",\\n        \\\"recSystem\\\": \\\"KUCOIN\\\",\\n        \\\"status\\\": \\\"PROCESSING\\\",\\n        \\\"currency\\\": \\\"USDT\\\",\\n        \\\"amount\\\": \\\"0.01\\\",\\n        \\\"fee\\\": \\\"0\\\",\\n        \\\"sn\\\": 1519769124134806,\\n        \\\"reason\\\": \\\"\\\",\\n        \\\"createdAt\\\": 1728837708000,\\n        \\\"updatedAt\\\": 1728837708000\\n    }\\n}",
-                "x-request-example": "{\\\"currency\\\": \\\"USDT\\\", \\\"amount\\\": 0.01, \\\"recAccountType\\\": \\\"MAIN\\\"}",
-                "operationId": "005"
-            }
-        },
-        "/api/v1/transfer-in": {
-            "post": {
-                "summary": "Futures Account Transfer In",
-                "deprecated": true,
-                "description": "The amount to be transferred will be deducted from the payAccount. Please ensure that you have sufficient funds in your payAccount account, or the transfer will fail.",
-                "tags": [],
-                "parameters": [],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "code": {
-                                            "type": "string"
-                                        },
-                                        "data": {
-                                            "type": "string"
-                                        }
-                                    },
-                                    "required": [
-                                        "code",
-                                        "data"
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                },
-                "x-api-doc": "https://www.kucoin.com/docs-new/api-3470304",
-                "x-abandon": "abandon",
-                "x-domain": "Futures",
-                "x-api-channel": "Private",
-                "x-api-permission": "Futures",
-                "x-api-rate-limit-pool": "Management",
-                "x-sdk-service": "Account",
-                "x-sdk-sub-service": "Transfer",
-                "x-sdk-method-name": "futuresAccountTransferIn",
-                "x-sdk-method-description": "The amount to be transferred will be deducted from the payAccount. Please ensure that you have sufficient funds in your payAccount account, or the transfer will fail.",
-                "x-api-rate-limit-weight": 20,
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "title": "",
-                                "type": "object",
-                                "properties": {
-                                    "currency": {
-                                        "type": "string",
-                                        "description": "Currency, including XBT, USDT...",
-                                        "example": [
-                                            "XBT",
-                                            "USDT",
-                                            "ETH"
-                                        ]
-                                    },
-                                    "amount": {
-                                        "type": "number",
-                                        "description": "Amount to be transferred in"
-                                    },
-                                    "payAccountType": {
-                                        "type": "string",
-                                        "description": "Payment account type, including MAIN, TRADE",
-                                        "enum": [
-                                            "MAIN",
-                                            "TRADE"
-                                        ],
-                                        "x-api-enum": [
-                                            {
-                                                "value": "MAIN",
-                                                "name": "",
-                                                "description": ""
-                                            },
-                                            {
-                                                "value": "TRADE",
-                                                "name": "",
-                                                "description": ""
-                                            }
-                                        ]
-                                    }
-                                },
-                                "required": [
-                                    "amount",
-                                    "currency",
-                                    "payAccountType"
-                                ]
-                            },
-                            "example": "{\n    \"currency\": \"USDT\",\n    \"amount\": 0.01,\n    \"payAccountType\": \"MAIN\"\n}"
-                        }
-                    }
-                },
-                "x-response-example": "{\\\"code\\\":\\\"200000\\\",\\\"data\\\":null}",
-                "x-request-example": "{\\\"currency\\\": \\\"USDT\\\", \\\"amount\\\": 0.01, \\\"payAccountType\\\": \\\"MAIN\\\"}",
-                "operationId": "006"
-            }
-        },
         "/api/v1/transfer-list": {
             "get": {
                 "summary": "Get Futures Account Transfer Out Ledger",
@@ -1342,6 +1053,295 @@
                 "x-api-rate-limit-weight": 20,
                 "x-response-example": "{\\\"code\\\":\\\"200000\\\",\\\"data\\\":{\\\"currentPage\\\":1,\\\"pageSize\\\":50,\\\"totalNum\\\":1,\\\"totalPage\\\":1,\\\"items\\\":[{\\\"applyId\\\":\\\"670bf84c577f6c00017a1c48\\\",\\\"currency\\\":\\\"USDT\\\",\\\"recRemark\\\":\\\"\\\",\\\"recSystem\\\":\\\"KUCOIN\\\",\\\"status\\\":\\\"SUCCESS\\\",\\\"amount\\\":\\\"0.01\\\",\\\"reason\\\":\\\"\\\",\\\"offset\\\":1519769124134806,\\\"createdAt\\\":1728837708000,\\\"remark\\\":\\\"\\\"}]}}",
                 "x-request-example": "{\\\"currency\\\": \\\"XBT\\\", \\\"type\\\": \\\"MAIN\\\", \\\"tag\\\": [\\\"mock_a\\\", \\\"mock_b\\\"], \\\"startAt\\\": 1728663338000, \\\"endAt\\\": 1728692138000, \\\"currentPage\\\": 1, \\\"pageSize\\\": 50}",
+                "operationId": "005"
+            }
+        },
+        "/api/v3/transfer-out": {
+            "post": {
+                "summary": "Futures Account Transfer Out",
+                "deprecated": true,
+                "description": "The amount to be transferred will be deducted from the KuCoin Futures Account. Please ensure that you have sufficient funds in your KuCoin Futures Account, or the transfer will fail.",
+                "tags": [],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "applyId": {
+                                                    "type": "string",
+                                                    "description": "Transfer order ID"
+                                                },
+                                                "bizNo": {
+                                                    "type": "string",
+                                                    "description": "Business number"
+                                                },
+                                                "payAccountType": {
+                                                    "type": "string",
+                                                    "description": "Pay account type"
+                                                },
+                                                "payTag": {
+                                                    "type": "string",
+                                                    "description": "Pay account sub type"
+                                                },
+                                                "remark": {
+                                                    "type": "string",
+                                                    "description": "User remark"
+                                                },
+                                                "recAccountType": {
+                                                    "type": "string",
+                                                    "description": "Receive account type"
+                                                },
+                                                "recTag": {
+                                                    "type": "string",
+                                                    "description": "Receive account sub type"
+                                                },
+                                                "recRemark": {
+                                                    "type": "string",
+                                                    "description": "Receive account tx remark"
+                                                },
+                                                "recSystem": {
+                                                    "type": "string",
+                                                    "description": "Receive system"
+                                                },
+                                                "status": {
+                                                    "type": "string",
+                                                    "description": "Status:APPLY, PROCESSING, PENDING_APPROVAL, APPROVED, REJECTED, PENDING_CANCEL, CANCEL, SUCCESS"
+                                                },
+                                                "currency": {
+                                                    "type": "string",
+                                                    "description": "Currency"
+                                                },
+                                                "amount": {
+                                                    "type": "string",
+                                                    "description": "Transfer amount"
+                                                },
+                                                "fee": {
+                                                    "type": "string",
+                                                    "description": "Transfer fee"
+                                                },
+                                                "sn": {
+                                                    "type": "integer",
+                                                    "description": "Serial number",
+                                                    "format": "int64"
+                                                },
+                                                "reason": {
+                                                    "type": "string",
+                                                    "description": "Fail Reason"
+                                                },
+                                                "createdAt": {
+                                                    "type": "integer",
+                                                    "description": "Create time",
+                                                    "format": "int64"
+                                                },
+                                                "updatedAt": {
+                                                    "type": "integer",
+                                                    "description": "Update time",
+                                                    "format": "int64"
+                                                }
+                                            },
+                                            "required": [
+                                                "applyId",
+                                                "bizNo",
+                                                "payAccountType",
+                                                "payTag",
+                                                "remark",
+                                                "recAccountType",
+                                                "recTag",
+                                                "recRemark",
+                                                "recSystem",
+                                                "status",
+                                                "currency",
+                                                "amount",
+                                                "fee",
+                                                "sn",
+                                                "reason",
+                                                "createdAt",
+                                                "updatedAt"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "code",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-api-doc": "https://www.kucoin.com/docs-new/api-3470303",
+                "x-abandon": "abandon",
+                "x-domain": "Futures",
+                "x-api-channel": "Private",
+                "x-api-permission": "Futures",
+                "x-api-rate-limit-pool": "Management",
+                "x-sdk-service": "Account",
+                "x-sdk-sub-service": "Transfer",
+                "x-sdk-method-name": "futuresAccountTransferOut",
+                "x-sdk-method-description": "The amount to be transferred will be deducted from the KuCoin Futures Account. Please ensure that you have sufficient funds in your KuCoin Futures Account, or the transfer will fail.",
+                "x-api-rate-limit-weight": 20,
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "title": "",
+                                "type": "object",
+                                "properties": {
+                                    "currency": {
+                                        "type": "string",
+                                        "description": "Currency, including XBT, USDT...",
+                                        "example": [
+                                            "XBT",
+                                            "USDT",
+                                            "ETH"
+                                        ]
+                                    },
+                                    "amount": {
+                                        "type": "number",
+                                        "description": "Amount to be transferred out; cannot exceed 1000000000",
+                                        "maximum": 1000000000
+                                    },
+                                    "recAccountType": {
+                                        "type": "string",
+                                        "description": "Receive account type, including MAIN, TRADE",
+                                        "enum": [
+                                            "MAIN",
+                                            "TRADE"
+                                        ],
+                                        "x-api-enum": [
+                                            {
+                                                "value": "MAIN",
+                                                "name": "",
+                                                "description": ""
+                                            },
+                                            {
+                                                "value": "TRADE",
+                                                "name": "",
+                                                "description": ""
+                                            }
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "amount",
+                                    "currency",
+                                    "recAccountType"
+                                ]
+                            },
+                            "example": "{\n    \"currency\": \"USDT\",\n    \"amount\": 0.01,\n    \"recAccountType\": \"MAIN\"\n}"
+                        }
+                    }
+                },
+                "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": {\\n        \\\"applyId\\\": \\\"670bf84c577f6c00017a1c48\\\",\\n        \\\"bizNo\\\": \\\"670bf84c577f6c00017a1c47\\\",\\n        \\\"payAccountType\\\": \\\"CONTRACT\\\",\\n        \\\"payTag\\\": \\\"DEFAULT\\\",\\n        \\\"remark\\\": \\\"\\\",\\n        \\\"recAccountType\\\": \\\"MAIN\\\",\\n        \\\"recTag\\\": \\\"DEFAULT\\\",\\n        \\\"recRemark\\\": \\\"\\\",\\n        \\\"recSystem\\\": \\\"KUCOIN\\\",\\n        \\\"status\\\": \\\"PROCESSING\\\",\\n        \\\"currency\\\": \\\"USDT\\\",\\n        \\\"amount\\\": \\\"0.01\\\",\\n        \\\"fee\\\": \\\"0\\\",\\n        \\\"sn\\\": 1519769124134806,\\n        \\\"reason\\\": \\\"\\\",\\n        \\\"createdAt\\\": 1728837708000,\\n        \\\"updatedAt\\\": 1728837708000\\n    }\\n}",
+                "x-request-example": "{\\\"currency\\\": \\\"USDT\\\", \\\"amount\\\": 0.01, \\\"recAccountType\\\": \\\"MAIN\\\"}",
+                "operationId": "006"
+            }
+        },
+        "/api/v1/transfer-in": {
+            "post": {
+                "summary": "Futures Account Transfer In",
+                "deprecated": true,
+                "description": "The amount to be transferred will be deducted from the payAccount. Please ensure that you have sufficient funds in your payAccount account, or the transfer will fail.",
+                "tags": [],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "code",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-api-doc": "https://www.kucoin.com/docs-new/api-3470304",
+                "x-abandon": "abandon",
+                "x-domain": "Futures",
+                "x-api-channel": "Private",
+                "x-api-permission": "Futures",
+                "x-api-rate-limit-pool": "Management",
+                "x-sdk-service": "Account",
+                "x-sdk-sub-service": "Transfer",
+                "x-sdk-method-name": "futuresAccountTransferIn",
+                "x-sdk-method-description": "The amount to be transferred will be deducted from the payAccount. Please ensure that you have sufficient funds in your payAccount account, or the transfer will fail.",
+                "x-api-rate-limit-weight": 20,
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "title": "",
+                                "type": "object",
+                                "properties": {
+                                    "currency": {
+                                        "type": "string",
+                                        "description": "Currency, including XBT, USDT...",
+                                        "example": [
+                                            "XBT",
+                                            "USDT",
+                                            "ETH"
+                                        ]
+                                    },
+                                    "amount": {
+                                        "type": "number",
+                                        "description": "Amount to be transferred in"
+                                    },
+                                    "payAccountType": {
+                                        "type": "string",
+                                        "description": "Payment account type, including MAIN, TRADE",
+                                        "enum": [
+                                            "MAIN",
+                                            "TRADE"
+                                        ],
+                                        "x-api-enum": [
+                                            {
+                                                "value": "MAIN",
+                                                "name": "",
+                                                "description": ""
+                                            },
+                                            {
+                                                "value": "TRADE",
+                                                "name": "",
+                                                "description": ""
+                                            }
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "amount",
+                                    "currency",
+                                    "payAccountType"
+                                ]
+                            },
+                            "example": "{\n    \"currency\": \"USDT\",\n    \"amount\": 0.01,\n    \"payAccountType\": \"MAIN\"\n}"
+                        }
+                    }
+                },
+                "x-response-example": "{\\\"code\\\":\\\"200000\\\",\\\"data\\\":null}",
+                "x-request-example": "{\\\"currency\\\": \\\"USDT\\\", \\\"amount\\\": 0.01, \\\"payAccountType\\\": \\\"MAIN\\\"}",
                 "operationId": "007"
             }
         }

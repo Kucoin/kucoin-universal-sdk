@@ -163,7 +163,7 @@ describe('Auto Test', ()=> {
     * /api/v1/level2/depth{size}
     */
     let builder = GetPartOrderBookReq.builder();
-    builder.setSymbol(?).setSize(?);
+    builder.setSize(?).setSymbol(?);
     let req = builder.build();
     let resp = api.getPartOrderBook(req);
     return resp.then(result => {

@@ -22,7 +22,7 @@ class GetBasicFeeReq(BaseModel):
     class CurrencyTypeEnum(Enum):
         """
         Attributes:
-            T_0: crypto currency
+            T_0: cryptocurrency
             T_1: fiat currency
         """
         T_0 = 0

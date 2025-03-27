@@ -36,9 +36,9 @@ type AddOrderSyncReq struct {
 	CancelAfter *int64 `json:"cancelAfter,omitempty"`
 	// When **type** is market, select one out of two: size or funds
 	Funds *string `json:"funds,omitempty"`
-	// Order failed after timeout of specified milliseconds, If clientTimestamp + allowMaxTimeWindow < the server reaches time, this order will fail.
+	// The order will fail if it times out after the specified duration in milliseconds. Specifically, if clientTimestamp + allowMaxTimeWindow (in milliseconds) is less than the time the server receives the message, the order will fail.
 	AllowMaxTimeWindow *int64 `json:"allowMaxTimeWindow,omitempty"`
-	// Equal to KC-API-TIMESTAMP, Need to be defined if iceberg is specified.
+	// Equal to KC-API-TIMESTAMP. Needs to be defined if iceberg is specified.
 	ClientTimestamp *int64 `json:"clientTimestamp,omitempty"`
 }
 
@@ -206,13 +206,13 @@ func (builder *AddOrderSyncReqBuilder) SetFunds(value string) *AddOrderSyncReqBu
 	return builder
 }
 
-// Order failed after timeout of specified milliseconds, If clientTimestamp + allowMaxTimeWindow < the server reaches time, this order will fail.
+// The order will fail if it times out after the specified duration in milliseconds. Specifically, if clientTimestamp + allowMaxTimeWindow (in milliseconds) is less than the time the server receives the message, the order will fail.
 func (builder *AddOrderSyncReqBuilder) SetAllowMaxTimeWindow(value int64) *AddOrderSyncReqBuilder {
 	builder.obj.AllowMaxTimeWindow = &value
 	return builder
 }
 
-// Equal to KC-API-TIMESTAMP, Need to be defined if iceberg is specified.
+// Equal to KC-API-TIMESTAMP. Needs to be defined if iceberg is specified.
 func (builder *AddOrderSyncReqBuilder) SetClientTimestamp(value int64) *AddOrderSyncReqBuilder {
 	builder.obj.ClientTimestamp = &value
 	return builder

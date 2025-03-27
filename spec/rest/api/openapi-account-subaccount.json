@@ -485,9 +485,18 @@
                 "tags": [],
                 "parameters": [
                     {
+                        "name": "subUserId",
+                        "in": "path",
+                        "description": "the userID of a sub-account.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
                         "name": "includeBaseAmount",
                         "in": "query",
-                        "description": "false: do not display the currency which asset is 0, true: display all currency",
+                        "description": "False: Do not display currencies with 0 assets; True: display all currencies",
                         "required": false,
                         "schema": {
                             "type": "boolean",
@@ -506,17 +515,8 @@
                     {
                         "name": "baseAmount",
                         "in": "query",
-                        "description": "Specify the currency balance must be greater than or equal to the amount",
+                        "description": "The currency balance specified must be greater than or equal to the amount",
                         "required": false,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "subUserId",
-                        "in": "path",
-                        "description": "the userID of a sub-account.",
-                        "required": true,
                         "schema": {
                             "type": "string"
                         }
@@ -703,7 +703,7 @@
                 "x-sdk-method-description": "This endpoint returns the account info of a sub-user specified by the subUserId.",
                 "x-api-rate-limit-weight": 15,
                 "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": {\\n        \\\"subUserId\\\": \\\"63743f07e0c5230001761d08\\\",\\n        \\\"subName\\\": \\\"testapi6\\\",\\n        \\\"mainAccounts\\\": [\\n            {\\n                \\\"currency\\\": \\\"USDT\\\",\\n                \\\"balance\\\": \\\"0.01\\\",\\n                \\\"available\\\": \\\"0.01\\\",\\n                \\\"holds\\\": \\\"0\\\",\\n                \\\"baseCurrency\\\": \\\"BTC\\\",\\n                \\\"baseCurrencyPrice\\\": \\\"62384.3\\\",\\n                \\\"baseAmount\\\": \\\"0.00000016\\\",\\n                \\\"tag\\\": \\\"DEFAULT\\\"\\n            }\\n        ],\\n        \\\"tradeAccounts\\\": [\\n            {\\n                \\\"currency\\\": \\\"USDT\\\",\\n                \\\"balance\\\": \\\"0.01\\\",\\n                \\\"available\\\": \\\"0.01\\\",\\n                \\\"holds\\\": \\\"0\\\",\\n                \\\"baseCurrency\\\": \\\"BTC\\\",\\n                \\\"baseCurrencyPrice\\\": \\\"62384.3\\\",\\n                \\\"baseAmount\\\": \\\"0.00000016\\\",\\n                \\\"tag\\\": \\\"DEFAULT\\\"\\n            }\\n        ],\\n        \\\"marginAccounts\\\": [\\n            {\\n                \\\"currency\\\": \\\"USDT\\\",\\n                \\\"balance\\\": \\\"0.01\\\",\\n                \\\"available\\\": \\\"0.01\\\",\\n                \\\"holds\\\": \\\"0\\\",\\n                \\\"baseCurrency\\\": \\\"BTC\\\",\\n                \\\"baseCurrencyPrice\\\": \\\"62384.3\\\",\\n                \\\"baseAmount\\\": \\\"0.00000016\\\",\\n                \\\"tag\\\": \\\"DEFAULT\\\"\\n            }\\n        ],\\n        \\\"tradeHFAccounts\\\": []\\n    }\\n}",
-                "x-request-example": "{\\\"includeBaseAmount\\\": true, \\\"baseCurrency\\\": \\\"example_string_default_value\\\", \\\"baseAmount\\\": \\\"example_string_default_value\\\", \\\"subUserId\\\": \\\"63743f07e0c5230001761d08\\\"}",
+                "x-request-example": "{\\\"subUserId\\\": \\\"63743f07e0c5230001761d08\\\", \\\"includeBaseAmount\\\": true, \\\"baseCurrency\\\": \\\"example_string_default_value\\\", \\\"baseAmount\\\": \\\"example_string_default_value\\\"}",
                 "operationId": "005"
             }
         },

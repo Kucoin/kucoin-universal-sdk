@@ -155,7 +155,7 @@ describe('Auto Test', () => {
          * /api/v1/sub-accounts/{subUserId}
          */
         let data =
-            '{"includeBaseAmount": true, "baseCurrency": "example_string_default_value", "baseAmount": "example_string_default_value", "subUserId": "63743f07e0c5230001761d08"}';
+            '{"subUserId": "63743f07e0c5230001761d08", "includeBaseAmount": true, "baseCurrency": "example_string_default_value", "baseAmount": "example_string_default_value"}';
         let req = GetSpotSubAccountDetailReq.fromJson(data);
         expect(Object.values(req).every((value) => value === null || value === undefined)).toBe(
             false,

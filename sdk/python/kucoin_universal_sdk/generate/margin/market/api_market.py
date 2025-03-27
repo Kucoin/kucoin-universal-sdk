@@ -36,24 +36,6 @@ class MarketAPI(ABC):
         pass
 
     @abstractmethod
-    def get_margin_config(self, **kwargs: Any) -> GetMarginConfigResp:
-        """
-        summary: Get Margin Config
-        description: Request the configure info of the cross margin via this endpoint.
-        documentation: https://www.kucoin.com/docs-new/api-3470190
-        +-----------------------+--------+
-        | Extra API Info        | Value  |
-        +-----------------------+--------+
-        | API-DOMAIN            | SPOT   |
-        | API-CHANNEL           | PUBLIC |
-        | API-PERMISSION        | NULL   |
-        | API-RATE-LIMIT-POOL   | SPOT   |
-        | API-RATE-LIMIT-WEIGHT | 25     |
-        +-----------------------+--------+
-        """
-        pass
-
-    @abstractmethod
     def get_etf_info(self, req: GetEtfInfoReq,
                      **kwargs: Any) -> GetEtfInfoResp:
         """
@@ -73,24 +55,6 @@ class MarketAPI(ABC):
         pass
 
     @abstractmethod
-    def get_mark_price_list(self, **kwargs: Any) -> GetMarkPriceListResp:
-        """
-        summary: Get Mark Price List
-        description: This endpoint returns the current Mark price for all margin trading pairs.
-        documentation: https://www.kucoin.com/docs-new/api-3470192
-        +-----------------------+--------+
-        | Extra API Info        | Value  |
-        +-----------------------+--------+
-        | API-DOMAIN            | SPOT   |
-        | API-CHANNEL           | PUBLIC |
-        | API-PERMISSION        | NULL   |
-        | API-RATE-LIMIT-POOL   | PUBLIC |
-        | API-RATE-LIMIT-WEIGHT | 10     |
-        +-----------------------+--------+
-        """
-        pass
-
-    @abstractmethod
     def get_mark_price_detail(self, req: GetMarkPriceDetailReq,
                               **kwargs: Any) -> GetMarkPriceDetailResp:
         """
@@ -105,6 +69,42 @@ class MarketAPI(ABC):
         | API-PERMISSION        | NULL   |
         | API-RATE-LIMIT-POOL   | PUBLIC |
         | API-RATE-LIMIT-WEIGHT | 2      |
+        +-----------------------+--------+
+        """
+        pass
+
+    @abstractmethod
+    def get_margin_config(self, **kwargs: Any) -> GetMarginConfigResp:
+        """
+        summary: Get Margin Config
+        description: Request the configure info of the cross margin via this endpoint.
+        documentation: https://www.kucoin.com/docs-new/api-3470190
+        +-----------------------+--------+
+        | Extra API Info        | Value  |
+        +-----------------------+--------+
+        | API-DOMAIN            | SPOT   |
+        | API-CHANNEL           | PUBLIC |
+        | API-PERMISSION        | NULL   |
+        | API-RATE-LIMIT-POOL   | SPOT   |
+        | API-RATE-LIMIT-WEIGHT | 25     |
+        +-----------------------+--------+
+        """
+        pass
+
+    @abstractmethod
+    def get_mark_price_list(self, **kwargs: Any) -> GetMarkPriceListResp:
+        """
+        summary: Get Mark Price List
+        description: This endpoint returns the current Mark price for all margin trading pairs.
+        documentation: https://www.kucoin.com/docs-new/api-3470192
+        +-----------------------+--------+
+        | Extra API Info        | Value  |
+        +-----------------------+--------+
+        | API-DOMAIN            | SPOT   |
+        | API-CHANNEL           | PUBLIC |
+        | API-PERMISSION        | NULL   |
+        | API-RATE-LIMIT-POOL   | PUBLIC |
+        | API-RATE-LIMIT-WEIGHT | 10     |
         +-----------------------+--------+
         """
         pass
@@ -141,26 +141,26 @@ class MarketAPIImpl(MarketAPI):
                                    GetCrossMarginSymbolsResp(), False,
                                    **kwargs)
 
-    def get_margin_config(self, **kwargs: Any) -> GetMarginConfigResp:
-        return self.transport.call("spot", False, "GET",
-                                   "/api/v1/margin/config", None,
-                                   GetMarginConfigResp(), False, **kwargs)
-
     def get_etf_info(self, req: GetEtfInfoReq,
                      **kwargs: Any) -> GetEtfInfoResp:
         return self.transport.call("spot", False, "GET", "/api/v3/etf/info",
                                    req, GetEtfInfoResp(), False, **kwargs)
-
-    def get_mark_price_list(self, **kwargs: Any) -> GetMarkPriceListResp:
-        return self.transport.call("spot", False, "GET",
-                                   "/api/v3/mark-price/all-symbols", None,
-                                   GetMarkPriceListResp(), False, **kwargs)
 
     def get_mark_price_detail(self, req: GetMarkPriceDetailReq,
                               **kwargs: Any) -> GetMarkPriceDetailResp:
         return self.transport.call("spot", False, "GET",
                                    "/api/v1/mark-price/{symbol}/current", req,
                                    GetMarkPriceDetailResp(), False, **kwargs)
+
+    def get_margin_config(self, **kwargs: Any) -> GetMarginConfigResp:
+        return self.transport.call("spot", False, "GET",
+                                   "/api/v1/margin/config", None,
+                                   GetMarginConfigResp(), False, **kwargs)
+
+    def get_mark_price_list(self, **kwargs: Any) -> GetMarkPriceListResp:
+        return self.transport.call("spot", False, "GET",
+                                   "/api/v3/mark-price/all-symbols", None,
+                                   GetMarkPriceListResp(), False, **kwargs)
 
     def get_isolated_margin_symbols(
             self, **kwargs: Any) -> GetIsolatedMarginSymbolsResp:

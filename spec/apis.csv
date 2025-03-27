@@ -44,9 +44,9 @@ account,transfer,/api/v1/accounts/transferable,get,Get Transfer Quotas
 account,transfer,/api/v3/accounts/universal-transfer,post,Flex Transfer
 account,transfer,/api/v2/accounts/sub-transfer,post,Sub-account Transfer
 account,transfer,/api/v2/accounts/inner-transfer,post,Internal Transfer
+account,transfer,/api/v1/transfer-list,get,Get Futures Account Transfer Out Ledger
 account,transfer,/api/v3/transfer-out,post,Futures Account Transfer Out
 account,transfer,/api/v1/transfer-in,post,Futures Account Transfer In
-account,transfer,/api/v1/transfer-list,get,Get Futures Account Transfer Out Ledger
 account,fee,/api/v1/base-fee,get,Get Basic Fee - Spot/Margin
 account,fee,/api/v1/trade-fees,get,Get Actual Fee - Spot/Margin
 account,fee,/api/v1/trade-fees,get,Get Actual Fee - Futures
@@ -64,7 +64,7 @@ spot,market,/api/v3/market/orderbook/level2,get,Get Full OrderBook
 spot,market,/api/v1/market/orderbook/callauction/level2_{size},get,Get Call Auction Part OrderBook
 spot,market,/api/v1/market/callauctionData,get,Get Call Auction Info
 spot,market,/api/v1/prices,get,Get Fiat Price
-spot,market,/api/v1/market/stats,get,Get 24hr stats
+spot,market,/api/v1/market/stats,get,Get 24hr Stats
 spot,market,/api/v1/markets,get,Get Market List
 spot,market,/api/v1/my-ip,get,Get Client IP Address
 spot,market,/api/v1/timestamp,get,Get Server Time
@@ -88,6 +88,7 @@ spot,order,/api/v1/hf/orders/{orderId},get,Get Order By OrderId
 spot,order,/api/v1/hf/orders/client-order/{clientOid},get,Get Order By ClientOid
 spot,order,/api/v1/hf/orders/active/symbols,get,Get Symbols With Open Order
 spot,order,/api/v1/hf/orders/active,get,Get Open Orders
+spot,order,/api/v1/hf/orders/active/page,get,Get Open Orders By Page
 spot,order,/api/v1/hf/orders/done,get,Get Closed Orders
 spot,order,/api/v1/hf/fills,get,Get Trade History
 spot,order,/api/v1/hf/orders/dead-cancel-all/query,get,Get DCP
@@ -120,10 +121,10 @@ spot,order,/api/v1/order/client-order/{clientOid},get,Get Order By ClientOid - O
 spot,order,/api/v1/fills,get,Get Trade History - Old
 spot,order,/api/v1/limit/fills,get,Get Recent Trade History - Old
 margin,market,/api/v3/margin/symbols,get,Get Symbols - Cross Margin
-margin,market,/api/v1/margin/config,get,Get Margin Config
 margin,market,/api/v3/etf/info,get,Get ETF Info
-margin,market,/api/v3/mark-price/all-symbols,get,Get Mark Price List
 margin,market,/api/v1/mark-price/{symbol}/current,get,Get Mark Price Detail
+margin,market,/api/v1/margin/config,get,Get Margin Config
+margin,market,/api/v3/mark-price/all-symbols,get,Get Mark Price List
 margin,market,/api/v1/isolated/symbols,get,Get Symbols - Isolated Margin
 margin,order,/api/v3/hf/margin/order,post,Add Order
 margin,order,/api/v3/hf/margin/order/test,post,Add Order Test

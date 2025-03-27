@@ -21,7 +21,7 @@ class GetWithdrawalHistoryResp(BaseModel, Response):
         current_page (int): current page
         page_size (int): page size
         total_num (int): total number
-        total_page (int): total page
+        total_page (int): total pages
         items (list[GetWithdrawalHistoryItems]): 
     """
 
@@ -37,7 +37,7 @@ class GetWithdrawalHistoryResp(BaseModel, Response):
                                      description="total number",
                                      alias="totalNum")
     total_page: Optional[int] = Field(default=None,
-                                      description="total page",
+                                      description="total pages",
                                       alias="totalPage")
     items: Optional[List[GetWithdrawalHistoryItems]] = None
 

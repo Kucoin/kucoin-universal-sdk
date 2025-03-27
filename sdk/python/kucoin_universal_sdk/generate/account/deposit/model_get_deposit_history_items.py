@@ -25,7 +25,7 @@ class GetDepositHistoryItems(BaseModel):
         amount (str): Deposit amount
         fee (str): Fees charged for deposit
         wallet_tx_id (str): Wallet Txid
-        created_at (int): Creation time of the database record
+        created_at (int): Database record creation time
         updated_at (int): Update time of the database record
         remark (str): remark
         arrears (bool): Whether there is any debt.A quick rollback will cause the deposit to fail. If the deposit fails, you will need to repay the balance.
@@ -61,7 +61,7 @@ class GetDepositHistoryItems(BaseModel):
                                         alias="walletTxId")
     created_at: Optional[int] = Field(
         default=None,
-        description="Creation time of the database record",
+        description="Database record creation time",
         alias="createdAt")
     updated_at: Optional[int] = Field(
         default=None,

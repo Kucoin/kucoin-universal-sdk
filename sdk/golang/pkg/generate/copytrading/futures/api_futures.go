@@ -24,7 +24,7 @@ type FuturesAPI interface {
 	AddOrder(req *AddOrderReq, ctx context.Context) (*AddOrderResp, error)
 
 	// AddOrderTest Add Order Test
-	// Description: Place order to the futures trading system just for validation
+	// Description: Place order  the futures trading system just for validation
 	// Documentation: https://www.kucoin.com/docs-new/api-3470618
 	// +-----------------------+------------------+
 	// | Extra API Info        | Value            |

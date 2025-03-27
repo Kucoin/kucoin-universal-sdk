@@ -55,7 +55,7 @@ export interface SpotPublicWS {
 
     /**
      * callAuctionOrderbookLevel50 CallAuctionOrderbook - Level50
-     * The system will return the call auction 50 best ask/bid orders data, If there is no change in the market, data will not be pushed
+     * The system will return the call auction 50 best ask/bid orders data; if there is no change in the market, data will not be pushed
      * push frequency: once every 100ms
      */
     callAuctionOrderbookLevel50(
@@ -72,7 +72,7 @@ export interface SpotPublicWS {
 
     /**
      * marketSnapshot Market Snapshot
-     * Subscribe this topic to get snapshot data for the entire market.
+     * Subscribe to this topic to get snapshot data for the entire market.
      * push frequency: once every 2s
      */
     marketSnapshot(market: string, callback: MarketSnapshotEventCallback): Promise<string>;

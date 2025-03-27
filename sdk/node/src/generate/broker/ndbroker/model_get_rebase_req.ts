@@ -15,7 +15,7 @@ export class GetRebaseReq implements Serializable {
     end?: string;
 
     /**
-     * Transaction type: 1, spot; 2: futures
+     * Transaction type: 1, spot; 2, futures
      */
     tradeType?: GetRebaseReq.TradeTypeEnum;
 
@@ -44,7 +44,7 @@ export class GetRebaseReq implements Serializable {
          */
         end?: string;
         /**
-         * Transaction type: 1, spot; 2: futures
+         * Transaction type: 1, spot; 2, futures
          */
         tradeType?: GetRebaseReq.TradeTypeEnum;
     }): GetRebaseReq {
@@ -109,7 +109,7 @@ export class GetRebaseReqBuilder {
     }
 
     /**
-     * Transaction type: 1, spot; 2: futures
+     * Transaction type: 1, spot; 2, futures
      */
     setTradeType(value: GetRebaseReq.TradeTypeEnum): GetRebaseReqBuilder {
         this.obj.tradeType = value;

@@ -65,6 +65,8 @@ from .model_get_oco_order_detail_by_order_id_req import GetOcoOrderDetailByOrder
 from .model_get_oco_order_detail_by_order_id_resp import GetOcoOrderDetailByOrderIdResp
 from .model_get_oco_order_list_req import GetOcoOrderListReq
 from .model_get_oco_order_list_resp import GetOcoOrderListResp
+from .model_get_open_orders_by_page_req import GetOpenOrdersByPageReq
+from .model_get_open_orders_by_page_resp import GetOpenOrdersByPageResp
 from .model_get_open_orders_req import GetOpenOrdersReq
 from .model_get_open_orders_resp import GetOpenOrdersResp
 from .model_get_order_by_client_oid_old_req import GetOrderByClientOidOldReq
@@ -122,7 +124,7 @@ class OrderAPI(ABC):
                        **kwargs: Any) -> AddOrderSyncResp:
         """
         summary: Add Order Sync
-        description: Place order in the spot trading system  The difference between this interface and \&quot;Add order\&quot; is that this interface will synchronously return the order information after the order matching is completed.  For higher latency requirements, please select the \&quot;Add order\&quot; interface. If there is a requirement for returning data integrity, please select this interface.
+        description: Place order in the spot trading system. The difference between this interface and \&quot;Add order\&quot; is that this interface will synchronously return the order information after the order matching is completed. For higher latency requirements, please select the \&quot;Add order\&quot; interface. If there is a requirement for returning data integrity, please select this interface.
         documentation: https://www.kucoin.com/docs-new/api-3470170
         +-----------------------+---------+
         | Extra API Info        | Value   |
@@ -410,8 +412,27 @@ class OrderAPI(ABC):
                         **kwargs: Any) -> GetOpenOrdersResp:
         """
         summary: Get Open Orders
-        description: This interface is to obtain all Spot active order (uncompleted order) lists. The returned data is sorted in descending order according to the create time of the order.  After the user successfully places an order, the order is in Active state, and the user can use inOrderBook to determine whether the order has entered the order. Canceled or fully filled orders are marked as completed Done status.
+        description: This interface is to obtain all Spot active order lists, and the return value of the active order interface is the paged data of all uncompleted order lists. The returned data is sorted in descending order according to the latest update time of the order.  After the user successfully places an order, the order is in Active state, and the user can use inOrderBook to determine whether the order has entered the order. Canceled or fully filled orders are marked as completed Done status.
         documentation: https://www.kucoin.com/docs-new/api-3470178
+        +-----------------------+---------+
+        | Extra API Info        | Value   |
+        +-----------------------+---------+
+        | API-DOMAIN            | SPOT    |
+        | API-CHANNEL           | PRIVATE |
+        | API-PERMISSION        | GENERAL |
+        | API-RATE-LIMIT-POOL   | SPOT    |
+        | API-RATE-LIMIT-WEIGHT | 2       |
+        +-----------------------+---------+
+        """
+        pass
+
+    @abstractmethod
+    def get_open_orders_by_page(self, req: GetOpenOrdersByPageReq,
+                                **kwargs: Any) -> GetOpenOrdersByPageResp:
+        """
+        summary: Get Open Orders By Page
+        description: This interface is to obtain Spot active order (uncompleted order) lists by page. The returned data is sorted in descending order according to the create time of the order.  After the user successfully places an order, the order is in Active state, and the user can use inOrderBook to determine whether the order has entered the order. Canceled or fully filled orders are marked as completed Done status.
+        documentation: https://www.kucoin.com/docs-new/api-3471591
         +-----------------------+---------+
         | Extra API Info        | Value   |
         +-----------------------+---------+
@@ -1156,6 +1177,12 @@ class OrderAPIImpl(OrderAPI):
         return self.transport.call("spot", False, "GET",
                                    "/api/v1/hf/orders/active", req,
                                    GetOpenOrdersResp(), False, **kwargs)
+
+    def get_open_orders_by_page(self, req: GetOpenOrdersByPageReq,
+                                **kwargs: Any) -> GetOpenOrdersByPageResp:
+        return self.transport.call("spot", False, "GET",
+                                   "/api/v1/hf/orders/active/page", req,
+                                   GetOpenOrdersByPageResp(), False, **kwargs)
 
     def get_closed_orders(self, req: GetClosedOrdersReq,
                           **kwargs: Any) -> GetClosedOrdersResp:

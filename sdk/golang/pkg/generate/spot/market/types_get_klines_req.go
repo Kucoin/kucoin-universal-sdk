@@ -6,11 +6,11 @@ package market
 type GetKlinesReq struct {
 	//  symbol
 	Symbol *string `json:"symbol,omitempty" url:"symbol,omitempty"`
-	// Types of candlestick pattern: 1min, 3min, 5min, 15min, 30min, 1hour, 2hour, 4hour, 6hour, 8hour, 12hour, 1day, 1week, 1month
+	// Type of candlestick patterns: 1min, 3min, 5min, 15min, 30min, 1hour, 2hour, 4hour, 6hour, 8hour, 12hour, 1day, 1week, 1month
 	Type *string `json:"type,omitempty" url:"type,omitempty"`
-	// Start time (seconds), default is 0
+	// Start time (second), default is 0
 	StartAt *int64 `json:"startAt,omitempty" url:"startAt,omitempty"`
-	// End time (seconds), default is 0
+	// End time (second), default is 0
 	EndAt *int64 `json:"endAt,omitempty" url:"endAt,omitempty"`
 }
 
@@ -59,19 +59,19 @@ func (builder *GetKlinesReqBuilder) SetSymbol(value string) *GetKlinesReqBuilder
 	return builder
 }
 
-// Types of candlestick pattern: 1min, 3min, 5min, 15min, 30min, 1hour, 2hour, 4hour, 6hour, 8hour, 12hour, 1day, 1week, 1month
+// Type of candlestick patterns: 1min, 3min, 5min, 15min, 30min, 1hour, 2hour, 4hour, 6hour, 8hour, 12hour, 1day, 1week, 1month
 func (builder *GetKlinesReqBuilder) SetType(value string) *GetKlinesReqBuilder {
 	builder.obj.Type = &value
 	return builder
 }
 
-// Start time (seconds), default is 0
+// Start time (second), default is 0
 func (builder *GetKlinesReqBuilder) SetStartAt(value int64) *GetKlinesReqBuilder {
 	builder.obj.StartAt = &value
 	return builder
 }
 
-// End time (seconds), default is 0
+// End time (second), default is 0
 func (builder *GetKlinesReqBuilder) SetEndAt(value int64) *GetKlinesReqBuilder {
 	builder.obj.EndAt = &value
 	return builder

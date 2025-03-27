@@ -80,8 +80,8 @@ class GetSymbolResp(BaseModel, Response):
         mmr_limit (float): 
         mmr_lev_constant (float): 
         support_cross (bool): Whether support Cross Margin
-        buy_limit (float): The current maximum allowed buying price
-        sell_limit (float): The current minimum allowed selling price
+        buy_limit (float): The current maximum buying price allowed
+        sell_limit (float): The current minimum selling price allowed
     """
 
     class TypeEnum(Enum):
@@ -333,11 +333,11 @@ class GetSymbolResp(BaseModel, Response):
         alias="supportCross")
     buy_limit: Optional[float] = Field(
         default=None,
-        description="The current maximum allowed buying price",
+        description="The current maximum buying price allowed",
         alias="buyLimit")
     sell_limit: Optional[float] = Field(
         default=None,
-        description="The current minimum allowed selling price",
+        description="The current minimum selling price allowed",
         alias="sellLimit")
 
     __properties: ClassVar[List[str]] = [

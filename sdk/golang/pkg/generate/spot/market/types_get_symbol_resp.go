@@ -10,19 +10,19 @@ import (
 type GetSymbolResp struct {
 	// common response
 	CommonResponse *types.RestResponse
-	// Unique code of a symbol; it will not change after renaming
+	// unique code of a symbol, it would not change after renaming
 	Symbol string `json:"symbol,omitempty"`
-	// Name of trading pairs, it will change after renaming
+	// Name of trading pairs, it would change after renaming
 	Name string `json:"name,omitempty"`
-	// Base currency, e.g. BTC.
+	// Base currency,e.g. BTC.
 	BaseCurrency string `json:"baseCurrency,omitempty"`
-	// Quote currency, e.g. USDT.
+	// Quote currency,e.g. USDT.
 	QuoteCurrency string `json:"quoteCurrency,omitempty"`
 	// The currency of charged fees.
 	FeeCurrency string `json:"feeCurrency,omitempty"`
 	// The trading market.
 	Market string `json:"market,omitempty"`
-	// The minimum order quantity required to place an order.
+	// The minimum order quantity requried to place an order.
 	BaseMinSize string `json:"baseMinSize,omitempty"`
 	// The minimum order funds required to place a market order.
 	QuoteMinSize string `json:"quoteMinSize,omitempty"`
@@ -36,7 +36,7 @@ type GetSymbolResp struct {
 	QuoteIncrement string `json:"quoteIncrement,omitempty"`
 	// Price increment: The price of an order must be a positive integer multiple of this increment. For example, for the ETH-USDT trading pair, if the priceIncrement is 0.01, the order price can be 3000.01 but not 3000.001.
 	PriceIncrement string `json:"priceIncrement,omitempty"`
-	// Threshold for price protection
+	// Threshold for price portection
 	PriceLimitRate string `json:"priceLimitRate,omitempty"`
 	// The minimum trading amounts
 	MinFunds string `json:"minFunds,omitempty"`

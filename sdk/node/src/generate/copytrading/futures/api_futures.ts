@@ -43,7 +43,7 @@ export interface FuturesAPI {
 
     /**
      * addOrderTest Add Order Test
-     * Description: Place order to the futures trading system just for validation
+     * Description: Place order  the futures trading system just for validation
      * Documentation: https://www.kucoin.com/docs-new/api-3470618
      * +-----------------------+------------------+
      * | Extra API Info        | Value            |

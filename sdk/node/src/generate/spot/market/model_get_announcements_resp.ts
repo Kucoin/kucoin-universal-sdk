@@ -28,7 +28,7 @@ export class GetAnnouncementsResp implements Response<RestResponse> {
     pageSize: number;
 
     /**
-     * Total Pages
+     * Total Page
      */
     totalPage: number;
 

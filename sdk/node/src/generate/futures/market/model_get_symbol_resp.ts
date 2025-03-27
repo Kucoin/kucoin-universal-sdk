@@ -316,12 +316,12 @@ export class GetSymbolResp implements Response<RestResponse> {
     supportCross: boolean;
 
     /**
-     * The current maximum allowed buying price
+     * The current maximum buying price allowed
      */
     buyLimit: number;
 
     /**
-     * The current minimum allowed selling price
+     * The current minimum selling price allowed
      */
     sellLimit: number;
 

@@ -30,7 +30,7 @@ export class GetAnnouncementsItems implements Serializable {
     cTime: number;
 
     /**
-     * Language type
+     * language type
      */
     language: string;
 

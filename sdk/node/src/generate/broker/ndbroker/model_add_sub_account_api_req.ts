@@ -20,7 +20,7 @@ export class AddSubAccountApiReq implements Serializable {
     ipWhitelist: Array<string>;
 
     /**
-     * Permission group list (Only General, Spot and Futures permissions can be set, such as \"General, Trade\").
+     * Permission group list (only General, Spot and Futures permissions can be set, such as \"General, Trade\").
      */
     permissions: Array<AddSubAccountApiReq.PermissionsEnum>;
 
@@ -69,7 +69,7 @@ export class AddSubAccountApiReq implements Serializable {
          */
         ipWhitelist: Array<string>;
         /**
-         * Permission group list (Only General, Spot and Futures permissions can be set, such as \"General, Trade\").
+         * Permission group list (only General, Spot and Futures permissions can be set, such as \"General, Trade\").
          */
         permissions: Array<AddSubAccountApiReq.PermissionsEnum>;
         /**
@@ -152,7 +152,7 @@ export class AddSubAccountApiReqBuilder {
     }
 
     /**
-     * Permission group list (Only General, Spot and Futures permissions can be set, such as \"General, Trade\").
+     * Permission group list (only General, Spot and Futures permissions can be set, such as \"General, Trade\").
      */
     setPermissions(value: Array<AddSubAccountApiReq.PermissionsEnum>): AddSubAccountApiReqBuilder {
         this.obj.permissions = value;

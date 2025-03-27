@@ -16,7 +16,7 @@ type GetSpotLedgerItems struct {
 	Balance *string `json:"balance,omitempty"`
 	// Master user account types: MAIN, TRADE, MARGIN or CONTRACT.
 	AccountType *string `json:"accountType,omitempty"`
-	// Business type leading to changes in funds, such as exchange, withdrawal, deposit, KUCOIN_BONUS, REFERRAL_BONUS, Lendings etc.
+	// Business type leading to changes in funds, such as exchange, withdrawal, deposit, KUCOIN_BONUS, REFERRAL_BONUS, Lendings, etc.
 	BizType *string `json:"bizType,omitempty"`
 	// Side, out or in
 	Direction *string `json:"direction,omitempty"`

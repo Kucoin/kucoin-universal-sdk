@@ -98,7 +98,7 @@ def test_get_part_order_book_req(self):
     """
 
     builder = GetPartOrderBookReqBuilder()
-    builder.set_symbol(?).set_size(?)
+    builder.set_size(?).set_symbol(?)
     req = builder.build()
     try:
         resp = self.api.get_part_order_book(req)

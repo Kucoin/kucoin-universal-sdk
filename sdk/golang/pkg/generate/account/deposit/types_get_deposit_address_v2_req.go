@@ -6,7 +6,7 @@ package deposit
 type GetDepositAddressV2Req struct {
 	// currency
 	Currency *string `json:"currency,omitempty" url:"currency,omitempty"`
-	// Chain id of currency
+	// Chain ID of currency
 	Chain *string `json:"chain,omitempty" url:"chain,omitempty"`
 }
 
@@ -45,7 +45,7 @@ func (builder *GetDepositAddressV2ReqBuilder) SetCurrency(value string) *GetDepo
 	return builder
 }
 
-// Chain id of currency
+// Chain ID of currency
 func (builder *GetDepositAddressV2ReqBuilder) SetChain(value string) *GetDepositAddressV2ReqBuilder {
 	builder.obj.Chain = &value
 	return builder

@@ -124,7 +124,7 @@ func TestSubAccountGetSpotSubAccountDetailReqModel(t *testing.T) {
 	// Get sub-account Detail - Balance
 	// /api/v1/sub-accounts/{subUserId}
 
-	data := "{\"includeBaseAmount\": true, \"baseCurrency\": \"example_string_default_value\", \"baseAmount\": \"example_string_default_value\", \"subUserId\": \"63743f07e0c5230001761d08\"}"
+	data := "{\"subUserId\": \"63743f07e0c5230001761d08\", \"includeBaseAmount\": true, \"baseCurrency\": \"example_string_default_value\", \"baseAmount\": \"example_string_default_value\"}"
 	req := &GetSpotSubAccountDetailReq{}
 	err := json.Unmarshal([]byte(data), req)
 	req.ToMap()

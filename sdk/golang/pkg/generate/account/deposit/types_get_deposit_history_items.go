@@ -22,7 +22,7 @@ type GetDepositHistoryItems struct {
 	Fee *string `json:"fee,omitempty"`
 	// Wallet Txid
 	WalletTxId *string `json:"walletTxId,omitempty"`
-	// Creation time of the database record
+	// Database record creation time
 	CreatedAt *int64 `json:"createdAt,omitempty"`
 	// Update time of the database record
 	UpdatedAt *int64 `json:"updatedAt,omitempty"`

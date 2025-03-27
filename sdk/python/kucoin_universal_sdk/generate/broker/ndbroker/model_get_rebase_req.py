@@ -18,7 +18,7 @@ class GetRebaseReq(BaseModel):
     Attributes:
         begin (str): Start time, for example: 20240610
         end (str): End time, for example: 20241010 (query data with a maximum interval of 6 months) 
-        trade_type (TradeTypeEnum): Transaction type: 1, spot; 2: futures
+        trade_type (TradeTypeEnum): Transaction type: 1, spot; 2, futures
     """
 
     class TradeTypeEnum(Enum):
@@ -39,7 +39,7 @@ class GetRebaseReq(BaseModel):
     )
     trade_type: Optional[TradeTypeEnum] = Field(
         default=None,
-        description="Transaction type: 1, spot; 2: futures",
+        description="Transaction type: 1, spot; 2, futures",
         alias="tradeType")
 
     __properties: ClassVar[List[str]] = ["begin", "end", "tradeType"]
@@ -106,7 +106,7 @@ class GetRebaseReqBuilder:
     def set_trade_type(
             self, value: GetRebaseReq.TradeTypeEnum) -> GetRebaseReqBuilder:
         """
-        Transaction type: 1, spot; 2: futures
+        Transaction type: 1, spot; 2, futures
         """
         self.obj['tradeType'] = value
         return self

@@ -104,7 +104,7 @@
                 "x-sdk-method-name": "stopOrder",
                 "x-topic": "/spotMarket/advancedOrders",
                 "x-push_frequency": "real-time",
-                "x-response-example": "{\\\"topic\\\":\\\"/spotMarket/tradeOrdersV2\\\",\\\"type\\\":\\\"message\\\",\\\"subject\\\":\\\"orderChange\\\",\\\"userId\\\":\\\"633559791e1cbc0001f319bc\\\",\\\"channelType\\\":\\\"private\\\",\\\"data\\\":{\\\"clientOid\\\":\\\"5c52e11203aa677f33e493fc\\\",\\\"orderId\\\":\\\"6720da3fa30a360007f5f832\\\",\\\"orderTime\\\":1730206271588,\\\"orderType\\\":\\\"market\\\",\\\"originSize\\\":\\\"0.00001\\\",\\\"side\\\":\\\"buy\\\",\\\"status\\\":\\\"new\\\",\\\"symbol\\\":\\\"BTC-USDT\\\",\\\"ts\\\":1730206271616000000,\\\"type\\\":\\\"received\\\"}}",
+                "x-response-example": "{\\\"topic\\\":\\\"/spotMarket/advancedOrders\\\",\\\"type\\\":\\\"message\\\",\\\"subject\\\":\\\"stopOrder\\\",\\\"userId\\\":\\\"633559791e1cbc0001f319bc\\\",\\\"channelType\\\":\\\"private\\\",\\\"data\\\":{\\\"orderId\\\":\\\"vs93gpupfa48anof003u85mb\\\",\\\"orderPrice\\\":\\\"70000\\\",\\\"orderType\\\":\\\"stop\\\",\\\"side\\\":\\\"buy\\\",\\\"size\\\":\\\"0.00007142\\\",\\\"stop\\\":\\\"loss\\\",\\\"stopPrice\\\":\\\"71000\\\",\\\"symbol\\\":\\\"BTC-USDT\\\",\\\"tradeType\\\":\\\"TRADE\\\",\\\"type\\\":\\\"open\\\",\\\"createdAt\\\":1742305928064,\\\"ts\\\":1742305928091268493}}",
                 "responses": {
                     "200": {
                         "description": "",
@@ -876,21 +876,9 @@
                                 "type": "string",
                                 "description": "User-specified order type",
                                 "enum": [
-                                    "limit",
-                                    "market",
                                     "stop"
                                 ],
                                 "x-api-enum": [
-                                    {
-                                        "value": "limit",
-                                        "name": "limit",
-                                        "description": "limit"
-                                    },
-                                    {
-                                        "value": "market",
-                                        "name": "market",
-                                        "description": "market"
-                                    },
                                     {
                                         "value": "stop",
                                         "name": "stop",
@@ -924,15 +912,15 @@
                             },
                             "stop": {
                                 "type": "string",
-                                "description": "Order type: stop: stop loss order, oco: oco order",
+                                "description": "Order type: loss: stop loss order, oco: oco order",
                                 "enum": [
-                                    "stop",
+                                    "loss",
                                     "oco"
                                 ],
                                 "x-api-enum": [
                                     {
-                                        "value": "stop",
-                                        "name": "stop",
+                                        "value": "loss",
+                                        "name": "loss",
                                         "description": "stop loss order"
                                     },
                                     {
@@ -952,7 +940,7 @@
                             },
                             "tradeType": {
                                 "type": "string",
-                                "description": "The type of trading : TRADE（Spot）, MARGIN_TRADE (Cross Margin), MARGIN_ISOLATED_TRADE (Isolated Margin).",
+                                "description": "The type of trading: TRADE (Spot), MARGIN_TRADE (Cross Margin), MARGIN_ISOLATED_TRADE (Isolated Margin).",
                                 "enum": [
                                     "TRADE",
                                     "MARGIN_TRADE",
@@ -983,25 +971,25 @@
                             },
                             "type": {
                                 "type": "string",
+                                "description": "Order Type",
                                 "enum": [
                                     "open",
                                     "match",
                                     "update",
                                     "filled",
-                                    "canceled",
+                                    "cancel",
                                     "received"
                                 ],
-                                "description": "Order Type",
                                 "x-api-enum": [
                                     {
                                         "value": "open",
                                         "name": "open",
-                                        "description": "the order is in the order book (maker order)"
+                                        "description": "The order is in the order book (maker order)"
                                     },
                                     {
                                         "value": "match",
                                         "name": "match",
-                                        "description": "The message sent when the order is match, 1. When the status is open and the type is match, it is a maker match.  2. When the status is match and the type is match, it is a taker match."
+                                        "description": "The message sent when the order is matched, 1. When the status is open and the type is match, it is a maker match.  2. When the status is match and the type is match, it is a taker match."
                                     },
                                     {
                                         "value": "update",
@@ -1014,8 +1002,8 @@
                                         "description": "The message sent when the status of the order changes to DONE after the transaction"
                                     },
                                     {
-                                        "value": "canceled",
-                                        "name": "canceled",
+                                        "value": "cancel",
+                                        "name": "cancel",
                                         "description": "The message sent when the status of the order changes to DONE due to being canceled"
                                     },
                                     {

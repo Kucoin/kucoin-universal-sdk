@@ -7,34 +7,6 @@
     },
     "tags": [],
     "paths": {
-        "/crossMarginPosition/margin/position": {
-            "trace": {
-                "summary": "Get Cross Margin Position change",
-                "deprecated": "false",
-                "description": "The system will push the change event when the position status changes, or push the current debt message periodically when there is a liability.",
-                "tags": [],
-                "parameters": [],
-                "x-sdk-service": "Margin",
-                "x-sdk-sub-service": "margin_private",
-                "x-sdk-private": true,
-                "x-sdk-method-name": "crossMarginPosition",
-                "x-topic": "/margin/position",
-                "x-push_frequency": "once every 4s",
-                "x-response-example": "{\\\"topic\\\":\\\"/margin/position\\\",\\\"subject\\\":\\\"debt.ratio\\\",\\\"type\\\":\\\"message\\\",\\\"userId\\\":\\\"633559791e1cbc0001f319bc\\\",\\\"channelType\\\":\\\"private\\\",\\\"data\\\":{\\\"debtRatio\\\":0,\\\"totalAsset\\\":0.00052431772284080000000,\\\"marginCoefficientTotalAsset\\\":\\\"0.0005243177228408\\\",\\\"totalDebt\\\":\\\"0\\\",\\\"assetList\\\":{\\\"BTC\\\":{\\\"total\\\":\\\"0.00002\\\",\\\"available\\\":\\\"0\\\",\\\"hold\\\":\\\"0.00002\\\"},\\\"USDT\\\":{\\\"total\\\":\\\"33.68855864\\\",\\\"available\\\":\\\"15.01916691\\\",\\\"hold\\\":\\\"18.66939173\\\"}},\\\"debtList\\\":{\\\"BTC\\\":\\\"0\\\",\\\"USDT\\\":\\\"0\\\"},\\\"timestamp\\\":1729912435657}}",
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Margin_margin_private_crossMarginPosition"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
         "/isolatedMarginPosition/margin/isolatedPosition:_symbol_": {
             "trace": {
                 "summary": "Get Isolated Margin Position change",
@@ -62,181 +34,38 @@
                     }
                 }
             }
+        },
+        "/crossMarginPosition/margin/position": {
+            "trace": {
+                "summary": "Get Cross Margin Position change",
+                "deprecated": "false",
+                "description": "The system will push the change event when the position status changes, or push the current debt message periodically when there is a liability.",
+                "tags": [],
+                "parameters": [],
+                "x-sdk-service": "Margin",
+                "x-sdk-sub-service": "margin_private",
+                "x-sdk-private": true,
+                "x-sdk-method-name": "crossMarginPosition",
+                "x-topic": "/margin/position",
+                "x-push_frequency": "once every 4s",
+                "x-response-example": "{\\\"topic\\\":\\\"/margin/position\\\",\\\"subject\\\":\\\"debt.ratio\\\",\\\"type\\\":\\\"message\\\",\\\"userId\\\":\\\"633559791e1cbc0001f319bc\\\",\\\"channelType\\\":\\\"private\\\",\\\"data\\\":{\\\"debtRatio\\\":0,\\\"totalAsset\\\":0.00052431772284080000000,\\\"marginCoefficientTotalAsset\\\":\\\"0.0005243177228408\\\",\\\"totalDebt\\\":\\\"0\\\",\\\"assetList\\\":{\\\"BTC\\\":{\\\"total\\\":\\\"0.00002\\\",\\\"available\\\":\\\"0\\\",\\\"hold\\\":\\\"0.00002\\\"},\\\"USDT\\\":{\\\"total\\\":\\\"33.68855864\\\",\\\"available\\\":\\\"15.01916691\\\",\\\"hold\\\":\\\"18.66939173\\\"}},\\\"debtList\\\":{\\\"BTC\\\":\\\"0\\\",\\\"USDT\\\":\\\"0\\\"},\\\"timestamp\\\":1729912435657}}",
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Margin_margin_private_crossMarginPosition"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
         "schemas": {
-            "Margin_margin_private_crossMarginPosition": {
-                "type": "object",
-                "properties": {
-                    "topic": {
-                        "type": "string"
-                    },
-                    "type": {
-                        "type": "string"
-                    },
-                    "data": {
-                        "type": "object",
-                        "properties": {
-                            "debtRatio": {
-                                "type": "number",
-                                "description": "Debt ratio"
-                            },
-                            "totalAsset": {
-                                "type": "number",
-                                "description": "Total assets in BTC (interest included)"
-                            },
-                            "marginCoefficientTotalAsset": {
-                                "type": "string"
-                            },
-                            "totalDebt": {
-                                "type": "string",
-                                "description": "Total debt in BTC (interest included)"
-                            },
-                            "assetList": {
-                                "type": "object",
-                                "properties": {},
-                                "description": "Asset list (interest included)",
-                                "additionalProperties": {
-                                    "type": "object",
-                                    "properties": {
-                                        "total": {
-                                            "type": "string"
-                                        },
-                                        "available": {
-                                            "type": "string"
-                                        },
-                                        "hold": {
-                                            "type": "string"
-                                        }
-                                    },
-                                    "required": [
-                                        "total",
-                                        "available",
-                                        "hold"
-                                    ]
-                                }
-                            },
-                            "debtList": {
-                                "type": "object",
-                                "properties": {},
-                                "description": "Debt list (interest included)",
-                                "additionalProperties": {
-                                    "type": "string"
-                                }
-                            },
-                            "timestamp": {
-                                "type": "integer",
-                                "format": "int64"
-                            },
-                            "type": {
-                                "type": "string",
-                                "enum": [
-                                    "FROZEN_FL",
-                                    "UNFROZEN_FL",
-                                    "FROZEN_RENEW",
-                                    "UNFROZEN_RENEW",
-                                    "LIABILITY",
-                                    "UNLIABILITY"
-                                ],
-                                "description": "Event type, **Only applicable to \"debt.ratio\" subject**",
-                                "x-api-enum": [
-                                    {
-                                        "value": "FROZEN_FL",
-                                        "name": "FROZEN_FL",
-                                        "description": "When the debt ratio exceeds the liquidation threshold and the position is frozen, the system will push this event."
-                                    },
-                                    {
-                                        "value": "UNFROZEN_FL",
-                                        "name": "UNFROZEN_FL",
-                                        "description": "When the liquidation is finished and the position returns to “EFFECTIVE” status, the system will push this event."
-                                    },
-                                    {
-                                        "value": "FROZEN_RENEW",
-                                        "name": "FROZEN_RENEW",
-                                        "description": "When the auto-borrow renewing is complete and the position returns to “EFFECTIVE” status, the system will push this event."
-                                    },
-                                    {
-                                        "value": "UNFROZEN_RENEW",
-                                        "name": "UNFROZEN_RENEW",
-                                        "description": "When the account reaches a negative balance, the system will push this event."
-                                    },
-                                    {
-                                        "value": "LIABILITY",
-                                        "name": "LIABILITY",
-                                        "description": "When the account reaches a negative balance, the system will push this event."
-                                    },
-                                    {
-                                        "value": "UNLIABILITY",
-                                        "name": "UNLIABILITY",
-                                        "description": "When all the liabilities are repaid and the position returns to “EFFECTIVE” status, the system will push this event."
-                                    }
-                                ]
-                            }
-                        },
-                        "required": [
-                            "debtRatio",
-                            "totalAsset",
-                            "marginCoefficientTotalAsset",
-                            "totalDebt",
-                            "assetList",
-                            "debtList",
-                            "timestamp",
-                            "type"
-                        ]
-                    },
-                    "subject": {
-                        "type": "string",
-                        "enum": [
-                            "debt.ratio",
-                            "position.status"
-                        ],
-                        "x-api-enum": [
-                            {
-                                "value": "debt.ratio",
-                                "name": "",
-                                "description": ""
-                            },
-                            {
-                                "value": "position.status",
-                                "name": "",
-                                "description": ""
-                            }
-                        ]
-                    },
-                    "userId": {
-                        "type": "string"
-                    },
-                    "channelType": {
-                        "type": "string",
-                        "enum": [
-                            "private",
-                            "public"
-                        ],
-                        "description": "Channel type",
-                        "x-api-enum": [
-                            {
-                                "value": "private",
-                                "name": "private",
-                                "description": "private channel"
-                            },
-                            {
-                                "value": "public",
-                                "name": "public",
-                                "description": "public channel"
-                            }
-                        ]
-                    }
-                },
-                "required": [
-                    "topic",
-                    "type",
-                    "data",
-                    "subject",
-                    "userId",
-                    "channelType"
-                ]
-            },
             "Margin_margin_private_isolatedMarginPosition": {
                 "type": "object",
                 "properties": {
@@ -448,6 +277,177 @@
                     "topic",
                     "type",
                     "data"
+                ]
+            },
+            "Margin_margin_private_crossMarginPosition": {
+                "type": "object",
+                "properties": {
+                    "topic": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "debtRatio": {
+                                "type": "number",
+                                "description": "Debt ratio"
+                            },
+                            "totalAsset": {
+                                "type": "number",
+                                "description": "Total assets in BTC (interest included)"
+                            },
+                            "marginCoefficientTotalAsset": {
+                                "type": "string"
+                            },
+                            "totalDebt": {
+                                "type": "string",
+                                "description": "Total debt in BTC (interest included)"
+                            },
+                            "assetList": {
+                                "type": "object",
+                                "properties": {},
+                                "description": "Asset list (interest included)",
+                                "additionalProperties": {
+                                    "type": "object",
+                                    "properties": {
+                                        "total": {
+                                            "type": "string"
+                                        },
+                                        "available": {
+                                            "type": "string"
+                                        },
+                                        "hold": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "total",
+                                        "available",
+                                        "hold"
+                                    ]
+                                }
+                            },
+                            "debtList": {
+                                "type": "object",
+                                "properties": {},
+                                "description": "Debt list (interest included)",
+                                "additionalProperties": {
+                                    "type": "string"
+                                }
+                            },
+                            "timestamp": {
+                                "type": "integer",
+                                "format": "int64"
+                            },
+                            "type": {
+                                "type": "string",
+                                "enum": [
+                                    "FROZEN_FL",
+                                    "UNFROZEN_FL",
+                                    "FROZEN_RENEW",
+                                    "UNFROZEN_RENEW",
+                                    "LIABILITY",
+                                    "UNLIABILITY"
+                                ],
+                                "description": "Event type, **Only applicable to \"debt.ratio\" subject**",
+                                "x-api-enum": [
+                                    {
+                                        "value": "FROZEN_FL",
+                                        "name": "FROZEN_FL",
+                                        "description": "When the debt ratio exceeds the liquidation threshold and the position is frozen, the system will push this event."
+                                    },
+                                    {
+                                        "value": "UNFROZEN_FL",
+                                        "name": "UNFROZEN_FL",
+                                        "description": "When the liquidation is finished and the position returns to “EFFECTIVE” status, the system will push this event."
+                                    },
+                                    {
+                                        "value": "FROZEN_RENEW",
+                                        "name": "FROZEN_RENEW",
+                                        "description": "When the auto-borrow renewing is complete and the position returns to “EFFECTIVE” status, the system will push this event."
+                                    },
+                                    {
+                                        "value": "UNFROZEN_RENEW",
+                                        "name": "UNFROZEN_RENEW",
+                                        "description": "When the account reaches a negative balance, the system will push this event."
+                                    },
+                                    {
+                                        "value": "LIABILITY",
+                                        "name": "LIABILITY",
+                                        "description": "When the account reaches a negative balance, the system will push this event."
+                                    },
+                                    {
+                                        "value": "UNLIABILITY",
+                                        "name": "UNLIABILITY",
+                                        "description": "When all the liabilities are repaid and the position returns to “EFFECTIVE” status, the system will push this event."
+                                    }
+                                ]
+                            }
+                        },
+                        "required": [
+                            "debtRatio",
+                            "totalAsset",
+                            "marginCoefficientTotalAsset",
+                            "totalDebt",
+                            "assetList",
+                            "debtList",
+                            "timestamp",
+                            "type"
+                        ]
+                    },
+                    "subject": {
+                        "type": "string",
+                        "enum": [
+                            "debt.ratio",
+                            "position.status"
+                        ],
+                        "x-api-enum": [
+                            {
+                                "value": "debt.ratio",
+                                "name": "",
+                                "description": ""
+                            },
+                            {
+                                "value": "position.status",
+                                "name": "",
+                                "description": ""
+                            }
+                        ]
+                    },
+                    "userId": {
+                        "type": "string"
+                    },
+                    "channelType": {
+                        "type": "string",
+                        "enum": [
+                            "private",
+                            "public"
+                        ],
+                        "description": "Channel type",
+                        "x-api-enum": [
+                            {
+                                "value": "private",
+                                "name": "private",
+                                "description": "private channel"
+                            },
+                            {
+                                "value": "public",
+                                "name": "public",
+                                "description": "public channel"
+                            }
+                        ]
+                    }
+                },
+                "required": [
+                    "topic",
+                    "type",
+                    "data",
+                    "subject",
+                    "userId",
+                    "channelType"
                 ]
             }
         }

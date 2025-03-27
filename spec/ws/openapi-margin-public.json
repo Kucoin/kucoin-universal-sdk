@@ -7,34 +7,6 @@
     },
     "tags": [],
     "paths": {
-        "/indexPrice/indicator/index:_symbol_,_symbol_": {
-            "trace": {
-                "summary": "Index Price",
-                "deprecated": "false",
-                "description": "Subscribe to this topic to get the index price for margin trading. The following ticker symbols are supported: List of currently supported symbols.",
-                "tags": [],
-                "parameters": [],
-                "x-sdk-service": "Margin",
-                "x-sdk-sub-service": "margin_public",
-                "x-sdk-private": false,
-                "x-sdk-method-name": "indexPrice",
-                "x-topic": "/indicator/index:{symbol},{symbol}",
-                "x-push_frequency": "once every 1s",
-                "x-response-example": "{\\\"id\\\":\\\"5c24c5da03aa673885cd67a0\\\",\\\"type\\\":\\\"message\\\",\\\"topic\\\":\\\"/indicator/index:USDT-BTC\\\",\\\"subject\\\":\\\"tick\\\",\\\"data\\\":{\\\"symbol\\\":\\\"USDT-BTC\\\",\\\"granularity\\\":5000,\\\"timestamp\\\":1551770400000,\\\"value\\\":0.0001092}}",
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Margin_margin_public_indexPrice"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
         "/markPrice/indicator/markPrice:_symbol_,_symbol_": {
             "trace": {
                 "summary": "Mark Price",
@@ -62,11 +34,39 @@
                     }
                 }
             }
+        },
+        "/indexPrice/indicator/index:_symbol_,_symbol_": {
+            "trace": {
+                "summary": "Index Price",
+                "deprecated": "false",
+                "description": "Subscribe to this topic to get the index price for margin trading. The following ticker symbols are supported: List of currently supported symbols.",
+                "tags": [],
+                "parameters": [],
+                "x-sdk-service": "Margin",
+                "x-sdk-sub-service": "margin_public",
+                "x-sdk-private": false,
+                "x-sdk-method-name": "indexPrice",
+                "x-topic": "/indicator/index:{symbol},{symbol}",
+                "x-push_frequency": "once every 1s",
+                "x-response-example": "{\\\"id\\\":\\\"5c24c5da03aa673885cd67a0\\\",\\\"type\\\":\\\"message\\\",\\\"topic\\\":\\\"/indicator/index:USDT-BTC\\\",\\\"subject\\\":\\\"tick\\\",\\\"data\\\":{\\\"symbol\\\":\\\"USDT-BTC\\\",\\\"granularity\\\":5000,\\\"timestamp\\\":1551770400000,\\\"value\\\":0.0001092}}",
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Margin_margin_public_indexPrice"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
         "schemas": {
-            "Margin_margin_public_indexPrice": {
+            "Margin_margin_public_markPrice": {
                 "type": "object",
                 "properties": {
                     "id": {
@@ -114,7 +114,7 @@
                     "data"
                 ]
             },
-            "Margin_margin_public_markPrice": {
+            "Margin_margin_public_indexPrice": {
                 "type": "object",
                 "properties": {
                     "id": {

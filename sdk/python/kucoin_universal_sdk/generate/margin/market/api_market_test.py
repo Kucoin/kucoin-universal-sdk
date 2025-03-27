@@ -32,23 +32,6 @@ class MarketAPITest(unittest.TestCase):
         common_response = RestResponse.from_json(data)
         resp = GetCrossMarginSymbolsResp.from_dict(common_response.data)
 
-    def test_get_margin_config_req_model(self):
-        """
-       get_margin_config
-       Get Margin Config
-       /api/v1/margin/config
-       """
-
-    def test_get_margin_config_resp_model(self):
-        """
-        get_margin_config
-        Get Margin Config
-        /api/v1/margin/config
-        """
-        data = "{\n    \"code\": \"200000\",\n    \"data\": {\n        \"maxLeverage\": 5,\n        \"warningDebtRatio\": \"0.95\",\n        \"liqDebtRatio\": \"0.97\",\n        \"currencyList\": [\n            \"VRA\",\n            \"APT\",\n            \"IOTX\",\n            \"SHIB\",\n            \"KDA\",\n            \"BCHSV\",\n            \"NEAR\",\n            \"CLV\",\n            \"AUDIO\",\n            \"AIOZ\",\n            \"FLOW\",\n            \"WLD\",\n            \"COMP\",\n            \"MEME\",\n            \"SLP\",\n            \"STX\",\n            \"ZRO\",\n            \"QI\",\n            \"PYTH\",\n            \"RUNE\",\n            \"DGB\",\n            \"IOST\",\n            \"SUI\",\n            \"BCH\",\n            \"CAKE\",\n            \"DOT\",\n            \"OMG\",\n            \"POL\",\n            \"GMT\",\n            \"1INCH\",\n            \"RSR\",\n            \"NKN\",\n            \"BTC\",\n            \"AR\",\n            \"ARB\",\n            \"TON\",\n            \"LISTA\",\n            \"AVAX\",\n            \"SEI\",\n            \"FTM\",\n            \"ERN\",\n            \"BB\",\n            \"BTT\",\n            \"JTO\",\n            \"ONE\",\n            \"RLC\",\n            \"ANKR\",\n            \"SUSHI\",\n            \"CATI\",\n            \"ALGO\",\n            \"PEPE2\",\n            \"ATOM\",\n            \"LPT\",\n            \"BIGTIME\",\n            \"CFX\",\n            \"DYM\",\n            \"VELO\",\n            \"XPR\",\n            \"SNX\",\n            \"JUP\",\n            \"MANA\",\n            \"API3\",\n            \"PYR\",\n            \"ROSE\",\n            \"GLMR\",\n            \"SATS\",\n            \"TIA\",\n            \"GALAX\",\n            \"SOL\",\n            \"DAO\",\n            \"FET\",\n            \"ETC\",\n            \"MKR\",\n            \"WOO\",\n            \"DODO\",\n            \"OGN\",\n            \"BNB\",\n            \"ICP\",\n            \"BLUR\",\n            \"ETH\",\n            \"ZEC\",\n            \"NEO\",\n            \"CELO\",\n            \"REN\",\n            \"MANTA\",\n            \"LRC\",\n            \"STRK\",\n            \"ADA\",\n            \"STORJ\",\n            \"REQ\",\n            \"TAO\",\n            \"VET\",\n            \"FITFI\",\n            \"USDT\",\n            \"DOGE\",\n            \"HBAR\",\n            \"SXP\",\n            \"NEIROCTO\",\n            \"CHR\",\n            \"ORDI\",\n            \"DASH\",\n            \"PEPE\",\n            \"ONDO\",\n            \"ILV\",\n            \"WAVES\",\n            \"CHZ\",\n            \"DOGS\",\n            \"XRP\",\n            \"CTSI\",\n            \"JASMY\",\n            \"FLOKI\",\n            \"TRX\",\n            \"KAVA\",\n            \"SAND\",\n            \"C98\",\n            \"UMA\",\n            \"NOT\",\n            \"IMX\",\n            \"WIF\",\n            \"ENA\",\n            \"EGLD\",\n            \"BOME\",\n            \"LTC\",\n            \"USDC\",\n            \"METIS\",\n            \"WIN\",\n            \"THETA\",\n            \"FXS\",\n            \"ENJ\",\n            \"CRO\",\n            \"AEVO\",\n            \"INJ\",\n            \"LTO\",\n            \"CRV\",\n            \"GRT\",\n            \"DYDX\",\n            \"FLUX\",\n            \"ENS\",\n            \"WAX\",\n            \"MASK\",\n            \"POND\",\n            \"UNI\",\n            \"AAVE\",\n            \"LINA\",\n            \"TLM\",\n            \"BONK\",\n            \"QNT\",\n            \"LDO\",\n            \"ALICE\",\n            \"XLM\",\n            \"LINK\",\n            \"CKB\",\n            \"LUNC\",\n            \"YFI\",\n            \"ETHW\",\n            \"XTZ\",\n            \"LUNA\",\n            \"OP\",\n            \"SUPER\",\n            \"EIGEN\",\n            \"KSM\",\n            \"ELON\",\n            \"EOS\",\n            \"FIL\",\n            \"ZETA\",\n            \"SKL\",\n            \"BAT\",\n            \"APE\",\n            \"HMSTR\",\n            \"YGG\",\n            \"MOVR\",\n            \"PEOPLE\",\n            \"KCS\",\n            \"AXS\",\n            \"ARPA\",\n            \"ZIL\"\n        ]\n    }\n}"
-        common_response = RestResponse.from_json(data)
-        resp = GetMarginConfigResp.from_dict(common_response.data)
-
     def test_get_etf_info_req_model(self):
         """
        get_etf_info
@@ -68,23 +51,6 @@ class MarketAPITest(unittest.TestCase):
         common_response = RestResponse.from_json(data)
         resp = GetEtfInfoResp.from_dict(common_response.data)
 
-    def test_get_mark_price_list_req_model(self):
-        """
-       get_mark_price_list
-       Get Mark Price List
-       /api/v3/mark-price/all-symbols
-       """
-
-    def test_get_mark_price_list_resp_model(self):
-        """
-        get_mark_price_list
-        Get Mark Price List
-        /api/v3/mark-price/all-symbols
-        """
-        data = "{\n    \"code\": \"200000\",\n    \"data\": [\n        {\n            \"symbol\": \"USDT-BTC\",\n            \"timePoint\": 1729676522000,\n            \"value\": 1.504E-5\n        },\n        {\n            \"symbol\": \"USDC-BTC\",\n            \"timePoint\": 1729676522000,\n            \"value\": 1.5049024E-5\n        }\n    ]\n}"
-        common_response = RestResponse.from_json(data)
-        resp = GetMarkPriceListResp.from_dict(common_response.data)
-
     def test_get_mark_price_detail_req_model(self):
         """
        get_mark_price_detail
@@ -103,6 +69,40 @@ class MarketAPITest(unittest.TestCase):
         data = "{\n    \"code\": \"200000\",\n    \"data\": {\n        \"symbol\": \"USDT-BTC\",\n        \"timePoint\": 1729676888000,\n        \"value\": 1.5045E-5\n    }\n}"
         common_response = RestResponse.from_json(data)
         resp = GetMarkPriceDetailResp.from_dict(common_response.data)
+
+    def test_get_margin_config_req_model(self):
+        """
+       get_margin_config
+       Get Margin Config
+       /api/v1/margin/config
+       """
+
+    def test_get_margin_config_resp_model(self):
+        """
+        get_margin_config
+        Get Margin Config
+        /api/v1/margin/config
+        """
+        data = "{\n    \"code\": \"200000\",\n    \"data\": {\n        \"maxLeverage\": 5,\n        \"warningDebtRatio\": \"0.95\",\n        \"liqDebtRatio\": \"0.97\",\n        \"currencyList\": [\n            \"VRA\",\n            \"APT\",\n            \"IOTX\",\n            \"SHIB\",\n            \"KDA\",\n            \"BCHSV\",\n            \"NEAR\",\n            \"CLV\",\n            \"AUDIO\",\n            \"AIOZ\",\n            \"FLOW\",\n            \"WLD\",\n            \"COMP\",\n            \"MEME\",\n            \"SLP\",\n            \"STX\",\n            \"ZRO\",\n            \"QI\",\n            \"PYTH\",\n            \"RUNE\",\n            \"DGB\",\n            \"IOST\",\n            \"SUI\",\n            \"BCH\",\n            \"CAKE\",\n            \"DOT\",\n            \"OMG\",\n            \"POL\",\n            \"GMT\",\n            \"1INCH\",\n            \"RSR\",\n            \"NKN\",\n            \"BTC\",\n            \"AR\",\n            \"ARB\",\n            \"TON\",\n            \"LISTA\",\n            \"AVAX\",\n            \"SEI\",\n            \"FTM\",\n            \"ERN\",\n            \"BB\",\n            \"BTT\",\n            \"JTO\",\n            \"ONE\",\n            \"RLC\",\n            \"ANKR\",\n            \"SUSHI\",\n            \"CATI\",\n            \"ALGO\",\n            \"PEPE2\",\n            \"ATOM\",\n            \"LPT\",\n            \"BIGTIME\",\n            \"CFX\",\n            \"DYM\",\n            \"VELO\",\n            \"XPR\",\n            \"SNX\",\n            \"JUP\",\n            \"MANA\",\n            \"API3\",\n            \"PYR\",\n            \"ROSE\",\n            \"GLMR\",\n            \"SATS\",\n            \"TIA\",\n            \"GALAX\",\n            \"SOL\",\n            \"DAO\",\n            \"FET\",\n            \"ETC\",\n            \"MKR\",\n            \"WOO\",\n            \"DODO\",\n            \"OGN\",\n            \"BNB\",\n            \"ICP\",\n            \"BLUR\",\n            \"ETH\",\n            \"ZEC\",\n            \"NEO\",\n            \"CELO\",\n            \"REN\",\n            \"MANTA\",\n            \"LRC\",\n            \"STRK\",\n            \"ADA\",\n            \"STORJ\",\n            \"REQ\",\n            \"TAO\",\n            \"VET\",\n            \"FITFI\",\n            \"USDT\",\n            \"DOGE\",\n            \"HBAR\",\n            \"SXP\",\n            \"NEIROCTO\",\n            \"CHR\",\n            \"ORDI\",\n            \"DASH\",\n            \"PEPE\",\n            \"ONDO\",\n            \"ILV\",\n            \"WAVES\",\n            \"CHZ\",\n            \"DOGS\",\n            \"XRP\",\n            \"CTSI\",\n            \"JASMY\",\n            \"FLOKI\",\n            \"TRX\",\n            \"KAVA\",\n            \"SAND\",\n            \"C98\",\n            \"UMA\",\n            \"NOT\",\n            \"IMX\",\n            \"WIF\",\n            \"ENA\",\n            \"EGLD\",\n            \"BOME\",\n            \"LTC\",\n            \"USDC\",\n            \"METIS\",\n            \"WIN\",\n            \"THETA\",\n            \"FXS\",\n            \"ENJ\",\n            \"CRO\",\n            \"AEVO\",\n            \"INJ\",\n            \"LTO\",\n            \"CRV\",\n            \"GRT\",\n            \"DYDX\",\n            \"FLUX\",\n            \"ENS\",\n            \"WAX\",\n            \"MASK\",\n            \"POND\",\n            \"UNI\",\n            \"AAVE\",\n            \"LINA\",\n            \"TLM\",\n            \"BONK\",\n            \"QNT\",\n            \"LDO\",\n            \"ALICE\",\n            \"XLM\",\n            \"LINK\",\n            \"CKB\",\n            \"LUNC\",\n            \"YFI\",\n            \"ETHW\",\n            \"XTZ\",\n            \"LUNA\",\n            \"OP\",\n            \"SUPER\",\n            \"EIGEN\",\n            \"KSM\",\n            \"ELON\",\n            \"EOS\",\n            \"FIL\",\n            \"ZETA\",\n            \"SKL\",\n            \"BAT\",\n            \"APE\",\n            \"HMSTR\",\n            \"YGG\",\n            \"MOVR\",\n            \"PEOPLE\",\n            \"KCS\",\n            \"AXS\",\n            \"ARPA\",\n            \"ZIL\"\n        ]\n    }\n}"
+        common_response = RestResponse.from_json(data)
+        resp = GetMarginConfigResp.from_dict(common_response.data)
+
+    def test_get_mark_price_list_req_model(self):
+        """
+       get_mark_price_list
+       Get Mark Price List
+       /api/v3/mark-price/all-symbols
+       """
+
+    def test_get_mark_price_list_resp_model(self):
+        """
+        get_mark_price_list
+        Get Mark Price List
+        /api/v3/mark-price/all-symbols
+        """
+        data = "{\n    \"code\": \"200000\",\n    \"data\": [\n        {\n            \"symbol\": \"USDT-BTC\",\n            \"timePoint\": 1729676522000,\n            \"value\": 1.504E-5\n        },\n        {\n            \"symbol\": \"USDC-BTC\",\n            \"timePoint\": 1729676522000,\n            \"value\": 1.5049024E-5\n        }\n    ]\n}"
+        common_response = RestResponse.from_json(data)
+        resp = GetMarkPriceListResp.from_dict(common_response.data)
 
     def test_get_isolated_margin_symbols_req_model(self):
         """

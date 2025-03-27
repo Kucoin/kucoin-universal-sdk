@@ -186,7 +186,7 @@ class MarketAPI(ABC):
                        **kwargs: Any) -> GetMarkPriceResp:
         """
         summary: Get Mark Price
-        description: Get the current mark price.
+        description: Get the current mark price (Update snapshots once per second, real-time query).
         documentation: https://www.kucoin.com/docs-new/api-3470233
         +-----------------------+---------+
         | Extra API Info        | Value   |
@@ -205,7 +205,7 @@ class MarketAPI(ABC):
                              **kwargs: Any) -> GetSpotIndexPriceResp:
         """
         summary: Get Spot Index Price
-        description: Get Spot Index Price.
+        description: Get Spot Index Price (Update snapshots once per second,  and there is a 5s cache when querying).
         documentation: https://www.kucoin.com/docs-new/api-3470231
         +-----------------------+---------+
         | Extra API Info        | Value   |
@@ -224,7 +224,7 @@ class MarketAPI(ABC):
                                 **kwargs: Any) -> GetInterestRateIndexResp:
         """
         summary: Get Interest Rate Index
-        description: Get interest rate Index.
+        description: Get interest rate Index (real-time query).
         documentation: https://www.kucoin.com/docs-new/api-3470226
         +-----------------------+---------+
         | Extra API Info        | Value   |
@@ -243,7 +243,7 @@ class MarketAPI(ABC):
                           **kwargs: Any) -> GetPremiumIndexResp:
         """
         summary: Get Premium Index
-        description: Submit request to get premium index.
+        description: Submit request to get premium index (Update snapshots once per second, real-time query).
         documentation: https://www.kucoin.com/docs-new/api-3470227
         +-----------------------+---------+
         | Extra API Info        | Value   |

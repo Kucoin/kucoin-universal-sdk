@@ -10,9 +10,9 @@ type GetSpotActualFeeData struct {
 	TakerFeeRate string `json:"takerFeeRate,omitempty"`
 	// Actual maker fee rate of the symbol
 	MakerFeeRate string `json:"makerFeeRate,omitempty"`
-	// Buy tax rate, This field is visible to users in certain countries
+	// Buy tax rate; this field is visible to users in certain countries
 	SellTaxRate *string `json:"sellTaxRate,omitempty"`
-	// Sell tax rate, This field is visible to users in certain countries
+	// Sell tax rate; this field is visible to users in certain countries
 	BuyTaxRate *string `json:"buyTaxRate,omitempty"`
 }
 

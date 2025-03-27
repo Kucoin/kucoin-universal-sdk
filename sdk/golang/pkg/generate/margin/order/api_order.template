@@ -53,7 +53,7 @@ func TestOrderCancelOrderByOrderIdReq(t *testing.T) {
     // /api/v3/hf/margin/orders/{orderId}
 
     builder := order.NewCancelOrderByOrderIdReqBuilder()
-    builder.SetSymbol(?).SetOrderId(?)
+    builder.SetOrderId(?).SetSymbol(?)
     req := builder.Build()
 
     resp, err := orderApi.CancelOrderByOrderId(req, context.TODO())
@@ -76,7 +76,7 @@ func TestOrderCancelOrderByClientOidReq(t *testing.T) {
     // /api/v3/hf/margin/orders/client-order/{clientOid}
 
     builder := order.NewCancelOrderByClientOidReqBuilder()
-    builder.SetSymbol(?).SetClientOid(?)
+    builder.SetClientOid(?).SetSymbol(?)
     req := builder.Build()
 
     resp, err := orderApi.CancelOrderByClientOid(req, context.TODO())
@@ -214,7 +214,7 @@ func TestOrderGetOrderByOrderIdReq(t *testing.T) {
     // /api/v3/hf/margin/orders/{orderId}
 
     builder := order.NewGetOrderByOrderIdReqBuilder()
-    builder.SetSymbol(?).SetOrderId(?)
+    builder.SetOrderId(?).SetSymbol(?)
     req := builder.Build()
 
     resp, err := orderApi.GetOrderByOrderId(req, context.TODO())
@@ -237,7 +237,7 @@ func TestOrderGetOrderByClientOidReq(t *testing.T) {
     // /api/v3/hf/margin/orders/client-order/{clientOid}
 
     builder := order.NewGetOrderByClientOidReqBuilder()
-    builder.SetSymbol(?).SetClientOid(?)
+    builder.SetClientOid(?).SetSymbol(?)
     req := builder.Build()
 
     resp, err := orderApi.GetOrderByClientOid(req, context.TODO())

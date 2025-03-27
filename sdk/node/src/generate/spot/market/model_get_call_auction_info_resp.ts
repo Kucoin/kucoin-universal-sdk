@@ -31,7 +31,7 @@ export class GetCallAuctionInfoResp implements Response<RestResponse> {
     sellOrderRangeHighPrice: string;
 
     /**
-     * Bell ​​order minimum price
+     * Buy order minimum price
      */
     buyOrderRangeLowPrice: string;
 

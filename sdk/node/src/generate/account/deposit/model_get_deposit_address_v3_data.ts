@@ -20,7 +20,7 @@ export class GetDepositAddressV3Data implements Serializable {
     chainId: string;
 
     /**
-     * Deposit account type: MAIN(funding account), TRADE (spot trading account)
+     * Deposit account type: MAIN (funding account), TRADE (spot trading account)
      */
     to: GetDepositAddressV3Data.ToEnum;
 

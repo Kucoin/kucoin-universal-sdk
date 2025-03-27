@@ -24,26 +24,6 @@ func TestMarketGetCrossMarginSymbolsReq(t *testing.T) {
 }
 
 
-func TestMarketGetMarginConfigReq(t *testing.T) {
-    // GetMarginConfig
-    // Get Margin Config
-    // /api/v1/margin/config
-
-
-    resp, err := marketApi.GetMarginConfig(context.TODO())
-    if err != nil {
-        panic(err)
-    }
-    data, err := json.Marshal(resp.ToMap())
-    if err != nil {
-        panic(err)
-    }
-    fmt.Println("code:", resp.CommonResponse.Code)
-    fmt.Println("message:", resp.CommonResponse.Message)
-    fmt.Println("data:", string(data))
-}
-
-
 func TestMarketGetETFInfoReq(t *testing.T) {
     // GetETFInfo
     // Get ETF Info
@@ -67,13 +47,16 @@ func TestMarketGetETFInfoReq(t *testing.T) {
 }
 
 
-func TestMarketGetMarkPriceListReq(t *testing.T) {
-    // GetMarkPriceList
-    // Get Mark Price List
-    // /api/v3/mark-price/all-symbols
+func TestMarketGetMarkPriceDetailReq(t *testing.T) {
+    // GetMarkPriceDetail
+    // Get Mark Price Detail
+    // /api/v1/mark-price/{symbol}/current
 
+    builder := market.NewGetMarkPriceDetailReqBuilder()
+    builder.SetSymbol(?)
+    req := builder.Build()
 
-    resp, err := marketApi.GetMarkPriceList(context.TODO())
+    resp, err := marketApi.GetMarkPriceDetail(req, context.TODO())
     if err != nil {
         panic(err)
     }
@@ -87,16 +70,33 @@ func TestMarketGetMarkPriceListReq(t *testing.T) {
 }
 
 
-func TestMarketGetMarkPriceDetailReq(t *testing.T) {
-    // GetMarkPriceDetail
-    // Get Mark Price Detail
-    // /api/v1/mark-price/{symbol}/current
+func TestMarketGetMarginConfigReq(t *testing.T) {
+    // GetMarginConfig
+    // Get Margin Config
+    // /api/v1/margin/config
 
-    builder := market.NewGetMarkPriceDetailReqBuilder()
-    builder.SetSymbol(?)
-    req := builder.Build()
 
-    resp, err := marketApi.GetMarkPriceDetail(req, context.TODO())
+    resp, err := marketApi.GetMarginConfig(context.TODO())
+    if err != nil {
+        panic(err)
+    }
+    data, err := json.Marshal(resp.ToMap())
+    if err != nil {
+        panic(err)
+    }
+    fmt.Println("code:", resp.CommonResponse.Code)
+    fmt.Println("message:", resp.CommonResponse.Message)
+    fmt.Println("data:", string(data))
+}
+
+
+func TestMarketGetMarkPriceListReq(t *testing.T) {
+    // GetMarkPriceList
+    // Get Mark Price List
+    // /api/v3/mark-price/all-symbols
+
+
+    resp, err := marketApi.GetMarkPriceList(context.TODO())
     if err != nil {
         panic(err)
     }

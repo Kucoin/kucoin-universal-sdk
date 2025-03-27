@@ -17,9 +17,9 @@ class GetKlinesReq(BaseModel):
 
     Attributes:
         symbol (str):  symbol
-        type (TypeEnum): Types of candlestick pattern: 1min, 3min, 5min, 15min, 30min, 1hour, 2hour, 4hour, 6hour, 8hour, 12hour, 1day, 1week, 1month
-        start_at (int): Start time (seconds), default is 0
-        end_at (int): End time (seconds), default is 0
+        type (TypeEnum): Type of candlestick patterns: 1min, 3min, 5min, 15min, 30min, 1hour, 2hour, 4hour, 6hour, 8hour, 12hour, 1day, 1week, 1month
+        start_at (int): Start time (second), default is 0
+        end_at (int): End time (second), default is 0
     """
 
     class TypeEnum(Enum):
@@ -59,15 +59,15 @@ class GetKlinesReq(BaseModel):
     type: Optional[TypeEnum] = Field(
         default=None,
         description=
-        "Types of candlestick pattern: 1min, 3min, 5min, 15min, 30min, 1hour, 2hour, 4hour, 6hour, 8hour, 12hour, 1day, 1week, 1month"
+        "Type of candlestick patterns: 1min, 3min, 5min, 15min, 30min, 1hour, 2hour, 4hour, 6hour, 8hour, 12hour, 1day, 1week, 1month"
     )
     start_at: Optional[int] = Field(
         default=0,
-        description="Start time (seconds), default is 0",
+        description="Start time (second), default is 0",
         alias="startAt")
     end_at: Optional[int] = Field(
         default=0,
-        description="End time (seconds), default is 0",
+        description="End time (second), default is 0",
         alias="endAt")
 
     __properties: ClassVar[List[str]] = ["symbol", "type", "startAt", "endAt"]
@@ -131,21 +131,21 @@ class GetKlinesReqBuilder:
 
     def set_type(self, value: GetKlinesReq.TypeEnum) -> GetKlinesReqBuilder:
         """
-        Types of candlestick pattern: 1min, 3min, 5min, 15min, 30min, 1hour, 2hour, 4hour, 6hour, 8hour, 12hour, 1day, 1week, 1month
+        Type of candlestick patterns: 1min, 3min, 5min, 15min, 30min, 1hour, 2hour, 4hour, 6hour, 8hour, 12hour, 1day, 1week, 1month
         """
         self.obj['type'] = value
         return self
 
     def set_start_at(self, value: int) -> GetKlinesReqBuilder:
         """
-        Start time (seconds), default is 0
+        Start time (second), default is 0
         """
         self.obj['startAt'] = value
         return self
 
     def set_end_at(self, value: int) -> GetKlinesReqBuilder:
         """
-        End time (seconds), default is 0
+        End time (second), default is 0
         """
         self.obj['endAt'] = value
         return self

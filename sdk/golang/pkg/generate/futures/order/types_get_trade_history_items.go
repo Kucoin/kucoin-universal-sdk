@@ -52,9 +52,9 @@ type GetTradeHistoryItems struct {
 	TradeType string `json:"tradeType,omitempty"`
 	// Order creation time
 	CreatedAt int64 `json:"createdAt,omitempty"`
-	// Opening tax fee (Only kyc users in some regions have this parameter)
+	// Opening tax fee (Only KYC users in some regions have this parameter)
 	OpenFeeTaxPay string `json:"openFeeTaxPay,omitempty"`
-	// Close tax fee (Only kyc users in some regions have this parameter)
+	// Close tax fee (Only KYC users in some regions have this parameter)
 	CloseFeeTaxPay string `json:"closeFeeTaxPay,omitempty"`
 }
 

@@ -32,7 +32,7 @@ describe('Auto Test', ()=> {
     * /api/v3/currencies/{currency}
     */
     let builder = GetCurrencyReq.builder();
-    builder.setChain(?).setCurrency(?);
+    builder.setCurrency(?).setChain(?);
     let req = builder.build();
     let resp = api.getCurrency(req);
     return resp.then(result => {
@@ -1184,7 +1184,7 @@ describe('Auto Test', ()=> {
     test('get24hrStats request test', ()=> {
     /**
     * get24hrStats
-    * Get 24hr stats
+    * Get 24hr Stats
     * /api/v1/market/stats
     */
     let builder = Get24hrStatsReq.builder();

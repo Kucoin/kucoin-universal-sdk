@@ -35,7 +35,7 @@ export class GetSpotLedgerItems implements Serializable {
     accountType?: string;
 
     /**
-     * Business type leading to changes in funds, such as exchange, withdrawal, deposit, KUCOIN_BONUS, REFERRAL_BONUS, Lendings etc.
+     * Business type leading to changes in funds, such as exchange, withdrawal, deposit, KUCOIN_BONUS, REFERRAL_BONUS, Lendings, etc.
      */
     bizType?: string;
 

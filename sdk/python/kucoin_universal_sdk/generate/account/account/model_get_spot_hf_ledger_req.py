@@ -38,10 +38,10 @@ class GetSpotHfLedgerReq(BaseModel):
         """
         Attributes:
             TRADE_EXCHANGE: trade exchange
-            TRANSFER: transffer
+            TRANSFER: transfer
             RETURNED_FEES: returned fees
             DEDUCTION_FEES: deduction fees
-            OTHER: Other
+            OTHER: other
         """
         TRADE_EXCHANGE = 'TRADE_EXCHANGE'
         TRANSFER = 'TRANSFER'

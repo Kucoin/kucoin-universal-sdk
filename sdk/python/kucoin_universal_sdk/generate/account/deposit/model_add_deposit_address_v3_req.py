@@ -17,7 +17,7 @@ class AddDepositAddressV3Req(BaseModel):
 
     Attributes:
         currency (str): currency
-        chain (str): The chainId of currency, e.g. the available values for USDT are OMNI, ERC20, and TRC20; default is ERC20. The available values for BTC are Native, Segwit, TRC20; the parameters are bech32, btc, trx; default is Native. 
+        chain (str): The currency chainId, e.g. the available values for USDT are OMNI, ERC20, and TRC20; default is ERC20. The available values for BTC are Native, Segwit, TRC20; the parameters are bech32, btc, trx; default is Native. 
         to (ToEnum): Deposit account type: MAIN (funding account), TRADE (spot trading account); the default is MAIN
         amount (str): Deposit amount. This parameter is only used when applying for invoices on the Lightning Network. This parameter is invalid if it is not passed through the Lightning Network.
     """
@@ -28,14 +28,14 @@ class AddDepositAddressV3Req(BaseModel):
             MAIN: Funding account
             TRADE: Spot account
         """
-        MAIN = 'MAIN'
-        TRADE = 'TRADE'
+        MAIN = 'main'
+        TRADE = 'trade'
 
     currency: Optional[str] = Field(default=None, description="currency")
     chain: Optional[str] = Field(
         default='eth',
         description=
-        "The chainId of currency, e.g. the available values for USDT are OMNI, ERC20, and TRC20; default is ERC20. The available values for BTC are Native, Segwit, TRC20; the parameters are bech32, btc, trx; default is Native. "
+        "The currency chainId, e.g. the available values for USDT are OMNI, ERC20, and TRC20; default is ERC20. The available values for BTC are Native, Segwit, TRC20; the parameters are bech32, btc, trx; default is Native. "
     )
     to: Optional[ToEnum] = Field(
         default=ToEnum.MAIN,
@@ -111,7 +111,7 @@ class AddDepositAddressV3ReqBuilder:
 
     def set_chain(self, value: str) -> AddDepositAddressV3ReqBuilder:
         """
-        The chainId of currency, e.g. the available values for USDT are OMNI, ERC20, and TRC20; default is ERC20. The available values for BTC are Native, Segwit, TRC20; the parameters are bech32, btc, trx; default is Native. 
+        The currency chainId, e.g. the available values for USDT are OMNI, ERC20, and TRC20; default is ERC20. The available values for BTC are Native, Segwit, TRC20; the parameters are bech32, btc, trx; default is Native. 
         """
         self.obj['chain'] = value
         return self

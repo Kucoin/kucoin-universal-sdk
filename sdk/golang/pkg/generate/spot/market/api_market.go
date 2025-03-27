@@ -52,7 +52,7 @@ type MarketAPI interface {
 	GetAllCurrencies(ctx context.Context) (*GetAllCurrenciesResp, error)
 
 	// GetSymbol Get Symbol
-	// Description: Request detailed currency pairs for trading via this endpoint. If you want to get the market information of the trading symbol, please use Get All Tickers.
+	// Description: Request via this endpoint to get detail currency pairs for trading. If you want to get the market information of the trading symbol, please use Get All Tickers.
 	// Documentation: https://www.kucoin.com/docs-new/api-3470159
 	// +-----------------------+--------+
 	// | Extra API Info        | Value  |
@@ -80,7 +80,7 @@ type MarketAPI interface {
 	GetAllSymbols(req *GetAllSymbolsReq, ctx context.Context) (*GetAllSymbolsResp, error)
 
 	// GetTicker Get Ticker
-	// Description: Request Level 1 Market Data via this endpoint. The returned value includes the best bid price and size, the best ask price and size, as well as the last traded price and the last traded size.
+	// Description: Request via this endpoint to get Level 1 Market Data. The returned value includes the best bid price and size, the best ask price and size as well as the last traded price and the last traded size.
 	// Documentation: https://www.kucoin.com/docs-new/api-3470160
 	// +-----------------------+--------+
 	// | Extra API Info        | Value  |
@@ -108,7 +108,7 @@ type MarketAPI interface {
 	GetAllTickers(ctx context.Context) (*GetAllTickersResp, error)
 
 	// GetTradeHistory Get Trade History
-	// Description: Request the trade history of the specified symbol via this endpoint. The returned quantity is the last 100 transaction records.
+	// Description: Request via this endpoint to get the trade history of the specified symbol, the returned quantity is the last 100 transaction records.
 	// Documentation: https://www.kucoin.com/docs-new/api-3470162
 	// +-----------------------+--------+
 	// | Extra API Info        | Value  |
@@ -122,7 +122,7 @@ type MarketAPI interface {
 	GetTradeHistory(req *GetTradeHistoryReq, ctx context.Context) (*GetTradeHistoryResp, error)
 
 	// GetKlines Get Klines
-	// Description: Get the symbol’s candlestick chart. Data are returned in grouped buckets based on requested type. For each query, the system will return at most 1500 pieces of data. To obtain more data, please page the data by time.
+	// Description: Get the Kline of the symbol. Data are returned in grouped buckets based on requested type. For each query, the system would return at most 1500 pieces of data. To obtain more data, please page the data by time.
 	// Documentation: https://www.kucoin.com/docs-new/api-3470163
 	// +-----------------------+--------+
 	// | Extra API Info        | Value  |
@@ -136,7 +136,7 @@ type MarketAPI interface {
 	GetKlines(req *GetKlinesReq, ctx context.Context) (*GetKlinesResp, error)
 
 	// GetPartOrderBook Get Part OrderBook
-	// Description: Query for part orderbook depth data. (aggregated by price). It is recommended that you request via this endpoint, as the system response will be faster and consume less traffic.
+	// Description: Query for part orderbook depth data. (aggregated by price)  You are recommended to request via this endpoint as the system reponse would be faster and cosume less traffic.
 	// Documentation: https://www.kucoin.com/docs-new/api-3470165
 	// +-----------------------+--------+
 	// | Extra API Info        | Value  |
@@ -150,7 +150,7 @@ type MarketAPI interface {
 	GetPartOrderBook(req *GetPartOrderBookReq, ctx context.Context) (*GetPartOrderBookResp, error)
 
 	// GetFullOrderBook Get Full OrderBook
-	// Description: Query for Full orderbook depth data (aggregated by price). It is generally used by professional traders because it uses more server resources and traffic, and we have strict access rate limit control.  To maintain an up-to-date Order Book, please use Websocket incremental feed after retrieving the OrderBook.
+	// Description: Query for Full orderbook depth data. (aggregated by price)  It is generally used by professional traders because it uses more server resources and traffic, and we have strict access rate limit control.  To maintain up-to-date Order Book, please use Websocket incremental feed after retrieving the OrderBook.
 	// Documentation: https://www.kucoin.com/docs-new/api-3470164
 	// +-----------------------+---------+
 	// | Extra API Info        | Value   |
@@ -178,7 +178,7 @@ type MarketAPI interface {
 	GetCallAuctionPartOrderBook(req *GetCallAuctionPartOrderBookReq, ctx context.Context) (*GetCallAuctionPartOrderBookResp, error)
 
 	// GetCallAuctionInfo Get Call Auction Info
-	// Description: Get call auction data, This interface will return the following information for the specified symbol during the call auction phase: estimated transaction price, estimated transaction quantity, bid price range, and ask price range.
+	// Description: Get call auction data. This interface will return the following information for the specified symbol during the call auction phase: estimated transaction price, estimated transaction quantity, bid price range, and ask price range.
 	// Documentation: https://www.kucoin.com/docs-new/api-3471565
 	// +-----------------------+--------+
 	// | Extra API Info        | Value  |
@@ -205,8 +205,8 @@ type MarketAPI interface {
 	// +-----------------------+--------+
 	GetFiatPrice(req *GetFiatPriceReq, ctx context.Context) (*GetFiatPriceResp, error)
 
-	// Get24hrStats Get 24hr stats
-	// Description: Request the statistics of the specified ticker in the last 24 hours via this endpoint.
+	// Get24hrStats Get 24hr Stats
+	// Description: Request via this endpoint to get the statistics of the specified ticker in the last 24 hours.
 	// Documentation: https://www.kucoin.com/docs-new/api-3470161
 	// +-----------------------+--------+
 	// | Extra API Info        | Value  |

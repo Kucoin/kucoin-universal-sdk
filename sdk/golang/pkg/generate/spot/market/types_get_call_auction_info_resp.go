@@ -20,7 +20,7 @@ type GetCallAuctionInfoResp struct {
 	SellOrderRangeLowPrice string `json:"sellOrderRangeLowPrice,omitempty"`
 	// Sell ​​order maximum price
 	SellOrderRangeHighPrice string `json:"sellOrderRangeHighPrice,omitempty"`
-	// Bell ​​order minimum price
+	// Buy order minimum price
 	BuyOrderRangeLowPrice string `json:"buyOrderRangeLowPrice,omitempty"`
 	// Buy ​​order maximum price
 	BuyOrderRangeHighPrice string `json:"buyOrderRangeHighPrice,omitempty"`

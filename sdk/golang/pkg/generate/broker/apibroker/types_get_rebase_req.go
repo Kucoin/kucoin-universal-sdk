@@ -8,7 +8,7 @@ type GetRebaseReq struct {
 	Begin *string `json:"begin,omitempty" url:"begin,omitempty"`
 	// End time, for example: 20241010 (query data with a maximum interval of 6 months)
 	End *string `json:"end,omitempty" url:"end,omitempty"`
-	// Transaction type: 1, spot; 2: futures
+	// Transaction type: 1, spot; 2, futures
 	TradeType *string `json:"tradeType,omitempty" url:"tradeType,omitempty"`
 }
 
@@ -54,7 +54,7 @@ func (builder *GetRebaseReqBuilder) SetEnd(value string) *GetRebaseReqBuilder {
 	return builder
 }
 
-// Transaction type: 1, spot; 2: futures
+// Transaction type: 1, spot; 2, futures
 func (builder *GetRebaseReqBuilder) SetTradeType(value string) *GetRebaseReqBuilder {
 	builder.obj.TradeType = &value
 	return builder

@@ -186,7 +186,7 @@
                                 {
                                     "key": "chain",
                                     "value": "eth",
-                                    "description": "Chain id of currency"
+                                    "description": "Chain ID of currency"
                                 }
                             ]
                         },
@@ -219,7 +219,7 @@
                                         {
                                             "key": "chain",
                                             "value": "eth",
-                                            "description": "Chain id of currency"
+                                            "description": "Chain ID of currency"
                                         }
                                     ]
                                 }
@@ -255,342 +255,6 @@
                             ],
                             "cookie": [],
                             "body": "{\n    \"code\": \"200000\",\n    \"data\": [\n        {\n            \"address\": \"0x02028456*****87ede7a73d7c\",\n            \"memo\": \"\",\n            \"chain\": \"ERC20\",\n            \"chainId\": \"eth\",\n            \"to\": \"MAIN\",\n            \"currency\": \"ETH\",\n            \"contractAddress\": \"\"\n        }\n    ]\n}"
-                        }
-                    ]
-                },
-                {
-                    "name": "Sub-account Transfer",
-                    "request": {
-                        "method": "POST",
-                        "header": [],
-                        "url": {
-                            "raw": "",
-                            "protocol": "https",
-                            "host": [
-                                "{{spot_endpoint}}"
-                            ],
-                            "path": [
-                                "api",
-                                "v2",
-                                "accounts",
-                                "sub-transfer"
-                            ],
-                            "query": []
-                        },
-                        "description": "# API Description\n\nFor the complete API documentation, please refer to [doc](https://www.kucoin.com/docs-new/api-3470301)\n\n:::tip[TIPS]\nIt is recommended to use the **GET /api/v3/accounts/universal-transfer** endpoint instead of this endpoint\n:::\n\n:::info[Description]\nFunds in the main account, trading account and margin account of a Master Account can be transferred to the main account, trading account, futures account and margin account of its Sub-Account. The futures account of both the Master Account and Sub-Account can only accept funds transferred in from the main account, trading account and margin account and cannot transfer out to these accounts.\n:::\n\n# API Schema\n\n## Request Schema\n\n\n**Request Body**\n\n---\n**root Schema**\n\n| name | type | description |\n| --- | --- | --- |\n| clientOid | string | Unique order ID created by users to identify their orders, e.g. UUID, with a maximum length of 128 bits |\n| currency | string | currency |\n| amount | string | Transfer amount: The amount is a positive integer multiple of the currency precision. |\n| direction | string | OUT — the master user to sub user<br>IN — the sub user to the master user |\n| accountType | string | Account type: MAIN, TRADE, CONTRACT, MARGIN, ISOLATED |\n| subAccountType | string | Sub-account type: MAIN, TRADE, CONTRACT, MARGIN, ISOLATED |\n| subUserId | string | the user ID of a sub-account. |\n| tag | string |  Need to be defined if accountType=ISOLATED. |\n| subTag | string |  Need to be defined if subAccountType=ISOLATED. |\n\n---\n## Response Schema\n\n\n**Response Body**\n\n---\n**root Schema**\n\n| name | type | description |\n| --- | --- | --- |\n| code | string |  |\n| data | object | Refer to the schema section of data |\n\n**root.data Schema**\n\n| name | type | description |\n| --- | --- | --- |\n| orderId | string | Transfer order ID |\n\n---\n",
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\n    \"clientOid\": \"64ccc0f164781800010d8c09\",\n    \"currency\": \"USDT\",\n    \"amount\": \"0.01\",\n    \"direction\": \"OUT\",\n    \"accountType\": \"MAIN\",\n    \"subAccountType\": \"MAIN\",\n    \"subUserId\": \"63743f07e0c5230001761d08\"\n}",
-                            "options": {
-                                "raw": {
-                                    "language": "json"
-                                }
-                            }
-                        }
-                    },
-                    "response": [
-                        {
-                            "name": "Successful Response",
-                            "originalRequest": {
-                                "method": "POST",
-                                "header": [],
-                                "url": {
-                                    "raw": "",
-                                    "protocol": "https",
-                                    "host": [
-                                        "{{spot_endpoint}}"
-                                    ],
-                                    "path": [
-                                        "api",
-                                        "v2",
-                                        "accounts",
-                                        "sub-transfer"
-                                    ],
-                                    "query": []
-                                }
-                            },
-                            "status": "OK",
-                            "code": 200,
-                            "_postman_previewlanguage": "json",
-                            "header": [
-                                {
-                                    "key": "Content-Type",
-                                    "value": "application/json",
-                                    "name": "Content-Type",
-                                    "description": {
-                                        "content": "",
-                                        "type": "text/plain"
-                                    }
-                                },
-                                {
-                                    "key": "gw-ratelimit-remaining",
-                                    "value": 1997,
-                                    "name": "gw-ratelimit-remaining"
-                                },
-                                {
-                                    "key": "gw-ratelimit-limit",
-                                    "value": 2000,
-                                    "name": "gw-ratelimit-limit"
-                                },
-                                {
-                                    "key": "gw-ratelimit-reset",
-                                    "value": 29990,
-                                    "name": "gw-ratelimit-reset"
-                                }
-                            ],
-                            "cookie": [],
-                            "body": "{\n    \"code\": \"200000\",\n    \"data\": {\n        \"orderId\": \"670be6b0b1b9080007040a9b\"\n    }\n}"
-                        }
-                    ]
-                },
-                {
-                    "name": "Internal Transfer",
-                    "request": {
-                        "method": "POST",
-                        "header": [],
-                        "url": {
-                            "raw": "",
-                            "protocol": "https",
-                            "host": [
-                                "{{spot_endpoint}}"
-                            ],
-                            "path": [
-                                "api",
-                                "v2",
-                                "accounts",
-                                "inner-transfer"
-                            ],
-                            "query": []
-                        },
-                        "description": "# API Description\n\nFor the complete API documentation, please refer to [doc](https://www.kucoin.com/docs-new/api-3470302)\n\n:::tip[TIPS]\nIt is recommended to use the **GET /api/v3/accounts/universal-transfer** endpoint instead of this endpoint\n:::\n\n:::info[Description]\nThis API endpoint can be used to transfer funds between accounts internally. Users can transfer funds between their accounts free of charge. \n:::\n\nNotice:\nThe transfer of funds from contract accounts to other accounts is not supported.\nThe margin_v2 account currently only supports transfers between margin accounts, and does not support direct transfers from other accounts to margin_v2\nThe isolated_v2 account currently only supports transfers between margin accounts, and does not support direct transfers from other accounts to isolated_v2\n# API Schema\n\n## Request Schema\n\n\n**Request Body**\n\n---\n**root Schema**\n\n| name | type | description |\n| --- | --- | --- |\n| clientOid | string | Unique order ID created by users to identify their orders, e.g. UUID, with a maximum length of 128 bits |\n| currency | string | currency |\n| amount | string | Transfer amount: The amount is a positive integer multiple of the currency precision. |\n| to | string | Receiving Account Type: main, trade, margin, isolated, margin_v2, isolated_v2, contract |\n| fromTag | string | Trading pair, required when the payment account type is isolated, e.g.: BTC-USDT |\n| toTag | string | Trading pair, required when the payment account type is isolated, e.g.: BTC-USDT |\n| from | string | Payment Account Type: main, trade, margin, isolated, margin_v2, isolated_v2 |\n\n---\n## Response Schema\n\n\n**Response Body**\n\n---\n**root Schema**\n\n| name | type | description |\n| --- | --- | --- |\n| code | string |  |\n| data | object | Refer to the schema section of data |\n\n**root.data Schema**\n\n| name | type | description |\n| --- | --- | --- |\n| orderId | string | Transfer order ID |\n\n---\n",
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\n    \"clientOid\": \"64ccc0f164781800010d8c09\",\n    \"currency\": \"USDT\",\n    \"amount\": \"0.01\",\n    \"from\": \"main\",\n    \"to\": \"trade\"\n}",
-                            "options": {
-                                "raw": {
-                                    "language": "json"
-                                }
-                            }
-                        }
-                    },
-                    "response": [
-                        {
-                            "name": "Successful Response",
-                            "originalRequest": {
-                                "method": "POST",
-                                "header": [],
-                                "url": {
-                                    "raw": "",
-                                    "protocol": "https",
-                                    "host": [
-                                        "{{spot_endpoint}}"
-                                    ],
-                                    "path": [
-                                        "api",
-                                        "v2",
-                                        "accounts",
-                                        "inner-transfer"
-                                    ],
-                                    "query": []
-                                }
-                            },
-                            "status": "OK",
-                            "code": 200,
-                            "_postman_previewlanguage": "json",
-                            "header": [
-                                {
-                                    "key": "Content-Type",
-                                    "value": "application/json",
-                                    "name": "Content-Type",
-                                    "description": {
-                                        "content": "",
-                                        "type": "text/plain"
-                                    }
-                                },
-                                {
-                                    "key": "gw-ratelimit-remaining",
-                                    "value": 1997,
-                                    "name": "gw-ratelimit-remaining"
-                                },
-                                {
-                                    "key": "gw-ratelimit-limit",
-                                    "value": 2000,
-                                    "name": "gw-ratelimit-limit"
-                                },
-                                {
-                                    "key": "gw-ratelimit-reset",
-                                    "value": 29990,
-                                    "name": "gw-ratelimit-reset"
-                                }
-                            ],
-                            "cookie": [],
-                            "body": "{\n    \"code\": \"200000\",\n    \"data\": {\n        \"orderId\": \"670beb3482a1bb0007dec644\"\n    }\n}"
-                        }
-                    ]
-                },
-                {
-                    "name": "Futures Account Transfer Out",
-                    "request": {
-                        "method": "POST",
-                        "header": [],
-                        "url": {
-                            "raw": "",
-                            "protocol": "https",
-                            "host": [
-                                "{{futures_endpoint}}"
-                            ],
-                            "path": [
-                                "api",
-                                "v3",
-                                "transfer-out"
-                            ],
-                            "query": []
-                        },
-                        "description": "# API Description\n\nFor the complete API documentation, please refer to [doc](https://www.kucoin.com/docs-new/api-3470303)\n\n:::tip[TIPS]\nIt is recommended to use the **GET /api/v3/accounts/universal-transfer** endpoint instead of this endpoint\n:::\n\n:::info[Description]\nThe amount to be transferred will be deducted from the KuCoin Futures Account. Please ensure that you have sufficient funds in your KuCoin Futures Account, or the transfer will fail.\n:::\n# API Schema\n\n## Request Schema\n\n\n**Request Body**\n\n---\n**root Schema**\n\n| name | type | description |\n| --- | --- | --- |\n| currency | string | Currency, including XBT, USDT... |\n| amount | number | Amount to be transferred out; cannot exceed 1000000000 |\n| recAccountType | string | Receive account type, including MAIN, TRADE |\n\n---\n## Response Schema\n\n\n**Response Body**\n\n---\n**root Schema**\n\n| name | type | description |\n| --- | --- | --- |\n| code | string |  |\n| data | object | Refer to the schema section of data |\n\n**root.data Schema**\n\n| name | type | description |\n| --- | --- | --- |\n| applyId | string | Transfer order ID |\n| bizNo | string | Business number |\n| payAccountType | string | Pay account type |\n| payTag | string | Pay account sub type |\n| remark | string | User remark |\n| recAccountType | string | Receive account type |\n| recTag | string | Receive account sub type |\n| recRemark | string | Receive account tx remark |\n| recSystem | string | Receive system |\n| status | string | Status:APPLY, PROCESSING, PENDING_APPROVAL, APPROVED, REJECTED, PENDING_CANCEL, CANCEL, SUCCESS |\n| currency | string | Currency |\n| amount | string | Transfer amount |\n| fee | string | Transfer fee |\n| sn | integer | Serial number |\n| reason | string | Fail Reason |\n| createdAt | integer | Create time |\n| updatedAt | integer | Update time |\n\n---\n",
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\n    \"currency\": \"USDT\",\n    \"amount\": 0.01,\n    \"recAccountType\": \"MAIN\"\n}",
-                            "options": {
-                                "raw": {
-                                    "language": "json"
-                                }
-                            }
-                        }
-                    },
-                    "response": [
-                        {
-                            "name": "Successful Response",
-                            "originalRequest": {
-                                "method": "POST",
-                                "header": [],
-                                "url": {
-                                    "raw": "",
-                                    "protocol": "https",
-                                    "host": [
-                                        "{{futures_endpoint}}"
-                                    ],
-                                    "path": [
-                                        "api",
-                                        "v3",
-                                        "transfer-out"
-                                    ],
-                                    "query": []
-                                }
-                            },
-                            "status": "OK",
-                            "code": 200,
-                            "_postman_previewlanguage": "json",
-                            "header": [
-                                {
-                                    "key": "Content-Type",
-                                    "value": "application/json",
-                                    "name": "Content-Type",
-                                    "description": {
-                                        "content": "",
-                                        "type": "text/plain"
-                                    }
-                                },
-                                {
-                                    "key": "gw-ratelimit-remaining",
-                                    "value": 1997,
-                                    "name": "gw-ratelimit-remaining"
-                                },
-                                {
-                                    "key": "gw-ratelimit-limit",
-                                    "value": 2000,
-                                    "name": "gw-ratelimit-limit"
-                                },
-                                {
-                                    "key": "gw-ratelimit-reset",
-                                    "value": 29990,
-                                    "name": "gw-ratelimit-reset"
-                                }
-                            ],
-                            "cookie": [],
-                            "body": "{\n    \"code\": \"200000\",\n    \"data\": {\n        \"applyId\": \"670bf84c577f6c00017a1c48\",\n        \"bizNo\": \"670bf84c577f6c00017a1c47\",\n        \"payAccountType\": \"CONTRACT\",\n        \"payTag\": \"DEFAULT\",\n        \"remark\": \"\",\n        \"recAccountType\": \"MAIN\",\n        \"recTag\": \"DEFAULT\",\n        \"recRemark\": \"\",\n        \"recSystem\": \"KUCOIN\",\n        \"status\": \"PROCESSING\",\n        \"currency\": \"USDT\",\n        \"amount\": \"0.01\",\n        \"fee\": \"0\",\n        \"sn\": 1519769124134806,\n        \"reason\": \"\",\n        \"createdAt\": 1728837708000,\n        \"updatedAt\": 1728837708000\n    }\n}"
-                        }
-                    ]
-                },
-                {
-                    "name": "Futures Account Transfer In",
-                    "request": {
-                        "method": "POST",
-                        "header": [],
-                        "url": {
-                            "raw": "",
-                            "protocol": "https",
-                            "host": [
-                                "{{futures_endpoint}}"
-                            ],
-                            "path": [
-                                "api",
-                                "v1",
-                                "transfer-in"
-                            ],
-                            "query": []
-                        },
-                        "description": "# API Description\n\nFor the complete API documentation, please refer to [doc](https://www.kucoin.com/docs-new/api-3470304)\n\n:::tip[TIPS]\nIt is recommended to use the **GET /api/v3/accounts/universal-transfer** endpoint instead of this endpoint\n:::\n\n:::info[Description]\nThe amount to be transferred will be deducted from the payAccount. Please ensure that you have sufficient funds in your payAccount account, or the transfer will fail.\n:::\n# API Schema\n\n## Request Schema\n\n\n**Request Body**\n\n---\n**root Schema**\n\n| name | type | description |\n| --- | --- | --- |\n| currency | string | Currency, including XBT, USDT... |\n| amount | number | Amount to be transferred in |\n| payAccountType | string | Payment account type, including MAIN, TRADE |\n\n---\n## Response Schema\n\n\n**Response Body**\n\n---\n**root Schema**\n\n| name | type | description |\n| --- | --- | --- |\n| code | string |  |\n| data | string |  |\n\n---\n",
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\n    \"currency\": \"USDT\",\n    \"amount\": 0.01,\n    \"payAccountType\": \"MAIN\"\n}",
-                            "options": {
-                                "raw": {
-                                    "language": "json"
-                                }
-                            }
-                        }
-                    },
-                    "response": [
-                        {
-                            "name": "Successful Response",
-                            "originalRequest": {
-                                "method": "POST",
-                                "header": [],
-                                "url": {
-                                    "raw": "",
-                                    "protocol": "https",
-                                    "host": [
-                                        "{{futures_endpoint}}"
-                                    ],
-                                    "path": [
-                                        "api",
-                                        "v1",
-                                        "transfer-in"
-                                    ],
-                                    "query": []
-                                }
-                            },
-                            "status": "OK",
-                            "code": 200,
-                            "_postman_previewlanguage": "json",
-                            "header": [
-                                {
-                                    "key": "Content-Type",
-                                    "value": "application/json",
-                                    "name": "Content-Type",
-                                    "description": {
-                                        "content": "",
-                                        "type": "text/plain"
-                                    }
-                                },
-                                {
-                                    "key": "gw-ratelimit-remaining",
-                                    "value": 1997,
-                                    "name": "gw-ratelimit-remaining"
-                                },
-                                {
-                                    "key": "gw-ratelimit-limit",
-                                    "value": 2000,
-                                    "name": "gw-ratelimit-limit"
-                                },
-                                {
-                                    "key": "gw-ratelimit-reset",
-                                    "value": 29990,
-                                    "name": "gw-ratelimit-reset"
-                                }
-                            ],
-                            "cookie": [],
-                            "body": "{\n    \"code\": \"200000\",\n    \"data\": null\n}"
                         }
                     ]
                 },
@@ -688,6 +352,91 @@
                             ],
                             "cookie": [],
                             "body": "{\n    \"code\": \"200000\",\n    \"data\": {\n        \"address\": \"0xea220bf61c3c2b0adc2cfa29fec3d2677745a379\",\n        \"memo\": \"\",\n        \"chain\": \"ERC20\",\n        \"chainId\": \"eth\",\n        \"to\": \"MAIN\",\n        \"currency\": \"USDT\"\n    }\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Sub-account Transfer",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "url": {
+                            "raw": "",
+                            "protocol": "https",
+                            "host": [
+                                "{{spot_endpoint}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v2",
+                                "accounts",
+                                "sub-transfer"
+                            ],
+                            "query": []
+                        },
+                        "description": "# API Description\n\nFor the complete API documentation, please refer to [doc](https://www.kucoin.com/docs-new/api-3470301)\n\n:::tip[TIPS]\nIt is recommended to use the **GET /api/v3/accounts/universal-transfer** endpoint instead of this endpoint\n:::\n\n:::info[Description]\nFunds in the main account, trading account and margin account of a Master Account can be transferred to the main account, trading account, futures account and margin account of its Sub-Account. The futures account of both the Master Account and Sub-Account can only accept funds transferred in from the main account, trading account and margin account and cannot transfer out to these accounts.\n:::\n\n# API Schema\n\n## Request Schema\n\n\n**Request Body**\n\n---\n**root Schema**\n\n| name | type | description |\n| --- | --- | --- |\n| clientOid | string | Unique order ID created by users to identify their orders, e.g. UUID, with a maximum length of 128 bits |\n| currency | string | currency |\n| amount | string | Transfer amount: The amount is a positive integer multiple of the currency precision. |\n| direction | string | OUT — the master user to sub user<br>IN — the sub user to the master user |\n| accountType | string | Account type: MAIN, TRADE, CONTRACT, MARGIN, ISOLATED |\n| subAccountType | string | Sub-account type: MAIN, TRADE, CONTRACT, MARGIN, ISOLATED |\n| subUserId | string | the user ID of a sub-account. |\n| tag | string |  Need to be defined if accountType=ISOLATED. |\n| subTag | string |  Need to be defined if subAccountType=ISOLATED. |\n\n---\n## Response Schema\n\n\n**Response Body**\n\n---\n**root Schema**\n\n| name | type | description |\n| --- | --- | --- |\n| code | string |  |\n| data | object | Refer to the schema section of data |\n\n**root.data Schema**\n\n| name | type | description |\n| --- | --- | --- |\n| orderId | string | Transfer order ID |\n\n---\n",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"clientOid\": \"64ccc0f164781800010d8c09\",\n    \"currency\": \"USDT\",\n    \"amount\": \"0.01\",\n    \"direction\": \"OUT\",\n    \"accountType\": \"MAIN\",\n    \"subAccountType\": \"MAIN\",\n    \"subUserId\": \"63743f07e0c5230001761d08\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        }
+                    },
+                    "response": [
+                        {
+                            "name": "Successful Response",
+                            "originalRequest": {
+                                "method": "POST",
+                                "header": [],
+                                "url": {
+                                    "raw": "",
+                                    "protocol": "https",
+                                    "host": [
+                                        "{{spot_endpoint}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "v2",
+                                        "accounts",
+                                        "sub-transfer"
+                                    ],
+                                    "query": []
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "_postman_previewlanguage": "json",
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json",
+                                    "name": "Content-Type",
+                                    "description": {
+                                        "content": "",
+                                        "type": "text/plain"
+                                    }
+                                },
+                                {
+                                    "key": "gw-ratelimit-remaining",
+                                    "value": 1997,
+                                    "name": "gw-ratelimit-remaining"
+                                },
+                                {
+                                    "key": "gw-ratelimit-limit",
+                                    "value": 2000,
+                                    "name": "gw-ratelimit-limit"
+                                },
+                                {
+                                    "key": "gw-ratelimit-reset",
+                                    "value": 29990,
+                                    "name": "gw-ratelimit-reset"
+                                }
+                            ],
+                            "cookie": [],
+                            "body": "{\n    \"code\": \"200000\",\n    \"data\": {\n        \"orderId\": \"670be6b0b1b9080007040a9b\"\n    }\n}"
                         }
                     ]
                 },
@@ -805,6 +554,91 @@
                             ],
                             "cookie": [],
                             "body": "{\n    \"code\": \"200000\",\n    \"data\": {\n        \"currentPage\": 1,\n        \"pageSize\": 50,\n        \"totalNum\": 0,\n        \"totalPage\": 0,\n        \"items\": [\n            {\n                \"currency\": \"BTC\",\n                \"createAt\": 1528536998,\n                \"amount\": \"0.03266638\",\n                \"walletTxId\": \"55c643bc2c68d6f17266383ac1be9e454038864b929ae7cee0bc408cc5c869e8@12ffGWmMMD1zA1WbFm7Ho3JZ1w6NYXjpFk@234\",\n                \"isInner\": false,\n                \"status\": \"SUCCESS\"\n            }\n        ]\n    }\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Internal Transfer",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "url": {
+                            "raw": "",
+                            "protocol": "https",
+                            "host": [
+                                "{{spot_endpoint}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v2",
+                                "accounts",
+                                "inner-transfer"
+                            ],
+                            "query": []
+                        },
+                        "description": "# API Description\n\nFor the complete API documentation, please refer to [doc](https://www.kucoin.com/docs-new/api-3470302)\n\n:::tip[TIPS]\nIt is recommended to use the **GET /api/v3/accounts/universal-transfer** endpoint instead of this endpoint\n:::\n\n:::info[Description]\nThis API endpoint can be used to transfer funds between accounts internally. Users can transfer funds between their accounts free of charge. \n:::\n\nNotice:\nThe transfer of funds from contract accounts to other accounts is not supported.\nThe margin_v2 account currently only supports transfers between margin accounts, and does not support direct transfers from other accounts to margin_v2\nThe isolated_v2 account currently only supports transfers between margin accounts, and does not support direct transfers from other accounts to isolated_v2\n# API Schema\n\n## Request Schema\n\n\n**Request Body**\n\n---\n**root Schema**\n\n| name | type | description |\n| --- | --- | --- |\n| clientOid | string | Unique order ID created by users to identify their orders, e.g. UUID, with a maximum length of 128 bits |\n| currency | string | currency |\n| amount | string | Transfer amount: The amount is a positive integer multiple of the currency precision. |\n| to | string | Receiving Account Type: main, trade, margin, isolated, margin_v2, isolated_v2, contract |\n| fromTag | string | Trading pair, required when the payment account type is isolated, e.g.: BTC-USDT |\n| toTag | string | Trading pair, required when the payment account type is isolated, e.g.: BTC-USDT |\n| from | string | Payment Account Type: main, trade, margin, isolated, margin_v2, isolated_v2 |\n\n---\n## Response Schema\n\n\n**Response Body**\n\n---\n**root Schema**\n\n| name | type | description |\n| --- | --- | --- |\n| code | string |  |\n| data | object | Refer to the schema section of data |\n\n**root.data Schema**\n\n| name | type | description |\n| --- | --- | --- |\n| orderId | string | Transfer order ID |\n\n---\n",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"clientOid\": \"64ccc0f164781800010d8c09\",\n    \"currency\": \"USDT\",\n    \"amount\": \"0.01\",\n    \"from\": \"main\",\n    \"to\": \"trade\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        }
+                    },
+                    "response": [
+                        {
+                            "name": "Successful Response",
+                            "originalRequest": {
+                                "method": "POST",
+                                "header": [],
+                                "url": {
+                                    "raw": "",
+                                    "protocol": "https",
+                                    "host": [
+                                        "{{spot_endpoint}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "v2",
+                                        "accounts",
+                                        "inner-transfer"
+                                    ],
+                                    "query": []
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "_postman_previewlanguage": "json",
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json",
+                                    "name": "Content-Type",
+                                    "description": {
+                                        "content": "",
+                                        "type": "text/plain"
+                                    }
+                                },
+                                {
+                                    "key": "gw-ratelimit-remaining",
+                                    "value": 1997,
+                                    "name": "gw-ratelimit-remaining"
+                                },
+                                {
+                                    "key": "gw-ratelimit-limit",
+                                    "value": 2000,
+                                    "name": "gw-ratelimit-limit"
+                                },
+                                {
+                                    "key": "gw-ratelimit-reset",
+                                    "value": 29990,
+                                    "name": "gw-ratelimit-reset"
+                                }
+                            ],
+                            "cookie": [],
+                            "body": "{\n    \"code\": \"200000\",\n    \"data\": {\n        \"orderId\": \"670beb3482a1bb0007dec644\"\n    }\n}"
                         }
                     ]
                 },
@@ -1089,6 +923,172 @@
                             ],
                             "cookie": [],
                             "body": "{\n    \"code\": \"200000\",\n    \"data\": {\n        \"currentPage\": 1,\n        \"pageSize\": 50,\n        \"totalNum\": 1,\n        \"totalPage\": 1,\n        \"items\": [\n            {\n                \"currency\": \"BTC\",\n                \"createAt\": 1526723468,\n                \"amount\": \"0.534\",\n                \"address\": \"33xW37ZSW4tQvg443Pc7NLCAs167Yc2XUV\",\n                \"walletTxId\": \"aeacea864c020acf58e51606169240e96774838dcd4f7ce48acf38e3651323f4\",\n                \"isInner\": false,\n                \"status\": \"SUCCESS\"\n            }\n        ]\n    }\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Futures Account Transfer Out",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "url": {
+                            "raw": "",
+                            "protocol": "https",
+                            "host": [
+                                "{{futures_endpoint}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v3",
+                                "transfer-out"
+                            ],
+                            "query": []
+                        },
+                        "description": "# API Description\n\nFor the complete API documentation, please refer to [doc](https://www.kucoin.com/docs-new/api-3470303)\n\n:::tip[TIPS]\nIt is recommended to use the **GET /api/v3/accounts/universal-transfer** endpoint instead of this endpoint\n:::\n\n:::info[Description]\nThe amount to be transferred will be deducted from the KuCoin Futures Account. Please ensure that you have sufficient funds in your KuCoin Futures Account, or the transfer will fail.\n:::\n# API Schema\n\n## Request Schema\n\n\n**Request Body**\n\n---\n**root Schema**\n\n| name | type | description |\n| --- | --- | --- |\n| currency | string | Currency, including XBT, USDT... |\n| amount | number | Amount to be transferred out; cannot exceed 1000000000 |\n| recAccountType | string | Receive account type, including MAIN, TRADE |\n\n---\n## Response Schema\n\n\n**Response Body**\n\n---\n**root Schema**\n\n| name | type | description |\n| --- | --- | --- |\n| code | string |  |\n| data | object | Refer to the schema section of data |\n\n**root.data Schema**\n\n| name | type | description |\n| --- | --- | --- |\n| applyId | string | Transfer order ID |\n| bizNo | string | Business number |\n| payAccountType | string | Pay account type |\n| payTag | string | Pay account sub type |\n| remark | string | User remark |\n| recAccountType | string | Receive account type |\n| recTag | string | Receive account sub type |\n| recRemark | string | Receive account tx remark |\n| recSystem | string | Receive system |\n| status | string | Status:APPLY, PROCESSING, PENDING_APPROVAL, APPROVED, REJECTED, PENDING_CANCEL, CANCEL, SUCCESS |\n| currency | string | Currency |\n| amount | string | Transfer amount |\n| fee | string | Transfer fee |\n| sn | integer | Serial number |\n| reason | string | Fail Reason |\n| createdAt | integer | Create time |\n| updatedAt | integer | Update time |\n\n---\n",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"currency\": \"USDT\",\n    \"amount\": 0.01,\n    \"recAccountType\": \"MAIN\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        }
+                    },
+                    "response": [
+                        {
+                            "name": "Successful Response",
+                            "originalRequest": {
+                                "method": "POST",
+                                "header": [],
+                                "url": {
+                                    "raw": "",
+                                    "protocol": "https",
+                                    "host": [
+                                        "{{futures_endpoint}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "v3",
+                                        "transfer-out"
+                                    ],
+                                    "query": []
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "_postman_previewlanguage": "json",
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json",
+                                    "name": "Content-Type",
+                                    "description": {
+                                        "content": "",
+                                        "type": "text/plain"
+                                    }
+                                },
+                                {
+                                    "key": "gw-ratelimit-remaining",
+                                    "value": 1997,
+                                    "name": "gw-ratelimit-remaining"
+                                },
+                                {
+                                    "key": "gw-ratelimit-limit",
+                                    "value": 2000,
+                                    "name": "gw-ratelimit-limit"
+                                },
+                                {
+                                    "key": "gw-ratelimit-reset",
+                                    "value": 29990,
+                                    "name": "gw-ratelimit-reset"
+                                }
+                            ],
+                            "cookie": [],
+                            "body": "{\n    \"code\": \"200000\",\n    \"data\": {\n        \"applyId\": \"670bf84c577f6c00017a1c48\",\n        \"bizNo\": \"670bf84c577f6c00017a1c47\",\n        \"payAccountType\": \"CONTRACT\",\n        \"payTag\": \"DEFAULT\",\n        \"remark\": \"\",\n        \"recAccountType\": \"MAIN\",\n        \"recTag\": \"DEFAULT\",\n        \"recRemark\": \"\",\n        \"recSystem\": \"KUCOIN\",\n        \"status\": \"PROCESSING\",\n        \"currency\": \"USDT\",\n        \"amount\": \"0.01\",\n        \"fee\": \"0\",\n        \"sn\": 1519769124134806,\n        \"reason\": \"\",\n        \"createdAt\": 1728837708000,\n        \"updatedAt\": 1728837708000\n    }\n}"
+                        }
+                    ]
+                },
+                {
+                    "name": "Futures Account Transfer In",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "url": {
+                            "raw": "",
+                            "protocol": "https",
+                            "host": [
+                                "{{futures_endpoint}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "transfer-in"
+                            ],
+                            "query": []
+                        },
+                        "description": "# API Description\n\nFor the complete API documentation, please refer to [doc](https://www.kucoin.com/docs-new/api-3470304)\n\n:::tip[TIPS]\nIt is recommended to use the **GET /api/v3/accounts/universal-transfer** endpoint instead of this endpoint\n:::\n\n:::info[Description]\nThe amount to be transferred will be deducted from the payAccount. Please ensure that you have sufficient funds in your payAccount account, or the transfer will fail.\n:::\n# API Schema\n\n## Request Schema\n\n\n**Request Body**\n\n---\n**root Schema**\n\n| name | type | description |\n| --- | --- | --- |\n| currency | string | Currency, including XBT, USDT... |\n| amount | number | Amount to be transferred in |\n| payAccountType | string | Payment account type, including MAIN, TRADE |\n\n---\n## Response Schema\n\n\n**Response Body**\n\n---\n**root Schema**\n\n| name | type | description |\n| --- | --- | --- |\n| code | string |  |\n| data | string |  |\n\n---\n",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"currency\": \"USDT\",\n    \"amount\": 0.01,\n    \"payAccountType\": \"MAIN\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        }
+                    },
+                    "response": [
+                        {
+                            "name": "Successful Response",
+                            "originalRequest": {
+                                "method": "POST",
+                                "header": [],
+                                "url": {
+                                    "raw": "",
+                                    "protocol": "https",
+                                    "host": [
+                                        "{{futures_endpoint}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "v1",
+                                        "transfer-in"
+                                    ],
+                                    "query": []
+                                }
+                            },
+                            "status": "OK",
+                            "code": 200,
+                            "_postman_previewlanguage": "json",
+                            "header": [
+                                {
+                                    "key": "Content-Type",
+                                    "value": "application/json",
+                                    "name": "Content-Type",
+                                    "description": {
+                                        "content": "",
+                                        "type": "text/plain"
+                                    }
+                                },
+                                {
+                                    "key": "gw-ratelimit-remaining",
+                                    "value": 1997,
+                                    "name": "gw-ratelimit-remaining"
+                                },
+                                {
+                                    "key": "gw-ratelimit-limit",
+                                    "value": 2000,
+                                    "name": "gw-ratelimit-limit"
+                                },
+                                {
+                                    "key": "gw-ratelimit-reset",
+                                    "value": 29990,
+                                    "name": "gw-ratelimit-reset"
+                                }
+                            ],
+                            "cookie": [],
+                            "body": "{\n    \"code\": \"200000\",\n    \"data\": null\n}"
                         }
                     ]
                 },
@@ -3048,7 +3048,7 @@
                 "type": "text/javascript",
                 "packages": {},
                 "exec": [
-                    "function extractPathVariable(str) {\n    const regex = /^\\{\\{(.+?)\\}\\}$/;\n    const match = str.match(regex);\n    if (match) {\n        return match[1];\n    }\n    return null;\n}\n\nfunction hasAnyFieldEmpty(obj) {\n    for (const key in obj) {\n        if (obj[key] === \"\" || obj[key] === null || obj[key] === undefined) {\n            return true;\n        }\n    }\n    return false;\n}\n\nfunction sign(text, secret) {\n    const hash = CryptoJS.HmacSHA256(text, secret);\n    return CryptoJS.enc.Base64.stringify(hash)\n}\n\nfunction auth(apiKey, method, url, data) {\n    if (hasAnyFieldEmpty(apiKey)) {\n        console.warn('The API key-related information is not configured; only the public channel API is accessible.')\n        return {'User-Agent': `Kucoin-Universal-Postman-SDK/v1.1.0`}\n    }\n\n    const timestamp = Date.now();\n    const text = timestamp + method.toUpperCase() + url + data;\n    const signature = sign(text, apiKey.secret);\n    return {\n        'KC-API-KEY': apiKey.key,\n        'KC-API-SIGN': signature,\n        'KC-API-TIMESTAMP': timestamp.toString(),\n        'KC-API-PASSPHRASE': sign(apiKey.passphrase || '', apiKey.secret),\n        'Content-Type': 'application/json',\n        'User-Agent': `Kucoin-Universal-Postman-SDK/v1.1.0`,\n        'KC-API-KEY-VERSION': 3,\n    };\n}\n\nlet key = pm.environment.get('API_KEY')\nlet secret = pm.environment.get('API_SECRET')\nlet passphrase = pm.environment.get('API_PASSPHRASE')\n\nlet url = pm.request.url.getPathWithQuery()\nlet method = pm.request.method\nlet body = pm.request.body ? pm.request.body.toString() : ''\n\nfor (const index in pm.request.url.path) {\n    path = pm.request.url.path[index]\n    pathVar = extractPathVariable(path)\n    if (pathVar != null) {\n        let collectionVariable = pm.collectionVariables.get(pathVar);\n        if (collectionVariable != null) {\n            url = url.replace(path, collectionVariable)\n        } else {\n            console.warn('no path variable set: ' + path)\n        }\n    }\n}\n\nheader = auth({ key: key, passphrase: passphrase, secret: secret }, method, url, body)\n\nfor (const [headerName, headerValue] of Object.entries(header)) {\n    pm.request.headers.add({ key: headerName, value: headerValue })\n}"
+                    "function extractPathVariable(str) {\n    const regex = /^\\{\\{(.+?)\\}\\}$/;\n    const match = str.match(regex);\n    if (match) {\n        return match[1];\n    }\n    return null;\n}\n\nfunction hasAnyFieldEmpty(obj) {\n    for (const key in obj) {\n        if (obj[key] === \"\" || obj[key] === null || obj[key] === undefined) {\n            return true;\n        }\n    }\n    return false;\n}\n\nfunction sign(text, secret) {\n    const hash = CryptoJS.HmacSHA256(text, secret);\n    return CryptoJS.enc.Base64.stringify(hash)\n}\n\nfunction auth(apiKey, method, url, data) {\n    if (hasAnyFieldEmpty(apiKey)) {\n        console.warn('The API key-related information is not configured; only the public channel API is accessible.')\n        return {'User-Agent': `Kucoin-Universal-Postman-SDK/v1.2.0`}\n    }\n\n    const timestamp = Date.now();\n    const text = timestamp + method.toUpperCase() + url + data;\n    const signature = sign(text, apiKey.secret);\n    return {\n        'KC-API-KEY': apiKey.key,\n        'KC-API-SIGN': signature,\n        'KC-API-TIMESTAMP': timestamp.toString(),\n        'KC-API-PASSPHRASE': sign(apiKey.passphrase || '', apiKey.secret),\n        'Content-Type': 'application/json',\n        'User-Agent': `Kucoin-Universal-Postman-SDK/v1.2.0`,\n        'KC-API-KEY-VERSION': 3,\n    };\n}\n\nlet key = pm.environment.get('API_KEY')\nlet secret = pm.environment.get('API_SECRET')\nlet passphrase = pm.environment.get('API_PASSPHRASE')\n\nlet url = pm.request.url.getPathWithQuery()\nlet method = pm.request.method\nlet body = pm.request.body ? pm.request.body.toString() : ''\n\nfor (const index in pm.request.url.path) {\n    path = pm.request.url.path[index]\n    pathVar = extractPathVariable(path)\n    if (pathVar != null) {\n        let collectionVariable = pm.collectionVariables.get(pathVar);\n        if (collectionVariable != null) {\n            url = url.replace(path, collectionVariable)\n        } else {\n            console.warn('no path variable set: ' + path)\n        }\n    }\n}\n\nheader = auth({ key: key, passphrase: passphrase, secret: secret }, method, url, body)\n\nfor (const [headerName, headerValue] of Object.entries(header)) {\n    pm.request.headers.add({ key: headerName, value: headerValue })\n}"
                 ]
             }
         },

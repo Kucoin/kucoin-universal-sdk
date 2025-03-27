@@ -17,7 +17,7 @@ class GetFullOrderBookResp(BaseModel, Response):
     GetFullOrderBookResp
 
     Attributes:
-        time (int): Timestamp (milliseconds)
+        time (int): Timestamp(millisecond)
         sequence (str): Sequence number
         bids (list[list[str]]): bids, from high to low
         asks (list[list[str]]): asks, from low to high
@@ -26,7 +26,7 @@ class GetFullOrderBookResp(BaseModel, Response):
     common_response: Optional[RestResponse] = Field(
         default=None, description="Common response")
     time: Optional[int] = Field(default=None,
-                                description="Timestamp (milliseconds)")
+                                description="Timestamp(millisecond)")
     sequence: Optional[str] = Field(default=None,
                                     description="Sequence number")
     bids: Optional[List[List[str]]] = Field(

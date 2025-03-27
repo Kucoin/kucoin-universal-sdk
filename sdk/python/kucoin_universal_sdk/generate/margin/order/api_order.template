@@ -47,7 +47,7 @@ def test_cancel_order_by_order_id_req(self):
     """
 
     builder = CancelOrderByOrderIdReqBuilder()
-    builder.set_symbol(?).set_order_id(?)
+    builder.set_order_id(?).set_symbol(?)
     req = builder.build()
     try:
         resp = self.api.cancel_order_by_order_id(req)
@@ -66,7 +66,7 @@ def test_cancel_order_by_client_oid_req(self):
     """
 
     builder = CancelOrderByClientOidReqBuilder()
-    builder.set_symbol(?).set_client_oid(?)
+    builder.set_client_oid(?).set_symbol(?)
     req = builder.build()
     try:
         resp = self.api.cancel_order_by_client_oid(req)
@@ -180,7 +180,7 @@ def test_get_order_by_order_id_req(self):
     """
 
     builder = GetOrderByOrderIdReqBuilder()
-    builder.set_symbol(?).set_order_id(?)
+    builder.set_order_id(?).set_symbol(?)
     req = builder.build()
     try:
         resp = self.api.get_order_by_order_id(req)
@@ -199,7 +199,7 @@ def test_get_order_by_client_oid_req(self):
     """
 
     builder = GetOrderByClientOidReqBuilder()
-    builder.set_symbol(?).set_client_oid(?)
+    builder.set_client_oid(?).set_symbol(?)
     req = builder.build()
     try:
         resp = self.api.get_order_by_client_oid(req)

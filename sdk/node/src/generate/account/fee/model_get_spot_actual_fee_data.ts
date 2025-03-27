@@ -20,12 +20,12 @@ export class GetSpotActualFeeData implements Serializable {
     makerFeeRate: string;
 
     /**
-     * Buy tax rate, This field is visible to users in certain countries
+     * Buy tax rate; this field is visible to users in certain countries
      */
     sellTaxRate?: string;
 
     /**
-     * Sell tax rate, This field is visible to users in certain countries
+     * Sell tax rate; this field is visible to users in certain countries
      */
     buyTaxRate?: string;
 

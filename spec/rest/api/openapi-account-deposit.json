@@ -122,7 +122,7 @@
                                     },
                                     "chain": {
                                         "type": "string",
-                                        "description": "The chainId of currency, e.g. the available values for USDT are OMNI, ERC20, and TRC20; default is ERC20. The available values for BTC are Native, Segwit, TRC20; the parameters are bech32, btc, trx; default is Native. ",
+                                        "description": "The currency chainId, e.g. the available values for USDT are OMNI, ERC20, and TRC20; default is ERC20. The available values for BTC are Native, Segwit, TRC20; the parameters are bech32, btc, trx; default is Native. ",
                                         "default": "eth",
                                         "example": [
                                             "eth",
@@ -140,19 +140,19 @@
                                         "type": "string",
                                         "description": "Deposit account type: MAIN (funding account), TRADE (spot trading account); the default is MAIN",
                                         "enum": [
-                                            "MAIN",
-                                            "TRADE"
+                                            "main",
+                                            "trade"
                                         ],
-                                        "default": "MAIN",
+                                        "default": "main",
                                         "x-api-enum": [
                                             {
-                                                "value": "MAIN",
-                                                "name": "MAIN",
+                                                "value": "main",
+                                                "name": "main",
                                                 "description": "Funding account"
                                             },
                                             {
-                                                "value": "TRADE",
-                                                "name": "TRADE",
+                                                "value": "trade",
+                                                "name": "trade",
                                                 "description": "Spot account"
                                             }
                                         ]
@@ -268,7 +268,7 @@
                                                     },
                                                     "to": {
                                                         "type": "string",
-                                                        "description": "Deposit account type: MAIN(funding account), TRADE (spot trading account)",
+                                                        "description": "Deposit account type: MAIN (funding account), TRADE (spot trading account)",
                                                         "enum": [
                                                             "MAIN",
                                                             "TRADE"
@@ -468,7 +468,7 @@
                                                 },
                                                 "totalPage": {
                                                     "type": "integer",
-                                                    "description": "total page"
+                                                    "description": "total pages"
                                                 },
                                                 "items": {
                                                     "type": "array",
@@ -546,7 +546,7 @@
                                                             },
                                                             "createdAt": {
                                                                 "type": "integer",
-                                                                "description": "Creation time of the database record",
+                                                                "description": "Database record creation time",
                                                                 "format": "int64"
                                                             },
                                                             "updatedAt": {
@@ -624,7 +624,7 @@
                     {
                         "name": "chain",
                         "in": "query",
-                        "description": "Chain id of currency",
+                        "description": "Chain ID of currency",
                         "required": false,
                         "schema": {
                             "type": "string",

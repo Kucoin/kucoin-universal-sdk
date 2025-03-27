@@ -52,7 +52,7 @@ class FuturesAPI(ABC):
                        **kwargs: Any) -> AddOrderTestResp:
         """
         summary: Add Order Test
-        description: Place order to the futures trading system just for validation
+        description: Place order  the futures trading system just for validation
         documentation: https://www.kucoin.com/docs-new/api-3470618
         +-----------------------+------------------+
         | Extra API Info        | Value            |

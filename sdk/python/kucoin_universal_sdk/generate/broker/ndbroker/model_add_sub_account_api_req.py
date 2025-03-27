@@ -19,7 +19,7 @@ class AddSubAccountApiReq(BaseModel):
         uid (str): Sub-account UID
         passphrase (str): API passphrase
         ip_whitelist (list[str]): IP whitelist list, supports up to 20 IPs
-        permissions (list[PermissionsEnum]): Permission group list (Only General, Spot and Futures permissions can be set, such as \"General, Trade\"). 
+        permissions (list[PermissionsEnum]): Permission group list (only General, Spot and Futures permissions can be set, such as \"General, Trade\"). 
         label (str): apikey remarks (length 4~32) 
     """
 
@@ -44,7 +44,7 @@ class AddSubAccountApiReq(BaseModel):
     permissions: Optional[List[PermissionsEnum]] = Field(
         default=None,
         description=
-        "Permission group list (Only General, Spot and Futures permissions can be set, such as \"General, Trade\"). "
+        "Permission group list (only General, Spot and Futures permissions can be set, such as \"General, Trade\"). "
     )
     label: Optional[str] = Field(default=None,
                                  description="apikey remarks (length 4~32) ")
@@ -126,7 +126,7 @@ class AddSubAccountApiReqBuilder:
         self, value: list[AddSubAccountApiReq.PermissionsEnum]
     ) -> AddSubAccountApiReqBuilder:
         """
-        Permission group list (Only General, Spot and Futures permissions can be set, such as \"General, Trade\"). 
+        Permission group list (only General, Spot and Futures permissions can be set, such as \"General, Trade\"). 
         """
         self.obj['permissions'] = value
         return self

@@ -4356,11 +4356,11 @@
                                                             },
                                                             "openFeeTaxPay": {
                                                                 "type": "string",
-                                                                "description": "Opening tax fee (Only kyc users in some regions have this parameter)"
+                                                                "description": "Opening tax fee (Only KYC users in some regions have this parameter)"
                                                             },
                                                             "closeFeeTaxPay": {
                                                                 "type": "string",
-                                                                "description": "Close tax fee (Only kyc users in some regions have this parameter)"
+                                                                "description": "Close tax fee (Only KYC users in some regions have this parameter)"
                                                             }
                                                         },
                                                         "required": [

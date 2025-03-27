@@ -332,7 +332,7 @@
                                                     },
                                                     "type": {
                                                         "type": "string",
-                                                        "description": "Account type:，main、trade、isolated(abandon)、margin(abandon)\n",
+                                                        "description": "Account type: main, trade, isolated (abandon), margin (abandon)\n",
                                                         "enum": [
                                                             "main",
                                                             "trade"
@@ -1278,7 +1278,7 @@
                                                             },
                                                             "bizType": {
                                                                 "type": "string",
-                                                                "description": "Business type leading to changes in funds, such as exchange, withdrawal, deposit, KUCOIN_BONUS, REFERRAL_BONUS, Lendings etc."
+                                                                "description": "Business type leading to changes in funds, such as exchange, withdrawal, deposit, KUCOIN_BONUS, REFERRAL_BONUS, Lendings, etc."
                                                             },
                                                             "direction": {
                                                                 "type": "string",
@@ -1395,7 +1395,7 @@
                                 {
                                     "value": "TRANSFER",
                                     "name": "TRANSFER",
-                                    "description": "transffer"
+                                    "description": "transfer"
                                 },
                                 {
                                     "value": "RETURNED_FEES",
@@ -1410,7 +1410,7 @@
                                 {
                                     "value": "OTHER",
                                     "name": "OTHER",
-                                    "description": "Other"
+                                    "description": "other"
                                 }
                             ]
                         }

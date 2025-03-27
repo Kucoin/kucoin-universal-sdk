@@ -12,11 +12,11 @@ type TransferReq struct {
 	Direction string `json:"direction,omitempty"`
 	// Broker account types: MAIN (Funding account), TRADE (Spot trading account)
 	AccountType string `json:"accountType,omitempty"`
-	// Broker sub-account uid, must be the Broker sub-account created by the current Broker user.
+	// Broker sub-account UID, must be the Broker sub-account created by the current Broker user.
 	SpecialUid string `json:"specialUid,omitempty"`
 	// Broker sub-account types: MAIN (Funding account), TRADE (Spot trading account)
 	SpecialAccountType string `json:"specialAccountType,omitempty"`
-	// Client Order ID, The unique identifier created by the client. It is recommended to use UUID. The maximum length is 128 bits.
+	// Client Order ID, the unique identifier created by the client. It is recommended to use UUID. The maximum length is 128 bits.
 	ClientOid string `json:"clientOid,omitempty"`
 }
 
@@ -85,7 +85,7 @@ func (builder *TransferReqBuilder) SetAccountType(value string) *TransferReqBuil
 	return builder
 }
 
-// Broker sub-account uid, must be the Broker sub-account created by the current Broker user.
+// Broker sub-account UID, must be the Broker sub-account created by the current Broker user.
 func (builder *TransferReqBuilder) SetSpecialUid(value string) *TransferReqBuilder {
 	builder.obj.SpecialUid = value
 	return builder
@@ -97,7 +97,7 @@ func (builder *TransferReqBuilder) SetSpecialAccountType(value string) *Transfer
 	return builder
 }
 
-// Client Order ID, The unique identifier created by the client. It is recommended to use UUID. The maximum length is 128 bits.
+// Client Order ID, the unique identifier created by the client. It is recommended to use UUID. The maximum length is 128 bits.
 func (builder *TransferReqBuilder) SetClientOid(value string) *TransferReqBuilder {
 	builder.obj.ClientOid = value
 	return builder

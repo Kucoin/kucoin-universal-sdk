@@ -19,8 +19,8 @@ class GetTradeHistoryData(BaseModel):
         sequence (str): Sequence number
         price (str): Filled price
         size (str): Filled amount
-        side (SideEnum): Filled side; the trade side indicates the taker order side. A taker order is the order that was matched with orders opened on the order book.
-        time (int): Filled timestamp (nanosecond)
+        side (SideEnum): Filled side, The trade side indicates the taker order side. A taker order is the order that was matched with orders opened on the order book.
+        time (int): Filled timestamp(nanosecond)
     """
 
     class SideEnum(Enum):
@@ -39,10 +39,10 @@ class GetTradeHistoryData(BaseModel):
     side: Optional[SideEnum] = Field(
         default=None,
         description=
-        "Filled side; the trade side indicates the taker order side. A taker order is the order that was matched with orders opened on the order book."
+        "Filled side, The trade side indicates the taker order side. A taker order is the order that was matched with orders opened on the order book."
     )
     time: Optional[int] = Field(default=None,
-                                description="Filled timestamp (nanosecond)")
+                                description="Filled timestamp(nanosecond)")
 
     __properties: ClassVar[List[str]] = [
         "sequence", "price", "size", "side", "time"

@@ -125,12 +125,12 @@ export class GetTradeHistoryItems implements Serializable {
     createdAt: number;
 
     /**
-     * Opening tax fee (Only kyc users in some regions have this parameter)
+     * Opening tax fee (Only KYC users in some regions have this parameter)
      */
     openFeeTaxPay: string;
 
     /**
-     * Close tax fee (Only kyc users in some regions have this parameter)
+     * Close tax fee (Only KYC users in some regions have this parameter)
      */
     closeFeeTaxPay: string;
 

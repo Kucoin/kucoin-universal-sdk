@@ -32,8 +32,8 @@ class AddOrderSyncReq(BaseModel):
         tags (str): Order tag, length cannot exceed 20 characters (ASCII)
         cancel_after (int): Cancel after n seconds, the order timing strategy is GTT, -1 means it will not be cancelled automatically, the default value is -1 
         funds (str): When **type** is market, select one out of two: size or funds
-        allow_max_time_window (int): Order failed after timeout of specified milliseconds, If clientTimestamp + allowMaxTimeWindow < the server reaches time, this order will fail.
-        client_timestamp (int): Equal to KC-API-TIMESTAMP, Need to be defined if iceberg is specified.
+        allow_max_time_window (int): The order will fail if it times out after the specified duration in milliseconds. Specifically, if clientTimestamp + allowMaxTimeWindow (in milliseconds) is less than the time the server receives the message, the order will fail.
+        client_timestamp (int): Equal to KC-API-TIMESTAMP. Needs to be defined if iceberg is specified.
     """
 
     class SideEnum(Enum):
@@ -152,12 +152,12 @@ class AddOrderSyncReq(BaseModel):
     allow_max_time_window: Optional[int] = Field(
         default=None,
         description=
-        "Order failed after timeout of specified milliseconds, If clientTimestamp + allowMaxTimeWindow < the server reaches time, this order will fail.",
+        "The order will fail if it times out after the specified duration in milliseconds. Specifically, if clientTimestamp + allowMaxTimeWindow (in milliseconds) is less than the time the server receives the message, the order will fail.",
         alias="allowMaxTimeWindow")
     client_timestamp: Optional[int] = Field(
         default=None,
         description=
-        "Equal to KC-API-TIMESTAMP, Need to be defined if iceberg is specified.",
+        "Equal to KC-API-TIMESTAMP. Needs to be defined if iceberg is specified.",
         alias="clientTimestamp")
 
     __properties: ClassVar[List[str]] = [
@@ -365,14 +365,14 @@ class AddOrderSyncReqBuilder:
 
     def set_allow_max_time_window(self, value: int) -> AddOrderSyncReqBuilder:
         """
-        Order failed after timeout of specified milliseconds, If clientTimestamp + allowMaxTimeWindow < the server reaches time, this order will fail.
+        The order will fail if it times out after the specified duration in milliseconds. Specifically, if clientTimestamp + allowMaxTimeWindow (in milliseconds) is less than the time the server receives the message, the order will fail.
         """
         self.obj['allowMaxTimeWindow'] = value
         return self
 
     def set_client_timestamp(self, value: int) -> AddOrderSyncReqBuilder:
         """
-        Equal to KC-API-TIMESTAMP, Need to be defined if iceberg is specified.
+        Equal to KC-API-TIMESTAMP. Needs to be defined if iceberg is specified.
         """
         self.obj['clientTimestamp'] = value
         return self

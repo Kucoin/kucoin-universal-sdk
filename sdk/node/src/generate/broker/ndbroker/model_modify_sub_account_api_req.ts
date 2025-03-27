@@ -15,7 +15,7 @@ export class ModifySubAccountApiReq implements Serializable {
     ipWhitelist: Array<string>;
 
     /**
-     * [Permissions](https://www.kucoin.com/docs-new/doc-338144) group list (Only General, Spot and Futures permissions can be set, such as \"General, Trade\").
+     * [Permissions](https://www.kucoin.com/docs-new/doc-338144) group list (only General, Spot and Futures permissions can be set, such as \"General, Trade\").
      */
     permissions: Array<ModifySubAccountApiReq.PermissionsEnum>;
 
@@ -65,7 +65,7 @@ export class ModifySubAccountApiReq implements Serializable {
          */
         ipWhitelist: Array<string>;
         /**
-         * [Permissions](https://www.kucoin.com/docs-new/doc-338144) group list (Only General, Spot and Futures permissions can be set, such as \"General, Trade\").
+         * [Permissions](https://www.kucoin.com/docs-new/doc-338144) group list (only General, Spot and Futures permissions can be set, such as \"General, Trade\").
          */
         permissions: Array<ModifySubAccountApiReq.PermissionsEnum>;
         /**
@@ -144,7 +144,7 @@ export class ModifySubAccountApiReqBuilder {
     }
 
     /**
-     * [Permissions](https://www.kucoin.com/docs-new/doc-338144) group list (Only General, Spot and Futures permissions can be set, such as \"General, Trade\").
+     * [Permissions](https://www.kucoin.com/docs-new/doc-338144) group list (only General, Spot and Futures permissions can be set, such as \"General, Trade\").
      */
     setPermissions(
         value: Array<ModifySubAccountApiReq.PermissionsEnum>,

@@ -152,7 +152,7 @@ func TestOrderCancelOrderByOrderIdReqModel(t *testing.T) {
 	// Cancel Order By OrderId
 	// /api/v1/hf/orders/{orderId}
 
-	data := "{\"symbol\": \"BTC-USDT\", \"orderId\": \"671124f9365ccb00073debd4\"}"
+	data := "{\"orderId\": \"671124f9365ccb00073debd4\", \"symbol\": \"BTC-USDT\"}"
 	req := &CancelOrderByOrderIdReq{}
 	err := json.Unmarshal([]byte(data), req)
 	req.ToMap()
@@ -468,6 +468,34 @@ func TestOrderGetOpenOrdersRespModel(t *testing.T) {
 	assert.Nil(t, err)
 	assert.NotNil(t, commonResp.Data)
 	resp := &GetOpenOrdersResp{}
+	err = json.Unmarshal([]byte(commonResp.Data), resp)
+	resp.ToMap()
+	assert.Nil(t, err)
+}
+
+func TestOrderGetOpenOrdersByPageReqModel(t *testing.T) {
+	// GetOpenOrdersByPage
+	// Get Open Orders By Page
+	// /api/v1/hf/orders/active/page
+
+	data := "{\"symbol\": \"BTC-USDT\", \"pageNum\": 1, \"pageSize\": 20}"
+	req := &GetOpenOrdersByPageReq{}
+	err := json.Unmarshal([]byte(data), req)
+	req.ToMap()
+	assert.Nil(t, err)
+}
+
+func TestOrderGetOpenOrdersByPageRespModel(t *testing.T) {
+	// GetOpenOrdersByPage
+	// Get Open Orders By Page
+	// /api/v1/hf/orders/active/page
+
+	data := "{\n    \"code\": \"200000\",\n    \"data\": {\n        \"currentPage\": 1,\n        \"pageSize\": 20,\n        \"totalNum\": 1,\n        \"totalPage\": 1,\n        \"items\": [\n            {\n                \"id\": \"67c1437ea5226600071cc080\",\n                \"symbol\": \"BTC-USDT\",\n                \"opType\": \"DEAL\",\n                \"type\": \"limit\",\n                \"side\": \"buy\",\n                \"price\": \"50000\",\n                \"size\": \"0.00001\",\n                \"funds\": \"0.5\",\n                \"dealSize\": \"0\",\n                \"dealFunds\": \"0\",\n                \"fee\": \"0\",\n                \"feeCurrency\": \"USDT\",\n                \"stp\": null,\n                \"timeInForce\": \"GTC\",\n                \"postOnly\": false,\n                \"hidden\": false,\n                \"iceberg\": false,\n                \"visibleSize\": \"0\",\n                \"cancelAfter\": 0,\n                \"channel\": \"API\",\n                \"clientOid\": \"5c52e11203aa677f33e493fb\",\n                \"remark\": \"order remarks\",\n                \"tags\": null,\n                \"cancelExist\": false,\n                \"createdAt\": 1740718974367,\n                \"lastUpdatedAt\": 1741867658590,\n                \"tradeType\": \"TRADE\",\n                \"inOrderBook\": true,\n                \"cancelledSize\": \"0\",\n                \"cancelledFunds\": \"0\",\n                \"remainSize\": \"0.00001\",\n                \"remainFunds\": \"0.5\",\n                \"tax\": \"0\",\n                \"active\": true\n            }\n        ]\n    }\n}"
+	commonResp := &types.RestResponse{}
+	err := json.Unmarshal([]byte(data), commonResp)
+	assert.Nil(t, err)
+	assert.NotNil(t, commonResp.Data)
+	resp := &GetOpenOrdersByPageResp{}
 	err = json.Unmarshal([]byte(commonResp.Data), resp)
 	resp.ToMap()
 	assert.Nil(t, err)

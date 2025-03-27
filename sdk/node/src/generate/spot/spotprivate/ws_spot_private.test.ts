@@ -57,7 +57,7 @@ describe('Auto Test', () => {
          * /stopOrder/spotMarket/advancedOrders
          */
         let data =
-            '{"topic":"/spotMarket/tradeOrdersV2","type":"message","subject":"orderChange","userId":"633559791e1cbc0001f319bc","channelType":"private","data":{"clientOid":"5c52e11203aa677f33e493fc","orderId":"6720da3fa30a360007f5f832","orderTime":1730206271588,"orderType":"market","originSize":"0.00001","side":"buy","status":"new","symbol":"BTC-USDT","ts":1730206271616000000,"type":"received"}}';
+            '{"topic":"/spotMarket/advancedOrders","type":"message","subject":"stopOrder","userId":"633559791e1cbc0001f319bc","channelType":"private","data":{"orderId":"vs93gpupfa48anof003u85mb","orderPrice":"70000","orderType":"stop","side":"buy","size":"0.00007142","stop":"loss","stopPrice":"71000","symbol":"BTC-USDT","tradeType":"TRADE","type":"open","createdAt":1742305928064,"ts":1742305928091268493}}';
         let commonResp = WsMessage.fromJson(data);
         let resp = StopOrderEvent.fromObject(commonResp.data);
         expect(Object.values(resp).every((value) => value === null || value === undefined)).toBe(

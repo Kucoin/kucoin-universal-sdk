@@ -6,7 +6,7 @@ import { Response } from '@internal/interfaces/serializable';
 
 export class GetPartOrderBookResp implements Response<RestResponse> {
     /**
-     * Timestamp (milliseconds)
+     * Timestamp(millisecond)
      */
     time: number;
 

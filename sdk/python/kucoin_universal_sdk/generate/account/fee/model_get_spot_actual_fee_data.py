@@ -18,8 +18,8 @@ class GetSpotActualFeeData(BaseModel):
         symbol (str): The unique identity of the trading pair; will not change even if the trading pair is renamed
         taker_fee_rate (str): Actual taker fee rate of the symbol
         maker_fee_rate (str): Actual maker fee rate of the symbol
-        sell_tax_rate (str): Buy tax rate, This field is visible to users in certain countries
-        buy_tax_rate (str): Sell tax rate, This field is visible to users in certain countries
+        sell_tax_rate (str): Buy tax rate; this field is visible to users in certain countries
+        buy_tax_rate (str): Sell tax rate; this field is visible to users in certain countries
     """
 
     symbol: Optional[str] = Field(
@@ -38,12 +38,12 @@ class GetSpotActualFeeData(BaseModel):
     sell_tax_rate: Optional[str] = Field(
         default=None,
         description=
-        "Buy tax rate, This field is visible to users in certain countries",
+        "Buy tax rate; this field is visible to users in certain countries",
         alias="sellTaxRate")
     buy_tax_rate: Optional[str] = Field(
         default=None,
         description=
-        "Sell tax rate, This field is visible to users in certain countries",
+        "Sell tax rate; this field is visible to users in certain countries",
         alias="buyTaxRate")
 
     __properties: ClassVar[List[str]] = [

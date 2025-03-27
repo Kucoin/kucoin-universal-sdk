@@ -102,6 +102,27 @@ class TransferAPI(ABC):
 
     @abstractmethod
     @deprecated('')
+    def get_futures_account_transfer_out_ledger(
+            self, req: GetFuturesAccountTransferOutLedgerReq,
+            **kwargs: Any) -> GetFuturesAccountTransferOutLedgerResp:
+        """
+        summary: Get Futures Account Transfer Out Ledger
+        description: Futures account transfer out ledgers can be obtained at this endpoint.
+        documentation: https://www.kucoin.com/docs-new/api-3470307
+        +-----------------------+------------+
+        | Extra API Info        | Value      |
+        +-----------------------+------------+
+        | API-DOMAIN            | FUTURES    |
+        | API-CHANNEL           | PRIVATE    |
+        | API-PERMISSION        | GENERAL    |
+        | API-RATE-LIMIT-POOL   | MANAGEMENT |
+        | API-RATE-LIMIT-WEIGHT | 20         |
+        +-----------------------+------------+
+        """
+        pass
+
+    @abstractmethod
+    @deprecated('')
     def futures_account_transfer_out(
             self, req: FuturesAccountTransferOutReq,
             **kwargs: Any) -> FuturesAccountTransferOutResp:
@@ -142,27 +163,6 @@ class TransferAPI(ABC):
         """
         pass
 
-    @abstractmethod
-    @deprecated('')
-    def get_futures_account_transfer_out_ledger(
-            self, req: GetFuturesAccountTransferOutLedgerReq,
-            **kwargs: Any) -> GetFuturesAccountTransferOutLedgerResp:
-        """
-        summary: Get Futures Account Transfer Out Ledger
-        description: Futures account transfer out ledgers can be obtained at this endpoint.
-        documentation: https://www.kucoin.com/docs-new/api-3470307
-        +-----------------------+------------+
-        | Extra API Info        | Value      |
-        +-----------------------+------------+
-        | API-DOMAIN            | FUTURES    |
-        | API-CHANNEL           | PRIVATE    |
-        | API-PERMISSION        | GENERAL    |
-        | API-RATE-LIMIT-POOL   | MANAGEMENT |
-        | API-RATE-LIMIT-WEIGHT | 20         |
-        +-----------------------+------------+
-        """
-        pass
-
 
 class TransferAPIImpl(TransferAPI):
 
@@ -193,6 +193,14 @@ class TransferAPIImpl(TransferAPI):
                                    "/api/v2/accounts/inner-transfer", req,
                                    InnerTransferResp(), False, **kwargs)
 
+    def get_futures_account_transfer_out_ledger(
+            self, req: GetFuturesAccountTransferOutLedgerReq,
+            **kwargs: Any) -> GetFuturesAccountTransferOutLedgerResp:
+        return self.transport.call("futures", False, "GET",
+                                   "/api/v1/transfer-list", req,
+                                   GetFuturesAccountTransferOutLedgerResp(),
+                                   False, **kwargs)
+
     def futures_account_transfer_out(
             self, req: FuturesAccountTransferOutReq,
             **kwargs: Any) -> FuturesAccountTransferOutResp:
@@ -208,11 +216,3 @@ class TransferAPIImpl(TransferAPI):
                                    "/api/v1/transfer-in", req,
                                    FuturesAccountTransferInResp(), False,
                                    **kwargs)
-
-    def get_futures_account_transfer_out_ledger(
-            self, req: GetFuturesAccountTransferOutLedgerReq,
-            **kwargs: Any) -> GetFuturesAccountTransferOutLedgerResp:
-        return self.transport.call("futures", False, "GET",
-                                   "/api/v1/transfer-list", req,
-                                   GetFuturesAccountTransferOutLedgerResp(),
-                                   False, **kwargs)

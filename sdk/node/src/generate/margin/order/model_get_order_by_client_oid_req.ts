@@ -6,15 +6,15 @@ import { Serializable } from '@internal/interfaces/serializable';
 
 export class GetOrderByClientOidReq implements Serializable {
     /**
-     * symbol
-     */
-    symbol?: string;
-
-    /**
      * Client Order Id, unique identifier created by the user
      */
     @Reflect.metadata('path', 'clientOid')
     clientOid?: string;
+
+    /**
+     * symbol
+     */
+    symbol?: string;
 
     /**
      * Private constructor, please use the corresponding static methods to construct the object.
@@ -33,17 +33,17 @@ export class GetOrderByClientOidReq implements Serializable {
      */
     static create(data: {
         /**
-         * symbol
-         */
-        symbol?: string;
-        /**
          * Client Order Id, unique identifier created by the user
          */
         clientOid?: string;
+        /**
+         * symbol
+         */
+        symbol?: string;
     }): GetOrderByClientOidReq {
         let obj = new GetOrderByClientOidReq();
-        obj.symbol = data.symbol;
         obj.clientOid = data.clientOid;
+        obj.symbol = data.symbol;
         return obj;
     }
 
@@ -72,18 +72,18 @@ export class GetOrderByClientOidReqBuilder {
         this.obj = obj;
     }
     /**
-     * symbol
-     */
-    setSymbol(value: string): GetOrderByClientOidReqBuilder {
-        this.obj.symbol = value;
-        return this;
-    }
-
-    /**
      * Client Order Id, unique identifier created by the user
      */
     setClientOid(value: string): GetOrderByClientOidReqBuilder {
         this.obj.clientOid = value;
+        return this;
+    }
+
+    /**
+     * symbol
+     */
+    setSymbol(value: string): GetOrderByClientOidReqBuilder {
+        this.obj.symbol = value;
         return this;
     }
 

@@ -18,7 +18,7 @@ class ModifySubAccountApiReq(BaseModel):
     Attributes:
         uid (str): Sub-account UID
         ip_whitelist (list[str]): IP whitelist list, supports up to 20 IPs
-        permissions (list[PermissionsEnum]): [Permissions](https://www.kucoin.com/docs-new/doc-338144) group list (Only General, Spot and Futures permissions can be set, such as \"General, Trade\"). 
+        permissions (list[PermissionsEnum]): [Permissions](https://www.kucoin.com/docs-new/doc-338144) group list (only General, Spot and Futures permissions can be set, such as \"General, Trade\"). 
         label (str): apikey remarks (length 4~32) 
         api_key (str): Sub-account apiKey
     """
@@ -42,7 +42,7 @@ class ModifySubAccountApiReq(BaseModel):
     permissions: Optional[List[PermissionsEnum]] = Field(
         default=None,
         description=
-        "[Permissions](https://www.kucoin.com/docs-new/doc-338144) group list (Only General, Spot and Futures permissions can be set, such as \"General, Trade\"). "
+        "[Permissions](https://www.kucoin.com/docs-new/doc-338144) group list (only General, Spot and Futures permissions can be set, such as \"General, Trade\"). "
     )
     label: Optional[str] = Field(default=None,
                                  description="apikey remarks (length 4~32) ")
@@ -121,7 +121,7 @@ class ModifySubAccountApiReqBuilder:
         self, value: list[ModifySubAccountApiReq.PermissionsEnum]
     ) -> ModifySubAccountApiReqBuilder:
         """
-        [Permissions](https://www.kucoin.com/docs-new/doc-338144) group list (Only General, Spot and Futures permissions can be set, such as \"General, Trade\"). 
+        [Permissions](https://www.kucoin.com/docs-new/doc-338144) group list (only General, Spot and Futures permissions can be set, such as \"General, Trade\"). 
         """
         self.obj['permissions'] = value
         return self

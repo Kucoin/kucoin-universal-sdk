@@ -15,18 +15,18 @@ class CancelOrderByClientOidReq(BaseModel):
     CancelOrderByClientOidReq
 
     Attributes:
-        symbol (str): symbol
         client_oid (str): Client Order Id, unique identifier created by the user
+        symbol (str): symbol
     """
 
-    symbol: Optional[str] = Field(default=None, description="symbol")
     client_oid: Optional[str] = Field(
         default=None,
         path_variable="True",
         description="Client Order Id, unique identifier created by the user",
         alias="clientOid")
+    symbol: Optional[str] = Field(default=None, description="symbol")
 
-    __properties: ClassVar[List[str]] = ["symbol", "clientOid"]
+    __properties: ClassVar[List[str]] = ["clientOid", "symbol"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -63,8 +63,8 @@ class CancelOrderByClientOidReq(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "symbol": obj.get("symbol"),
-            "clientOid": obj.get("clientOid")
+            "clientOid": obj.get("clientOid"),
+            "symbol": obj.get("symbol")
         })
         return _obj
 
@@ -74,18 +74,18 @@ class CancelOrderByClientOidReqBuilder:
     def __init__(self):
         self.obj = {}
 
-    def set_symbol(self, value: str) -> CancelOrderByClientOidReqBuilder:
-        """
-        symbol
-        """
-        self.obj['symbol'] = value
-        return self
-
     def set_client_oid(self, value: str) -> CancelOrderByClientOidReqBuilder:
         """
         Client Order Id, unique identifier created by the user
         """
         self.obj['clientOid'] = value
+        return self
+
+    def set_symbol(self, value: str) -> CancelOrderByClientOidReqBuilder:
+        """
+        symbol
+        """
+        self.obj['symbol'] = value
         return self
 
     def build(self) -> CancelOrderByClientOidReq:

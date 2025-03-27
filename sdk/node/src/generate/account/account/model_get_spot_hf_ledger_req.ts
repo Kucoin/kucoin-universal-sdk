@@ -136,7 +136,7 @@ export namespace GetSpotHFLedgerReq {
          */
         TRADE_EXCHANGE = <any>'TRADE_EXCHANGE',
         /**
-         * transffer
+         * transfer
          */
         TRANSFER = <any>'TRANSFER',
         /**
@@ -148,7 +148,7 @@ export namespace GetSpotHFLedgerReq {
          */
         DEDUCTION_FEES = <any>'DEDUCTION_FEES',
         /**
-         * Other
+         * other
          */
         OTHER = <any>'OTHER',
     }

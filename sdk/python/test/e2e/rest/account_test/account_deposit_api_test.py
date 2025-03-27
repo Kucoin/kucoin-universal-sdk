@@ -154,7 +154,7 @@ class AccountApiTest(unittest.TestCase):
        """
 
        builder = AddDepositAddressV3ReqBuilder()
-       builder.set_currency("USDT").set_chain("ton").set_to(AddDepositAddressV3Req.ToEnum.MAIN).set_amount("1")
+       builder.set_currency("USDT").set_chain("xtz").set_to(AddDepositAddressV3Req.ToEnum.MAIN).set_amount("1")
        req = builder.build()
        try:
            resp = self.api.add_deposit_address_v3(req)

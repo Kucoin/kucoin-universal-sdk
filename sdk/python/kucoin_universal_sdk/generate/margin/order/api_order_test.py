@@ -75,7 +75,7 @@ class OrderAPITest(unittest.TestCase):
        Cancel Order By OrderId
        /api/v3/hf/margin/orders/{orderId}
        """
-        data = "{\"symbol\": \"BTC-USDT\", \"orderId\": \"671663e02188630007e21c9c\"}"
+        data = "{\"orderId\": \"671663e02188630007e21c9c\", \"symbol\": \"BTC-USDT\"}"
         req = CancelOrderByOrderIdReq.from_json(data)
 
     def test_cancel_order_by_order_id_resp_model(self):
@@ -94,7 +94,7 @@ class OrderAPITest(unittest.TestCase):
        Cancel Order By ClientOid
        /api/v3/hf/margin/orders/client-order/{clientOid}
        """
-        data = "{\"symbol\": \"BTC-USDT\", \"clientOid\": \"5c52e11203aa677f33e1493fb\"}"
+        data = "{\"clientOid\": \"5c52e11203aa677f33e1493fb\", \"symbol\": \"BTC-USDT\"}"
         req = CancelOrderByClientOidReq.from_json(data)
 
     def test_cancel_order_by_client_oid_resp_model(self):
@@ -208,7 +208,7 @@ class OrderAPITest(unittest.TestCase):
        Get Order By OrderId
        /api/v3/hf/margin/orders/{orderId}
        """
-        data = "{\"symbol\": \"BTC-USDT\", \"orderId\": \"671667306afcdb000723107f\"}"
+        data = "{\"orderId\": \"671667306afcdb000723107f\", \"symbol\": \"BTC-USDT\"}"
         req = GetOrderByOrderIdReq.from_json(data)
 
     def test_get_order_by_order_id_resp_model(self):
@@ -227,7 +227,7 @@ class OrderAPITest(unittest.TestCase):
        Get Order By ClientOid
        /api/v3/hf/margin/orders/client-order/{clientOid}
        """
-        data = "{\"symbol\": \"BTC-USDT\", \"clientOid\": \"5c52e11203aa677f33e493fb\"}"
+        data = "{\"clientOid\": \"5c52e11203aa677f33e493fb\", \"symbol\": \"BTC-USDT\"}"
         req = GetOrderByClientOidReq.from_json(data)
 
     def test_get_order_by_client_oid_resp_model(self):

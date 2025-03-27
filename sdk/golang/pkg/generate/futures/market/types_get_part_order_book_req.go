@@ -4,10 +4,10 @@ package market
 
 // GetPartOrderBookReq struct for GetPartOrderBookReq
 type GetPartOrderBookReq struct {
-	// Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)
-	Symbol *string `json:"symbol,omitempty" url:"symbol,omitempty"`
 	// Get the depth layer, optional value: 20, 100
 	Size *string `json:"size,omitempty" path:"size" url:"-"`
+	// Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)
+	Symbol *string `json:"symbol,omitempty" url:"symbol,omitempty"`
 }
 
 // NewGetPartOrderBookReq instantiates a new GetPartOrderBookReq object
@@ -26,8 +26,8 @@ func NewGetPartOrderBookReqWithDefaults() *GetPartOrderBookReq {
 
 func (o *GetPartOrderBookReq) ToMap() map[string]interface{} {
 	toSerialize := map[string]interface{}{}
-	toSerialize["symbol"] = o.Symbol
 	toSerialize["size"] = o.Size
+	toSerialize["symbol"] = o.Symbol
 	return toSerialize
 }
 
@@ -39,15 +39,15 @@ func NewGetPartOrderBookReqBuilder() *GetPartOrderBookReqBuilder {
 	return &GetPartOrderBookReqBuilder{obj: NewGetPartOrderBookReqWithDefaults()}
 }
 
-// Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)
-func (builder *GetPartOrderBookReqBuilder) SetSymbol(value string) *GetPartOrderBookReqBuilder {
-	builder.obj.Symbol = &value
-	return builder
-}
-
 // Get the depth layer, optional value: 20, 100
 func (builder *GetPartOrderBookReqBuilder) SetSize(value string) *GetPartOrderBookReqBuilder {
 	builder.obj.Size = &value
+	return builder
+}
+
+// Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)
+func (builder *GetPartOrderBookReqBuilder) SetSymbol(value string) *GetPartOrderBookReqBuilder {
+	builder.obj.Symbol = &value
 	return builder
 }
 

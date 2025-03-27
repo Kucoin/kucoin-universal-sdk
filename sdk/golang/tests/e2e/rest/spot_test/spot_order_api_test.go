@@ -296,6 +296,28 @@ func TestOrderCancelAllOrdersBySymbolReq(t *testing.T) {
 	fmt.Println("data:", string(data))
 }
 
+func TestOrderGetOpenOrdersByPageReq(t *testing.T) {
+	// GetOpenOrdersByPage
+	// Get Open Orders By Page
+	// /api/v1/hf/orders/active/page
+
+	builder := order.NewGetOpenOrdersByPageReqBuilder()
+	builder.SetSymbol("BTC-USDT").SetPageNum(1).SetPageSize(50)
+	req := builder.Build()
+
+	resp, err := orderApi.GetOpenOrdersByPage(req, context.TODO())
+	if err != nil {
+		panic(err)
+	}
+	data, err := json.Marshal(resp.ToMap())
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println("code:", resp.CommonResponse.Code)
+	fmt.Println("message:", resp.CommonResponse.Message)
+	fmt.Println("data:", string(data))
+}
+
 func TestOrderGetClosedOrdersReq(t *testing.T) {
 	// GetClosedOrders
 	// Get Closed Orders

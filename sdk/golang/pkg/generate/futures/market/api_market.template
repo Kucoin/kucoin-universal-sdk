@@ -116,7 +116,7 @@ func TestMarketGetPartOrderBookReq(t *testing.T) {
     // /api/v1/level2/depth{size}
 
     builder := market.NewGetPartOrderBookReqBuilder()
-    builder.SetSymbol(?).SetSize(?)
+    builder.SetSize(?).SetSymbol(?)
     req := builder.Build()
 
     resp, err := marketApi.GetPartOrderBook(req, context.TODO())

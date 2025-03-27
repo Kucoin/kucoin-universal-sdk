@@ -10,7 +10,7 @@ import (
 type GetDepositDetailResp struct {
 	// common response
 	CommonResponse *types.RestResponse
-	// Chain id of currency
+	// Chain ID of currency
 	Chain string `json:"chain,omitempty"`
 	// Hash
 	Hash string `json:"hash,omitempty"`

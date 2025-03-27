@@ -85,6 +85,25 @@ export interface TransferAPI {
 
     /**
      * @deprecated
+     * getFuturesAccountTransferOutLedger Get Futures Account Transfer Out Ledger
+     * Description: Futures account transfer out ledgers can be obtained at this endpoint.
+     * Documentation: https://www.kucoin.com/docs-new/api-3470307
+     * +-----------------------+------------+
+     * | Extra API Info        | Value      |
+     * +-----------------------+------------+
+     * | API-DOMAIN            | FUTURES    |
+     * | API-CHANNEL           | PRIVATE    |
+     * | API-PERMISSION        | GENERAL    |
+     * | API-RATE-LIMIT-POOL   | MANAGEMENT |
+     * | API-RATE-LIMIT-WEIGHT | 20         |
+     * +-----------------------+------------+
+     */
+    getFuturesAccountTransferOutLedger(
+        req: GetFuturesAccountTransferOutLedgerReq,
+    ): Promise<GetFuturesAccountTransferOutLedgerResp>;
+
+    /**
+     * @deprecated
      * futuresAccountTransferOut Futures Account Transfer Out
      * Description: The amount to be transferred will be deducted from the KuCoin Futures Account. Please ensure that you have sufficient funds in your KuCoin Futures Account, or the transfer will fail.
      * Documentation: https://www.kucoin.com/docs-new/api-3470303
@@ -120,25 +139,6 @@ export interface TransferAPI {
     futuresAccountTransferIn(
         req: FuturesAccountTransferInReq,
     ): Promise<FuturesAccountTransferInResp>;
-
-    /**
-     * @deprecated
-     * getFuturesAccountTransferOutLedger Get Futures Account Transfer Out Ledger
-     * Description: Futures account transfer out ledgers can be obtained at this endpoint.
-     * Documentation: https://www.kucoin.com/docs-new/api-3470307
-     * +-----------------------+------------+
-     * | Extra API Info        | Value      |
-     * +-----------------------+------------+
-     * | API-DOMAIN            | FUTURES    |
-     * | API-CHANNEL           | PRIVATE    |
-     * | API-PERMISSION        | GENERAL    |
-     * | API-RATE-LIMIT-POOL   | MANAGEMENT |
-     * | API-RATE-LIMIT-WEIGHT | 20         |
-     * +-----------------------+------------+
-     */
-    getFuturesAccountTransferOutLedger(
-        req: GetFuturesAccountTransferOutLedgerReq,
-    ): Promise<GetFuturesAccountTransferOutLedgerResp>;
 }
 
 export class TransferAPIImpl implements TransferAPI {
@@ -192,6 +192,20 @@ export class TransferAPIImpl implements TransferAPI {
         );
     }
 
+    getFuturesAccountTransferOutLedger(
+        req: GetFuturesAccountTransferOutLedgerReq,
+    ): Promise<GetFuturesAccountTransferOutLedgerResp> {
+        return this.transport.call(
+            'futures',
+            false,
+            'GET',
+            '/api/v1/transfer-list',
+            req,
+            GetFuturesAccountTransferOutLedgerResp,
+            false,
+        );
+    }
+
     futuresAccountTransferOut(
         req: FuturesAccountTransferOutReq,
     ): Promise<FuturesAccountTransferOutResp> {
@@ -216,20 +230,6 @@ export class TransferAPIImpl implements TransferAPI {
             '/api/v1/transfer-in',
             req,
             FuturesAccountTransferInResp,
-            false,
-        );
-    }
-
-    getFuturesAccountTransferOutLedger(
-        req: GetFuturesAccountTransferOutLedgerReq,
-    ): Promise<GetFuturesAccountTransferOutLedgerResp> {
-        return this.transport.call(
-            'futures',
-            false,
-            'GET',
-            '/api/v1/transfer-list',
-            req,
-            GetFuturesAccountTransferOutLedgerResp,
             false,
         );
     }

@@ -50,7 +50,7 @@ export class GetDepositHistoryItems implements Serializable {
     walletTxId?: string;
 
     /**
-     * Creation time of the database record
+     * Database record creation time
      */
     createdAt?: number;
 

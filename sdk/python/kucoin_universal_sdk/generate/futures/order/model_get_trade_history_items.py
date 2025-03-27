@@ -40,8 +40,8 @@ class GetTradeHistoryItems(BaseModel):
         order_type (OrderTypeEnum): Order type
         trade_type (TradeTypeEnum): Trade type (trade, liquid, adl or settlement) 
         created_at (int): Order creation time 
-        open_fee_tax_pay (str): Opening tax fee (Only kyc users in some regions have this parameter)
-        close_fee_tax_pay (str): Close tax fee (Only kyc users in some regions have this parameter)
+        open_fee_tax_pay (str): Opening tax fee (Only KYC users in some regions have this parameter)
+        close_fee_tax_pay (str): Close tax fee (Only KYC users in some regions have this parameter)
     """
 
     class SideEnum(Enum):
@@ -178,12 +178,12 @@ class GetTradeHistoryItems(BaseModel):
     open_fee_tax_pay: Optional[str] = Field(
         default=None,
         description=
-        "Opening tax fee (Only kyc users in some regions have this parameter)",
+        "Opening tax fee (Only KYC users in some regions have this parameter)",
         alias="openFeeTaxPay")
     close_fee_tax_pay: Optional[str] = Field(
         default=None,
         description=
-        "Close tax fee (Only kyc users in some regions have this parameter)",
+        "Close tax fee (Only KYC users in some regions have this parameter)",
         alias="closeFeeTaxPay")
 
     __properties: ClassVar[List[str]] = [

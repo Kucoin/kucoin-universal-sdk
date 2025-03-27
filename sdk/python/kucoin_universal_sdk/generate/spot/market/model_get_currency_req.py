@@ -15,20 +15,20 @@ class GetCurrencyReq(BaseModel):
     GetCurrencyReq
 
     Attributes:
-        chain (str): Support for querying the chain of currency, e.g. the available values for USDT are OMNI, ERC20, TRC20. This only applies to multi-chain currencies; no need for single-chain currencies.
         currency (str): Path parameter, Currency
+        chain (str): Support for querying the chain of currency, e.g. the available values for USDT are OMNI, ERC20, TRC20. This only applies to multi-chain currencies; no need for single-chain currencies.
     """
 
+    currency: Optional[str] = Field(default=None,
+                                    path_variable="True",
+                                    description="Path parameter, Currency")
     chain: Optional[str] = Field(
         default=None,
         description=
         "Support for querying the chain of currency, e.g. the available values for USDT are OMNI, ERC20, TRC20. This only applies to multi-chain currencies; no need for single-chain currencies."
     )
-    currency: Optional[str] = Field(default=None,
-                                    path_variable="True",
-                                    description="Path parameter, Currency")
 
-    __properties: ClassVar[List[str]] = ["chain", "currency"]
+    __properties: ClassVar[List[str]] = ["currency", "chain"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -63,8 +63,8 @@ class GetCurrencyReq(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "chain": obj.get("chain"),
-            "currency": obj.get("currency")
+            "currency": obj.get("currency"),
+            "chain": obj.get("chain")
         })
         return _obj
 
@@ -74,18 +74,18 @@ class GetCurrencyReqBuilder:
     def __init__(self):
         self.obj = {}
 
-    def set_chain(self, value: str) -> GetCurrencyReqBuilder:
-        """
-        Support for querying the chain of currency, e.g. the available values for USDT are OMNI, ERC20, TRC20. This only applies to multi-chain currencies; no need for single-chain currencies.
-        """
-        self.obj['chain'] = value
-        return self
-
     def set_currency(self, value: str) -> GetCurrencyReqBuilder:
         """
         Path parameter, Currency
         """
         self.obj['currency'] = value
+        return self
+
+    def set_chain(self, value: str) -> GetCurrencyReqBuilder:
+        """
+        Support for querying the chain of currency, e.g. the available values for USDT are OMNI, ERC20, TRC20. This only applies to multi-chain currencies; no need for single-chain currencies.
+        """
+        self.obj['chain'] = value
         return self
 
     def build(self) -> GetCurrencyReq:

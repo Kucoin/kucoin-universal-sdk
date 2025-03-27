@@ -23,13 +23,13 @@ type StopOrderEvent struct {
 	Side string `json:"side,omitempty"`
 	// User-specified order size
 	Size string `json:"size,omitempty"`
-	// Order type: stop: stop loss order, oco: oco order
+	// Order type: loss: stop loss order, oco: oco order
 	Stop string `json:"stop,omitempty"`
 	// Stop Price
 	StopPrice string `json:"stopPrice,omitempty"`
 	// symbol
 	Symbol string `json:"symbol,omitempty"`
-	// The type of trading : TRADE（Spot）, MARGIN_TRADE (Cross Margin), MARGIN_ISOLATED_TRADE (Isolated Margin).
+	// The type of trading: TRADE (Spot), MARGIN_TRADE (Cross Margin), MARGIN_ISOLATED_TRADE (Isolated Margin).
 	TradeType string `json:"tradeType,omitempty"`
 	// Push time (nanoseconds)
 	Ts int64 `json:"ts,omitempty"`

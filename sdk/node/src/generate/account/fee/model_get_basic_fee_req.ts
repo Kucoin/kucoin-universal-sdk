@@ -62,7 +62,7 @@ export class GetBasicFeeReq implements Serializable {
 export namespace GetBasicFeeReq {
     export enum CurrencyTypeEnum {
         /**
-         * crypto currency
+         * cryptocurrency
          */
         _0 = <any>0,
         /**

@@ -93,6 +93,29 @@ func TestTransferInnerTransferReq(t *testing.T) {
 }
 
 
+func TestTransferGetFuturesAccountTransferOutLedgerReq(t *testing.T) {
+    // GetFuturesAccountTransferOutLedger
+    // Get Futures Account Transfer Out Ledger
+    // /api/v1/transfer-list
+
+    builder := transfer.NewGetFuturesAccountTransferOutLedgerReqBuilder()
+    builder.SetCurrency(?).SetType(?).SetTag(?).SetStartAt(?).SetEndAt(?).SetCurrentPage(?).SetPageSize(?)
+    req := builder.Build()
+
+    resp, err := transferApi.GetFuturesAccountTransferOutLedger(req, context.TODO())
+    if err != nil {
+        panic(err)
+    }
+    data, err := json.Marshal(resp.ToMap())
+    if err != nil {
+        panic(err)
+    }
+    fmt.Println("code:", resp.CommonResponse.Code)
+    fmt.Println("message:", resp.CommonResponse.Message)
+    fmt.Println("data:", string(data))
+}
+
+
 func TestTransferFuturesAccountTransferOutReq(t *testing.T) {
     // FuturesAccountTransferOut
     // Futures Account Transfer Out
@@ -126,29 +149,6 @@ func TestTransferFuturesAccountTransferInReq(t *testing.T) {
     req := builder.Build()
 
     resp, err := transferApi.FuturesAccountTransferIn(req, context.TODO())
-    if err != nil {
-        panic(err)
-    }
-    data, err := json.Marshal(resp.ToMap())
-    if err != nil {
-        panic(err)
-    }
-    fmt.Println("code:", resp.CommonResponse.Code)
-    fmt.Println("message:", resp.CommonResponse.Message)
-    fmt.Println("data:", string(data))
-}
-
-
-func TestTransferGetFuturesAccountTransferOutLedgerReq(t *testing.T) {
-    // GetFuturesAccountTransferOutLedger
-    // Get Futures Account Transfer Out Ledger
-    // /api/v1/transfer-list
-
-    builder := transfer.NewGetFuturesAccountTransferOutLedgerReqBuilder()
-    builder.SetCurrency(?).SetType(?).SetTag(?).SetStartAt(?).SetEndAt(?).SetCurrentPage(?).SetPageSize(?)
-    req := builder.Build()
-
-    resp, err := transferApi.GetFuturesAccountTransferOutLedger(req, context.TODO())
     if err != nil {
         panic(err)
     }

@@ -129,9 +129,9 @@ type GetSymbolResp struct {
 	MmrLevConstant float32 `json:"mmrLevConstant,omitempty"`
 	// Whether support Cross Margin
 	SupportCross bool `json:"supportCross,omitempty"`
-	// The current maximum allowed buying price
+	// The current maximum buying price allowed
 	BuyLimit float32 `json:"buyLimit,omitempty"`
-	// The current minimum allowed selling price
+	// The current minimum selling price allowed
 	SellLimit float32 `json:"sellLimit,omitempty"`
 }
 

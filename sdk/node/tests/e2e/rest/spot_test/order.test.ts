@@ -38,7 +38,7 @@ import {
     GetOcoOrderByClientOidReq,
     GetOcoOrderByOrderIdReq,
     GetOcoOrderDetailByOrderIdReq,
-    GetOcoOrderListReq,
+    GetOcoOrderListReq, GetOpenOrdersByPageReq,
     GetOpenOrdersReq,
     GetOrderByClientOidOldReq,
     GetOrderByClientOidReq,
@@ -507,6 +507,33 @@ describe('Auto Test', () => {
             console.log(resp);
         });
     });
+
+
+    test('getOpenOrdersByPage request test', ()=> {
+        /**
+         * getOpenOrdersByPage
+         * Get Open Orders By Page
+         * /api/v1/hf/orders/active/page
+         */
+        let builder = GetOpenOrdersByPageReq.builder();
+        builder.setSymbol('BTC-USDT').setPageNum(1).setPageSize(50);
+        let req = builder.build();
+        let resp = api.getOpenOrdersByPage(req);
+        return resp.then(result => {
+            expect(result.currentPage).toEqual(expect.anything());
+            expect(result.pageSize).toEqual(expect.anything());
+            expect(result.totalNum).toEqual(expect.anything());
+            expect(result.totalPage).toEqual(expect.anything());
+            result.items.forEach(item => {
+                expect(item.fee).toEqual(expect.anything());
+                expect(item.id).toEqual(expect.anything());
+                expect(item.symbol).toEqual(expect.anything());
+                expect(item.opType).toEqual(expect.anything());
+            })
+            console.log(resp);
+        });
+    })
+
 
     test('getClosedOrders request test', () => {
         /**

@@ -16,10 +16,10 @@ class GetAnnouncementsReq(BaseModel):
     GetAnnouncementsReq
 
     Attributes:
-        current_page (int): Page number
-        page_size (int): Page Size
-        ann_type (AnnTypeEnum): Announcement types: latest-announcements, activities (latest activities), new-listings (new currency online), product-updates (product updates), vip (institutions and VIPs), maintenance-updates (system maintenance), product-updates (product news), delistings (currency offline), others, api-campaigns (API user activities), default: latest-announcements
-        lang (LangEnum): Language type: The default is en_US, the specific value parameters are as follows
+        current_page (int): page number
+        page_size (int): page Size
+        ann_type (AnnTypeEnum): Announcement types: latest-announcements , activities (latest activities), new-listings (new currency online), product-updates (product updates), vip (institutions and VIPs), maintenance-updates (system maintenance), product -updates (product news), delistings (currency offline), others, api-campaigns (API user activities), default : latest-announcements
+        lang (LangEnum): Language type, the default is en_US, the specific value parameters are as follows
         start_time (int): Announcement online start time (milliseconds)
         end_time (int): Announcement online end time (milliseconds)
     """
@@ -97,20 +97,20 @@ class GetAnnouncementsReq(BaseModel):
         UR_PK = 'ur_PK'
 
     current_page: Optional[int] = Field(default=None,
-                                        description="Page number",
+                                        description="page number",
                                         alias="currentPage")
     page_size: Optional[int] = Field(default=None,
-                                     description="Page Size",
+                                     description="page Size",
                                      alias="pageSize")
     ann_type: Optional[AnnTypeEnum] = Field(
         default=AnnTypeEnum.LATEST_ANNOUNCEMENTS,
         description=
-        "Announcement types: latest-announcements, activities (latest activities), new-listings (new currency online), product-updates (product updates), vip (institutions and VIPs), maintenance-updates (system maintenance), product-updates (product news), delistings (currency offline), others, api-campaigns (API user activities), default: latest-announcements",
+        "Announcement types: latest-announcements , activities (latest activities), new-listings (new currency online), product-updates (product updates), vip (institutions and VIPs), maintenance-updates (system maintenance), product -updates (product news), delistings (currency offline), others, api-campaigns (API user activities), default : latest-announcements",
         alias="annType")
     lang: Optional[LangEnum] = Field(
         default=LangEnum.EN_US,
         description=
-        "Language type: The default is en_US, the specific value parameters are as follows"
+        "Language type, the default is en_US, the specific value parameters are as follows"
     )
     start_time: Optional[int] = Field(
         default=None,
@@ -184,14 +184,14 @@ class GetAnnouncementsReqBuilder:
 
     def set_current_page(self, value: int) -> GetAnnouncementsReqBuilder:
         """
-        Page number
+        page number
         """
         self.obj['currentPage'] = value
         return self
 
     def set_page_size(self, value: int) -> GetAnnouncementsReqBuilder:
         """
-        Page Size
+        page Size
         """
         self.obj['pageSize'] = value
         return self
@@ -200,7 +200,7 @@ class GetAnnouncementsReqBuilder:
             self, value: GetAnnouncementsReq.AnnTypeEnum
     ) -> GetAnnouncementsReqBuilder:
         """
-        Announcement types: latest-announcements, activities (latest activities), new-listings (new currency online), product-updates (product updates), vip (institutions and VIPs), maintenance-updates (system maintenance), product-updates (product news), delistings (currency offline), others, api-campaigns (API user activities), default: latest-announcements
+        Announcement types: latest-announcements , activities (latest activities), new-listings (new currency online), product-updates (product updates), vip (institutions and VIPs), maintenance-updates (system maintenance), product -updates (product news), delistings (currency offline), others, api-campaigns (API user activities), default : latest-announcements
         """
         self.obj['annType'] = value
         return self
@@ -209,7 +209,7 @@ class GetAnnouncementsReqBuilder:
             self,
             value: GetAnnouncementsReq.LangEnum) -> GetAnnouncementsReqBuilder:
         """
-        Language type: The default is en_US, the specific value parameters are as follows
+        Language type, the default is en_US, the specific value parameters are as follows
         """
         self.obj['lang'] = value
         return self

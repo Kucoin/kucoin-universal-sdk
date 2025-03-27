@@ -28,7 +28,7 @@ def test_get_currency_req(self):
     """
 
     builder = GetCurrencyReqBuilder()
-    builder.set_chain(?).set_currency(?)
+    builder.set_currency(?).set_chain(?)
     req = builder.build()
     try:
         resp = self.api.get_currency(req)
@@ -264,7 +264,7 @@ def test_get_fiat_price_req(self):
 def test_get24hr_stats_req(self):
     """
         get24hr_stats
-        Get 24hr stats
+        Get 24hr Stats
         /api/v1/market/stats
     """
 

@@ -104,7 +104,7 @@ def test_cancel_order_by_order_id_req(self):
     """
 
     builder = CancelOrderByOrderIdReqBuilder()
-    builder.set_symbol(?).set_order_id(?)
+    builder.set_order_id(?).set_symbol(?)
     req = builder.build()
     try:
         resp = self.api.cancel_order_by_order_id(req)
@@ -311,6 +311,25 @@ def test_get_open_orders_req(self):
     req = builder.build()
     try:
         resp = self.api.get_open_orders(req)
+        print("code: ", resp.common_response.code)
+        print("msg: ", resp.common_response.message)
+        print("data: ", resp.to_json())
+    except Exception as e:
+        print("error: ", e)
+        raise e
+
+def test_get_open_orders_by_page_req(self):
+    """
+        get_open_orders_by_page
+        Get Open Orders By Page
+        /api/v1/hf/orders/active/page
+    """
+
+    builder = GetOpenOrdersByPageReqBuilder()
+    builder.set_symbol(?).set_page_num(?).set_page_size(?)
+    req = builder.build()
+    try:
+        resp = self.api.get_open_orders_by_page(req)
         print("code: ", resp.common_response.code)
         print("msg: ", resp.common_response.message)
         print("data: ", resp.to_json())

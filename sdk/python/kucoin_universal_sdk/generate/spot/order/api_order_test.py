@@ -61,6 +61,8 @@ from .model_get_oco_order_detail_by_order_id_req import GetOcoOrderDetailByOrder
 from .model_get_oco_order_detail_by_order_id_resp import GetOcoOrderDetailByOrderIdResp
 from .model_get_oco_order_list_req import GetOcoOrderListReq
 from .model_get_oco_order_list_resp import GetOcoOrderListResp
+from .model_get_open_orders_by_page_req import GetOpenOrdersByPageReq
+from .model_get_open_orders_by_page_resp import GetOpenOrdersByPageResp
 from .model_get_open_orders_req import GetOpenOrdersReq
 from .model_get_open_orders_resp import GetOpenOrdersResp
 from .model_get_order_by_client_oid_old_req import GetOrderByClientOidOldReq
@@ -197,7 +199,7 @@ class OrderAPITest(unittest.TestCase):
        Cancel Order By OrderId
        /api/v1/hf/orders/{orderId}
        """
-        data = "{\"symbol\": \"BTC-USDT\", \"orderId\": \"671124f9365ccb00073debd4\"}"
+        data = "{\"orderId\": \"671124f9365ccb00073debd4\", \"symbol\": \"BTC-USDT\"}"
         req = CancelOrderByOrderIdReq.from_json(data)
 
     def test_cancel_order_by_order_id_resp_model(self):
@@ -414,6 +416,25 @@ class OrderAPITest(unittest.TestCase):
         data = "{\n    \"code\": \"200000\",\n    \"data\": [\n        {\n            \"id\": \"67120bbef094e200070976f6\",\n            \"clientOid\": \"5c52e11203aa677f33e493fb\",\n            \"symbol\": \"BTC-USDT\",\n            \"opType\": \"DEAL\",\n            \"type\": \"limit\",\n            \"side\": \"buy\",\n            \"price\": \"50000\",\n            \"size\": \"0.00001\",\n            \"funds\": \"0.5\",\n            \"dealSize\": \"0\",\n            \"dealFunds\": \"0\",\n            \"fee\": \"0\",\n            \"feeCurrency\": \"USDT\",\n            \"stp\": null,\n            \"timeInForce\": \"GTC\",\n            \"postOnly\": false,\n            \"hidden\": false,\n            \"iceberg\": false,\n            \"visibleSize\": \"0\",\n            \"cancelAfter\": 0,\n            \"channel\": \"API\",\n            \"remark\": \"order remarks\",\n            \"tags\": \"order tags\",\n            \"cancelExist\": false,\n            \"tradeType\": \"TRADE\",\n            \"inOrderBook\": true,\n            \"cancelledSize\": \"0\",\n            \"cancelledFunds\": \"0\",\n            \"remainSize\": \"0.00001\",\n            \"remainFunds\": \"0.5\",\n            \"tax\": \"0\",\n            \"active\": true,\n            \"createdAt\": 1729235902748,\n            \"lastUpdatedAt\": 1729235909862\n        }\n    ]\n}"
         common_response = RestResponse.from_json(data)
         resp = GetOpenOrdersResp.from_dict(common_response.data)
+
+    def test_get_open_orders_by_page_req_model(self):
+        """
+       get_open_orders_by_page
+       Get Open Orders By Page
+       /api/v1/hf/orders/active/page
+       """
+        data = "{\"symbol\": \"BTC-USDT\", \"pageNum\": 1, \"pageSize\": 20}"
+        req = GetOpenOrdersByPageReq.from_json(data)
+
+    def test_get_open_orders_by_page_resp_model(self):
+        """
+        get_open_orders_by_page
+        Get Open Orders By Page
+        /api/v1/hf/orders/active/page
+        """
+        data = "{\n    \"code\": \"200000\",\n    \"data\": {\n        \"currentPage\": 1,\n        \"pageSize\": 20,\n        \"totalNum\": 1,\n        \"totalPage\": 1,\n        \"items\": [\n            {\n                \"id\": \"67c1437ea5226600071cc080\",\n                \"symbol\": \"BTC-USDT\",\n                \"opType\": \"DEAL\",\n                \"type\": \"limit\",\n                \"side\": \"buy\",\n                \"price\": \"50000\",\n                \"size\": \"0.00001\",\n                \"funds\": \"0.5\",\n                \"dealSize\": \"0\",\n                \"dealFunds\": \"0\",\n                \"fee\": \"0\",\n                \"feeCurrency\": \"USDT\",\n                \"stp\": null,\n                \"timeInForce\": \"GTC\",\n                \"postOnly\": false,\n                \"hidden\": false,\n                \"iceberg\": false,\n                \"visibleSize\": \"0\",\n                \"cancelAfter\": 0,\n                \"channel\": \"API\",\n                \"clientOid\": \"5c52e11203aa677f33e493fb\",\n                \"remark\": \"order remarks\",\n                \"tags\": null,\n                \"cancelExist\": false,\n                \"createdAt\": 1740718974367,\n                \"lastUpdatedAt\": 1741867658590,\n                \"tradeType\": \"TRADE\",\n                \"inOrderBook\": true,\n                \"cancelledSize\": \"0\",\n                \"cancelledFunds\": \"0\",\n                \"remainSize\": \"0.00001\",\n                \"remainFunds\": \"0.5\",\n                \"tax\": \"0\",\n                \"active\": true\n            }\n        ]\n    }\n}"
+        common_response = RestResponse.from_json(data)
+        resp = GetOpenOrdersByPageResp.from_dict(common_response.data)
 
     def test_get_closed_orders_req_model(self):
         """

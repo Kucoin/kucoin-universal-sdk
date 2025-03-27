@@ -44,7 +44,7 @@ class SpotPublicWS(ABC):
             callback: CallAuctionOrderbookLevel50EventCallback) -> str:
         """
         summary: CallAuctionOrderbook - Level50
-        description: The system will return the call auction 50 best ask/bid orders data, If there is no change in the market, data will not be pushed
+        description: The system will return the call auction 50 best ask/bid orders data; if there is no change in the market, data will not be pushed
         push frequency: once every 100ms
         """
         pass
@@ -64,7 +64,7 @@ class SpotPublicWS(ABC):
                         callback: MarketSnapshotEventCallback) -> str:
         """
         summary: Market Snapshot
-        description: Subscribe this topic to get snapshot data for the entire market.
+        description: Subscribe to this topic to get snapshot data for the entire market.
         push frequency: once every 2s
         """
         pass

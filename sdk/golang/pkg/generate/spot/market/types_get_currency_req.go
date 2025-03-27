@@ -4,10 +4,10 @@ package market
 
 // GetCurrencyReq struct for GetCurrencyReq
 type GetCurrencyReq struct {
-	// Support for querying the chain of currency, e.g. the available values for USDT are OMNI, ERC20, TRC20. This only applies to multi-chain currencies; no need for single-chain currencies.
-	Chain *string `json:"chain,omitempty" url:"chain,omitempty"`
 	// Path parameter, Currency
 	Currency *string `json:"currency,omitempty" path:"currency" url:"-"`
+	// Support for querying the chain of currency, e.g. the available values for USDT are OMNI, ERC20, TRC20. This only applies to multi-chain currencies; no need for single-chain currencies.
+	Chain *string `json:"chain,omitempty" url:"chain,omitempty"`
 }
 
 // NewGetCurrencyReq instantiates a new GetCurrencyReq object
@@ -26,8 +26,8 @@ func NewGetCurrencyReqWithDefaults() *GetCurrencyReq {
 
 func (o *GetCurrencyReq) ToMap() map[string]interface{} {
 	toSerialize := map[string]interface{}{}
-	toSerialize["chain"] = o.Chain
 	toSerialize["currency"] = o.Currency
+	toSerialize["chain"] = o.Chain
 	return toSerialize
 }
 
@@ -39,15 +39,15 @@ func NewGetCurrencyReqBuilder() *GetCurrencyReqBuilder {
 	return &GetCurrencyReqBuilder{obj: NewGetCurrencyReqWithDefaults()}
 }
 
-// Support for querying the chain of currency, e.g. the available values for USDT are OMNI, ERC20, TRC20. This only applies to multi-chain currencies; no need for single-chain currencies.
-func (builder *GetCurrencyReqBuilder) SetChain(value string) *GetCurrencyReqBuilder {
-	builder.obj.Chain = &value
-	return builder
-}
-
 // Path parameter, Currency
 func (builder *GetCurrencyReqBuilder) SetCurrency(value string) *GetCurrencyReqBuilder {
 	builder.obj.Currency = &value
+	return builder
+}
+
+// Support for querying the chain of currency, e.g. the available values for USDT are OMNI, ERC20, TRC20. This only applies to multi-chain currencies; no need for single-chain currencies.
+func (builder *GetCurrencyReqBuilder) SetChain(value string) *GetCurrencyReqBuilder {
+	builder.obj.Chain = &value
 	return builder
 }
 

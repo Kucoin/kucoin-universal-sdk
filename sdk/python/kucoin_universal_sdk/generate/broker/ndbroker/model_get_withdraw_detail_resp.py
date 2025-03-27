@@ -19,7 +19,7 @@ class GetWithdrawDetailResp(BaseModel, Response):
 
     Attributes:
         id (str): Withdrawal ID
-        chain (str): Chain id of currency
+        chain (str): Chain ID of currency
         wallet_tx_id (str): Wallet Transaction ID
         uid (int): UID
         updated_at (int): Update Time (milliseconds)
@@ -53,7 +53,7 @@ class GetWithdrawDetailResp(BaseModel, Response):
         default=None, description="Common response")
     id: Optional[str] = Field(default=None, description="Withdrawal ID")
     chain: Optional[str] = Field(default=None,
-                                 description="Chain id of currency")
+                                 description="Chain ID of currency")
     wallet_tx_id: Optional[str] = Field(default=None,
                                         description="Wallet Transaction ID",
                                         alias="walletTxId")

@@ -12,9 +12,9 @@ type GetMaxOpenSizeResp struct {
 	CommonResponse *types.RestResponse
 	// Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)
 	Symbol string `json:"symbol,omitempty"`
-	// Maximum buy size
+	// Maximum buy size (unit: lot)
 	MaxBuyOpenSize int32 `json:"maxBuyOpenSize,omitempty"`
-	// Maximum buy size
+	// Maximum buy size (unit: lot)
 	MaxSellOpenSize int32 `json:"maxSellOpenSize,omitempty"`
 }
 

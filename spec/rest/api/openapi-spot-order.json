@@ -343,7 +343,7 @@
             "post": {
                 "summary": "Add Order Sync",
                 "deprecated": false,
-                "description": "Place order in the spot trading system  The difference between this interface and \"Add order\" is that this interface will synchronously return the order information after the order matching is completed.  For higher latency requirements, please select the \"Add order\" interface. If there is a requirement for returning data integrity, please select this interface.",
+                "description": "Place order in the spot trading system. The difference between this interface and \"Add order\" is that this interface will synchronously return the order information after the order matching is completed. For higher latency requirements, please select the \"Add order\" interface. If there is a requirement for returning data integrity, please select this interface.",
                 "tags": [],
                 "parameters": [],
                 "responses": {
@@ -444,7 +444,7 @@
                 "x-sdk-service": "Spot",
                 "x-sdk-sub-service": "Order",
                 "x-sdk-method-name": "addOrderSync",
-                "x-sdk-method-description": "Place order in the spot trading system  The difference between this interface and \"Add order\" is that this interface will synchronously return the order information after the order matching is completed.  For higher latency requirements, please select the \"Add order\" interface. If there is a requirement for returning data integrity, please select this interface.",
+                "x-sdk-method-description": "Place order in the spot trading system. The difference between this interface and \"Add order\" is that this interface will synchronously return the order information after the order matching is completed. For higher latency requirements, please select the \"Add order\" interface. If there is a requirement for returning data integrity, please select this interface.",
                 "x-api-rate-limit-weight": 1,
                 "requestBody": {
                     "content": {
@@ -630,7 +630,7 @@
                                     },
                                     "allowMaxTimeWindow": {
                                         "type": "integer",
-                                        "description": "Order failed after timeout of specified milliseconds, If clientTimestamp + allowMaxTimeWindow < the server reaches time, this order will fail.",
+                                        "description": "The order will fail if it times out after the specified duration in milliseconds. Specifically, if clientTimestamp + allowMaxTimeWindow (in milliseconds) is less than the time the server receives the message, the order will fail.",
                                         "format": "int64",
                                         "example": [
                                             10,
@@ -640,7 +640,7 @@
                                     },
                                     "clientTimestamp": {
                                         "type": "integer",
-                                        "description": "Equal to KC-API-TIMESTAMP, Need to be defined if iceberg is specified.",
+                                        "description": "Equal to KC-API-TIMESTAMP. Needs to be defined if iceberg is specified.",
                                         "format": "int64",
                                         "example": [
                                             1740711735178
@@ -1174,7 +1174,7 @@
                                                 },
                                                 "clientTimestamp": {
                                                     "type": "integer",
-                                                    "description": "Equal to KC-API-TIMESTAMP, Need to be defined if iceberg is specified.",
+                                                    "description": "Equal to KC-API-TIMESTAMP. Needs to be defined if iceberg is specified.",
                                                     "format": "int64",
                                                     "example": [
                                                         1740711735178
@@ -1182,7 +1182,7 @@
                                                 },
                                                 "allowMaxTimeWindow": {
                                                     "type": "integer",
-                                                    "description": "Order failed after timeout of specified milliseconds, If clientTimestamp + allowMaxTimeWindow < the server reaches time, this order will fail.",
+                                                    "description": "The order will fail if it times out after the specified duration in milliseconds. Specifically, if clientTimestamp + allowMaxTimeWindow (in milliseconds) is less than the time the server receives the message, the order will fail.",
                                                     "format": "int64",
                                                     "example": [
                                                         10,
@@ -1498,7 +1498,7 @@
                                                 },
                                                 "allowMaxTimeWindow": {
                                                     "type": "integer",
-                                                    "description": "Order failed after timeout of specified milliseconds, If clientTimestamp + allowMaxTimeWindow < the server reaches time, this order will fail.",
+                                                    "description": "The order will fail if it times out after the specified duration in milliseconds. Specifically, if clientTimestamp + allowMaxTimeWindow (in milliseconds) is less than the time the server receives the message, the order will fail.",
                                                     "format": "int64",
                                                     "example": [
                                                         10,
@@ -1508,7 +1508,7 @@
                                                 },
                                                 "clientTimestamp": {
                                                     "type": "integer",
-                                                    "description": "Equal to KC-API-TIMESTAMP, Need to be defined if iceberg is specified.",
+                                                    "description": "Equal to KC-API-TIMESTAMP. Needs to be defined if iceberg is specified.",
                                                     "format": "int64",
                                                     "example": [
                                                         1740711735178
@@ -1546,6 +1546,15 @@
                 "tags": [],
                 "parameters": [
                     {
+                        "name": "orderId",
+                        "in": "path",
+                        "description": "The unique order id generated by the trading system",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
                         "name": "symbol",
                         "in": "query",
                         "description": "symbol",
@@ -1557,15 +1566,6 @@
                                 "ETH-USDT",
                                 "KCS-USDT"
                             ]
-                        }
-                    },
-                    {
-                        "name": "orderId",
-                        "in": "path",
-                        "description": "The unique order id generated by the trading system",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
                         }
                     }
                 ],
@@ -1614,7 +1614,7 @@
                 "x-sdk-method-description": "This endpoint can be used to cancel a spot order by orderId. This endpoint only sends cancellation requests. The results of the requests must be obtained by checking the order status or subscribing to Websocket.",
                 "x-api-rate-limit-weight": 1,
                 "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": {\\n        \\\"orderId\\\": \\\"671124f9365ccb00073debd4\\\"\\n    }\\n}",
-                "x-request-example": "{\\\"symbol\\\": \\\"BTC-USDT\\\", \\\"orderId\\\": \\\"671124f9365ccb00073debd4\\\"}",
+                "x-request-example": "{\\\"orderId\\\": \\\"671124f9365ccb00073debd4\\\", \\\"symbol\\\": \\\"BTC-USDT\\\"}",
                 "operationId": "006"
             },
             "get": {
@@ -2945,7 +2945,7 @@
             "get": {
                 "summary": "Get Open Orders",
                 "deprecated": false,
-                "description": "This interface is to obtain all Spot active order (uncompleted order) lists. The returned data is sorted in descending order according to the create time of the order.  After the user successfully places an order, the order is in Active state, and the user can use inOrderBook to determine whether the order has entered the order. Canceled or fully filled orders are marked as completed Done status.",
+                "description": "This interface is to obtain all Spot active order lists, and the return value of the active order interface is the paged data of all uncompleted order lists. The returned data is sorted in descending order according to the latest update time of the order.  After the user successfully places an order, the order is in Active state, and the user can use inOrderBook to determine whether the order has entered the order. Canceled or fully filled orders are marked as completed Done status.",
                 "tags": [],
                 "parameters": [
                     {
@@ -3262,11 +3262,386 @@
                 "x-sdk-service": "Spot",
                 "x-sdk-sub-service": "Order",
                 "x-sdk-method-name": "getOpenOrders",
-                "x-sdk-method-description": "This interface is to obtain all Spot active order (uncompleted order) lists. The returned data is sorted in descending order according to the create time of the order.  After the user successfully places an order, the order is in Active state, and the user can use inOrderBook to determine whether the order has entered the order. Canceled or fully filled orders are marked as completed Done status.",
+                "x-sdk-method-description": "This interface is to obtain all Spot active order lists, and the return value of the active order interface is the paged data of all uncompleted order lists. The returned data is sorted in descending order according to the latest update time of the order.  After the user successfully places an order, the order is in Active state, and the user can use inOrderBook to determine whether the order has entered the order. Canceled or fully filled orders are marked as completed Done status.",
                 "x-api-rate-limit-weight": 2,
                 "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": [\\n        {\\n            \\\"id\\\": \\\"67120bbef094e200070976f6\\\",\\n            \\\"clientOid\\\": \\\"5c52e11203aa677f33e493fb\\\",\\n            \\\"symbol\\\": \\\"BTC-USDT\\\",\\n            \\\"opType\\\": \\\"DEAL\\\",\\n            \\\"type\\\": \\\"limit\\\",\\n            \\\"side\\\": \\\"buy\\\",\\n            \\\"price\\\": \\\"50000\\\",\\n            \\\"size\\\": \\\"0.00001\\\",\\n            \\\"funds\\\": \\\"0.5\\\",\\n            \\\"dealSize\\\": \\\"0\\\",\\n            \\\"dealFunds\\\": \\\"0\\\",\\n            \\\"fee\\\": \\\"0\\\",\\n            \\\"feeCurrency\\\": \\\"USDT\\\",\\n            \\\"stp\\\": null,\\n            \\\"timeInForce\\\": \\\"GTC\\\",\\n            \\\"postOnly\\\": false,\\n            \\\"hidden\\\": false,\\n            \\\"iceberg\\\": false,\\n            \\\"visibleSize\\\": \\\"0\\\",\\n            \\\"cancelAfter\\\": 0,\\n            \\\"channel\\\": \\\"API\\\",\\n            \\\"remark\\\": \\\"order remarks\\\",\\n            \\\"tags\\\": \\\"order tags\\\",\\n            \\\"cancelExist\\\": false,\\n            \\\"tradeType\\\": \\\"TRADE\\\",\\n            \\\"inOrderBook\\\": true,\\n            \\\"cancelledSize\\\": \\\"0\\\",\\n            \\\"cancelledFunds\\\": \\\"0\\\",\\n            \\\"remainSize\\\": \\\"0.00001\\\",\\n            \\\"remainFunds\\\": \\\"0.5\\\",\\n            \\\"tax\\\": \\\"0\\\",\\n            \\\"active\\\": true,\\n            \\\"createdAt\\\": 1729235902748,\\n            \\\"lastUpdatedAt\\\": 1729235909862\\n        }\\n    ]\\n}",
                 "x-request-example": "{\\\"symbol\\\": \\\"BTC-USDT\\\"}",
                 "operationId": "017"
+            }
+        },
+        "/api/v1/hf/orders/active/page": {
+            "get": {
+                "summary": "Get Open Orders By Page",
+                "deprecated": false,
+                "description": "This interface is to obtain Spot active order (uncompleted order) lists by page. The returned data is sorted in descending order according to the create time of the order.  After the user successfully places an order, the order is in Active state, and the user can use inOrderBook to determine whether the order has entered the order. Canceled or fully filled orders are marked as completed Done status.",
+                "tags": [],
+                "parameters": [
+                    {
+                        "name": "symbol",
+                        "in": "query",
+                        "description": "Symbol",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": [
+                                "BTC-USDT",
+                                "ETH-USDT",
+                                "KCS-USDT"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "pageNum",
+                        "in": "query",
+                        "description": "Current page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "default": 1
+                        }
+                    },
+                    {
+                        "name": "pageSize",
+                        "in": "query",
+                        "description": "Size per page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "default": 20,
+                            "minimum": 1,
+                            "maximum": 50
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "currentPage": {
+                                                    "type": "integer"
+                                                },
+                                                "pageSize": {
+                                                    "type": "integer"
+                                                },
+                                                "totalNum": {
+                                                    "type": "integer"
+                                                },
+                                                "totalPage": {
+                                                    "type": "integer"
+                                                },
+                                                "items": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "string",
+                                                                "description": "The unique order id generated by the trading system"
+                                                            },
+                                                            "symbol": {
+                                                                "type": "string",
+                                                                "description": "symbol",
+                                                                "example": [
+                                                                    "BTC-USDT",
+                                                                    "ETH-USDT",
+                                                                    "KCS-USDT"
+                                                                ]
+                                                            },
+                                                            "opType": {
+                                                                "type": "string"
+                                                            },
+                                                            "type": {
+                                                                "type": "string",
+                                                                "description": "Specify if the order is an 'limit' order or 'market' order. ",
+                                                                "enum": [
+                                                                    "limit",
+                                                                    "market"
+                                                                ],
+                                                                "x-api-enum": [
+                                                                    {
+                                                                        "value": "limit",
+                                                                        "name": "",
+                                                                        "description": ""
+                                                                    },
+                                                                    {
+                                                                        "value": "market",
+                                                                        "name": "",
+                                                                        "description": ""
+                                                                    }
+                                                                ]
+                                                            },
+                                                            "side": {
+                                                                "type": "string",
+                                                                "description": "Buy or sell",
+                                                                "enum": [
+                                                                    "buy",
+                                                                    "sell"
+                                                                ],
+                                                                "x-api-enum": [
+                                                                    {
+                                                                        "value": "buy",
+                                                                        "name": "",
+                                                                        "description": ""
+                                                                    },
+                                                                    {
+                                                                        "value": "sell",
+                                                                        "name": "",
+                                                                        "description": ""
+                                                                    }
+                                                                ]
+                                                            },
+                                                            "price": {
+                                                                "type": "string",
+                                                                "description": "Order price"
+                                                            },
+                                                            "size": {
+                                                                "type": "string",
+                                                                "description": "Order size"
+                                                            },
+                                                            "funds": {
+                                                                "type": "string",
+                                                                "description": "Order Funds"
+                                                            },
+                                                            "dealSize": {
+                                                                "type": "string",
+                                                                "description": "Number of filled transactions"
+                                                            },
+                                                            "dealFunds": {
+                                                                "type": "string",
+                                                                "description": "Funds of filled transactions"
+                                                            },
+                                                            "fee": {
+                                                                "type": "string",
+                                                                "description": "[Handling fees](https://www.kucoin.com/docs-new/api-5327739)"
+                                                            },
+                                                            "feeCurrency": {
+                                                                "type": "string",
+                                                                "description": "currency used to calculate trading fee"
+                                                            },
+                                                            "stp": {
+                                                                "type": "string",
+                                                                "description": "[Self Trade Prevention](https://www.kucoin.com/docs-new/api-5176570)",
+                                                                "enum": [
+                                                                    "DC",
+                                                                    "CO",
+                                                                    "CN",
+                                                                    "CB"
+                                                                ],
+                                                                "x-api-enum": [
+                                                                    {
+                                                                        "value": "DC",
+                                                                        "name": "",
+                                                                        "description": ""
+                                                                    },
+                                                                    {
+                                                                        "value": "CO",
+                                                                        "name": "",
+                                                                        "description": ""
+                                                                    },
+                                                                    {
+                                                                        "value": "CN",
+                                                                        "name": "",
+                                                                        "description": ""
+                                                                    },
+                                                                    {
+                                                                        "value": "CB",
+                                                                        "name": "",
+                                                                        "description": ""
+                                                                    }
+                                                                ]
+                                                            },
+                                                            "timeInForce": {
+                                                                "type": "string",
+                                                                "description": "Time in force",
+                                                                "enum": [
+                                                                    "GTC",
+                                                                    "GTT",
+                                                                    "IOC",
+                                                                    "FOK"
+                                                                ],
+                                                                "x-api-enum": [
+                                                                    {
+                                                                        "value": "GTC",
+                                                                        "name": "",
+                                                                        "description": ""
+                                                                    },
+                                                                    {
+                                                                        "value": "GTT",
+                                                                        "name": "",
+                                                                        "description": ""
+                                                                    },
+                                                                    {
+                                                                        "value": "IOC",
+                                                                        "name": "",
+                                                                        "description": ""
+                                                                    },
+                                                                    {
+                                                                        "value": "FOK",
+                                                                        "name": "",
+                                                                        "description": ""
+                                                                    }
+                                                                ]
+                                                            },
+                                                            "postOnly": {
+                                                                "type": "boolean",
+                                                                "description": "Whether its a postOnly order."
+                                                            },
+                                                            "hidden": {
+                                                                "type": "boolean",
+                                                                "description": "Whether its a hidden order."
+                                                            },
+                                                            "iceberg": {
+                                                                "type": "boolean",
+                                                                "description": "Whether its a iceberg order."
+                                                            },
+                                                            "visibleSize": {
+                                                                "type": "string",
+                                                                "description": "Visible size of iceberg order in order book."
+                                                            },
+                                                            "cancelAfter": {
+                                                                "type": "integer",
+                                                                "description": "A GTT timeInForce that expires in n seconds",
+                                                                "format": "int64"
+                                                            },
+                                                            "channel": {
+                                                                "type": "string"
+                                                            },
+                                                            "clientOid": {
+                                                                "type": "string",
+                                                                "description": "Client Order Id，unique identifier created by the user"
+                                                            },
+                                                            "remark": {
+                                                                "type": "string",
+                                                                "description": "Order placement remarks"
+                                                            },
+                                                            "tags": {
+                                                                "type": "string",
+                                                                "description": "Order tag"
+                                                            },
+                                                            "cancelExist": {
+                                                                "type": "boolean",
+                                                                "description": "Whether there is a cancellation record for the order."
+                                                            },
+                                                            "createdAt": {
+                                                                "type": "integer",
+                                                                "format": "int64"
+                                                            },
+                                                            "lastUpdatedAt": {
+                                                                "type": "integer",
+                                                                "format": "int64"
+                                                            },
+                                                            "tradeType": {
+                                                                "type": "string",
+                                                                "description": "Trade type, redundancy param"
+                                                            },
+                                                            "inOrderBook": {
+                                                                "type": "boolean",
+                                                                "description": "Whether to enter the orderbook: true: enter the orderbook; false: not enter the orderbook"
+                                                            },
+                                                            "cancelledSize": {
+                                                                "type": "string",
+                                                                "description": "Number of canceled transactions"
+                                                            },
+                                                            "cancelledFunds": {
+                                                                "type": "string",
+                                                                "description": "Funds of canceled transactions"
+                                                            },
+                                                            "remainSize": {
+                                                                "type": "string",
+                                                                "description": "Number of remain transactions"
+                                                            },
+                                                            "remainFunds": {
+                                                                "type": "string",
+                                                                "description": "Funds of remain transactions"
+                                                            },
+                                                            "tax": {
+                                                                "type": "string",
+                                                                "description": "Users in some regions need query this field"
+                                                            },
+                                                            "active": {
+                                                                "type": "boolean",
+                                                                "description": "Order status: true-The status of the order isactive; false-The status of the order is done"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "id",
+                                                            "symbol",
+                                                            "opType",
+                                                            "type",
+                                                            "side",
+                                                            "price",
+                                                            "size",
+                                                            "funds",
+                                                            "dealSize",
+                                                            "dealFunds",
+                                                            "fee",
+                                                            "feeCurrency",
+                                                            "timeInForce",
+                                                            "postOnly",
+                                                            "hidden",
+                                                            "iceberg",
+                                                            "visibleSize",
+                                                            "cancelAfter",
+                                                            "channel",
+                                                            "clientOid",
+                                                            "cancelExist",
+                                                            "tradeType",
+                                                            "inOrderBook",
+                                                            "cancelledSize",
+                                                            "cancelledFunds",
+                                                            "remainSize",
+                                                            "remainFunds",
+                                                            "active",
+                                                            "createdAt",
+                                                            "lastUpdatedAt",
+                                                            "tax"
+                                                        ]
+                                                    }
+                                                }
+                                            },
+                                            "required": [
+                                                "currentPage",
+                                                "pageSize",
+                                                "totalNum",
+                                                "totalPage",
+                                                "items"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "code",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-api-doc": "https://www.kucoin.com/docs-new/api-3471591",
+                "x-abandon": "normal",
+                "x-domain": "Spot",
+                "x-api-channel": "Private",
+                "x-api-permission": "General",
+                "x-api-rate-limit-pool": "Spot",
+                "x-sdk-service": "Spot",
+                "x-sdk-sub-service": "Order",
+                "x-sdk-method-name": "getOpenOrdersByPage",
+                "x-sdk-method-description": "This interface is to obtain Spot active order (uncompleted order) lists by page. The returned data is sorted in descending order according to the create time of the order.  After the user successfully places an order, the order is in Active state, and the user can use inOrderBook to determine whether the order has entered the order. Canceled or fully filled orders are marked as completed Done status.",
+                "x-api-rate-limit-weight": 2,
+                "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": {\\n        \\\"currentPage\\\": 1,\\n        \\\"pageSize\\\": 20,\\n        \\\"totalNum\\\": 1,\\n        \\\"totalPage\\\": 1,\\n        \\\"items\\\": [\\n            {\\n                \\\"id\\\": \\\"67c1437ea5226600071cc080\\\",\\n                \\\"symbol\\\": \\\"BTC-USDT\\\",\\n                \\\"opType\\\": \\\"DEAL\\\",\\n                \\\"type\\\": \\\"limit\\\",\\n                \\\"side\\\": \\\"buy\\\",\\n                \\\"price\\\": \\\"50000\\\",\\n                \\\"size\\\": \\\"0.00001\\\",\\n                \\\"funds\\\": \\\"0.5\\\",\\n                \\\"dealSize\\\": \\\"0\\\",\\n                \\\"dealFunds\\\": \\\"0\\\",\\n                \\\"fee\\\": \\\"0\\\",\\n                \\\"feeCurrency\\\": \\\"USDT\\\",\\n                \\\"stp\\\": null,\\n                \\\"timeInForce\\\": \\\"GTC\\\",\\n                \\\"postOnly\\\": false,\\n                \\\"hidden\\\": false,\\n                \\\"iceberg\\\": false,\\n                \\\"visibleSize\\\": \\\"0\\\",\\n                \\\"cancelAfter\\\": 0,\\n                \\\"channel\\\": \\\"API\\\",\\n                \\\"clientOid\\\": \\\"5c52e11203aa677f33e493fb\\\",\\n                \\\"remark\\\": \\\"order remarks\\\",\\n                \\\"tags\\\": null,\\n                \\\"cancelExist\\\": false,\\n                \\\"createdAt\\\": 1740718974367,\\n                \\\"lastUpdatedAt\\\": 1741867658590,\\n                \\\"tradeType\\\": \\\"TRADE\\\",\\n                \\\"inOrderBook\\\": true,\\n                \\\"cancelledSize\\\": \\\"0\\\",\\n                \\\"cancelledFunds\\\": \\\"0\\\",\\n                \\\"remainSize\\\": \\\"0.00001\\\",\\n                \\\"remainFunds\\\": \\\"0.5\\\",\\n                \\\"tax\\\": \\\"0\\\",\\n                \\\"active\\\": true\\n            }\\n        ]\\n    }\\n}",
+                "x-request-example": "{\\\"symbol\\\": \\\"BTC-USDT\\\", \\\"pageNum\\\": 1, \\\"pageSize\\\": 20}",
+                "operationId": "018"
             }
         },
         "/api/v1/hf/orders/done": {
@@ -3707,7 +4082,7 @@
                 "x-api-rate-limit-weight": 2,
                 "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": {\\n        \\\"lastId\\\": 19814995255305,\\n        \\\"items\\\": [\\n            {\\n                \\\"id\\\": \\\"6717422bd51c29000775ea03\\\",\\n                \\\"clientOid\\\": \\\"5c52e11203aa677f33e493fb\\\",\\n                \\\"symbol\\\": \\\"BTC-USDT\\\",\\n                \\\"opType\\\": \\\"DEAL\\\",\\n                \\\"type\\\": \\\"limit\\\",\\n                \\\"side\\\": \\\"buy\\\",\\n                \\\"price\\\": \\\"70000\\\",\\n                \\\"size\\\": \\\"0.00001\\\",\\n                \\\"funds\\\": \\\"0.7\\\",\\n                \\\"dealSize\\\": \\\"0.00001\\\",\\n                \\\"dealFunds\\\": \\\"0.677176\\\",\\n                \\\"remainSize\\\": \\\"0\\\",\\n                \\\"remainFunds\\\": \\\"0.022824\\\",\\n                \\\"cancelledSize\\\": \\\"0\\\",\\n                \\\"cancelledFunds\\\": \\\"0\\\",\\n                \\\"fee\\\": \\\"0.000677176\\\",\\n                \\\"feeCurrency\\\": \\\"USDT\\\",\\n                \\\"stp\\\": null,\\n                \\\"timeInForce\\\": \\\"GTC\\\",\\n                \\\"postOnly\\\": false,\\n                \\\"hidden\\\": false,\\n                \\\"iceberg\\\": false,\\n                \\\"visibleSize\\\": \\\"0\\\",\\n                \\\"cancelAfter\\\": 0,\\n                \\\"channel\\\": \\\"API\\\",\\n                \\\"remark\\\": \\\"order remarks\\\",\\n                \\\"tags\\\": null,\\n                \\\"cancelExist\\\": false,\\n                \\\"tradeType\\\": \\\"TRADE\\\",\\n                \\\"inOrderBook\\\": false,\\n                \\\"active\\\": false,\\n                \\\"tax\\\": \\\"0\\\",\\n                \\\"createdAt\\\": 1729577515444,\\n                \\\"lastUpdatedAt\\\": 1729577515481\\n            }\\n        ]\\n    }\\n}",
                 "x-request-example": "{\\\"symbol\\\": \\\"BTC-USDT\\\", \\\"side\\\": \\\"buy\\\", \\\"type\\\": \\\"limit\\\", \\\"lastId\\\": 254062248624417, \\\"limit\\\": 20, \\\"startAt\\\": 1728663338000, \\\"endAt\\\": 1728692138000}",
-                "operationId": "018"
+                "operationId": "019"
             }
         },
         "/api/v1/hf/fills": {
@@ -4057,7 +4432,7 @@
                 "x-api-rate-limit-weight": 2,
                 "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": {\\n        \\\"items\\\": [\\n            {\\n                \\\"id\\\": 19814995255305,\\n                \\\"orderId\\\": \\\"6717422bd51c29000775ea03\\\",\\n                \\\"counterOrderId\\\": \\\"67174228135f9e000709da8c\\\",\\n                \\\"tradeId\\\": 11029373945659392,\\n                \\\"symbol\\\": \\\"BTC-USDT\\\",\\n                \\\"side\\\": \\\"buy\\\",\\n                \\\"liquidity\\\": \\\"taker\\\",\\n                \\\"type\\\": \\\"limit\\\",\\n                \\\"forceTaker\\\": false,\\n                \\\"price\\\": \\\"67717.6\\\",\\n                \\\"size\\\": \\\"0.00001\\\",\\n                \\\"funds\\\": \\\"0.677176\\\",\\n                \\\"fee\\\": \\\"0.000677176\\\",\\n                \\\"feeRate\\\": \\\"0.001\\\",\\n                \\\"feeCurrency\\\": \\\"USDT\\\",\\n                \\\"stop\\\": \\\"\\\",\\n                \\\"tradeType\\\": \\\"TRADE\\\",\\n                \\\"taxRate\\\": \\\"0\\\",\\n                \\\"tax\\\": \\\"0\\\",\\n                \\\"createdAt\\\": 1729577515473\\n            }\\n        ],\\n        \\\"lastId\\\": 19814995255305\\n    }\\n}",
                 "x-request-example": "{\\\"symbol\\\": \\\"BTC-USDT\\\", \\\"orderId\\\": \\\"example_string_default_value\\\", \\\"side\\\": \\\"buy\\\", \\\"type\\\": \\\"limit\\\", \\\"lastId\\\": 254062248624417, \\\"limit\\\": 100, \\\"startAt\\\": 1728663338000, \\\"endAt\\\": 1728692138000}",
-                "operationId": "019"
+                "operationId": "020"
             }
         },
         "/api/v1/hf/orders/dead-cancel-all/query": {
@@ -4125,7 +4500,7 @@
                 "x-sdk-method-description": "Get Disconnection Protect (Deadman Switch). Through this interface, you can query the settings of automatic order cancellation.",
                 "x-api-rate-limit-weight": 2,
                 "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": {\\n        \\\"timeout\\\": 5,\\n        \\\"symbols\\\": \\\"BTC-USDT,ETH-USDT\\\",\\n        \\\"currentTime\\\": 1729241305,\\n        \\\"triggerTime\\\": 1729241308\\n    }\\n}",
-                "operationId": "020"
+                "operationId": "021"
             }
         },
         "/api/v1/hf/orders/dead-cancel-all": {
@@ -4215,7 +4590,7 @@
                 },
                 "x-response-example": "{\\\"code\\\":\\\"200000\\\",\\\"data\\\":{\\\"currentTime\\\":1729656588,\\\"triggerTime\\\":1729656593}}",
                 "x-request-example": "{\\\"timeout\\\": 5, \\\"symbols\\\": \\\"BTC-USDT,ETH-USDT\\\"}",
-                "operationId": "021"
+                "operationId": "022"
             }
         },
         "/api/v1/stop-order": {
@@ -4469,7 +4844,7 @@
                 },
                 "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": {\\n        \\\"orderId\\\": \\\"670fd33bf9406e0007ab3945\\\"\\n    }\\n}",
                 "x-request-example": "{\\\"type\\\": \\\"limit\\\", \\\"symbol\\\": \\\"BTC-USDT\\\", \\\"side\\\": \\\"buy\\\", \\\"price\\\": \\\"50000\\\", \\\"stopPrice\\\": \\\"50000\\\", \\\"size\\\": \\\"0.00001\\\", \\\"clientOid\\\": \\\"5c52e11203aa677f33e493fb\\\", \\\"remark\\\": \\\"order remarks\\\"}",
-                "operationId": "022"
+                "operationId": "023"
             },
             "get": {
                 "summary": "Get Stop Orders List",
@@ -4843,7 +5218,7 @@
                 "x-api-rate-limit-weight": 8,
                 "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": {\\n        \\\"currentPage\\\": 1,\\n        \\\"pageSize\\\": 50,\\n        \\\"totalNum\\\": 2,\\n        \\\"totalPage\\\": 1,\\n        \\\"items\\\": [\\n            {\\n                \\\"id\\\": \\\"vs93gptvr9t2fsql003l8k5p\\\",\\n                \\\"symbol\\\": \\\"BTC-USDT\\\",\\n                \\\"userId\\\": \\\"633559791e1cbc0001f319bc\\\",\\n                \\\"status\\\": \\\"NEW\\\",\\n                \\\"type\\\": \\\"limit\\\",\\n                \\\"side\\\": \\\"buy\\\",\\n                \\\"price\\\": \\\"50000.00000000000000000000\\\",\\n                \\\"size\\\": \\\"0.00001000000000000000\\\",\\n                \\\"funds\\\": null,\\n                \\\"stp\\\": null,\\n                \\\"timeInForce\\\": \\\"GTC\\\",\\n                \\\"cancelAfter\\\": -1,\\n                \\\"postOnly\\\": false,\\n                \\\"hidden\\\": false,\\n                \\\"iceberg\\\": false,\\n                \\\"visibleSize\\\": null,\\n                \\\"channel\\\": \\\"API\\\",\\n                \\\"clientOid\\\": \\\"5c52e11203aa677f222233e493fb\\\",\\n                \\\"remark\\\": \\\"order remarks\\\",\\n                \\\"tags\\\": null,\\n                \\\"relatedNo\\\": null,\\n                \\\"orderTime\\\": 1740626554883000024,\\n                \\\"domainId\\\": \\\"kucoin\\\",\\n                \\\"tradeSource\\\": \\\"USER\\\",\\n                \\\"tradeType\\\": \\\"TRADE\\\",\\n                \\\"feeCurrency\\\": \\\"USDT\\\",\\n                \\\"takerFeeRate\\\": \\\"0.00100000000000000000\\\",\\n                \\\"makerFeeRate\\\": \\\"0.00100000000000000000\\\",\\n                \\\"createdAt\\\": 1740626554884,\\n                \\\"stop\\\": \\\"loss\\\",\\n                \\\"stopTriggerTime\\\": null,\\n                \\\"stopPrice\\\": \\\"60000.00000000000000000000\\\",\\n                \\\"limitPrice\\\": null,\\n                \\\"pop\\\": null,\\n                \\\"activateCondition\\\": null\\n            }\\n        ]\\n    }\\n}",
                 "x-request-example": "{\\\"symbol\\\": \\\"example_string_default_value\\\", \\\"side\\\": \\\"example_string_default_value\\\", \\\"type\\\": \\\"limit\\\", \\\"tradeType\\\": \\\"example_string_default_value\\\", \\\"startAt\\\": 123456, \\\"endAt\\\": 123456, \\\"currentPage\\\": 1, \\\"orderIds\\\": \\\"example_string_default_value\\\", \\\"pageSize\\\": 50, \\\"stop\\\": \\\"example_string_default_value\\\"}",
-                "operationId": "026"
+                "operationId": "027"
             }
         },
         "/api/v1/stop-order/cancelOrderByClientOid": {
@@ -4928,7 +5303,7 @@
                 "x-api-rate-limit-weight": 5,
                 "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": {\\n        \\\"cancelledOrderId\\\": \\\"vs8hoo8ksc8mario0035a74n\\\",\\n        \\\"clientOid\\\": \\\"689ff597f4414061aa819cc414836abd\\\"\\n    }\\n}",
                 "x-request-example": "{\\\"symbol\\\": \\\"BTC-USDT\\\", \\\"clientOid\\\": \\\"689ff597f4414061aa819cc414836abd\\\"}",
-                "operationId": "023"
+                "operationId": "024"
             }
         },
         "/api/v1/stop-order/{orderId}": {
@@ -4997,7 +5372,7 @@
                 "x-api-rate-limit-weight": 3,
                 "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": {\\n        \\\"cancelledOrderIds\\\": [\\n            \\\"671124f9365ccb00073debd4\\\"\\n        ]\\n    }\\n}",
                 "x-request-example": "{\\\"orderId\\\": \\\"671124f9365ccb00073debd4\\\"}",
-                "operationId": "024"
+                "operationId": "025"
             },
             "get": {
                 "summary": "Get Stop Order By OrderId",
@@ -5199,7 +5574,7 @@
                 "x-api-rate-limit-weight": 3,
                 "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": {\\n        \\\"id\\\": \\\"vs8hoo8q2ceshiue003b67c0\\\",\\n        \\\"symbol\\\": \\\"KCS-USDT\\\",\\n        \\\"userId\\\": \\\"60fe4956c43cbc0006562c2c\\\",\\n        \\\"status\\\": \\\"NEW\\\",\\n        \\\"type\\\": \\\"limit\\\",\\n        \\\"side\\\": \\\"buy\\\",\\n        \\\"price\\\": \\\"0.01000000000000000000\\\",\\n        \\\"size\\\": \\\"0.01000000000000000000\\\",\\n        \\\"funds\\\": null,\\n        \\\"stp\\\": null,\\n        \\\"timeInForce\\\": \\\"GTC\\\",\\n        \\\"cancelAfter\\\": -1,\\n        \\\"postOnly\\\": false,\\n        \\\"hidden\\\": false,\\n        \\\"iceberg\\\": false,\\n        \\\"visibleSize\\\": null,\\n        \\\"channel\\\": \\\"API\\\",\\n        \\\"clientOid\\\": \\\"40e0eb9efe6311eb8e58acde48001122\\\",\\n        \\\"remark\\\": null,\\n        \\\"tags\\\": null,\\n        \\\"orderTime\\\": 1629098781127530200,\\n        \\\"domainId\\\": \\\"kucoin\\\",\\n        \\\"tradeSource\\\": \\\"USER\\\",\\n        \\\"tradeType\\\": \\\"TRADE\\\",\\n        \\\"feeCurrency\\\": \\\"USDT\\\",\\n        \\\"takerFeeRate\\\": \\\"0.00200000000000000000\\\",\\n        \\\"makerFeeRate\\\": \\\"0.00200000000000000000\\\",\\n        \\\"createdAt\\\": 1629098781128,\\n        \\\"stop\\\": \\\"loss\\\",\\n        \\\"stopTriggerTime\\\": null,\\n        \\\"stopPrice\\\": \\\"10.00000000000000000000\\\"\\n    }\\n}",
                 "x-request-example": "{\\\"orderId\\\": \\\"example_string_default_value\\\"}",
-                "operationId": "027"
+                "operationId": "028"
             }
         },
         "/api/v1/stop-order/cancel": {
@@ -5286,7 +5661,7 @@
                 "x-api-rate-limit-weight": 3,
                 "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": {\\n        \\\"cancelledOrderIds\\\": [\\n            \\\"671124f9365ccb00073debd4\\\"\\n        ]\\n    }\\n}",
                 "x-request-example": "{\\\"symbol\\\": \\\"example_string_default_value\\\", \\\"tradeType\\\": \\\"example_string_default_value\\\", \\\"orderIds\\\": \\\"example_string_default_value\\\"}",
-                "operationId": "025"
+                "operationId": "026"
             }
         },
         "/api/v1/stop-order/queryOrderByClientOid": {
@@ -5502,7 +5877,7 @@
                 "x-api-rate-limit-weight": 3,
                 "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": [\\n        {\\n            \\\"id\\\": \\\"vs8hoo8os561f5np0032vngj\\\",\\n            \\\"symbol\\\": \\\"KCS-USDT\\\",\\n            \\\"userId\\\": \\\"60fe4956c43cbc0006562c2c\\\",\\n            \\\"status\\\": \\\"NEW\\\",\\n            \\\"type\\\": \\\"limit\\\",\\n            \\\"side\\\": \\\"buy\\\",\\n            \\\"price\\\": \\\"0.01000000000000000000\\\",\\n            \\\"size\\\": \\\"0.01000000000000000000\\\",\\n            \\\"funds\\\": null,\\n            \\\"stp\\\": null,\\n            \\\"timeInForce\\\": \\\"GTC\\\",\\n            \\\"cancelAfter\\\": -1,\\n            \\\"postOnly\\\": false,\\n            \\\"hidden\\\": false,\\n            \\\"iceberg\\\": false,\\n            \\\"visibleSize\\\": null,\\n            \\\"channel\\\": \\\"API\\\",\\n            \\\"clientOid\\\": \\\"2b700942b5db41cebe578cff48960e09\\\",\\n            \\\"remark\\\": null,\\n            \\\"tags\\\": null,\\n            \\\"orderTime\\\": 1629020492834532600,\\n            \\\"domainId\\\": \\\"kucoin\\\",\\n            \\\"tradeSource\\\": \\\"USER\\\",\\n            \\\"tradeType\\\": \\\"TRADE\\\",\\n            \\\"feeCurrency\\\": \\\"USDT\\\",\\n            \\\"takerFeeRate\\\": \\\"0.00200000000000000000\\\",\\n            \\\"makerFeeRate\\\": \\\"0.00200000000000000000\\\",\\n            \\\"createdAt\\\": 1629020492837,\\n            \\\"stop\\\": \\\"loss\\\",\\n            \\\"stopTriggerTime\\\": null,\\n            \\\"stopPrice\\\": \\\"1.00000000000000000000\\\"\\n        }\\n    ]\\n}",
                 "x-request-example": "{\\\"clientOid\\\": \\\"example_string_default_value\\\", \\\"symbol\\\": \\\"example_string_default_value\\\"}",
-                "operationId": "028"
+                "operationId": "029"
             }
         },
         "/api/v3/oco/order": {
@@ -5652,7 +6027,7 @@
                 },
                 "x-response-example": "{\\\"code\\\":\\\"200000\\\",\\\"data\\\":{\\\"orderId\\\":\\\"674c316e688dea0007c7b986\\\"}}",
                 "x-request-example": "{\\\"symbol\\\": \\\"BTC-USDT\\\", \\\"side\\\": \\\"buy\\\", \\\"price\\\": \\\"94000\\\", \\\"size\\\": \\\"0.1\\\", \\\"clientOid\\\": \\\"5c52e11203aa67f1e493fb\\\", \\\"stopPrice\\\": \\\"98000\\\", \\\"limitPrice\\\": \\\"96000\\\", \\\"remark\\\": \\\"this is remark\\\", \\\"tradeType\\\": \\\"TRADE\\\"}",
-                "operationId": "029"
+                "operationId": "030"
             }
         },
         "/api/v3/oco/order/{orderId}": {
@@ -5721,7 +6096,7 @@
                 "x-api-rate-limit-weight": 3,
                 "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": {\\n        \\\"cancelledOrderIds\\\": [\\n            \\\"vs93gpqc6kkmkk57003gok16\\\",\\n            \\\"vs93gpqc6kkmkk57003gok17\\\"\\n        ]\\n    }\\n}",
                 "x-request-example": "{\\\"orderId\\\": \\\"674c316e688dea0007c7b986\\\"}",
-                "operationId": "030"
+                "operationId": "031"
             },
             "get": {
                 "summary": "Get OCO Order By OrderId",
@@ -5834,7 +6209,7 @@
                 "x-api-rate-limit-weight": 2,
                 "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": {\\n        \\\"orderId\\\": \\\"674c3b6e688dea0007c7bab2\\\",\\n        \\\"symbol\\\": \\\"BTC-USDT\\\",\\n        \\\"clientOid\\\": \\\"5c52e1203aa6f37f1e493fb\\\",\\n        \\\"orderTime\\\": 1733049198863,\\n        \\\"status\\\": \\\"NEW\\\"\\n    }\\n}",
                 "x-request-example": "{\\\"orderId\\\": \\\"674c3b6e688dea0007c7bab2\\\"}",
-                "operationId": "033"
+                "operationId": "034"
             }
         },
         "/api/v3/oco/client-order/{clientOid}": {
@@ -5903,7 +6278,7 @@
                 "x-api-rate-limit-weight": 3,
                 "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": {\\n        \\\"cancelledOrderIds\\\": [\\n            \\\"vs93gpqc6r0mkk57003gok3h\\\",\\n            \\\"vs93gpqc6r0mkk57003gok3i\\\"\\n        ]\\n    }\\n}",
                 "x-request-example": "{\\\"clientOid\\\": \\\"5c52e11203aa67f1e493fb\\\"}",
-                "operationId": "031"
+                "operationId": "032"
             },
             "get": {
                 "summary": "Get OCO Order By ClientOid",
@@ -5988,7 +6363,7 @@
                 "x-api-rate-limit-weight": 2,
                 "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": {\\n        \\\"orderId\\\": \\\"674c3cfa72cf2800072ee7ce\\\",\\n        \\\"symbol\\\": \\\"BTC-USDT\\\",\\n        \\\"clientOid\\\": \\\"5c52e1203aa6f3g7f1e493fb\\\",\\n        \\\"orderTime\\\": 1733049594803,\\n        \\\"status\\\": \\\"NEW\\\"\\n    }\\n}",
                 "x-request-example": "{\\\"clientOid\\\": \\\"5c52e1203aa6f3g7f1e493fb\\\"}",
-                "operationId": "034"
+                "operationId": "035"
             }
         },
         "/api/v3/oco/orders": {
@@ -6066,7 +6441,7 @@
                 "x-api-rate-limit-weight": 3,
                 "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": {\\n        \\\"cancelledOrderIds\\\": [\\n            \\\"vs93gpqc750mkk57003gok6i\\\",\\n            \\\"vs93gpqc750mkk57003gok6j\\\",\\n            \\\"vs93gpqc75c39p83003tnriu\\\",\\n            \\\"vs93gpqc75c39p83003tnriv\\\"\\n        ]\\n    }\\n}",
                 "x-request-example": "{\\\"orderIds\\\": \\\"674c388172cf2800072ee746,674c38bdfd8300000795167e\\\", \\\"symbol\\\": \\\"BTC-USDT\\\"}",
-                "operationId": "032"
+                "operationId": "033"
             },
             "get": {
                 "summary": "Get OCO Order List",
@@ -6262,7 +6637,7 @@
                 "x-api-rate-limit-weight": 2,
                 "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": {\\n        \\\"currentPage\\\": 1,\\n        \\\"pageSize\\\": 50,\\n        \\\"totalNum\\\": 1,\\n        \\\"totalPage\\\": 1,\\n        \\\"items\\\": [\\n            {\\n                \\\"orderId\\\": \\\"674c3cfa72cf2800072ee7ce\\\",\\n                \\\"symbol\\\": \\\"BTC-USDT\\\",\\n                \\\"clientOid\\\": \\\"5c52e1203aa6f3g7f1e493fb\\\",\\n                \\\"orderTime\\\": 1733049594803,\\n                \\\"status\\\": \\\"NEW\\\"\\n            }\\n        ]\\n    }\\n}",
                 "x-request-example": "{\\\"symbol\\\": \\\"BTC-USDT\\\", \\\"startAt\\\": 123456, \\\"endAt\\\": 123456, \\\"orderIds\\\": \\\"example_string_default_value\\\", \\\"pageSize\\\": 50, \\\"currentPage\\\": 1}",
-                "operationId": "036"
+                "operationId": "037"
             }
         },
         "/api/v3/oco/order/details/{orderId}": {
@@ -6388,7 +6763,7 @@
                 "x-api-rate-limit-weight": 2,
                 "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": {\\n        \\\"orderId\\\": \\\"674c3b6e688dea0007c7bab2\\\",\\n        \\\"symbol\\\": \\\"BTC-USDT\\\",\\n        \\\"clientOid\\\": \\\"5c52e1203aa6f37f1e493fb\\\",\\n        \\\"orderTime\\\": 1733049198863,\\n        \\\"status\\\": \\\"NEW\\\",\\n        \\\"orders\\\": [\\n            {\\n                \\\"id\\\": \\\"vs93gpqc7dn6h3fa003sfelj\\\",\\n                \\\"symbol\\\": \\\"BTC-USDT\\\",\\n                \\\"side\\\": \\\"buy\\\",\\n                \\\"price\\\": \\\"94000.00000000000000000000\\\",\\n                \\\"stopPrice\\\": \\\"94000.00000000000000000000\\\",\\n                \\\"size\\\": \\\"0.10000000000000000000\\\",\\n                \\\"status\\\": \\\"NEW\\\"\\n            },\\n            {\\n                \\\"id\\\": \\\"vs93gpqc7dn6h3fa003sfelk\\\",\\n                \\\"symbol\\\": \\\"BTC-USDT\\\",\\n                \\\"side\\\": \\\"buy\\\",\\n                \\\"price\\\": \\\"96000.00000000000000000000\\\",\\n                \\\"stopPrice\\\": \\\"98000.00000000000000000000\\\",\\n                \\\"size\\\": \\\"0.10000000000000000000\\\",\\n                \\\"status\\\": \\\"NEW\\\"\\n            }\\n        ]\\n    }\\n}",
                 "x-request-example": "{\\\"orderId\\\": \\\"674c3b6e688dea0007c7bab2\\\"}",
-                "operationId": "035"
+                "operationId": "036"
             }
         },
         "/api/v1/orders": {
@@ -6647,7 +7022,7 @@
                 },
                 "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": {\\n        \\\"orderId\\\": \\\"674a8635b38d120007709c0f\\\"\\n    }\\n}",
                 "x-request-example": "{\\\"type\\\": \\\"limit\\\", \\\"symbol\\\": \\\"BTC-USDT\\\", \\\"side\\\": \\\"buy\\\", \\\"price\\\": \\\"50000\\\", \\\"size\\\": \\\"0.00001\\\", \\\"clientOid\\\": \\\"5c52e11203aa677f33e493fb\\\", \\\"remark\\\": \\\"order remarks\\\"}",
-                "operationId": "037"
+                "operationId": "038"
             },
             "delete": {
                 "summary": "Batch Cancel Order - Old",
@@ -6750,7 +7125,7 @@
                 "x-api-rate-limit-weight": 20,
                 "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": {\\n        \\\"cancelledOrderIds\\\": [\\n            \\\"674a8635b38d120007709c0f\\\",\\n            \\\"674a8630439c100007d3bce1\\\"\\n        ]\\n    }\\n}",
                 "x-request-example": "{\\\"symbol\\\": \\\"BTC-USDT\\\", \\\"tradeType\\\": \\\"TRADE\\\"}",
-                "operationId": "042"
+                "operationId": "043"
             },
             "get": {
                 "summary": "Get Orders List - Old",
@@ -7145,7 +7520,7 @@
                 "x-api-rate-limit-weight": 2,
                 "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": {\\n        \\\"currentPage\\\": 1,\\n        \\\"pageSize\\\": 50,\\n        \\\"totalNum\\\": 1,\\n        \\\"totalPage\\\": 1,\\n        \\\"items\\\": [\\n            {\\n                \\\"id\\\": \\\"674a9a872033a50007e2790d\\\",\\n                \\\"symbol\\\": \\\"BTC-USDT\\\",\\n                \\\"opType\\\": \\\"DEAL\\\",\\n                \\\"type\\\": \\\"limit\\\",\\n                \\\"side\\\": \\\"buy\\\",\\n                \\\"price\\\": \\\"50000\\\",\\n                \\\"size\\\": \\\"0.00001\\\",\\n                \\\"funds\\\": \\\"0\\\",\\n                \\\"dealFunds\\\": \\\"0\\\",\\n                \\\"dealSize\\\": \\\"0\\\",\\n                \\\"fee\\\": \\\"0\\\",\\n                \\\"feeCurrency\\\": \\\"USDT\\\",\\n                \\\"stp\\\": \\\"\\\",\\n                \\\"stop\\\": \\\"\\\",\\n                \\\"stopTriggered\\\": false,\\n                \\\"stopPrice\\\": \\\"0\\\",\\n                \\\"timeInForce\\\": \\\"GTC\\\",\\n                \\\"postOnly\\\": false,\\n                \\\"hidden\\\": false,\\n                \\\"iceberg\\\": false,\\n                \\\"visibleSize\\\": \\\"0\\\",\\n                \\\"cancelAfter\\\": 0,\\n                \\\"channel\\\": \\\"API\\\",\\n                \\\"clientOid\\\": \\\"5c52e11203aa677f33e4923fb\\\",\\n                \\\"remark\\\": \\\"order remarks\\\",\\n                \\\"tags\\\": null,\\n                \\\"isActive\\\": false,\\n                \\\"cancelExist\\\": true,\\n                \\\"createdAt\\\": 1732942471752,\\n                \\\"tradeType\\\": \\\"TRADE\\\"\\n            }\\n        ]\\n    }\\n}",
                 "x-request-example": "{\\\"symbol\\\": \\\"BTC-USDT\\\", \\\"status\\\": \\\"active\\\", \\\"side\\\": \\\"buy\\\", \\\"type\\\": \\\"limit\\\", \\\"tradeType\\\": \\\"TRADE\\\", \\\"startAt\\\": 123456, \\\"endAt\\\": 123456, \\\"currentPage\\\": 1, \\\"pageSize\\\": 50}",
-                "operationId": "043"
+                "operationId": "044"
             }
         },
         "/api/v1/orders/test": {
@@ -7404,7 +7779,7 @@
                 },
                 "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": {\\n        \\\"orderId\\\": \\\"674a8776291d9e00074f1edf\\\"\\n    }\\n}",
                 "x-request-example": "{\\\"type\\\": \\\"limit\\\", \\\"symbol\\\": \\\"BTC-USDT\\\", \\\"side\\\": \\\"buy\\\", \\\"price\\\": \\\"50000\\\", \\\"size\\\": \\\"0.00001\\\", \\\"clientOid\\\": \\\"5c52e11203aa677f33e493fb\\\", \\\"remark\\\": \\\"order remarks\\\"}",
-                "operationId": "038"
+                "operationId": "039"
             }
         },
         "/api/v1/orders/multi": {
@@ -7777,7 +8152,7 @@
                 },
                 "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": {\\n        \\\"data\\\": [\\n            {\\n                \\\"symbol\\\": \\\"BTC-USDT\\\",\\n                \\\"type\\\": \\\"limit\\\",\\n                \\\"side\\\": \\\"buy\\\",\\n                \\\"price\\\": \\\"50000\\\",\\n                \\\"size\\\": \\\"0.0001\\\",\\n                \\\"funds\\\": null,\\n                \\\"stp\\\": \\\"\\\",\\n                \\\"stop\\\": \\\"\\\",\\n                \\\"stopPrice\\\": null,\\n                \\\"timeInForce\\\": \\\"GTC\\\",\\n                \\\"cancelAfter\\\": 0,\\n                \\\"postOnly\\\": false,\\n                \\\"hidden\\\": false,\\n                \\\"iceberge\\\": false,\\n                \\\"iceberg\\\": false,\\n                \\\"visibleSize\\\": null,\\n                \\\"channel\\\": \\\"API\\\",\\n                \\\"id\\\": \\\"674a97dfef434f0007efc431\\\",\\n                \\\"status\\\": \\\"success\\\",\\n                \\\"failMsg\\\": null,\\n                \\\"clientOid\\\": \\\"3d07008668054da6b3cb12e432c2b13a\\\"\\n            },\\n            {\\n                \\\"symbol\\\": \\\"BTC-USDT\\\",\\n                \\\"type\\\": \\\"limit\\\",\\n                \\\"side\\\": \\\"buy\\\",\\n                \\\"price\\\": \\\"49999\\\",\\n                \\\"size\\\": \\\"0.0001\\\",\\n                \\\"funds\\\": null,\\n                \\\"stp\\\": \\\"\\\",\\n                \\\"stop\\\": \\\"\\\",\\n                \\\"stopPrice\\\": null,\\n                \\\"timeInForce\\\": \\\"GTC\\\",\\n                \\\"cancelAfter\\\": 0,\\n                \\\"postOnly\\\": false,\\n                \\\"hidden\\\": false,\\n                \\\"iceberge\\\": false,\\n                \\\"iceberg\\\": false,\\n                \\\"visibleSize\\\": null,\\n                \\\"channel\\\": \\\"API\\\",\\n                \\\"id\\\": \\\"674a97dffb378b00077b9c20\\\",\\n                \\\"status\\\": \\\"fail\\\",\\n                \\\"failMsg\\\": \\\"Balance insufficient!\\\",\\n                \\\"clientOid\\\": \\\"37245dbe6e134b5c97732bfb36cd4a9d\\\"\\n            }\\n        ]\\n    }\\n}",
                 "x-request-example": "{\\\"symbol\\\": \\\"BTC-USDT\\\", \\\"orderList\\\": [{\\\"clientOid\\\": \\\"3d07008668054da6b3cb12e432c2b13a\\\", \\\"side\\\": \\\"buy\\\", \\\"type\\\": \\\"limit\\\", \\\"price\\\": \\\"50000\\\", \\\"size\\\": \\\"0.0001\\\"}, {\\\"clientOid\\\": \\\"37245dbe6e134b5c97732bfb36cd4a9d\\\", \\\"side\\\": \\\"buy\\\", \\\"type\\\": \\\"limit\\\", \\\"price\\\": \\\"49999\\\", \\\"size\\\": \\\"0.0001\\\"}]}",
-                "operationId": "039"
+                "operationId": "040"
             }
         },
         "/api/v1/orders/{orderId}": {
@@ -7845,7 +8220,7 @@
                 "x-api-rate-limit-weight": 3,
                 "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": {\\n        \\\"cancelledOrderIds\\\": [\\n            \\\"674a97dfef434f0007efc431\\\"\\n        ]\\n    }\\n}",
                 "x-request-example": "{\\\"orderId\\\": \\\"674a97dfef434f0007efc431\\\"}",
-                "operationId": "040"
+                "operationId": "041"
             },
             "get": {
                 "summary": "Get Order By OrderId - Old",
@@ -8034,7 +8409,7 @@
                 "x-api-rate-limit-weight": 2,
                 "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": {\\n        \\\"id\\\": \\\"674a97dfef434f0007efc431\\\",\\n        \\\"symbol\\\": \\\"BTC-USDT\\\",\\n        \\\"opType\\\": \\\"DEAL\\\",\\n        \\\"type\\\": \\\"limit\\\",\\n        \\\"side\\\": \\\"buy\\\",\\n        \\\"price\\\": \\\"50000\\\",\\n        \\\"size\\\": \\\"0.0001\\\",\\n        \\\"funds\\\": \\\"0\\\",\\n        \\\"dealFunds\\\": \\\"0\\\",\\n        \\\"dealSize\\\": \\\"0\\\",\\n        \\\"fee\\\": \\\"0\\\",\\n        \\\"feeCurrency\\\": \\\"USDT\\\",\\n        \\\"stp\\\": \\\"\\\",\\n        \\\"stop\\\": \\\"\\\",\\n        \\\"stopTriggered\\\": false,\\n        \\\"stopPrice\\\": \\\"0\\\",\\n        \\\"timeInForce\\\": \\\"GTC\\\",\\n        \\\"postOnly\\\": false,\\n        \\\"hidden\\\": false,\\n        \\\"iceberg\\\": false,\\n        \\\"visibleSize\\\": \\\"0\\\",\\n        \\\"cancelAfter\\\": 0,\\n        \\\"channel\\\": \\\"API\\\",\\n        \\\"clientOid\\\": \\\"3d07008668054da6b3cb12e432c2b13a\\\",\\n        \\\"remark\\\": null,\\n        \\\"tags\\\": null,\\n        \\\"isActive\\\": false,\\n        \\\"cancelExist\\\": true,\\n        \\\"createdAt\\\": 1732941791518,\\n        \\\"tradeType\\\": \\\"TRADE\\\"\\n    }\\n}",
                 "x-request-example": "{\\\"orderId\\\": \\\"674a97dfef434f0007efc431\\\"}",
-                "operationId": "045"
+                "operationId": "046"
             }
         },
         "/api/v1/order/client-order/{clientOid}": {
@@ -8112,7 +8487,7 @@
                 "x-api-rate-limit-weight": 3,
                 "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": {\\n        \\\"cancelledOrderId\\\": \\\"67c3252a63d25e0007f91de9\\\",\\n        \\\"clientOid\\\": \\\"5c52e11203aa677f331e493fb\\\",\\n        \\\"cancelledOcoOrderIds\\\": null\\n    }\\n}",
                 "x-request-example": "{\\\"clientOid\\\": \\\"5c52e11203aa677f331e493fb\\\"}",
-                "operationId": "041"
+                "operationId": "042"
             },
             "get": {
                 "summary": "Get Order By ClientOid - Old",
@@ -8301,7 +8676,7 @@
                 "x-api-rate-limit-weight": 3,
                 "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": {\\n        \\\"id\\\": \\\"674a97dfef434f0007efc431\\\",\\n        \\\"symbol\\\": \\\"BTC-USDT\\\",\\n        \\\"opType\\\": \\\"DEAL\\\",\\n        \\\"type\\\": \\\"limit\\\",\\n        \\\"side\\\": \\\"buy\\\",\\n        \\\"price\\\": \\\"50000\\\",\\n        \\\"size\\\": \\\"0.0001\\\",\\n        \\\"funds\\\": \\\"0\\\",\\n        \\\"dealFunds\\\": \\\"0\\\",\\n        \\\"dealSize\\\": \\\"0\\\",\\n        \\\"fee\\\": \\\"0\\\",\\n        \\\"feeCurrency\\\": \\\"USDT\\\",\\n        \\\"stp\\\": \\\"\\\",\\n        \\\"stop\\\": \\\"\\\",\\n        \\\"stopTriggered\\\": false,\\n        \\\"stopPrice\\\": \\\"0\\\",\\n        \\\"timeInForce\\\": \\\"GTC\\\",\\n        \\\"postOnly\\\": false,\\n        \\\"hidden\\\": false,\\n        \\\"iceberg\\\": false,\\n        \\\"visibleSize\\\": \\\"0\\\",\\n        \\\"cancelAfter\\\": 0,\\n        \\\"channel\\\": \\\"API\\\",\\n        \\\"clientOid\\\": \\\"3d07008668054da6b3cb12e432c2b13a\\\",\\n        \\\"remark\\\": null,\\n        \\\"tags\\\": null,\\n        \\\"isActive\\\": false,\\n        \\\"cancelExist\\\": true,\\n        \\\"createdAt\\\": 1732941791518,\\n        \\\"tradeType\\\": \\\"TRADE\\\"\\n    }\\n}",
                 "x-request-example": "{\\\"clientOid\\\": \\\"3d07008668054da6b3cb12e432c2b13a\\\"}",
-                "operationId": "046"
+                "operationId": "047"
             }
         },
         "/api/v1/limit/orders": {
@@ -8484,7 +8859,7 @@
                 "x-sdk-method-description": "Request your current order list via this endpoint. The return value is the data after Pagination, sorted in descending order according to time.",
                 "x-api-rate-limit-weight": 3,
                 "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": [\\n        {\\n            \\\"id\\\": \\\"674a9a872033a50007e2790d\\\",\\n            \\\"symbol\\\": \\\"BTC-USDT\\\",\\n            \\\"opType\\\": \\\"DEAL\\\",\\n            \\\"type\\\": \\\"limit\\\",\\n            \\\"side\\\": \\\"buy\\\",\\n            \\\"price\\\": \\\"50000\\\",\\n            \\\"size\\\": \\\"0.00001\\\",\\n            \\\"funds\\\": \\\"0\\\",\\n            \\\"dealFunds\\\": \\\"0\\\",\\n            \\\"dealSize\\\": \\\"0\\\",\\n            \\\"fee\\\": \\\"0\\\",\\n            \\\"feeCurrency\\\": \\\"USDT\\\",\\n            \\\"stp\\\": \\\"\\\",\\n            \\\"stop\\\": \\\"\\\",\\n            \\\"stopTriggered\\\": false,\\n            \\\"stopPrice\\\": \\\"0\\\",\\n            \\\"timeInForce\\\": \\\"GTC\\\",\\n            \\\"postOnly\\\": false,\\n            \\\"hidden\\\": false,\\n            \\\"iceberg\\\": false,\\n            \\\"visibleSize\\\": \\\"0\\\",\\n            \\\"cancelAfter\\\": 0,\\n            \\\"channel\\\": \\\"API\\\",\\n            \\\"clientOid\\\": \\\"5c52e11203aa677f33e4923fb\\\",\\n            \\\"remark\\\": \\\"order remarks\\\",\\n            \\\"tags\\\": null,\\n            \\\"isActive\\\": false,\\n            \\\"cancelExist\\\": true,\\n            \\\"createdAt\\\": 1732942471752,\\n            \\\"tradeType\\\": \\\"TRADE\\\"\\n        }\\n    ]\\n}",
-                "operationId": "044"
+                "operationId": "045"
             }
         },
         "/api/v1/fills": {
@@ -8793,7 +9168,7 @@
                 "x-api-rate-limit-weight": 10,
                 "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": {\\n        \\\"currentPage\\\": 1,\\n        \\\"pageSize\\\": 50,\\n        \\\"totalNum\\\": 1,\\n        \\\"totalPage\\\": 1,\\n        \\\"items\\\": [\\n            {\\n                \\\"symbol\\\": \\\"DOGE-USDT\\\",\\n                \\\"tradeId\\\": \\\"10862827223795713\\\",\\n                \\\"orderId\\\": \\\"6745698ef4f1200007c561a8\\\",\\n                \\\"counterOrderId\\\": \\\"6745695ef15b270007ac5076\\\",\\n                \\\"side\\\": \\\"buy\\\",\\n                \\\"liquidity\\\": \\\"taker\\\",\\n                \\\"forceTaker\\\": false,\\n                \\\"price\\\": \\\"0.40739\\\",\\n                \\\"size\\\": \\\"10\\\",\\n                \\\"funds\\\": \\\"4.0739\\\",\\n                \\\"fee\\\": \\\"0.0040739\\\",\\n                \\\"feeRate\\\": \\\"0.001\\\",\\n                \\\"feeCurrency\\\": \\\"USDT\\\",\\n                \\\"stop\\\": \\\"\\\",\\n                \\\"tradeType\\\": \\\"TRADE\\\",\\n                \\\"type\\\": \\\"market\\\",\\n                \\\"createdAt\\\": 1732602254928\\n            }\\n        ]\\n    }\\n}",
                 "x-request-example": "{\\\"symbol\\\": \\\"BTC-USDT\\\", \\\"orderId\\\": \\\"example_string_default_value\\\", \\\"side\\\": \\\"buy\\\", \\\"type\\\": \\\"limit\\\", \\\"tradeType\\\": \\\"TRADE\\\", \\\"startAt\\\": 1728663338000, \\\"endAt\\\": 1728692138000, \\\"currentPage\\\": 1, \\\"pageSize\\\": 50}",
-                "operationId": "047"
+                "operationId": "048"
             }
         },
         "/api/v1/limit/fills": {
@@ -8924,7 +9299,7 @@
                 "x-sdk-method-description": "Request a list of 1000 fills in the last 24 hours via this endpoint. The return value is the data after Pagination, sorted in descending order according to time.",
                 "x-api-rate-limit-weight": 20,
                 "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": [\\n        {\\n            \\\"symbol\\\": \\\"BTC-USDT\\\",\\n            \\\"tradeId\\\": \\\"11732720444522497\\\",\\n            \\\"orderId\\\": \\\"674aab24754b1e00077dbc69\\\",\\n            \\\"counterOrderId\\\": \\\"674aab1fb26bfb0007a18b67\\\",\\n            \\\"side\\\": \\\"buy\\\",\\n            \\\"liquidity\\\": \\\"taker\\\",\\n            \\\"forceTaker\\\": false,\\n            \\\"price\\\": \\\"96999.6\\\",\\n            \\\"size\\\": \\\"0.00001\\\",\\n            \\\"funds\\\": \\\"0.969996\\\",\\n            \\\"fee\\\": \\\"0.000969996\\\",\\n            \\\"feeRate\\\": \\\"0.001\\\",\\n            \\\"feeCurrency\\\": \\\"USDT\\\",\\n            \\\"stop\\\": \\\"\\\",\\n            \\\"tradeType\\\": \\\"TRADE\\\",\\n            \\\"type\\\": \\\"limit\\\",\\n            \\\"createdAt\\\": 1732946724082\\n        }\\n    ]\\n}",
-                "operationId": "048"
+                "operationId": "049"
             }
         }
     },

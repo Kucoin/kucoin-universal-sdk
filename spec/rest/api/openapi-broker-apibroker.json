@@ -35,7 +35,7 @@
                     {
                         "name": "tradeType",
                         "in": "query",
-                        "description": "Transaction type: 1, spot; 2: futures",
+                        "description": "Transaction type: 1, spot; 2, futures",
                         "required": true,
                         "schema": {
                             "type": "string",

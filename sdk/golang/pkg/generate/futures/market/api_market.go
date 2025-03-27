@@ -122,7 +122,7 @@ type MarketAPI interface {
 	GetKlines(req *GetKlinesReq, ctx context.Context) (*GetKlinesResp, error)
 
 	// GetMarkPrice Get Mark Price
-	// Description: Get the current mark price.
+	// Description: Get the current mark price (Update snapshots once per second, real-time query).
 	// Documentation: https://www.kucoin.com/docs-new/api-3470233
 	// +-----------------------+---------+
 	// | Extra API Info        | Value   |
@@ -136,7 +136,7 @@ type MarketAPI interface {
 	GetMarkPrice(req *GetMarkPriceReq, ctx context.Context) (*GetMarkPriceResp, error)
 
 	// GetSpotIndexPrice Get Spot Index Price
-	// Description: Get Spot Index Price.
+	// Description: Get Spot Index Price (Update snapshots once per second,  and there is a 5s cache when querying).
 	// Documentation: https://www.kucoin.com/docs-new/api-3470231
 	// +-----------------------+---------+
 	// | Extra API Info        | Value   |
@@ -150,7 +150,7 @@ type MarketAPI interface {
 	GetSpotIndexPrice(req *GetSpotIndexPriceReq, ctx context.Context) (*GetSpotIndexPriceResp, error)
 
 	// GetInterestRateIndex Get Interest Rate Index
-	// Description: Get interest rate Index.
+	// Description: Get interest rate Index (real-time query).
 	// Documentation: https://www.kucoin.com/docs-new/api-3470226
 	// +-----------------------+---------+
 	// | Extra API Info        | Value   |
@@ -164,7 +164,7 @@ type MarketAPI interface {
 	GetInterestRateIndex(req *GetInterestRateIndexReq, ctx context.Context) (*GetInterestRateIndexResp, error)
 
 	// GetPremiumIndex Get Premium Index
-	// Description: Submit request to get premium index.
+	// Description: Submit request to get premium index (Update snapshots once per second, real-time query).
 	// Documentation: https://www.kucoin.com/docs-new/api-3470227
 	// +-----------------------+---------+
 	// | Extra API Info        | Value   |

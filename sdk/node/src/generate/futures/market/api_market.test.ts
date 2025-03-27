@@ -157,7 +157,7 @@ describe('Auto Test', () => {
          * Get Part OrderBook
          * /api/v1/level2/depth{size}
          */
-        let data = '{"symbol": "XBTUSDM", "size": "20"}';
+        let data = '{"size": "20", "symbol": "XBTUSDM"}';
         let req = GetPartOrderBookReq.fromJson(data);
         expect(Object.values(req).every((value) => value === null || value === undefined)).toBe(
             false,

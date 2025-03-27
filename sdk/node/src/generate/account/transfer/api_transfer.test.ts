@@ -140,6 +140,38 @@ describe('Auto Test', () => {
             console.log(resp);
         }
     });
+    test('getFuturesAccountTransferOutLedger request test', () => {
+        /**
+         * getFuturesAccountTransferOutLedger
+         * Get Futures Account Transfer Out Ledger
+         * /api/v1/transfer-list
+         */
+        let data =
+            '{"currency": "XBT", "type": "MAIN", "tag": ["mock_a", "mock_b"], "startAt": 1728663338000, "endAt": 1728692138000, "currentPage": 1, "pageSize": 50}';
+        let req = GetFuturesAccountTransferOutLedgerReq.fromJson(data);
+        expect(Object.values(req).every((value) => value === null || value === undefined)).toBe(
+            false,
+        );
+        console.log(req);
+    });
+
+    test('getFuturesAccountTransferOutLedger response test', () => {
+        /**
+         * getFuturesAccountTransferOutLedger
+         * Get Futures Account Transfer Out Ledger
+         * /api/v1/transfer-list
+         */
+        let data =
+            '{"code":"200000","data":{"currentPage":1,"pageSize":50,"totalNum":1,"totalPage":1,"items":[{"applyId":"670bf84c577f6c00017a1c48","currency":"USDT","recRemark":"","recSystem":"KUCOIN","status":"SUCCESS","amount":"0.01","reason":"","offset":1519769124134806,"createdAt":1728837708000,"remark":""}]}}';
+        let commonResp = RestResponse.fromJson(data);
+        let resp = GetFuturesAccountTransferOutLedgerResp.fromObject(commonResp.data);
+        if (commonResp.data !== null) {
+            expect(
+                Object.values(resp).every((value) => value === null || value === undefined),
+            ).toBe(false);
+            console.log(resp);
+        }
+    });
     test('futuresAccountTransferOut request test', () => {
         /**
          * futuresAccountTransferOut
@@ -194,38 +226,6 @@ describe('Auto Test', () => {
         let data = '{"code":"200000","data":null}';
         let commonResp = RestResponse.fromJson(data);
         let resp = FuturesAccountTransferInResp.fromObject(commonResp.data);
-        if (commonResp.data !== null) {
-            expect(
-                Object.values(resp).every((value) => value === null || value === undefined),
-            ).toBe(false);
-            console.log(resp);
-        }
-    });
-    test('getFuturesAccountTransferOutLedger request test', () => {
-        /**
-         * getFuturesAccountTransferOutLedger
-         * Get Futures Account Transfer Out Ledger
-         * /api/v1/transfer-list
-         */
-        let data =
-            '{"currency": "XBT", "type": "MAIN", "tag": ["mock_a", "mock_b"], "startAt": 1728663338000, "endAt": 1728692138000, "currentPage": 1, "pageSize": 50}';
-        let req = GetFuturesAccountTransferOutLedgerReq.fromJson(data);
-        expect(Object.values(req).every((value) => value === null || value === undefined)).toBe(
-            false,
-        );
-        console.log(req);
-    });
-
-    test('getFuturesAccountTransferOutLedger response test', () => {
-        /**
-         * getFuturesAccountTransferOutLedger
-         * Get Futures Account Transfer Out Ledger
-         * /api/v1/transfer-list
-         */
-        let data =
-            '{"code":"200000","data":{"currentPage":1,"pageSize":50,"totalNum":1,"totalPage":1,"items":[{"applyId":"670bf84c577f6c00017a1c48","currency":"USDT","recRemark":"","recSystem":"KUCOIN","status":"SUCCESS","amount":"0.01","reason":"","offset":1519769124134806,"createdAt":1728837708000,"remark":""}]}}';
-        let commonResp = RestResponse.fromJson(data);
-        let resp = GetFuturesAccountTransferOutLedgerResp.fromObject(commonResp.data);
         if (commonResp.data !== null) {
             expect(
                 Object.values(resp).every((value) => value === null || value === undefined),

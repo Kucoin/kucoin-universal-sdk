@@ -142,7 +142,7 @@ func TestMarketGetPartOrderBookReqModel(t *testing.T) {
 	// Get Part OrderBook
 	// /api/v1/level2/depth{size}
 
-	data := "{\"symbol\": \"XBTUSDM\", \"size\": \"20\"}"
+	data := "{\"size\": \"20\", \"symbol\": \"XBTUSDM\"}"
 	req := &GetPartOrderBookReq{}
 	err := json.Unmarshal([]byte(data), req)
 	req.ToMap()

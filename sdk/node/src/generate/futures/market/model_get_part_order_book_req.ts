@@ -6,15 +6,15 @@ import { Serializable } from '@internal/interfaces/serializable';
 
 export class GetPartOrderBookReq implements Serializable {
     /**
-     * Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)
-     */
-    symbol?: string;
-
-    /**
      * Get the depth layer, optional value: 20, 100
      */
     @Reflect.metadata('path', 'size')
     size?: string;
+
+    /**
+     * Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)
+     */
+    symbol?: string;
 
     /**
      * Private constructor, please use the corresponding static methods to construct the object.
@@ -33,17 +33,17 @@ export class GetPartOrderBookReq implements Serializable {
      */
     static create(data: {
         /**
-         * Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)
-         */
-        symbol?: string;
-        /**
          * Get the depth layer, optional value: 20, 100
          */
         size?: string;
+        /**
+         * Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)
+         */
+        symbol?: string;
     }): GetPartOrderBookReq {
         let obj = new GetPartOrderBookReq();
-        obj.symbol = data.symbol;
         obj.size = data.size;
+        obj.symbol = data.symbol;
         return obj;
     }
 
@@ -72,18 +72,18 @@ export class GetPartOrderBookReqBuilder {
         this.obj = obj;
     }
     /**
-     * Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)
-     */
-    setSymbol(value: string): GetPartOrderBookReqBuilder {
-        this.obj.symbol = value;
-        return this;
-    }
-
-    /**
      * Get the depth layer, optional value: 20, 100
      */
     setSize(value: string): GetPartOrderBookReqBuilder {
         this.obj.size = value;
+        return this;
+    }
+
+    /**
+     * Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)
+     */
+    setSymbol(value: string): GetPartOrderBookReqBuilder {
+        this.obj.symbol = value;
         return this;
     }
 

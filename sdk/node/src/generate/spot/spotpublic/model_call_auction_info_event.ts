@@ -27,7 +27,7 @@ export class CallAuctionInfoEvent implements Response<WsMessage> {
      */
     sellOrderRangeHighPrice: string;
     /**
-     * Bell ​​order minimum price
+     * Buy ​​order minimum price
      */
     buyOrderRangeLowPrice: string;
     /**

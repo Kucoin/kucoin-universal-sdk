@@ -57,7 +57,7 @@ describe('Auto Test', () => {
          * /api/v3/announcements
          */
         let data =
-            '{\n    "code": "200000",\n    "data": {\n        "totalNum": 195,\n        "totalPage": 13,\n        "currentPage": 1,\n        "pageSize": 15,\n        "items": [\n            {\n                "annId": 129045,\n                "annTitle": "KuCoin Isolated Margin Adds the Scroll (SCR) Trading Pair",\n                "annType": [\n                    "latest-announcements"\n                ],\n                "annDesc": "To enrich the variety of assets available, KuCoin\u2019s Isolated Margin Trading platform has added the Scroll (SCR) asset and trading pair.",\n                "cTime": 1729594043000,\n                "language": "en_US",\n                "annUrl": "https://www.kucoin.com/announcement/kucoin-isolated-margin-adds-scr?lang=en_US"\n            },\n            {\n                "annId": 129001,\n                "annTitle": "DAPP-30D Fixed Promotion, Enjoy an APR of 200%!\u200b",\n                "annType": [\n                    "latest-announcements",\n                    "activities"\n                ],\n                "annDesc": "KuCoin Earn will be launching the DAPP Fixed Promotion at 10:00:00 on October 22, 2024 (UTC). The available product is \u201cDAPP-30D\'\' with an APR of 200%.",\n                "cTime": 1729588460000,\n                "language": "en_US",\n                "annUrl": "https://www.kucoin.com/announcement/dapp-30d-fixed-promotion-enjoy?lang=en_US"\n            },\n            {\n                "annId": 128581,\n                "annTitle": "NAYM (NAYM) Gets Listed on KuCoin! World Premiere!",\n                "annType": [\n                    "latest-announcements",\n                    "new-listings"\n                ],\n                "annDesc": "Trading: 11:00 on October 22, 2024 (UTC)",\n                "cTime": 1729497729000,\n                "language": "en_US",\n                "annUrl": "https://www.kucoin.com/announcement/en-naym-naym-gets-listed-on-kucoin-world-premiere?lang=en_US"\n            }\n        ]\n    }\n}';
+            '{\n    "code": "200000",\n    "data": {\n        "totalNum": 195,\n        "totalPage": 13,\n        "currentPage": 1,\n        "pageSize": 15,\n        "items": [\n            {\n                "annId": 129045,\n                "annTitle": "KuCoin Isolated Margin Adds the Scroll (SCR) Trading Pair",\n                "annType": [\n                    "latest-announcements"\n                ],\n                "annDesc": "To enrich the variety of assets available,\xa0KuCoin\u2019s Isolated Margin Trading platform has added the Scroll (SCR)\xa0asset and trading pair.",\n                "cTime": 1729594043000,\n                "language": "en_US",\n                "annUrl": "https://www.kucoin.com/announcement/kucoin-isolated-margin-adds-scr?lang=en_US"\n            },\n            {\n                "annId": 129001,\n                "annTitle": "DAPP-30D Fixed Promotion, Enjoy an APR of 200%!\u200b",\n                "annType": [\n                    "latest-announcements",\n                    "activities"\n                ],\n                "annDesc": "KuCoin Earn will be launching the DAPP Fixed Promotion at 10:00:00 on October 22, 2024 (UTC). The available product is \u201cDAPP-30D\'\' with an APR of 200%.",\n                "cTime": 1729588460000,\n                "language": "en_US",\n                "annUrl": "https://www.kucoin.com/announcement/dapp-30d-fixed-promotion-enjoy?lang=en_US"\n            },\n            {\n                "annId": 128581,\n                "annTitle": "NAYM (NAYM) Gets Listed on KuCoin! World Premiere!",\n                "annType": [\n                    "latest-announcements",\n                    "new-listings"\n                ],\n                "annDesc": "Trading:\xa011:00 on October 22, 2024 (UTC)",\n                "cTime": 1729497729000,\n                "language": "en_US",\n                "annUrl": "https://www.kucoin.com/announcement/en-naym-naym-gets-listed-on-kucoin-world-premiere?lang=en_US"\n            }\n        ]\n    }\n}';
         let commonResp = RestResponse.fromJson(data);
         let resp = GetAnnouncementsResp.fromObject(commonResp.data);
         if (commonResp.data !== null) {
@@ -73,7 +73,7 @@ describe('Auto Test', () => {
          * Get Currency
          * /api/v3/currencies/{currency}
          */
-        let data = '{"chain": "eth", "currency": "BTC"}';
+        let data = '{"currency": "BTC", "chain": "eth"}';
         let req = GetCurrencyReq.fromJson(data);
         expect(Object.values(req).every((value) => value === null || value === undefined)).toBe(
             false,
@@ -442,7 +442,7 @@ describe('Auto Test', () => {
     test('get24hrStats request test', () => {
         /**
          * get24hrStats
-         * Get 24hr stats
+         * Get 24hr Stats
          * /api/v1/market/stats
          */
         let data = '{"symbol": "BTC-USDT"}';
@@ -456,7 +456,7 @@ describe('Auto Test', () => {
     test('get24hrStats response test', () => {
         /**
          * get24hrStats
-         * Get 24hr stats
+         * Get 24hr Stats
          * /api/v1/market/stats
          */
         let data =

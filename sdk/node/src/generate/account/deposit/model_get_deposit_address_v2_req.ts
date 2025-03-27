@@ -10,7 +10,7 @@ export class GetDepositAddressV2Req implements Serializable {
     currency?: string;
 
     /**
-     * Chain id of currency
+     * Chain ID of currency
      */
     chain?: string;
 
@@ -35,7 +35,7 @@ export class GetDepositAddressV2Req implements Serializable {
          */
         currency?: string;
         /**
-         * Chain id of currency
+         * Chain ID of currency
          */
         chain?: string;
     }): GetDepositAddressV2Req {
@@ -78,7 +78,7 @@ export class GetDepositAddressV2ReqBuilder {
     }
 
     /**
-     * Chain id of currency
+     * Chain ID of currency
      */
     setChain(value: string): GetDepositAddressV2ReqBuilder {
         this.obj.chain = value;

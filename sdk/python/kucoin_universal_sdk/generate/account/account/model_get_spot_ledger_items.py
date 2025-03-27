@@ -21,7 +21,7 @@ class GetSpotLedgerItems(BaseModel):
         fee (str): Fees generated in transaction, withdrawal, etc.
         balance (str): Remaining funds after the transaction. (Deprecated field, no actual use of the value field)
         account_type (str): Master user account types: MAIN, TRADE, MARGIN or CONTRACT.
-        biz_type (str): Business type leading to changes in funds, such as exchange, withdrawal, deposit, KUCOIN_BONUS, REFERRAL_BONUS, Lendings etc.
+        biz_type (str): Business type leading to changes in funds, such as exchange, withdrawal, deposit, KUCOIN_BONUS, REFERRAL_BONUS, Lendings, etc.
         direction (str): Side, out or in
         created_at (int): Time of event
         context (str): Business related information such as order ID, serial no., etc.
@@ -50,7 +50,7 @@ class GetSpotLedgerItems(BaseModel):
     biz_type: Optional[str] = Field(
         default=None,
         description=
-        "Business type leading to changes in funds, such as exchange, withdrawal, deposit, KUCOIN_BONUS, REFERRAL_BONUS, Lendings etc.",
+        "Business type leading to changes in funds, such as exchange, withdrawal, deposit, KUCOIN_BONUS, REFERRAL_BONUS, Lendings, etc.",
         alias="bizType")
     direction: Optional[str] = Field(default=None,
                                      description="Side, out or in")

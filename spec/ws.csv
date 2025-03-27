@@ -15,10 +15,10 @@ Spot,/spotMarket/tradeOrdersV2,orderV2,False
 Spot,/spotMarket/tradeOrders,orderV1,False
 Spot,/account/balance,account,False
 Spot,/spotMarket/advancedOrders,stopOrder,False
-Margin,"/indicator/index:{symbol},{symbol}",indexPrice,True
 Margin,"/indicator/markPrice:{symbol},{symbol}",markPrice,True
-Margin,/margin/position,crossMarginPosition,False
+Margin,"/indicator/index:{symbol},{symbol}",indexPrice,True
 Margin,/margin/isolatedPosition:{symbol},isolatedMarginPosition,False
+Margin,/margin/position,crossMarginPosition,False
 Futures,/contractMarket/tickerV2:{symbol},tickerV2,True
 Futures,/contractMarket/ticker:{symbol},tickerV1,True
 Futures,/contractMarket/level2Depth5:{symbol},orderbookLevel5,True

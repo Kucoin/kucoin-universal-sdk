@@ -30,7 +30,7 @@
                                 {
                                     "value": 0,
                                     "name": "",
-                                    "description": "crypto currency"
+                                    "description": "cryptocurrency"
                                 },
                                 {
                                     "value": 1,
@@ -149,11 +149,11 @@
                                                     },
                                                     "sellTaxRate": {
                                                         "type": "string",
-                                                        "description": "Buy tax rate, This field is visible to users in certain countries"
+                                                        "description": "Buy tax rate; this field is visible to users in certain countries"
                                                     },
                                                     "buyTaxRate": {
                                                         "type": "string",
-                                                        "description": "Sell tax rate, This field is visible to users in certain countries"
+                                                        "description": "Sell tax rate; this field is visible to users in certain countries"
                                                     }
                                                 },
                                                 "required": [

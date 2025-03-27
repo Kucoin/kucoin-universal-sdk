@@ -20,7 +20,7 @@ class GetAnnouncementsItems(BaseModel):
         ann_type (list[str]): Announcement type
         ann_desc (str): Announcement description
         c_time (int): Announcement release time, Unix millisecond timestamp format
-        language (str): Language type
+        language (str): language type
         ann_url (str): Announcement link
     """
 
@@ -41,7 +41,7 @@ class GetAnnouncementsItems(BaseModel):
         description=
         "Announcement release time, Unix millisecond timestamp format",
         alias="cTime")
-    language: Optional[str] = Field(default=None, description="Language type")
+    language: Optional[str] = Field(default=None, description="language type")
     ann_url: Optional[str] = Field(default=None,
                                    description="Announcement link",
                                    alias="annUrl")

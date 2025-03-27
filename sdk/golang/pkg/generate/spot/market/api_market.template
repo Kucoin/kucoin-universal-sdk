@@ -30,7 +30,7 @@ func TestMarketGetCurrencyReq(t *testing.T) {
     // /api/v3/currencies/{currency}
 
     builder := market.NewGetCurrencyReqBuilder()
-    builder.SetChain(?).SetCurrency(?)
+    builder.SetCurrency(?).SetChain(?)
     req := builder.Build()
 
     resp, err := marketApi.GetCurrency(req, context.TODO())
@@ -319,7 +319,7 @@ func TestMarketGetFiatPriceReq(t *testing.T) {
 
 func TestMarketGet24hrStatsReq(t *testing.T) {
     // Get24hrStats
-    // Get 24hr stats
+    // Get 24hr Stats
     // /api/v1/market/stats
 
     builder := market.NewGet24hrStatsReqBuilder()

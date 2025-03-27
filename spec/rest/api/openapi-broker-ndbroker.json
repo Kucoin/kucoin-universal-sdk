@@ -482,7 +482,7 @@
                                                 }
                                             ]
                                         },
-                                        "description": "Permission group list (Only General, Spot and Futures permissions can be set, such as \"General, Trade\").\n"
+                                        "description": "Permission group list (only General, Spot and Futures permissions can be set, such as \"General, Trade\").\n"
                                     },
                                     "label": {
                                         "type": "string",
@@ -839,7 +839,7 @@
                                                 }
                                             ]
                                         },
-                                        "description": "[Permissions](https://www.kucoin.com/docs-new/doc-338144) group list (Only General, Spot and Futures permissions can be set, such as \"General, Trade\").\n"
+                                        "description": "[Permissions](https://www.kucoin.com/docs-new/doc-338144) group list (only General, Spot and Futures permissions can be set, such as \"General, Trade\").\n"
                                     },
                                     "label": {
                                         "type": "string",
@@ -975,7 +975,7 @@
                                     },
                                     "specialUid": {
                                         "type": "string",
-                                        "description": "Broker sub-account uid, must be the Broker sub-account created by the current Broker user."
+                                        "description": "Broker sub-account UID, must be the Broker sub-account created by the current Broker user."
                                     },
                                     "specialAccountType": {
                                         "type": "string",
@@ -999,7 +999,7 @@
                                     },
                                     "clientOid": {
                                         "type": "string",
-                                        "description": "Client Order ID, The unique identifier created by the client. It is recommended to use UUID. The maximum length is 128 bits.",
+                                        "description": "Client Order ID, the unique identifier created by the client. It is recommended to use UUID. The maximum length is 128 bits.",
                                         "maxLength": 128
                                     }
                                 },
@@ -1502,7 +1502,7 @@
                                             "properties": {
                                                 "chain": {
                                                     "type": "string",
-                                                    "description": "Chain id of currency"
+                                                    "description": "Chain ID of currency"
                                                 },
                                                 "hash": {
                                                     "type": "string",
@@ -1661,7 +1661,7 @@
                                                 },
                                                 "chain": {
                                                     "type": "string",
-                                                    "description": "Chain id of currency"
+                                                    "description": "Chain ID of currency"
                                                 },
                                                 "walletTxId": {
                                                     "type": "string",
@@ -1822,7 +1822,7 @@
                     {
                         "name": "tradeType",
                         "in": "query",
-                        "description": "Transaction type: 1, spot; 2: futures",
+                        "description": "Transaction type: 1, spot; 2, futures",
                         "required": true,
                         "schema": {
                             "type": "string",

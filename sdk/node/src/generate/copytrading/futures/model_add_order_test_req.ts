@@ -5,17 +5,17 @@ import { Serializable } from '@internal/interfaces/serializable';
 
 export class AddOrderTestReq implements Serializable {
     /**
-     * Unique order id created by users to identify their orders, the maximum length cannot exceed 40, e.g. UUID, Only allows numbers, characters, underline(_), and separator(-)
+     * Unique order ID created by users to identify their orders. The maximum length cannot exceed 40, e.g. UUID only allows numbers, characters, underline(_), and separator (-).
      */
     clientOid: string;
 
     /**
-     * specify if the order is to \'buy\' or \'sell\'
+     * Specify if the order is to \'buy\' or \'sell\'.
      */
     side: AddOrderTestReq.SideEnum;
 
     /**
-     * Symbol of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)
+     * Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)
      */
     symbol: string;
 
@@ -25,22 +25,22 @@ export class AddOrderTestReq implements Serializable {
     leverage: number;
 
     /**
-     * specify if the order is an \'limit\' order or \'market\' order
+     * Specify if the order is a \'limit\' order or \'market\' order
      */
     type: AddOrderTestReq.TypeEnum = AddOrderTestReq.TypeEnum.LIMIT;
 
     /**
-     * Either \'down\' or \'up\'.  If stop is used,parameter stopPrice and stopPriceType also need to be provieded.
+     * Either \'down\' or \'up\'.  If stop is used, parameter stopPrice and stopPriceType also need to be provided.
      */
     stop?: AddOrderTestReq.StopEnum;
 
     /**
-     * Either \'TP\' or \'MP\', Need to be defined if stop is specified.
+     * Either \'TP\' or \'MP\' need to be defined if stop is specified.
      */
     stopPriceType?: AddOrderTestReq.StopPriceTypeEnum;
 
     /**
-     * Need to be defined if stop is specified.
+     * Needs to be defined if stop is specified.
      */
     stopPrice?: string;
 
@@ -65,7 +65,7 @@ export class AddOrderTestReq implements Serializable {
     price?: string;
 
     /**
-     * Order size (Lot), must be a positive integer. The quantity unit of coin-swap contracts is size(lot), and other units are not supported.
+     * Order size (lot), must be a positive integer. The quantity unit of coin-swap contracts is size (lot), and other units are not supported.
      */
     size: number;
 
@@ -76,22 +76,22 @@ export class AddOrderTestReq implements Serializable {
         AddOrderTestReq.TimeInForceEnum.GOOD_TILL_CANCELED;
 
     /**
-     * Optional for type is \'limit\' order,  post only flag, invalid when timeInForce is IOC. When postOnly is true, not allowed choose hidden or iceberg. The post-only flag ensures that the trader always pays the maker fee and provides liquidity to the order book. If any part of the order is going to pay taker fee, the order will be fully rejected.
+     * Optional for type is \'limit\' order, post only flag, invalid when timeInForce is IOC. When postOnly is true, not allowed to choose hidden or iceberg. The post-only flag ensures that the trader always pays the maker fee and provides liquidity to the order book. If any part of the order is going to pay taker fees, the order will be fully rejected.
      */
     postOnly?: boolean = false;
 
     /**
-     * Optional for type is \'limit\' order, orders not displaying in order book. When hidden chose, not allowed choose postOnly.
+     * Optional for type is \'limit\' order, orders not displaying in order book. When hidden is chosen, choosing postOnly is not allowed.
      */
     hidden?: boolean = false;
 
     /**
-     * Optional for type is \'limit\' order, Only visible portion of the order is displayed in the order book. When iceberg chose, not allowed choose postOnly.
+     * Optional for type is \'limit\' order, Only visible portion of the order is displayed in the order book. When iceberg is chose, choosing postOnly is not allowed.
      */
     iceberg?: boolean = false;
 
     /**
-     * Optional for type is \'limit\' order, The maximum visible size of an iceberg order. please place order in size (lots), The units of qty (base currency) and valueQty (value) are not supported. Need to be defined if iceberg is specified.
+     * Optional for type is \'limit\' order, the maximum visible size of an iceberg order. Please place order in size (lots). The units of qty (base currency) and valueQty (value) are not supported. Need to be defined if iceberg is specified.
      */
     visibleSize?: string;
 
@@ -125,15 +125,15 @@ export class AddOrderTestReq implements Serializable {
      */
     static create(data: {
         /**
-         * Unique order id created by users to identify their orders, the maximum length cannot exceed 40, e.g. UUID, Only allows numbers, characters, underline(_), and separator(-)
+         * Unique order ID created by users to identify their orders. The maximum length cannot exceed 40, e.g. UUID only allows numbers, characters, underline(_), and separator (-).
          */
         clientOid: string;
         /**
-         * specify if the order is to \'buy\' or \'sell\'
+         * Specify if the order is to \'buy\' or \'sell\'.
          */
         side: AddOrderTestReq.SideEnum;
         /**
-         * Symbol of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)
+         * Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)
          */
         symbol: string;
         /**
@@ -141,19 +141,19 @@ export class AddOrderTestReq implements Serializable {
          */
         leverage: number;
         /**
-         * specify if the order is an \'limit\' order or \'market\' order
+         * Specify if the order is a \'limit\' order or \'market\' order
          */
         type: AddOrderTestReq.TypeEnum;
         /**
-         * Either \'down\' or \'up\'.  If stop is used,parameter stopPrice and stopPriceType also need to be provieded.
+         * Either \'down\' or \'up\'.  If stop is used, parameter stopPrice and stopPriceType also need to be provided.
          */
         stop?: AddOrderTestReq.StopEnum;
         /**
-         * Either \'TP\' or \'MP\', Need to be defined if stop is specified.
+         * Either \'TP\' or \'MP\' need to be defined if stop is specified.
          */
         stopPriceType?: AddOrderTestReq.StopPriceTypeEnum;
         /**
-         * Need to be defined if stop is specified.
+         * Needs to be defined if stop is specified.
          */
         stopPrice?: string;
         /**
@@ -173,7 +173,7 @@ export class AddOrderTestReq implements Serializable {
          */
         price?: string;
         /**
-         * Order size (Lot), must be a positive integer. The quantity unit of coin-swap contracts is size(lot), and other units are not supported.
+         * Order size (lot), must be a positive integer. The quantity unit of coin-swap contracts is size (lot), and other units are not supported.
          */
         size: number;
         /**
@@ -181,19 +181,19 @@ export class AddOrderTestReq implements Serializable {
          */
         timeInForce?: AddOrderTestReq.TimeInForceEnum;
         /**
-         * Optional for type is \'limit\' order,  post only flag, invalid when timeInForce is IOC. When postOnly is true, not allowed choose hidden or iceberg. The post-only flag ensures that the trader always pays the maker fee and provides liquidity to the order book. If any part of the order is going to pay taker fee, the order will be fully rejected.
+         * Optional for type is \'limit\' order, post only flag, invalid when timeInForce is IOC. When postOnly is true, not allowed to choose hidden or iceberg. The post-only flag ensures that the trader always pays the maker fee and provides liquidity to the order book. If any part of the order is going to pay taker fees, the order will be fully rejected.
          */
         postOnly?: boolean;
         /**
-         * Optional for type is \'limit\' order, orders not displaying in order book. When hidden chose, not allowed choose postOnly.
+         * Optional for type is \'limit\' order, orders not displaying in order book. When hidden is chosen, choosing postOnly is not allowed.
          */
         hidden?: boolean;
         /**
-         * Optional for type is \'limit\' order, Only visible portion of the order is displayed in the order book. When iceberg chose, not allowed choose postOnly.
+         * Optional for type is \'limit\' order, Only visible portion of the order is displayed in the order book. When iceberg is chose, choosing postOnly is not allowed.
          */
         iceberg?: boolean;
         /**
-         * Optional for type is \'limit\' order, The maximum visible size of an iceberg order. please place order in size (lots), The units of qty (base currency) and valueQty (value) are not supported. Need to be defined if iceberg is specified.
+         * Optional for type is \'limit\' order, the maximum visible size of an iceberg order. Please place order in size (lots). The units of qty (base currency) and valueQty (value) are not supported. Need to be defined if iceberg is specified.
          */
         visibleSize?: string;
     }): AddOrderTestReq {
@@ -298,7 +298,7 @@ export namespace AddOrderTestReq {
          */
         DOWN = <any>'down',
         /**
-         * Triggers when the price reaches or goes above the stopPrice
+         * Triggers when the price reaches or goes above the stopPrice.
          */
         UP = <any>'up',
     }
@@ -308,7 +308,7 @@ export namespace AddOrderTestReq {
          */
         TRADE_PRICE = <any>'TP',
         /**
-         * MP for mark price, The mark price can be obtained through relevant OPEN API for index services
+         * MP for mark price. The mark price can be obtained through relevant OPEN API for index services.
          */
         MARK_PRICE = <any>'MP',
     }
@@ -335,7 +335,7 @@ export class AddOrderTestReqBuilder {
         this.obj = obj;
     }
     /**
-     * Unique order id created by users to identify their orders, the maximum length cannot exceed 40, e.g. UUID, Only allows numbers, characters, underline(_), and separator(-)
+     * Unique order ID created by users to identify their orders. The maximum length cannot exceed 40, e.g. UUID only allows numbers, characters, underline(_), and separator (-).
      */
     setClientOid(value: string): AddOrderTestReqBuilder {
         this.obj.clientOid = value;
@@ -343,7 +343,7 @@ export class AddOrderTestReqBuilder {
     }
 
     /**
-     * specify if the order is to \'buy\' or \'sell\'
+     * Specify if the order is to \'buy\' or \'sell\'.
      */
     setSide(value: AddOrderTestReq.SideEnum): AddOrderTestReqBuilder {
         this.obj.side = value;
@@ -351,7 +351,7 @@ export class AddOrderTestReqBuilder {
     }
 
     /**
-     * Symbol of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)
+     * Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)
      */
     setSymbol(value: string): AddOrderTestReqBuilder {
         this.obj.symbol = value;
@@ -367,7 +367,7 @@ export class AddOrderTestReqBuilder {
     }
 
     /**
-     * specify if the order is an \'limit\' order or \'market\' order
+     * Specify if the order is a \'limit\' order or \'market\' order
      */
     setType(value: AddOrderTestReq.TypeEnum): AddOrderTestReqBuilder {
         this.obj.type = value;
@@ -375,7 +375,7 @@ export class AddOrderTestReqBuilder {
     }
 
     /**
-     * Either \'down\' or \'up\'.  If stop is used,parameter stopPrice and stopPriceType also need to be provieded.
+     * Either \'down\' or \'up\'.  If stop is used, parameter stopPrice and stopPriceType also need to be provided.
      */
     setStop(value: AddOrderTestReq.StopEnum): AddOrderTestReqBuilder {
         this.obj.stop = value;
@@ -383,7 +383,7 @@ export class AddOrderTestReqBuilder {
     }
 
     /**
-     * Either \'TP\' or \'MP\', Need to be defined if stop is specified.
+     * Either \'TP\' or \'MP\' need to be defined if stop is specified.
      */
     setStopPriceType(value: AddOrderTestReq.StopPriceTypeEnum): AddOrderTestReqBuilder {
         this.obj.stopPriceType = value;
@@ -391,7 +391,7 @@ export class AddOrderTestReqBuilder {
     }
 
     /**
-     * Need to be defined if stop is specified.
+     * Needs to be defined if stop is specified.
      */
     setStopPrice(value: string): AddOrderTestReqBuilder {
         this.obj.stopPrice = value;
@@ -431,7 +431,7 @@ export class AddOrderTestReqBuilder {
     }
 
     /**
-     * Order size (Lot), must be a positive integer. The quantity unit of coin-swap contracts is size(lot), and other units are not supported.
+     * Order size (lot), must be a positive integer. The quantity unit of coin-swap contracts is size (lot), and other units are not supported.
      */
     setSize(value: number): AddOrderTestReqBuilder {
         this.obj.size = value;
@@ -447,7 +447,7 @@ export class AddOrderTestReqBuilder {
     }
 
     /**
-     * Optional for type is \'limit\' order,  post only flag, invalid when timeInForce is IOC. When postOnly is true, not allowed choose hidden or iceberg. The post-only flag ensures that the trader always pays the maker fee and provides liquidity to the order book. If any part of the order is going to pay taker fee, the order will be fully rejected.
+     * Optional for type is \'limit\' order, post only flag, invalid when timeInForce is IOC. When postOnly is true, not allowed to choose hidden or iceberg. The post-only flag ensures that the trader always pays the maker fee and provides liquidity to the order book. If any part of the order is going to pay taker fees, the order will be fully rejected.
      */
     setPostOnly(value: boolean): AddOrderTestReqBuilder {
         this.obj.postOnly = value;
@@ -455,7 +455,7 @@ export class AddOrderTestReqBuilder {
     }
 
     /**
-     * Optional for type is \'limit\' order, orders not displaying in order book. When hidden chose, not allowed choose postOnly.
+     * Optional for type is \'limit\' order, orders not displaying in order book. When hidden is chosen, choosing postOnly is not allowed.
      */
     setHidden(value: boolean): AddOrderTestReqBuilder {
         this.obj.hidden = value;
@@ -463,7 +463,7 @@ export class AddOrderTestReqBuilder {
     }
 
     /**
-     * Optional for type is \'limit\' order, Only visible portion of the order is displayed in the order book. When iceberg chose, not allowed choose postOnly.
+     * Optional for type is \'limit\' order, Only visible portion of the order is displayed in the order book. When iceberg is chose, choosing postOnly is not allowed.
      */
     setIceberg(value: boolean): AddOrderTestReqBuilder {
         this.obj.iceberg = value;
@@ -471,7 +471,7 @@ export class AddOrderTestReqBuilder {
     }
 
     /**
-     * Optional for type is \'limit\' order, The maximum visible size of an iceberg order. please place order in size (lots), The units of qty (base currency) and valueQty (value) are not supported. Need to be defined if iceberg is specified.
+     * Optional for type is \'limit\' order, the maximum visible size of an iceberg order. Please place order in size (lots). The units of qty (base currency) and valueQty (value) are not supported. Need to be defined if iceberg is specified.
      */
     setVisibleSize(value: string): AddOrderTestReqBuilder {
         this.obj.visibleSize = value;

@@ -23,7 +23,7 @@ class GetStakingProductsData(BaseModel):
         precision (int): Maximum precision supported
         product_upper_limit (str): Products total subscription amount
         user_upper_limit (str): Max. user subscription amount
-        user_lower_limit (str): Min. user subscribe amount
+        user_lower_limit (str): Min. user subscription amount
         redeem_period (int): Redemption waiting period (days)
         lock_start_time (int): Product earliest interest start time, in milliseconds
         lock_end_time (int): Product maturity time, in milliseconds
@@ -33,7 +33,7 @@ class GetStakingProductsData(BaseModel):
         income_currency (str): Income currency
         early_redeem_supported (EarlyRedeemSupportedEnum): Whether the fixed product supports early redemption: 0 (no), 1 (yes)
         product_remain_amount (str): Remaining product subscription amount
-        status (StatusEnum): Product status: ONGOING (Subscription in progress), PENDING (Preheating Subscription), FULL (Subscribed), INTERESTING (Interest in progress)
+        status (StatusEnum): Product status: ONGOING (Subscription in progress), PENDING (Preheating Subscription), FULL (Subscribed), INTERESTING (Interest accrual in progress)
         redeem_type (RedeemTypeEnum): Redemption channel: MANUAL (manual redemption), TRANS_DEMAND (transfer to corresponding demand product upon maturity), AUTO (redeem to funding account upon maturity)
         income_release_type (IncomeReleaseTypeEnum): Income release type: DAILY (daily release), AFTER (release after product ends)
         interest_date (int): Most recent interest date (milliseconds)
@@ -127,7 +127,7 @@ class GetStakingProductsData(BaseModel):
         alias="userUpperLimit")
     user_lower_limit: Optional[str] = Field(
         default=None,
-        description="Min. user subscribe amount",
+        description="Min. user subscription amount",
         alias="userLowerLimit")
     redeem_period: Optional[int] = Field(
         default=None,
@@ -169,7 +169,7 @@ class GetStakingProductsData(BaseModel):
     status: Optional[StatusEnum] = Field(
         default=None,
         description=
-        "Product status: ONGOING (Subscription in progress), PENDING (Preheating Subscription), FULL (Subscribed), INTERESTING (Interest in progress)"
+        "Product status: ONGOING (Subscription in progress), PENDING (Preheating Subscription), FULL (Subscribed), INTERESTING (Interest accrual in progress)"
     )
     redeem_type: Optional[RedeemTypeEnum] = Field(
         default=None,

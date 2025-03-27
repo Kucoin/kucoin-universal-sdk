@@ -17,7 +17,7 @@
                     {
                         "name": "currentPage",
                         "in": "query",
-                        "description": "Page number",
+                        "description": "page number",
                         "required": false,
                         "schema": {
                             "type": "integer",
@@ -27,7 +27,7 @@
                     {
                         "name": "pageSize",
                         "in": "query",
-                        "description": "Page Size",
+                        "description": "page Size",
                         "required": false,
                         "schema": {
                             "type": "integer",
@@ -37,7 +37,7 @@
                     {
                         "name": "annType",
                         "in": "query",
-                        "description": "Announcement types: latest-announcements, activities (latest activities), new-listings (new currency online), product-updates (product updates), vip (institutions and VIPs), maintenance-updates (system maintenance), product-updates (product news), delistings (currency offline), others, api-campaigns (API user activities), default: latest-announcements",
+                        "description": "Announcement types: latest-announcements , activities (latest activities), new-listings (new currency online), product-updates (product updates), vip (institutions and VIPs), maintenance-updates (system maintenance), product -updates (product news), delistings (currency offline), others, api-campaigns (API user activities), default : latest-announcements",
                         "required": false,
                         "schema": {
                             "type": "string",
@@ -71,7 +71,7 @@
                                 },
                                 {
                                     "value": "vip ",
-                                    "name": "VIPs",
+                                    "name": "VIPS",
                                     "description": "institutions and VIPs"
                                 },
                                 {
@@ -105,7 +105,7 @@
                     {
                         "name": "lang",
                         "in": "query",
-                        "description": "Language type: The default is en_US, the specific value parameters are as follows",
+                        "description": "Language type, the default is en_US, the specific value parameters are as follows",
                         "required": false,
                         "schema": {
                             "type": "string",
@@ -318,7 +318,7 @@
                                                             },
                                                             "language": {
                                                                 "type": "string",
-                                                                "description": "Language type"
+                                                                "description": "language type"
                                                             },
                                                             "annUrl": {
                                                                 "type": "string",
@@ -346,7 +346,7 @@
                                                 },
                                                 "totalPage": {
                                                     "type": "integer",
-                                                    "description": "Total Pages"
+                                                    "description": "Total Page"
                                                 }
                                             },
                                             "required": [
@@ -378,7 +378,7 @@
                 "x-sdk-method-name": "getAnnouncements",
                 "x-sdk-method-description": "This interface can obtain the latest news announcements, and the default page search is for announcements within a month.",
                 "x-api-rate-limit-weight": 20,
-                "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": {\\n        \\\"totalNum\\\": 195,\\n        \\\"totalPage\\\": 13,\\n        \\\"currentPage\\\": 1,\\n        \\\"pageSize\\\": 15,\\n        \\\"items\\\": [\\n            {\\n                \\\"annId\\\": 129045,\\n                \\\"annTitle\\\": \\\"KuCoin Isolated Margin Adds the Scroll (SCR) Trading Pair\\\",\\n                \\\"annType\\\": [\\n                    \\\"latest-announcements\\\"\\n                ],\\n                \\\"annDesc\\\": \\\"To enrich the variety of assets available, KuCoin\\u2019s Isolated Margin Trading platform has added the Scroll (SCR) asset and trading pair.\\\",\\n                \\\"cTime\\\": 1729594043000,\\n                \\\"language\\\": \\\"en_US\\\",\\n                \\\"annUrl\\\": \\\"https://www.kucoin.com/announcement/kucoin-isolated-margin-adds-scr?lang=en_US\\\"\\n            },\\n            {\\n                \\\"annId\\\": 129001,\\n                \\\"annTitle\\\": \\\"DAPP-30D Fixed Promotion, Enjoy an APR of 200%!\\u200b\\\",\\n                \\\"annType\\\": [\\n                    \\\"latest-announcements\\\",\\n                    \\\"activities\\\"\\n                ],\\n                \\\"annDesc\\\": \\\"KuCoin Earn will be launching the DAPP Fixed Promotion at 10:00:00 on October 22, 2024 (UTC). The available product is \\u201cDAPP-30D'' with an APR of 200%.\\\",\\n                \\\"cTime\\\": 1729588460000,\\n                \\\"language\\\": \\\"en_US\\\",\\n                \\\"annUrl\\\": \\\"https://www.kucoin.com/announcement/dapp-30d-fixed-promotion-enjoy?lang=en_US\\\"\\n            },\\n            {\\n                \\\"annId\\\": 128581,\\n                \\\"annTitle\\\": \\\"NAYM (NAYM) Gets Listed on KuCoin! World Premiere!\\\",\\n                \\\"annType\\\": [\\n                    \\\"latest-announcements\\\",\\n                    \\\"new-listings\\\"\\n                ],\\n                \\\"annDesc\\\": \\\"Trading: 11:00 on October 22, 2024 (UTC)\\\",\\n                \\\"cTime\\\": 1729497729000,\\n                \\\"language\\\": \\\"en_US\\\",\\n                \\\"annUrl\\\": \\\"https://www.kucoin.com/announcement/en-naym-naym-gets-listed-on-kucoin-world-premiere?lang=en_US\\\"\\n            }\\n        ]\\n    }\\n}",
+                "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": {\\n        \\\"totalNum\\\": 195,\\n        \\\"totalPage\\\": 13,\\n        \\\"currentPage\\\": 1,\\n        \\\"pageSize\\\": 15,\\n        \\\"items\\\": [\\n            {\\n                \\\"annId\\\": 129045,\\n                \\\"annTitle\\\": \\\"KuCoin Isolated Margin Adds the Scroll (SCR) Trading Pair\\\",\\n                \\\"annType\\\": [\\n                    \\\"latest-announcements\\\"\\n                ],\\n                \\\"annDesc\\\": \\\"To enrich the variety of assets available,\\xa0KuCoin\\u2019s Isolated Margin Trading platform has added the Scroll (SCR)\\xa0asset and trading pair.\\\",\\n                \\\"cTime\\\": 1729594043000,\\n                \\\"language\\\": \\\"en_US\\\",\\n                \\\"annUrl\\\": \\\"https://www.kucoin.com/announcement/kucoin-isolated-margin-adds-scr?lang=en_US\\\"\\n            },\\n            {\\n                \\\"annId\\\": 129001,\\n                \\\"annTitle\\\": \\\"DAPP-30D Fixed Promotion, Enjoy an APR of 200%!\\u200b\\\",\\n                \\\"annType\\\": [\\n                    \\\"latest-announcements\\\",\\n                    \\\"activities\\\"\\n                ],\\n                \\\"annDesc\\\": \\\"KuCoin Earn will be launching the DAPP Fixed Promotion at 10:00:00 on October 22, 2024 (UTC). The available product is \\u201cDAPP-30D'' with an APR of 200%.\\\",\\n                \\\"cTime\\\": 1729588460000,\\n                \\\"language\\\": \\\"en_US\\\",\\n                \\\"annUrl\\\": \\\"https://www.kucoin.com/announcement/dapp-30d-fixed-promotion-enjoy?lang=en_US\\\"\\n            },\\n            {\\n                \\\"annId\\\": 128581,\\n                \\\"annTitle\\\": \\\"NAYM (NAYM) Gets Listed on KuCoin! World Premiere!\\\",\\n                \\\"annType\\\": [\\n                    \\\"latest-announcements\\\",\\n                    \\\"new-listings\\\"\\n                ],\\n                \\\"annDesc\\\": \\\"Trading:\\xa011:00 on October 22, 2024 (UTC)\\\",\\n                \\\"cTime\\\": 1729497729000,\\n                \\\"language\\\": \\\"en_US\\\",\\n                \\\"annUrl\\\": \\\"https://www.kucoin.com/announcement/en-naym-naym-gets-listed-on-kucoin-world-premiere?lang=en_US\\\"\\n            }\\n        ]\\n    }\\n}",
                 "x-request-example": "{\\\"currentPage\\\": 1, \\\"pageSize\\\": 50, \\\"annType\\\": \\\"latest-announcements\\\", \\\"lang\\\": \\\"en_US\\\", \\\"startTime\\\": 1729594043000, \\\"endTime\\\": 1729697729000}",
                 "operationId": "001"
             }
@@ -390,6 +390,15 @@
                 "description": "Request the currency details of a specified currency via this endpoint.",
                 "tags": [],
                 "parameters": [
+                    {
+                        "name": "currency",
+                        "in": "path",
+                        "description": "Path parameter, Currency",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
                     {
                         "name": "chain",
                         "in": "query",
@@ -408,15 +417,6 @@
                                 "ton",
                                 "optimism"
                             ]
-                        }
-                    },
-                    {
-                        "name": "currency",
-                        "in": "path",
-                        "description": "Path parameter, Currency",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
                         }
                     }
                 ],
@@ -587,7 +587,7 @@
                 "x-sdk-method-description": "Request the currency details of a specified currency via this endpoint.",
                 "x-api-rate-limit-weight": 3,
                 "x-response-example": "{\\\"code\\\":\\\"200000\\\",\\\"data\\\":{\\\"currency\\\":\\\"BTC\\\",\\\"name\\\":\\\"BTC\\\",\\\"fullName\\\":\\\"Bitcoin\\\",\\\"precision\\\":8,\\\"confirms\\\":null,\\\"contractAddress\\\":null,\\\"isMarginEnabled\\\":true,\\\"isDebitEnabled\\\":true,\\\"chains\\\":[{\\\"chainName\\\":\\\"BTC\\\",\\\"withdrawalMinSize\\\":\\\"0.001\\\",\\\"depositMinSize\\\":\\\"0.0002\\\",\\\"withdrawFeeRate\\\":\\\"0\\\",\\\"withdrawalMinFee\\\":\\\"0.0005\\\",\\\"isWithdrawEnabled\\\":true,\\\"isDepositEnabled\\\":true,\\\"confirms\\\":3,\\\"preConfirms\\\":1,\\\"contractAddress\\\":\\\"\\\",\\\"withdrawPrecision\\\":8,\\\"maxWithdraw\\\":null,\\\"maxDeposit\\\":null,\\\"needTag\\\":false,\\\"chainId\\\":\\\"btc\\\"},{\\\"chainName\\\":\\\"Lightning Network\\\",\\\"withdrawalMinSize\\\":\\\"0.00001\\\",\\\"depositMinSize\\\":\\\"0.00001\\\",\\\"withdrawFeeRate\\\":\\\"0\\\",\\\"withdrawalMinFee\\\":\\\"0.000015\\\",\\\"isWithdrawEnabled\\\":true,\\\"isDepositEnabled\\\":true,\\\"confirms\\\":1,\\\"preConfirms\\\":1,\\\"contractAddress\\\":\\\"\\\",\\\"withdrawPrecision\\\":8,\\\"maxWithdraw\\\":null,\\\"maxDeposit\\\":\\\"0.03\\\",\\\"needTag\\\":false,\\\"chainId\\\":\\\"btcln\\\"},{\\\"chainName\\\":\\\"KCC\\\",\\\"withdrawalMinSize\\\":\\\"0.0008\\\",\\\"depositMinSize\\\":null,\\\"withdrawFeeRate\\\":\\\"0\\\",\\\"withdrawalMinFee\\\":\\\"0.00002\\\",\\\"isWithdrawEnabled\\\":true,\\\"isDepositEnabled\\\":true,\\\"confirms\\\":20,\\\"preConfirms\\\":20,\\\"contractAddress\\\":\\\"0xfa93c12cd345c658bc4644d1d4e1b9615952258c\\\",\\\"withdrawPrecision\\\":8,\\\"maxWithdraw\\\":null,\\\"maxDeposit\\\":null,\\\"needTag\\\":false,\\\"chainId\\\":\\\"kcc\\\"},{\\\"chainName\\\":\\\"BTC-Segwit\\\",\\\"withdrawalMinSize\\\":\\\"0.0008\\\",\\\"depositMinSize\\\":\\\"0.0002\\\",\\\"withdrawFeeRate\\\":\\\"0\\\",\\\"withdrawalMinFee\\\":\\\"0.0005\\\",\\\"isWithdrawEnabled\\\":false,\\\"isDepositEnabled\\\":true,\\\"confirms\\\":2,\\\"preConfirms\\\":2,\\\"contractAddress\\\":\\\"\\\",\\\"withdrawPrecision\\\":8,\\\"maxWithdraw\\\":null,\\\"maxDeposit\\\":null,\\\"needTag\\\":false,\\\"chainId\\\":\\\"bech32\\\"}]}}",
-                "x-request-example": "{\\\"chain\\\": \\\"eth\\\", \\\"currency\\\": \\\"BTC\\\"}",
+                "x-request-example": "{\\\"currency\\\": \\\"BTC\\\", \\\"chain\\\": \\\"eth\\\"}",
                 "operationId": "002"
             }
         },
@@ -786,7 +786,7 @@
             "get": {
                 "summary": "Get Symbol ",
                 "deprecated": false,
-                "description": "Request detailed currency pairs for trading via this endpoint. If you want to get the market information of the trading symbol, please use Get All Tickers.",
+                "description": "Request via this endpoint to get detail currency pairs for trading. If you want to get the market information of the trading symbol, please use Get All Tickers.",
                 "tags": [],
                 "parameters": [
                     {
@@ -815,7 +815,7 @@
                                             "properties": {
                                                 "symbol": {
                                                     "type": "string",
-                                                    "description": "Unique code of a symbol; it will not change after renaming",
+                                                    "description": "unique code of a symbol, it would not change after renaming",
                                                     "example": [
                                                         "BTC-USDT",
                                                         "BCHSV-USDT"
@@ -823,7 +823,7 @@
                                                 },
                                                 "name": {
                                                     "type": "string",
-                                                    "description": "Name of trading pairs, it will change after renaming",
+                                                    "description": "Name of trading pairs, it would change after renaming",
                                                     "example": [
                                                         "BTC-USDT",
                                                         "BSV-USDT"
@@ -831,11 +831,11 @@
                                                 },
                                                 "baseCurrency": {
                                                     "type": "string",
-                                                    "description": "Base currency, e.g. BTC."
+                                                    "description": "Base currency,e.g. BTC."
                                                 },
                                                 "quoteCurrency": {
                                                     "type": "string",
-                                                    "description": "Quote currency, e.g. USDT."
+                                                    "description": "Quote currency,e.g. USDT."
                                                 },
                                                 "feeCurrency": {
                                                     "type": "string",
@@ -852,7 +852,7 @@
                                                 },
                                                 "baseMinSize": {
                                                     "type": "string",
-                                                    "description": "The minimum order quantity required to place an order."
+                                                    "description": "The minimum order quantity requried to place an order."
                                                 },
                                                 "quoteMinSize": {
                                                     "type": "string",
@@ -880,7 +880,7 @@
                                                 },
                                                 "priceLimitRate": {
                                                     "type": "string",
-                                                    "description": "Threshold for price protection"
+                                                    "description": "Threshold for price portection"
                                                 },
                                                 "minFunds": {
                                                     "type": "string",
@@ -1033,7 +1033,7 @@
                 "x-sdk-service": "Spot",
                 "x-sdk-sub-service": "Market",
                 "x-sdk-method-name": "getSymbol",
-                "x-sdk-method-description": "Request detailed currency pairs for trading via this endpoint. If you want to get the market information of the trading symbol, please use Get All Tickers.",
+                "x-sdk-method-description": "Request via this endpoint to get detail currency pairs for trading. If you want to get the market information of the trading symbol, please use Get All Tickers.",
                 "x-api-rate-limit-weight": 4,
                 "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": {\\n        \\\"symbol\\\": \\\"BTC-USDT\\\",\\n        \\\"name\\\": \\\"BTC-USDT\\\",\\n        \\\"baseCurrency\\\": \\\"BTC\\\",\\n        \\\"quoteCurrency\\\": \\\"USDT\\\",\\n        \\\"feeCurrency\\\": \\\"USDT\\\",\\n        \\\"market\\\": \\\"USDS\\\",\\n        \\\"baseMinSize\\\": \\\"0.00001\\\",\\n        \\\"quoteMinSize\\\": \\\"0.1\\\",\\n        \\\"baseMaxSize\\\": \\\"10000000000\\\",\\n        \\\"quoteMaxSize\\\": \\\"99999999\\\",\\n        \\\"baseIncrement\\\": \\\"0.00000001\\\",\\n        \\\"quoteIncrement\\\": \\\"0.000001\\\",\\n        \\\"priceIncrement\\\": \\\"0.1\\\",\\n        \\\"priceLimitRate\\\": \\\"0.1\\\",\\n        \\\"minFunds\\\": \\\"0.1\\\",\\n        \\\"isMarginEnabled\\\": true,\\n        \\\"enableTrading\\\": true,\\n        \\\"feeCategory\\\": 1,\\n        \\\"makerFeeCoefficient\\\": \\\"1.00\\\",\\n        \\\"takerFeeCoefficient\\\": \\\"1.00\\\",\\n        \\\"st\\\": false,\\n        \\\"callauctionIsEnabled\\\": false,\\n        \\\"callauctionPriceFloor\\\": null,\\n        \\\"callauctionPriceCeiling\\\": null,\\n        \\\"callauctionFirstStageStartTime\\\": null,\\n        \\\"callauctionSecondStageStartTime\\\": null,\\n        \\\"callauctionThirdStageStartTime\\\": null,\\n        \\\"tradingStartTime\\\": null\\n    }\\n}",
                 "x-request-example": "{\\\"symbol\\\": \\\"BTC-USDT\\\"}",
@@ -1310,7 +1310,7 @@
             "get": {
                 "summary": "Get Ticker",
                 "deprecated": false,
-                "description": "Request Level 1 Market Data via this endpoint. The returned value includes the best bid price and size, the best ask price and size, as well as the last traded price and the last traded size.",
+                "description": "Request via this endpoint to get Level 1 Market Data. The returned value includes the best bid price and size, the best ask price and size as well as the last traded price and the last traded size.",
                 "tags": [],
                 "parameters": [
                     {
@@ -1401,7 +1401,7 @@
                 "x-sdk-service": "Spot",
                 "x-sdk-sub-service": "Market",
                 "x-sdk-method-name": "getTicker",
-                "x-sdk-method-description": "Request Level 1 Market Data via this endpoint. The returned value includes the best bid price and size, the best ask price and size, as well as the last traded price and the last traded size.",
+                "x-sdk-method-description": "Request via this endpoint to get Level 1 Market Data. The returned value includes the best bid price and size, the best ask price and size as well as the last traded price and the last traded size.",
                 "x-api-rate-limit-weight": 2,
                 "x-response-example": "{\\\"code\\\":\\\"200000\\\",\\\"data\\\":{\\\"time\\\":1729172965609,\\\"sequence\\\":\\\"14609309753\\\",\\\"price\\\":\\\"67269\\\",\\\"size\\\":\\\"0.000025\\\",\\\"bestBid\\\":\\\"67267.5\\\",\\\"bestBidSize\\\":\\\"0.000025\\\",\\\"bestAsk\\\":\\\"67267.6\\\",\\\"bestAskSize\\\":\\\"1.24808993\\\"}}",
                 "x-request-example": "{\\\"symbol\\\": \\\"BTC-USDT\\\"}",
@@ -1601,7 +1601,7 @@
             "get": {
                 "summary": "Get Trade History",
                 "deprecated": false,
-                "description": "Request the trade history of the specified symbol via this endpoint. The returned quantity is the last 100 transaction records.",
+                "description": "Request via this endpoint to get the trade history of the specified symbol, the returned quantity is the last 100 transaction records.",
                 "tags": [],
                 "parameters": [
                     {
@@ -1644,7 +1644,7 @@
                                                     },
                                                     "side": {
                                                         "type": "string",
-                                                        "description": "Filled side; the trade side indicates the taker order side. A taker order is the order that was matched with orders opened on the order book.",
+                                                        "description": "Filled side, The trade side indicates the taker order side. A taker order is the order that was matched with orders opened on the order book.",
                                                         "enum": [
                                                             "buy",
                                                             "sell"
@@ -1665,7 +1665,7 @@
                                                     "time": {
                                                         "type": "integer",
                                                         "format": "int64",
-                                                        "description": "Filled timestamp (nanosecond)"
+                                                        "description": "Filled timestamp(nanosecond)"
                                                     }
                                                 },
                                                 "required": [
@@ -1696,7 +1696,7 @@
                 "x-sdk-service": "Spot",
                 "x-sdk-sub-service": "Market",
                 "x-sdk-method-name": "getTradeHistory",
-                "x-sdk-method-description": "Request the trade history of the specified symbol via this endpoint. The returned quantity is the last 100 transaction records.",
+                "x-sdk-method-description": "Request via this endpoint to get the trade history of the specified symbol, the returned quantity is the last 100 transaction records.",
                 "x-api-rate-limit-weight": 3,
                 "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": [\\n        {\\n            \\\"sequence\\\": \\\"10976028003549185\\\",\\n            \\\"price\\\": \\\"67122\\\",\\n            \\\"size\\\": \\\"0.000025\\\",\\n            \\\"side\\\": \\\"buy\\\",\\n            \\\"time\\\": 1729177117877000000\\n        },\\n        {\\n            \\\"sequence\\\": \\\"10976028003549188\\\",\\n            \\\"price\\\": \\\"67122\\\",\\n            \\\"size\\\": \\\"0.01792257\\\",\\n            \\\"side\\\": \\\"buy\\\",\\n            \\\"time\\\": 1729177117877000000\\n        },\\n        {\\n            \\\"sequence\\\": \\\"10976028003549191\\\",\\n            \\\"price\\\": \\\"67122.9\\\",\\n            \\\"size\\\": \\\"0.05654289\\\",\\n            \\\"side\\\": \\\"buy\\\",\\n            \\\"time\\\": 1729177117877000000\\n        }\\n    ]\\n}",
                 "x-request-example": "{\\\"symbol\\\": \\\"BTC-USDT\\\"}",
@@ -1707,7 +1707,7 @@
             "get": {
                 "summary": "Get Klines",
                 "deprecated": false,
-                "description": "Get the symbol’s candlestick chart. Data are returned in grouped buckets based on requested type. For each query, the system will return at most 1500 pieces of data. To obtain more data, please page the data by time.",
+                "description": "Get the Kline of the symbol. Data are returned in grouped buckets based on requested type. For each query, the system would return at most 1500 pieces of data. To obtain more data, please page the data by time.",
                 "tags": [],
                 "parameters": [
                     {
@@ -1722,7 +1722,7 @@
                     {
                         "name": "type",
                         "in": "query",
-                        "description": "Types of candlestick pattern: 1min, 3min, 5min, 15min, 30min, 1hour, 2hour, 4hour, 6hour, 8hour, 12hour, 1day, 1week, 1month",
+                        "description": "Type of candlestick patterns: 1min, 3min, 5min, 15min, 30min, 1hour, 2hour, 4hour, 6hour, 8hour, 12hour, 1day, 1week, 1month",
                         "required": true,
                         "schema": {
                             "type": "string",
@@ -1819,7 +1819,7 @@
                     {
                         "name": "startAt",
                         "in": "query",
-                        "description": "Start time (seconds), default is 0",
+                        "description": "Start time (second), default is 0",
                         "required": false,
                         "schema": {
                             "type": "integer",
@@ -1830,7 +1830,7 @@
                     {
                         "name": "endAt",
                         "in": "query",
-                        "description": "End time (seconds), default is 0",
+                        "description": "End time (second), default is 0",
                         "required": false,
                         "schema": {
                             "type": "integer",
@@ -1856,7 +1856,7 @@
                                                 "type": "array",
                                                 "items": {
                                                     "type": "string",
-                                                    "description": "Start time of the candle cycle, opening price, closing price, highest price, lowest price, transaction amount, transaction volume"
+                                                    "description": "Start time of the candle cycle, opening price, closing price, highest price, Lowest price, Transaction amount, Transaction volume"
                                                 }
                                             }
                                         }
@@ -1879,7 +1879,7 @@
                 "x-sdk-service": "Spot",
                 "x-sdk-sub-service": "Market",
                 "x-sdk-method-name": "getKlines",
-                "x-sdk-method-description": "Get the symbol’s candlestick chart. Data are returned in grouped buckets based on requested type. For each query, the system will return at most 1500 pieces of data. To obtain more data, please page the data by time.",
+                "x-sdk-method-description": "Get the Kline of the symbol. Data are returned in grouped buckets based on requested type. For each query, the system would return at most 1500 pieces of data. To obtain more data, please page the data by time.",
                 "x-api-rate-limit-weight": 3,
                 "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": [\\n        [\\n            \\\"1566789720\\\",\\n            \\\"10411.5\\\",\\n            \\\"10401.9\\\",\\n            \\\"10411.5\\\",\\n            \\\"10396.3\\\",\\n            \\\"29.11357276\\\",\\n            \\\"302889.301529914\\\"\\n        ],\\n        [\\n            \\\"1566789660\\\",\\n            \\\"10416\\\",\\n            \\\"10411.5\\\",\\n            \\\"10422.3\\\",\\n            \\\"10411.5\\\",\\n            \\\"15.61781842\\\",\\n            \\\"162703.708997029\\\"\\n        ],\\n        [\\n            \\\"1566789600\\\",\\n            \\\"10408.6\\\",\\n            \\\"10416\\\",\\n            \\\"10416\\\",\\n            \\\"10405.4\\\",\\n            \\\"12.45584973\\\",\\n            \\\"129666.51508559\\\"\\n        ]\\n    ]\\n}",
                 "x-request-example": "{\\\"symbol\\\": \\\"BTC-USDT\\\", \\\"type\\\": \\\"1min\\\", \\\"startAt\\\": 1566703297, \\\"endAt\\\": 1566789757}",
@@ -1890,7 +1890,7 @@
             "get": {
                 "summary": "Get Part OrderBook",
                 "deprecated": false,
-                "description": "Query for part orderbook depth data. (aggregated by price). It is recommended that you request via this endpoint, as the system response will be faster and consume less traffic.",
+                "description": "Query for part orderbook depth data. (aggregated by price)  You are recommended to request via this endpoint as the system reponse would be faster and cosume less traffic.",
                 "tags": [],
                 "parameters": [
                     {
@@ -1928,7 +1928,7 @@
                                             "properties": {
                                                 "time": {
                                                     "type": "integer",
-                                                    "description": "Timestamp (milliseconds)",
+                                                    "description": "Timestamp(millisecond)",
                                                     "format": "int64"
                                                 },
                                                 "sequence": {
@@ -1984,7 +1984,7 @@
                 "x-sdk-service": "Spot",
                 "x-sdk-sub-service": "Market",
                 "x-sdk-method-name": "getPartOrderBook",
-                "x-sdk-method-description": "Query for part orderbook depth data. (aggregated by price). It is recommended that you request via this endpoint, as the system response will be faster and consume less traffic.",
+                "x-sdk-method-description": "Query for part orderbook depth data. (aggregated by price)  You are recommended to request via this endpoint as the system reponse would be faster and cosume less traffic.",
                 "x-api-rate-limit-weight": 2,
                 "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": {\\n        \\\"time\\\": 1729176273859,\\n        \\\"sequence\\\": \\\"14610502970\\\",\\n        \\\"bids\\\": [\\n            [\\n                \\\"66976.4\\\",\\n                \\\"0.69109872\\\"\\n            ],\\n            [\\n                \\\"66976.3\\\",\\n                \\\"0.14377\\\"\\n            ]\\n        ],\\n        \\\"asks\\\": [\\n            [\\n                \\\"66976.5\\\",\\n                \\\"0.05408199\\\"\\n            ],\\n            [\\n                \\\"66976.8\\\",\\n                \\\"0.0005\\\"\\n            ]\\n        ]\\n    }\\n}",
                 "x-request-example": "{\\\"symbol\\\": \\\"BTC-USDT\\\", \\\"size\\\": \\\"20\\\"}",
@@ -1995,7 +1995,7 @@
             "get": {
                 "summary": "Get Full OrderBook",
                 "deprecated": false,
-                "description": "Query for Full orderbook depth data (aggregated by price). It is generally used by professional traders because it uses more server resources and traffic, and we have strict access rate limit control.  To maintain an up-to-date Order Book, please use Websocket incremental feed after retrieving the OrderBook.",
+                "description": "Query for Full orderbook depth data. (aggregated by price)  It is generally used by professional traders because it uses more server resources and traffic, and we have strict access rate limit control.  To maintain up-to-date Order Book, please use Websocket incremental feed after retrieving the OrderBook.",
                 "tags": [],
                 "parameters": [
                     {
@@ -2024,7 +2024,7 @@
                                             "properties": {
                                                 "time": {
                                                     "type": "integer",
-                                                    "description": "Timestamp (milliseconds)",
+                                                    "description": "Timestamp(millisecond)",
                                                     "format": "int64"
                                                 },
                                                 "sequence": {
@@ -2080,7 +2080,7 @@
                 "x-sdk-service": "Spot",
                 "x-sdk-sub-service": "Market",
                 "x-sdk-method-name": "getFullOrderBook",
-                "x-sdk-method-description": "Query for Full orderbook depth data (aggregated by price). It is generally used by professional traders because it uses more server resources and traffic, and we have strict access rate limit control.  To maintain an up-to-date Order Book, please use Websocket incremental feed after retrieving the OrderBook.",
+                "x-sdk-method-description": "Query for Full orderbook depth data. (aggregated by price)  It is generally used by professional traders because it uses more server resources and traffic, and we have strict access rate limit control.  To maintain up-to-date Order Book, please use Websocket incremental feed after retrieving the OrderBook.",
                 "x-api-rate-limit-weight": 3,
                 "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": {\\n        \\\"time\\\": 1729176273859,\\n        \\\"sequence\\\": \\\"14610502970\\\",\\n        \\\"bids\\\": [\\n            [\\n                \\\"66976.4\\\",\\n                \\\"0.69109872\\\"\\n            ],\\n            [\\n                \\\"66976.3\\\",\\n                \\\"0.14377\\\"\\n            ]\\n        ],\\n        \\\"asks\\\": [\\n            [\\n                \\\"66976.5\\\",\\n                \\\"0.05408199\\\"\\n            ],\\n            [\\n                \\\"66976.8\\\",\\n                \\\"0.0005\\\"\\n            ]\\n        ]\\n    }\\n}",
                 "x-request-example": "{\\\"symbol\\\": \\\"BTC-USDT\\\"}",
@@ -2196,7 +2196,7 @@
             "get": {
                 "summary": "Get Call Auction Info",
                 "deprecated": false,
-                "description": "Get call auction data, This interface will return the following information for the specified symbol during the call auction phase: estimated transaction price, estimated transaction quantity, bid price range, and ask price range.",
+                "description": "Get call auction data. This interface will return the following information for the specified symbol during the call auction phase: estimated transaction price, estimated transaction quantity, bid price range, and ask price range.",
                 "tags": [],
                 "parameters": [
                     {
@@ -2248,7 +2248,7 @@
                                                 },
                                                 "buyOrderRangeLowPrice": {
                                                     "type": "string",
-                                                    "description": "Bell ​​order minimum price"
+                                                    "description": "Buy order minimum price"
                                                 },
                                                 "buyOrderRangeHighPrice": {
                                                     "type": "string",
@@ -2290,7 +2290,7 @@
                 "x-sdk-service": "Spot",
                 "x-sdk-sub-service": "Market",
                 "x-sdk-method-name": "getCallAuctionInfo",
-                "x-sdk-method-description": "Get call auction data, This interface will return the following information for the specified symbol during the call auction phase: estimated transaction price, estimated transaction quantity, bid price range, and ask price range.",
+                "x-sdk-method-description": "Get call auction data. This interface will return the following information for the specified symbol during the call auction phase: estimated transaction price, estimated transaction quantity, bid price range, and ask price range.",
                 "x-api-rate-limit-weight": 2,
                 "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": {\\n        \\\"symbol\\\": \\\"BTC-USDT\\\",\\n        \\\"estimatedPrice\\\": \\\"0.17\\\",\\n        \\\"estimatedSize\\\": \\\"0.03715004\\\",\\n        \\\"sellOrderRangeLowPrice\\\": \\\"1.788\\\",\\n        \\\"sellOrderRangeHighPrice\\\": \\\"2.788\\\",\\n        \\\"buyOrderRangeLowPrice\\\": \\\"1.788\\\",\\n        \\\"buyOrderRangeHighPrice\\\": \\\"2.788\\\",\\n        \\\"time\\\": 1550653727731\\n    }\\n}",
                 "x-request-example": "{\\\"symbol\\\": \\\"BTC-USDT\\\"}",
@@ -5958,9 +5958,9 @@
         },
         "/api/v1/market/stats": {
             "get": {
-                "summary": "Get 24hr stats",
+                "summary": "Get 24hr Stats",
                 "deprecated": false,
-                "description": "Request the statistics of the specified ticker in the last 24 hours via this endpoint.",
+                "description": "Request via this endpoint to get the statistics of the specified ticker in the last 24 hours.",
                 "tags": [],
                 "parameters": [
                     {
@@ -6091,7 +6091,7 @@
                 "x-sdk-service": "Spot",
                 "x-sdk-sub-service": "Market",
                 "x-sdk-method-name": "get24hrStats",
-                "x-sdk-method-description": "Request the statistics of the specified ticker in the last 24 hours via this endpoint.",
+                "x-sdk-method-description": "Request via this endpoint to get the statistics of the specified ticker in the last 24 hours.",
                 "x-api-rate-limit-weight": 15,
                 "x-response-example": "{\\\"code\\\":\\\"200000\\\",\\\"data\\\":{\\\"time\\\":1729175612158,\\\"symbol\\\":\\\"BTC-USDT\\\",\\\"buy\\\":\\\"66982.4\\\",\\\"sell\\\":\\\"66982.5\\\",\\\"changeRate\\\":\\\"-0.0114\\\",\\\"changePrice\\\":\\\"-778.1\\\",\\\"high\\\":\\\"68107.7\\\",\\\"low\\\":\\\"66683.3\\\",\\\"vol\\\":\\\"1738.02898182\\\",\\\"volValue\\\":\\\"117321982.415978333\\\",\\\"last\\\":\\\"66981.5\\\",\\\"averagePrice\\\":\\\"67281.21437289\\\",\\\"takerFeeRate\\\":\\\"0.001\\\",\\\"makerFeeRate\\\":\\\"0.001\\\",\\\"takerCoefficient\\\":\\\"1\\\",\\\"makerCoefficient\\\":\\\"1\\\"}}",
                 "x-request-example": "{\\\"symbol\\\": \\\"BTC-USDT\\\"}",

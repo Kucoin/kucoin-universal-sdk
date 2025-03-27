@@ -10,17 +10,17 @@ export class GetKlinesReq implements Serializable {
     symbol?: string;
 
     /**
-     * Types of candlestick pattern: 1min, 3min, 5min, 15min, 30min, 1hour, 2hour, 4hour, 6hour, 8hour, 12hour, 1day, 1week, 1month
+     * Type of candlestick patterns: 1min, 3min, 5min, 15min, 30min, 1hour, 2hour, 4hour, 6hour, 8hour, 12hour, 1day, 1week, 1month
      */
     type?: GetKlinesReq.TypeEnum;
 
     /**
-     * Start time (seconds), default is 0
+     * Start time (second), default is 0
      */
     startAt?: number = 0;
 
     /**
-     * End time (seconds), default is 0
+     * End time (second), default is 0
      */
     endAt?: number = 0;
 
@@ -45,15 +45,15 @@ export class GetKlinesReq implements Serializable {
          */
         symbol?: string;
         /**
-         * Types of candlestick pattern: 1min, 3min, 5min, 15min, 30min, 1hour, 2hour, 4hour, 6hour, 8hour, 12hour, 1day, 1week, 1month
+         * Type of candlestick patterns: 1min, 3min, 5min, 15min, 30min, 1hour, 2hour, 4hour, 6hour, 8hour, 12hour, 1day, 1week, 1month
          */
         type?: GetKlinesReq.TypeEnum;
         /**
-         * Start time (seconds), default is 0
+         * Start time (second), default is 0
          */
         startAt?: number;
         /**
-         * End time (seconds), default is 0
+         * End time (second), default is 0
          */
         endAt?: number;
     }): GetKlinesReq {
@@ -167,7 +167,7 @@ export class GetKlinesReqBuilder {
     }
 
     /**
-     * Types of candlestick pattern: 1min, 3min, 5min, 15min, 30min, 1hour, 2hour, 4hour, 6hour, 8hour, 12hour, 1day, 1week, 1month
+     * Type of candlestick patterns: 1min, 3min, 5min, 15min, 30min, 1hour, 2hour, 4hour, 6hour, 8hour, 12hour, 1day, 1week, 1month
      */
     setType(value: GetKlinesReq.TypeEnum): GetKlinesReqBuilder {
         this.obj.type = value;
@@ -175,7 +175,7 @@ export class GetKlinesReqBuilder {
     }
 
     /**
-     * Start time (seconds), default is 0
+     * Start time (second), default is 0
      */
     setStartAt(value: number): GetKlinesReqBuilder {
         this.obj.startAt = value;
@@ -183,7 +183,7 @@ export class GetKlinesReqBuilder {
     }
 
     /**
-     * End time (seconds), default is 0
+     * End time (second), default is 0
      */
     setEndAt(value: number): GetKlinesReqBuilder {
         this.obj.endAt = value;

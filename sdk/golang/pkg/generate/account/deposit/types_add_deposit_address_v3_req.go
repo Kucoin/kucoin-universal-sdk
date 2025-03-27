@@ -6,7 +6,7 @@ package deposit
 type AddDepositAddressV3Req struct {
 	// currency
 	Currency string `json:"currency,omitempty"`
-	// The chainId of currency, e.g. the available values for USDT are OMNI, ERC20, and TRC20; default is ERC20. The available values for BTC are Native, Segwit, TRC20; the parameters are bech32, btc, trx; default is Native.
+	// The currency chainId, e.g. the available values for USDT are OMNI, ERC20, and TRC20; default is ERC20. The available values for BTC are Native, Segwit, TRC20; the parameters are bech32, btc, trx; default is Native.
 	Chain string `json:"chain,omitempty"`
 	// Deposit account type: MAIN (funding account), TRADE (spot trading account); the default is MAIN
 	To *string `json:"to,omitempty"`
@@ -20,7 +20,7 @@ func NewAddDepositAddressV3Req(currency string, chain string) *AddDepositAddress
 	this := AddDepositAddressV3Req{}
 	this.Currency = currency
 	this.Chain = chain
-	var to string = "MAIN"
+	var to string = "main"
 	this.To = &to
 	return &this
 }
@@ -31,7 +31,7 @@ func NewAddDepositAddressV3ReqWithDefaults() *AddDepositAddressV3Req {
 	this := AddDepositAddressV3Req{}
 	var chain string = "eth"
 	this.Chain = chain
-	var to string = "MAIN"
+	var to string = "main"
 	this.To = &to
 	return &this
 }
@@ -59,7 +59,7 @@ func (builder *AddDepositAddressV3ReqBuilder) SetCurrency(value string) *AddDepo
 	return builder
 }
 
-// The chainId of currency, e.g. the available values for USDT are OMNI, ERC20, and TRC20; default is ERC20. The available values for BTC are Native, Segwit, TRC20; the parameters are bech32, btc, trx; default is Native.
+// The currency chainId, e.g. the available values for USDT are OMNI, ERC20, and TRC20; default is ERC20. The available values for BTC are Native, Segwit, TRC20; the parameters are bech32, btc, trx; default is Native.
 func (builder *AddDepositAddressV3ReqBuilder) SetChain(value string) *AddDepositAddressV3ReqBuilder {
 	builder.obj.Chain = value
 	return builder

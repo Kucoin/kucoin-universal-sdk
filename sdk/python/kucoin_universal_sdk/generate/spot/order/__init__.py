@@ -103,6 +103,10 @@ from .model_get_oco_order_list_items import GetOcoOrderListItems
 from .model_get_oco_order_list_req import GetOcoOrderListReq
 from .model_get_oco_order_list_req import GetOcoOrderListReqBuilder
 from .model_get_oco_order_list_resp import GetOcoOrderListResp
+from .model_get_open_orders_by_page_items import GetOpenOrdersByPageItems
+from .model_get_open_orders_by_page_req import GetOpenOrdersByPageReq
+from .model_get_open_orders_by_page_req import GetOpenOrdersByPageReqBuilder
+from .model_get_open_orders_by_page_resp import GetOpenOrdersByPageResp
 from .model_get_open_orders_data import GetOpenOrdersData
 from .model_get_open_orders_req import GetOpenOrdersReq
 from .model_get_open_orders_req import GetOpenOrdersReqBuilder

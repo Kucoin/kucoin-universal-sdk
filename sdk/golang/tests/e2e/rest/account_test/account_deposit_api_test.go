@@ -181,7 +181,7 @@ func TestDepositAddDepositAddressV3Req(t *testing.T) {
 	// /v3/deposit-address/create
 
 	builder := deposit.NewAddDepositAddressV3ReqBuilder()
-	builder.SetCurrency("MNT").SetChain("mnt").SetTo("trade")
+	builder.SetCurrency("MNT").SetChain("eth").SetTo("trade")
 	req := builder.Build()
 
 	resp, err := depositApi.AddDepositAddressV3(req, context.TODO())

@@ -17,7 +17,7 @@ type GetAnnouncementsResp struct {
 	CurrentPage int32 `json:"currentPage,omitempty"`
 	// Page size
 	PageSize int32 `json:"pageSize,omitempty"`
-	// Total Pages
+	// Total Page
 	TotalPage int32 `json:"totalPage,omitempty"`
 }
 

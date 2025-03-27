@@ -10,9 +10,9 @@ type GetTradeHistoryData struct {
 	Price string `json:"price,omitempty"`
 	// Filled amount
 	Size string `json:"size,omitempty"`
-	// Filled side; the trade side indicates the taker order side. A taker order is the order that was matched with orders opened on the order book.
+	// Filled side, The trade side indicates the taker order side. A taker order is the order that was matched with orders opened on the order book.
 	Side string `json:"side,omitempty"`
-	// Filled timestamp (nanosecond)
+	// Filled timestamp(nanosecond)
 	Time int64 `json:"time,omitempty"`
 }
 

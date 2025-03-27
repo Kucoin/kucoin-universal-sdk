@@ -53,7 +53,7 @@ class MarketAPITest(unittest.TestCase):
         Get Announcements
         /api/v3/announcements
         """
-        data = "{\n    \"code\": \"200000\",\n    \"data\": {\n        \"totalNum\": 195,\n        \"totalPage\": 13,\n        \"currentPage\": 1,\n        \"pageSize\": 15,\n        \"items\": [\n            {\n                \"annId\": 129045,\n                \"annTitle\": \"KuCoin Isolated Margin Adds the Scroll (SCR) Trading Pair\",\n                \"annType\": [\n                    \"latest-announcements\"\n                ],\n                \"annDesc\": \"To enrich the variety of assets available, KuCoin\u2019s Isolated Margin Trading platform has added the Scroll (SCR) asset and trading pair.\",\n                \"cTime\": 1729594043000,\n                \"language\": \"en_US\",\n                \"annUrl\": \"https://www.kucoin.com/announcement/kucoin-isolated-margin-adds-scr?lang=en_US\"\n            },\n            {\n                \"annId\": 129001,\n                \"annTitle\": \"DAPP-30D Fixed Promotion, Enjoy an APR of 200%!\u200b\",\n                \"annType\": [\n                    \"latest-announcements\",\n                    \"activities\"\n                ],\n                \"annDesc\": \"KuCoin Earn will be launching the DAPP Fixed Promotion at 10:00:00 on October 22, 2024 (UTC). The available product is \u201cDAPP-30D'' with an APR of 200%.\",\n                \"cTime\": 1729588460000,\n                \"language\": \"en_US\",\n                \"annUrl\": \"https://www.kucoin.com/announcement/dapp-30d-fixed-promotion-enjoy?lang=en_US\"\n            },\n            {\n                \"annId\": 128581,\n                \"annTitle\": \"NAYM (NAYM) Gets Listed on KuCoin! World Premiere!\",\n                \"annType\": [\n                    \"latest-announcements\",\n                    \"new-listings\"\n                ],\n                \"annDesc\": \"Trading: 11:00 on October 22, 2024 (UTC)\",\n                \"cTime\": 1729497729000,\n                \"language\": \"en_US\",\n                \"annUrl\": \"https://www.kucoin.com/announcement/en-naym-naym-gets-listed-on-kucoin-world-premiere?lang=en_US\"\n            }\n        ]\n    }\n}"
+        data = "{\n    \"code\": \"200000\",\n    \"data\": {\n        \"totalNum\": 195,\n        \"totalPage\": 13,\n        \"currentPage\": 1,\n        \"pageSize\": 15,\n        \"items\": [\n            {\n                \"annId\": 129045,\n                \"annTitle\": \"KuCoin Isolated Margin Adds the Scroll (SCR) Trading Pair\",\n                \"annType\": [\n                    \"latest-announcements\"\n                ],\n                \"annDesc\": \"To enrich the variety of assets available,\xa0KuCoin\u2019s Isolated Margin Trading platform has added the Scroll (SCR)\xa0asset and trading pair.\",\n                \"cTime\": 1729594043000,\n                \"language\": \"en_US\",\n                \"annUrl\": \"https://www.kucoin.com/announcement/kucoin-isolated-margin-adds-scr?lang=en_US\"\n            },\n            {\n                \"annId\": 129001,\n                \"annTitle\": \"DAPP-30D Fixed Promotion, Enjoy an APR of 200%!\u200b\",\n                \"annType\": [\n                    \"latest-announcements\",\n                    \"activities\"\n                ],\n                \"annDesc\": \"KuCoin Earn will be launching the DAPP Fixed Promotion at 10:00:00 on October 22, 2024 (UTC). The available product is \u201cDAPP-30D'' with an APR of 200%.\",\n                \"cTime\": 1729588460000,\n                \"language\": \"en_US\",\n                \"annUrl\": \"https://www.kucoin.com/announcement/dapp-30d-fixed-promotion-enjoy?lang=en_US\"\n            },\n            {\n                \"annId\": 128581,\n                \"annTitle\": \"NAYM (NAYM) Gets Listed on KuCoin! World Premiere!\",\n                \"annType\": [\n                    \"latest-announcements\",\n                    \"new-listings\"\n                ],\n                \"annDesc\": \"Trading:\xa011:00 on October 22, 2024 (UTC)\",\n                \"cTime\": 1729497729000,\n                \"language\": \"en_US\",\n                \"annUrl\": \"https://www.kucoin.com/announcement/en-naym-naym-gets-listed-on-kucoin-world-premiere?lang=en_US\"\n            }\n        ]\n    }\n}"
         common_response = RestResponse.from_json(data)
         resp = GetAnnouncementsResp.from_dict(common_response.data)
 
@@ -63,7 +63,7 @@ class MarketAPITest(unittest.TestCase):
        Get Currency
        /api/v3/currencies/{currency}
        """
-        data = "{\"chain\": \"eth\", \"currency\": \"BTC\"}"
+        data = "{\"currency\": \"BTC\", \"chain\": \"eth\"}"
         req = GetCurrencyReq.from_json(data)
 
     def test_get_currency_resp_model(self):
@@ -303,7 +303,7 @@ class MarketAPITest(unittest.TestCase):
     def test_get24hr_stats_req_model(self):
         """
        get24hr_stats
-       Get 24hr stats
+       Get 24hr Stats
        /api/v1/market/stats
        """
         data = "{\"symbol\": \"BTC-USDT\"}"
@@ -312,7 +312,7 @@ class MarketAPITest(unittest.TestCase):
     def test_get24hr_stats_resp_model(self):
         """
         get24hr_stats
-        Get 24hr stats
+        Get 24hr Stats
         /api/v1/market/stats
         """
         data = "{\"code\":\"200000\",\"data\":{\"time\":1729175612158,\"symbol\":\"BTC-USDT\",\"buy\":\"66982.4\",\"sell\":\"66982.5\",\"changeRate\":\"-0.0114\",\"changePrice\":\"-778.1\",\"high\":\"68107.7\",\"low\":\"66683.3\",\"vol\":\"1738.02898182\",\"volValue\":\"117321982.415978333\",\"last\":\"66981.5\",\"averagePrice\":\"67281.21437289\",\"takerFeeRate\":\"0.001\",\"makerFeeRate\":\"0.001\",\"takerCoefficient\":\"1\",\"makerCoefficient\":\"1\"}}"

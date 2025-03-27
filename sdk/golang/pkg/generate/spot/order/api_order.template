@@ -122,7 +122,7 @@ func TestOrderCancelOrderByOrderIdReq(t *testing.T) {
     // /api/v1/hf/orders/{orderId}
 
     builder := order.NewCancelOrderByOrderIdReqBuilder()
-    builder.SetSymbol(?).SetOrderId(?)
+    builder.SetOrderId(?).SetSymbol(?)
     req := builder.Build()
 
     resp, err := orderApi.CancelOrderByOrderId(req, context.TODO())
@@ -373,6 +373,29 @@ func TestOrderGetOpenOrdersReq(t *testing.T) {
     req := builder.Build()
 
     resp, err := orderApi.GetOpenOrders(req, context.TODO())
+    if err != nil {
+        panic(err)
+    }
+    data, err := json.Marshal(resp.ToMap())
+    if err != nil {
+        panic(err)
+    }
+    fmt.Println("code:", resp.CommonResponse.Code)
+    fmt.Println("message:", resp.CommonResponse.Message)
+    fmt.Println("data:", string(data))
+}
+
+
+func TestOrderGetOpenOrdersByPageReq(t *testing.T) {
+    // GetOpenOrdersByPage
+    // Get Open Orders By Page
+    // /api/v1/hf/orders/active/page
+
+    builder := order.NewGetOpenOrdersByPageReqBuilder()
+    builder.SetSymbol(?).SetPageNum(?).SetPageSize(?)
+    req := builder.Build()
+
+    resp, err := orderApi.GetOpenOrdersByPage(req, context.TODO())
     if err != nil {
         panic(err)
     }

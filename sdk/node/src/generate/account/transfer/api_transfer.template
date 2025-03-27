@@ -73,6 +73,26 @@ describe('Auto Test', ()=> {
     });
     })
 
+    test('getFuturesAccountTransferOutLedger request test', ()=> {
+    /**
+    * getFuturesAccountTransferOutLedger
+    * Get Futures Account Transfer Out Ledger
+    * /api/v1/transfer-list
+    */
+    let builder = GetFuturesAccountTransferOutLedgerReq.builder();
+    builder.setCurrency(?).setType(?).setTag(?).setStartAt(?).setEndAt(?).setCurrentPage(?).setPageSize(?);
+    let req = builder.build();
+    let resp = api.getFuturesAccountTransferOutLedger(req);
+    return resp.then(result => {
+        expect(result.currentPage).toEqual(expect.anything());
+        expect(result.pageSize).toEqual(expect.anything());
+        expect(result.totalNum).toEqual(expect.anything());
+        expect(result.totalPage).toEqual(expect.anything());
+        expect(result.items).toEqual(expect.anything());
+        console.log(resp);
+    });
+    })
+
     test('futuresAccountTransferOut request test', ()=> {
     /**
     * futuresAccountTransferOut
@@ -117,26 +137,6 @@ describe('Auto Test', ()=> {
     let resp = api.futuresAccountTransferIn(req);
     return resp.then(result => {
         expect(result.data).toEqual(expect.anything());
-        console.log(resp);
-    });
-    })
-
-    test('getFuturesAccountTransferOutLedger request test', ()=> {
-    /**
-    * getFuturesAccountTransferOutLedger
-    * Get Futures Account Transfer Out Ledger
-    * /api/v1/transfer-list
-    */
-    let builder = GetFuturesAccountTransferOutLedgerReq.builder();
-    builder.setCurrency(?).setType(?).setTag(?).setStartAt(?).setEndAt(?).setCurrentPage(?).setPageSize(?);
-    let req = builder.build();
-    let resp = api.getFuturesAccountTransferOutLedger(req);
-    return resp.then(result => {
-        expect(result.currentPage).toEqual(expect.anything());
-        expect(result.pageSize).toEqual(expect.anything());
-        expect(result.totalNum).toEqual(expect.anything());
-        expect(result.totalPage).toEqual(expect.anything());
-        expect(result.items).toEqual(expect.anything());
         console.log(resp);
     });
     })

@@ -67,6 +67,21 @@ type TransferAPI interface {
 	// Deprecated
 	InnerTransfer(req *InnerTransferReq, ctx context.Context) (*InnerTransferResp, error)
 
+	// GetFuturesAccountTransferOutLedger Get Futures Account Transfer Out Ledger
+	// Description: Futures account transfer out ledgers can be obtained at this endpoint.
+	// Documentation: https://www.kucoin.com/docs-new/api-3470307
+	// +-----------------------+------------+
+	// | Extra API Info        | Value      |
+	// +-----------------------+------------+
+	// | API-DOMAIN            | FUTURES    |
+	// | API-CHANNEL           | PRIVATE    |
+	// | API-PERMISSION        | GENERAL    |
+	// | API-RATE-LIMIT-POOL   | MANAGEMENT |
+	// | API-RATE-LIMIT-WEIGHT | 20         |
+	// +-----------------------+------------+
+	// Deprecated
+	GetFuturesAccountTransferOutLedger(req *GetFuturesAccountTransferOutLedgerReq, ctx context.Context) (*GetFuturesAccountTransferOutLedgerResp, error)
+
 	// FuturesAccountTransferOut Futures Account Transfer Out
 	// Description: The amount to be transferred will be deducted from the KuCoin Futures Account. Please ensure that you have sufficient funds in your KuCoin Futures Account, or the transfer will fail.
 	// Documentation: https://www.kucoin.com/docs-new/api-3470303
@@ -96,21 +111,6 @@ type TransferAPI interface {
 	// +-----------------------+------------+
 	// Deprecated
 	FuturesAccountTransferIn(req *FuturesAccountTransferInReq, ctx context.Context) (*FuturesAccountTransferInResp, error)
-
-	// GetFuturesAccountTransferOutLedger Get Futures Account Transfer Out Ledger
-	// Description: Futures account transfer out ledgers can be obtained at this endpoint.
-	// Documentation: https://www.kucoin.com/docs-new/api-3470307
-	// +-----------------------+------------+
-	// | Extra API Info        | Value      |
-	// +-----------------------+------------+
-	// | API-DOMAIN            | FUTURES    |
-	// | API-CHANNEL           | PRIVATE    |
-	// | API-PERMISSION        | GENERAL    |
-	// | API-RATE-LIMIT-POOL   | MANAGEMENT |
-	// | API-RATE-LIMIT-WEIGHT | 20         |
-	// +-----------------------+------------+
-	// Deprecated
-	GetFuturesAccountTransferOutLedger(req *GetFuturesAccountTransferOutLedgerReq, ctx context.Context) (*GetFuturesAccountTransferOutLedgerResp, error)
 }
 
 type TransferAPIImpl struct {
@@ -145,6 +145,12 @@ func (impl *TransferAPIImpl) InnerTransfer(req *InnerTransferReq, ctx context.Co
 	return resp, err
 }
 
+func (impl *TransferAPIImpl) GetFuturesAccountTransferOutLedger(req *GetFuturesAccountTransferOutLedgerReq, ctx context.Context) (*GetFuturesAccountTransferOutLedgerResp, error) {
+	resp := &GetFuturesAccountTransferOutLedgerResp{}
+	err := impl.transport.Call(ctx, "futures", false, "Get", "/api/v1/transfer-list", req, resp, false)
+	return resp, err
+}
+
 func (impl *TransferAPIImpl) FuturesAccountTransferOut(req *FuturesAccountTransferOutReq, ctx context.Context) (*FuturesAccountTransferOutResp, error) {
 	resp := &FuturesAccountTransferOutResp{}
 	err := impl.transport.Call(ctx, "futures", false, "Post", "/api/v3/transfer-out", req, resp, false)
@@ -154,11 +160,5 @@ func (impl *TransferAPIImpl) FuturesAccountTransferOut(req *FuturesAccountTransf
 func (impl *TransferAPIImpl) FuturesAccountTransferIn(req *FuturesAccountTransferInReq, ctx context.Context) (*FuturesAccountTransferInResp, error) {
 	resp := &FuturesAccountTransferInResp{}
 	err := impl.transport.Call(ctx, "futures", false, "Post", "/api/v1/transfer-in", req, resp, false)
-	return resp, err
-}
-
-func (impl *TransferAPIImpl) GetFuturesAccountTransferOutLedger(req *GetFuturesAccountTransferOutLedgerReq, ctx context.Context) (*GetFuturesAccountTransferOutLedgerResp, error) {
-	resp := &GetFuturesAccountTransferOutLedgerResp{}
-	err := impl.transport.Call(ctx, "futures", false, "Get", "/api/v1/transfer-list", req, resp, false)
 	return resp, err
 }

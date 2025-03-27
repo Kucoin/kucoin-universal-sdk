@@ -97,7 +97,7 @@ describe('Auto Test', () => {
          * Cancel Order By OrderId
          * /api/v3/hf/margin/orders/{orderId}
          */
-        let data = '{"symbol": "BTC-USDT", "orderId": "671663e02188630007e21c9c"}';
+        let data = '{"orderId": "671663e02188630007e21c9c", "symbol": "BTC-USDT"}';
         let req = CancelOrderByOrderIdReq.fromJson(data);
         expect(Object.values(req).every((value) => value === null || value === undefined)).toBe(
             false,
@@ -127,7 +127,7 @@ describe('Auto Test', () => {
          * Cancel Order By ClientOid
          * /api/v3/hf/margin/orders/client-order/{clientOid}
          */
-        let data = '{"symbol": "BTC-USDT", "clientOid": "5c52e11203aa677f33e1493fb"}';
+        let data = '{"clientOid": "5c52e11203aa677f33e1493fb", "symbol": "BTC-USDT"}';
         let req = CancelOrderByClientOidReq.fromJson(data);
         expect(Object.values(req).every((value) => value === null || value === undefined)).toBe(
             false,
@@ -313,7 +313,7 @@ describe('Auto Test', () => {
          * Get Order By OrderId
          * /api/v3/hf/margin/orders/{orderId}
          */
-        let data = '{"symbol": "BTC-USDT", "orderId": "671667306afcdb000723107f"}';
+        let data = '{"orderId": "671667306afcdb000723107f", "symbol": "BTC-USDT"}';
         let req = GetOrderByOrderIdReq.fromJson(data);
         expect(Object.values(req).every((value) => value === null || value === undefined)).toBe(
             false,
@@ -344,7 +344,7 @@ describe('Auto Test', () => {
          * Get Order By ClientOid
          * /api/v3/hf/margin/orders/client-order/{clientOid}
          */
-        let data = '{"symbol": "BTC-USDT", "clientOid": "5c52e11203aa677f33e493fb"}';
+        let data = '{"clientOid": "5c52e11203aa677f33e493fb", "symbol": "BTC-USDT"}';
         let req = GetOrderByClientOidReq.fromJson(data);
         expect(Object.values(req).every((value) => value === null || value === undefined)).toBe(
             false,

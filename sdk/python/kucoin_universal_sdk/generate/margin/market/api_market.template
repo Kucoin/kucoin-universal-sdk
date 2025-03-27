@@ -20,22 +20,6 @@ def test_get_cross_margin_symbols_req(self):
         print("error: ", e)
         raise e
 
-def test_get_margin_config_req(self):
-    """
-        get_margin_config
-        Get Margin Config
-        /api/v1/margin/config
-    """
-
-    try:
-        resp = self.api.get_margin_config()
-        print("code: ", resp.common_response.code)
-        print("msg: ", resp.common_response.message)
-        print("data: ", resp.to_json())
-    except Exception as e:
-        print("error: ", e)
-        raise e
-
 def test_get_etf_info_req(self):
     """
         get_etf_info
@@ -55,22 +39,6 @@ def test_get_etf_info_req(self):
         print("error: ", e)
         raise e
 
-def test_get_mark_price_list_req(self):
-    """
-        get_mark_price_list
-        Get Mark Price List
-        /api/v3/mark-price/all-symbols
-    """
-
-    try:
-        resp = self.api.get_mark_price_list()
-        print("code: ", resp.common_response.code)
-        print("msg: ", resp.common_response.message)
-        print("data: ", resp.to_json())
-    except Exception as e:
-        print("error: ", e)
-        raise e
-
 def test_get_mark_price_detail_req(self):
     """
         get_mark_price_detail
@@ -83,6 +51,38 @@ def test_get_mark_price_detail_req(self):
     req = builder.build()
     try:
         resp = self.api.get_mark_price_detail(req)
+        print("code: ", resp.common_response.code)
+        print("msg: ", resp.common_response.message)
+        print("data: ", resp.to_json())
+    except Exception as e:
+        print("error: ", e)
+        raise e
+
+def test_get_margin_config_req(self):
+    """
+        get_margin_config
+        Get Margin Config
+        /api/v1/margin/config
+    """
+
+    try:
+        resp = self.api.get_margin_config()
+        print("code: ", resp.common_response.code)
+        print("msg: ", resp.common_response.message)
+        print("data: ", resp.to_json())
+    except Exception as e:
+        print("error: ", e)
+        raise e
+
+def test_get_mark_price_list_req(self):
+    """
+        get_mark_price_list
+        Get Mark Price List
+        /api/v3/mark-price/all-symbols
+    """
+
+    try:
+        resp = self.api.get_mark_price_list()
         print("code: ", resp.common_response.code)
         print("msg: ", resp.common_response.message)
         print("data: ", resp.to_json())

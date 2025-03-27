@@ -85,7 +85,7 @@ def test_get_spot_sub_account_detail_req(self):
     """
 
     builder = GetSpotSubAccountDetailReqBuilder()
-    builder.set_include_base_amount(?).set_base_currency(?).set_base_amount(?).set_sub_user_id(?)
+    builder.set_sub_user_id(?).set_include_base_amount(?).set_base_currency(?).set_base_amount(?)
     req = builder.build()
     try:
         resp = self.api.get_spot_sub_account_detail(req)

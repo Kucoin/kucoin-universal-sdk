@@ -382,11 +382,11 @@
                                                 },
                                                 "buyLimit": {
                                                     "type": "number",
-                                                    "description": "The current maximum allowed buying price"
+                                                    "description": "The current maximum buying price allowed"
                                                 },
                                                 "sellLimit": {
                                                     "type": "number",
-                                                    "description": "The current minimum allowed selling price"
+                                                    "description": "The current minimum selling price allowed"
                                                 }
                                             },
                                             "required": [
@@ -849,11 +849,11 @@
                                                     },
                                                     "buyLimit": {
                                                         "type": "number",
-                                                        "description": "The current maximum allowed buying price"
+                                                        "description": "The current maximum buying price allowed"
                                                     },
                                                     "sellLimit": {
                                                         "type": "number",
-                                                        "description": "The current minimum allowed selling price"
+                                                        "description": "The current minimum selling price allowed"
                                                     }
                                                 },
                                                 "required": [
@@ -1326,18 +1326,18 @@
                 "tags": [],
                 "parameters": [
                     {
-                        "name": "symbol",
-                        "in": "query",
-                        "description": "Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) ",
+                        "name": "size",
+                        "in": "path",
+                        "description": "Get the depth layer, optional value: 20, 100",
                         "required": true,
                         "schema": {
                             "type": "string"
                         }
                     },
                     {
-                        "name": "size",
-                        "in": "path",
-                        "description": "Get the depth layer, optional value: 20, 100",
+                        "name": "symbol",
+                        "in": "query",
+                        "description": "Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220) ",
                         "required": true,
                         "schema": {
                             "type": "string"
@@ -1425,7 +1425,7 @@
                 "x-sdk-method-description": "Query for part orderbook depth data. (aggregated by price). It is recommended that you request via this endpoint, as the system response will be faster and consume less traffic.",
                 "x-api-rate-limit-weight": 5,
                 "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": {\\n        \\\"sequence\\\": 1697895963339,\\n        \\\"symbol\\\": \\\"XBTUSDM\\\",\\n        \\\"bids\\\": [\\n            [\\n                66968,\\n                2\\n            ],\\n            [\\n                66964.8,\\n                25596\\n            ]\\n        ],\\n        \\\"asks\\\": [\\n            [\\n                66968.1,\\n                13501\\n            ],\\n            [\\n                66968.7,\\n                2032\\n            ]\\n        ],\\n        \\\"ts\\\": 1729168101216000000\\n    }\\n}",
-                "x-request-example": "{\\\"symbol\\\": \\\"XBTUSDM\\\", \\\"size\\\": \\\"20\\\"}",
+                "x-request-example": "{\\\"size\\\": \\\"20\\\", \\\"symbol\\\": \\\"XBTUSDM\\\"}",
                 "operationId": "006"
             }
         },
@@ -1730,7 +1730,7 @@
             "get": {
                 "summary": "Get Mark Price",
                 "deprecated": false,
-                "description": "Get the current mark price.",
+                "description": "Get the current mark price (Update snapshots once per second, real-time query).",
                 "tags": [],
                 "parameters": [
                     {
@@ -1806,7 +1806,7 @@
                 "x-sdk-service": "Futures",
                 "x-sdk-sub-service": "Market",
                 "x-sdk-method-name": "getMarkPrice",
-                "x-sdk-method-description": "Get the current mark price.",
+                "x-sdk-method-description": "Get the current mark price (Update snapshots once per second, real-time query).",
                 "x-api-rate-limit-weight": 3,
                 "x-response-example": "{\\\"code\\\":\\\"200000\\\",\\\"data\\\":{\\\"symbol\\\":\\\"XBTUSDTM\\\",\\\"granularity\\\":1000,\\\"timePoint\\\":1729254307000,\\\"value\\\":67687.08,\\\"indexPrice\\\":67683.58}}",
                 "x-request-example": "{\\\"symbol\\\": \\\"XBTUSDTM\\\"}",
@@ -1817,7 +1817,7 @@
             "get": {
                 "summary": "Get Spot Index Price",
                 "deprecated": false,
-                "description": "Get Spot Index Price.",
+                "description": "Get Spot Index Price (Update snapshots once per second,  and there is a 5s cache when querying).",
                 "tags": [],
                 "parameters": [
                     {
@@ -1997,7 +1997,7 @@
                 "x-sdk-service": "Futures",
                 "x-sdk-sub-service": "Market",
                 "x-sdk-method-name": "getSpotIndexPrice",
-                "x-sdk-method-description": "Get Spot Index Price.",
+                "x-sdk-method-description": "Get Spot Index Price (Update snapshots once per second,  and there is a 5s cache when querying).",
                 "x-api-rate-limit-weight": 2,
                 "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": {\\n        \\\"hasMore\\\": true,\\n        \\\"dataList\\\": [\\n            {\\n                \\\"symbol\\\": \\\".KXBTUSDT\\\",\\n                \\\"granularity\\\": 1000,\\n                \\\"timePoint\\\": 1730557515000,\\n                \\\"value\\\": 69202.94,\\n                \\\"decomposionList\\\": [\\n                    {\\n                        \\\"exchange\\\": \\\"gateio\\\",\\n                        \\\"price\\\": 69209.27,\\n                        \\\"weight\\\": 0.0533\\n                    },\\n                    {\\n                        \\\"exchange\\\": \\\"bitmart\\\",\\n                        \\\"price\\\": 69230.77,\\n                        \\\"weight\\\": 0.0128\\n                    },\\n                    {\\n                        \\\"exchange\\\": \\\"okex\\\",\\n                        \\\"price\\\": 69195.34,\\n                        \\\"weight\\\": 0.11\\n                    },\\n                    {\\n                        \\\"exchange\\\": \\\"bybit\\\",\\n                        \\\"price\\\": 69190.33,\\n                        \\\"weight\\\": 0.0676\\n                    },\\n                    {\\n                        \\\"exchange\\\": \\\"binance\\\",\\n                        \\\"price\\\": 69204.55,\\n                        \\\"weight\\\": 0.6195\\n                    },\\n                    {\\n                        \\\"exchange\\\": \\\"kucoin\\\",\\n                        \\\"price\\\": 69202.91,\\n                        \\\"weight\\\": 0.1368\\n                    }\\n                ]\\n            },\\n            {\\n                \\\"symbol\\\": \\\".KXBTUSDT\\\",\\n                \\\"granularity\\\": 1000,\\n                \\\"timePoint\\\": 1730557514000,\\n                \\\"value\\\": 69204.98,\\n                \\\"decomposionList\\\": [\\n                    {\\n                        \\\"exchange\\\": \\\"gateio\\\",\\n                        \\\"price\\\": 69212.71,\\n                        \\\"weight\\\": 0.0808\\n                    },\\n                    {\\n                        \\\"exchange\\\": \\\"bitmart\\\",\\n                        \\\"price\\\": 69230.77,\\n                        \\\"weight\\\": 0.0134\\n                    },\\n                    {\\n                        \\\"exchange\\\": \\\"okex\\\",\\n                        \\\"price\\\": 69195.49,\\n                        \\\"weight\\\": 0.0536\\n                    },\\n                    {\\n                        \\\"exchange\\\": \\\"bybit\\\",\\n                        \\\"price\\\": 69195.97,\\n                        \\\"weight\\\": 0.0921\\n                    },\\n                    {\\n                        \\\"exchange\\\": \\\"binance\\\",\\n                        \\\"price\\\": 69204.56,\\n                        \\\"weight\\\": 0.5476\\n                    },\\n                    {\\n                        \\\"exchange\\\": \\\"kucoin\\\",\\n                        \\\"price\\\": 69207.8,\\n                        \\\"weight\\\": 0.2125\\n                    }\\n                ]\\n            }\\n        ]\\n    }\\n}",
                 "x-request-example": "{\\\"symbol\\\": \\\".KXBTUSDT\\\", \\\"startAt\\\": 123456, \\\"endAt\\\": 123456, \\\"reverse\\\": true, \\\"offset\\\": 123456, \\\"forward\\\": true, \\\"maxCount\\\": 10}",
@@ -2008,7 +2008,7 @@
             "get": {
                 "summary": "Get Interest Rate Index",
                 "deprecated": false,
-                "description": "Get interest rate Index.",
+                "description": "Get interest rate Index (real-time query).",
                 "tags": [],
                 "parameters": [
                     {
@@ -2163,7 +2163,7 @@
                 "x-sdk-service": "Futures",
                 "x-sdk-sub-service": "Market",
                 "x-sdk-method-name": "getInterestRateIndex",
-                "x-sdk-method-description": "Get interest rate Index.",
+                "x-sdk-method-description": "Get interest rate Index (real-time query).",
                 "x-api-rate-limit-weight": 5,
                 "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": {\\n        \\\"dataList\\\": [\\n            {\\n                \\\"symbol\\\": \\\".XBTINT\\\",\\n                \\\"granularity\\\": 60000,\\n                \\\"timePoint\\\": 1728692100000,\\n                \\\"value\\\": 3.0E-4\\n            },\\n            {\\n                \\\"symbol\\\": \\\".XBTINT\\\",\\n                \\\"granularity\\\": 60000,\\n                \\\"timePoint\\\": 1728692040000,\\n                \\\"value\\\": 3.0E-4\\n            }\\n        ],\\n        \\\"hasMore\\\": true\\n    }\\n}",
                 "x-request-example": "{\\\"symbol\\\": \\\".XBTINT8H\\\", \\\"startAt\\\": 1728663338000, \\\"endAt\\\": 1728692138000, \\\"reverse\\\": true, \\\"offset\\\": 254062248624417, \\\"forward\\\": true, \\\"maxCount\\\": 10}",
@@ -2174,7 +2174,7 @@
             "get": {
                 "summary": "Get Premium Index",
                 "deprecated": false,
-                "description": "Submit request to get premium index.",
+                "description": "Submit request to get premium index (Update snapshots once per second, real-time query).",
                 "tags": [],
                 "parameters": [
                     {
@@ -2327,7 +2327,7 @@
                 "x-sdk-service": "Futures",
                 "x-sdk-sub-service": "Market",
                 "x-sdk-method-name": "getPremiumIndex",
-                "x-sdk-method-description": "Submit request to get premium index.",
+                "x-sdk-method-description": "Submit request to get premium index (Update snapshots once per second, real-time query).",
                 "x-api-rate-limit-weight": 3,
                 "x-response-example": "{\\n    \\\"code\\\": \\\"200000\\\",\\n    \\\"data\\\": {\\n        \\\"hasMore\\\": true,\\n        \\\"dataList\\\": [\\n            {\\n                \\\"symbol\\\": \\\".XBTUSDTMPI\\\",\\n                \\\"granularity\\\": 60000,\\n                \\\"timePoint\\\": 1730558040000,\\n                \\\"value\\\": 0.00006\\n            },\\n            {\\n                \\\"symbol\\\": \\\".XBTUSDTMPI\\\",\\n                \\\"granularity\\\": 60000,\\n                \\\"timePoint\\\": 1730557980000,\\n                \\\"value\\\": -0.000025\\n            }\\n        ]\\n    }\\n}",
                 "x-request-example": "{\\\"symbol\\\": \\\".XBTUSDTMPI\\\", \\\"startAt\\\": 1728663338000, \\\"endAt\\\": 1728692138000, \\\"reverse\\\": true, \\\"offset\\\": 254062248624417, \\\"forward\\\": true, \\\"maxCount\\\": 10}",
@@ -6867,11 +6867,11 @@
                                                             },
                                                             "openFeeTaxPay": {
                                                                 "type": "string",
-                                                                "description": "Opening tax fee (Only kyc users in some regions have this parameter)"
+                                                                "description": "Opening tax fee (Only KYC users in some regions have this parameter)"
                                                             },
                                                             "closeFeeTaxPay": {
                                                                 "type": "string",
-                                                                "description": "Close tax fee (Only kyc users in some regions have this parameter)"
+                                                                "description": "Close tax fee (Only KYC users in some regions have this parameter)"
                                                             }
                                                         },
                                                         "required": [

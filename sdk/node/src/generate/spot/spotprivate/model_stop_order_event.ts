@@ -31,7 +31,7 @@ export class StopOrderEvent implements Response<WsMessage> {
      */
     size: string;
     /**
-     * Order type: stop: stop loss order, oco: oco order
+     * Order type: loss: stop loss order, oco: oco order
      */
     stop: StopOrderEvent.StopEnum;
     /**
@@ -43,7 +43,7 @@ export class StopOrderEvent implements Response<WsMessage> {
      */
     symbol: string;
     /**
-     * The type of trading : TRADE（Spot）, MARGIN_TRADE (Cross Margin), MARGIN_ISOLATED_TRADE (Isolated Margin).
+     * The type of trading: TRADE (Spot), MARGIN_TRADE (Cross Margin), MARGIN_ISOLATED_TRADE (Isolated Margin).
      */
     tradeType: StopOrderEvent.TradeTypeEnum;
     /**
@@ -114,14 +114,6 @@ export class StopOrderEvent implements Response<WsMessage> {
 export namespace StopOrderEvent {
     export enum OrderTypeEnum {
         /**
-         * limit
-         */
-        LIMIT = <any>'limit',
-        /**
-         * market
-         */
-        MARKET = <any>'market',
-        /**
          * stop
          */
         STOP = <any>'stop',
@@ -140,7 +132,7 @@ export namespace StopOrderEvent {
         /**
          * stop loss order
          */
-        STOP = <any>'stop',
+        LOSS = <any>'loss',
         /**
          * oco order
          */
@@ -162,11 +154,11 @@ export namespace StopOrderEvent {
     }
     export enum TypeEnum {
         /**
-         * the order is in the order book (maker order)
+         * The order is in the order book (maker order)
          */
         OPEN = <any>'open',
         /**
-         * The message sent when the order is match, 1. When the status is open and the type is match, it is a maker match.  2. When the status is match and the type is match, it is a taker match.
+         * The message sent when the order is matched, 1. When the status is open and the type is match, it is a maker match.  2. When the status is match and the type is match, it is a taker match.
          */
         MATCH = <any>'match',
         /**
@@ -180,7 +172,7 @@ export namespace StopOrderEvent {
         /**
          * The message sent when the status of the order changes to DONE due to being canceled
          */
-        CANCELED = <any>'canceled',
+        CANCEL = <any>'cancel',
         /**
          * The message sent when the order enters the matching system. When the order has just entered the matching system and has not yet done matching logic with the counterparty, a private message with the message type &quot;received&quot; and the order status &quot;new&quot; will be pushed.
          */

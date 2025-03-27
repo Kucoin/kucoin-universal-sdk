@@ -6,22 +6,22 @@ import { Response } from '@internal/interfaces/serializable';
 
 export class GetSymbolResp implements Response<RestResponse> {
     /**
-     * Unique code of a symbol; it will not change after renaming
+     * unique code of a symbol, it would not change after renaming
      */
     symbol: string;
 
     /**
-     * Name of trading pairs, it will change after renaming
+     * Name of trading pairs, it would change after renaming
      */
     name: string;
 
     /**
-     * Base currency, e.g. BTC.
+     * Base currency,e.g. BTC.
      */
     baseCurrency: string;
 
     /**
-     * Quote currency, e.g. USDT.
+     * Quote currency,e.g. USDT.
      */
     quoteCurrency: string;
 
@@ -36,7 +36,7 @@ export class GetSymbolResp implements Response<RestResponse> {
     market: string;
 
     /**
-     * The minimum order quantity required to place an order.
+     * The minimum order quantity requried to place an order.
      */
     baseMinSize: string;
 
@@ -71,7 +71,7 @@ export class GetSymbolResp implements Response<RestResponse> {
     priceIncrement: string;
 
     /**
-     * Threshold for price protection
+     * Threshold for price portection
      */
     priceLimitRate: string;
 

@@ -1,5 +1,17 @@
 # Changelog
 
+API documentation [Changelog](https://www.kucoin.com/docs-new/change-log)
+
+Current synchronized API documentation version [20250313](https://www.kucoin.com/docs-new/change-log#20250313)
+
+## 2025-03-21(1.2.0)
+- Update the latest APIs, documentation, etc
+- Remove range validation in Python
+- Update API KEY verification version to 3
+- Fix the bug related to resubscribing
+- The Node.js SDK has been changed to the official unified version
+- Fix issues with automated test execution.
+
 ## 2025-03-04(Python 1.1.1)
 - Update __init__.py to enhance the import experience
 - Reduce unnecessary log output

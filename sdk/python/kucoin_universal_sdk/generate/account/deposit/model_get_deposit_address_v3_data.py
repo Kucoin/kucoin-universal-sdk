@@ -19,7 +19,7 @@ class GetDepositAddressV3Data(BaseModel):
         address (str): Deposit address
         memo (str): Address remark. If there’s no remark, it is empty. When you withdraw from other platforms to KuCoin, you need to fill in memo(tag). Be careful: If you do not fill in memo(tag), your deposit may not be available.
         chain_id (str): The chainId of currency
-        to (ToEnum): Deposit account type: MAIN(funding account), TRADE (spot trading account)
+        to (ToEnum): Deposit account type: MAIN (funding account), TRADE (spot trading account)
         expiration_date (int): Expiration time; Lightning network expiration time; this field is not applicable to non-Lightning networks
         currency (str): currency
         contract_address (str): The token contract address.
@@ -47,7 +47,7 @@ class GetDepositAddressV3Data(BaseModel):
     to: Optional[ToEnum] = Field(
         default=None,
         description=
-        "Deposit account type: MAIN(funding account), TRADE (spot trading account)"
+        "Deposit account type: MAIN (funding account), TRADE (spot trading account)"
     )
     expiration_date: Optional[int] = Field(
         default=None,

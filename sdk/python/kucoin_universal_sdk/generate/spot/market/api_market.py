@@ -101,7 +101,7 @@ class MarketAPI(ABC):
     def get_symbol(self, req: GetSymbolReq, **kwargs: Any) -> GetSymbolResp:
         """
         summary: Get Symbol 
-        description: Request detailed currency pairs for trading via this endpoint. If you want to get the market information of the trading symbol, please use Get All Tickers.
+        description: Request via this endpoint to get detail currency pairs for trading. If you want to get the market information of the trading symbol, please use Get All Tickers.
         documentation: https://www.kucoin.com/docs-new/api-3470159
         +-----------------------+--------+
         | Extra API Info        | Value  |
@@ -138,7 +138,7 @@ class MarketAPI(ABC):
     def get_ticker(self, req: GetTickerReq, **kwargs: Any) -> GetTickerResp:
         """
         summary: Get Ticker
-        description: Request Level 1 Market Data via this endpoint. The returned value includes the best bid price and size, the best ask price and size, as well as the last traded price and the last traded size.
+        description: Request via this endpoint to get Level 1 Market Data. The returned value includes the best bid price and size, the best ask price and size as well as the last traded price and the last traded size.
         documentation: https://www.kucoin.com/docs-new/api-3470160
         +-----------------------+--------+
         | Extra API Info        | Value  |
@@ -175,7 +175,7 @@ class MarketAPI(ABC):
                           **kwargs: Any) -> GetTradeHistoryResp:
         """
         summary: Get Trade History
-        description: Request the trade history of the specified symbol via this endpoint. The returned quantity is the last 100 transaction records.
+        description: Request via this endpoint to get the trade history of the specified symbol, the returned quantity is the last 100 transaction records.
         documentation: https://www.kucoin.com/docs-new/api-3470162
         +-----------------------+--------+
         | Extra API Info        | Value  |
@@ -193,7 +193,7 @@ class MarketAPI(ABC):
     def get_klines(self, req: GetKlinesReq, **kwargs: Any) -> GetKlinesResp:
         """
         summary: Get Klines
-        description: Get the symbol’s candlestick chart. Data are returned in grouped buckets based on requested type. For each query, the system will return at most 1500 pieces of data. To obtain more data, please page the data by time.
+        description: Get the Kline of the symbol. Data are returned in grouped buckets based on requested type. For each query, the system would return at most 1500 pieces of data. To obtain more data, please page the data by time.
         documentation: https://www.kucoin.com/docs-new/api-3470163
         +-----------------------+--------+
         | Extra API Info        | Value  |
@@ -212,7 +212,7 @@ class MarketAPI(ABC):
                             **kwargs: Any) -> GetPartOrderBookResp:
         """
         summary: Get Part OrderBook
-        description: Query for part orderbook depth data. (aggregated by price). It is recommended that you request via this endpoint, as the system response will be faster and consume less traffic.
+        description: Query for part orderbook depth data. (aggregated by price)  You are recommended to request via this endpoint as the system reponse would be faster and cosume less traffic.
         documentation: https://www.kucoin.com/docs-new/api-3470165
         +-----------------------+--------+
         | Extra API Info        | Value  |
@@ -231,7 +231,7 @@ class MarketAPI(ABC):
                             **kwargs: Any) -> GetFullOrderBookResp:
         """
         summary: Get Full OrderBook
-        description: Query for Full orderbook depth data (aggregated by price). It is generally used by professional traders because it uses more server resources and traffic, and we have strict access rate limit control.  To maintain an up-to-date Order Book, please use Websocket incremental feed after retrieving the OrderBook.
+        description: Query for Full orderbook depth data. (aggregated by price)  It is generally used by professional traders because it uses more server resources and traffic, and we have strict access rate limit control.  To maintain up-to-date Order Book, please use Websocket incremental feed after retrieving the OrderBook.
         documentation: https://www.kucoin.com/docs-new/api-3470164
         +-----------------------+---------+
         | Extra API Info        | Value   |
@@ -270,7 +270,7 @@ class MarketAPI(ABC):
                               **kwargs: Any) -> GetCallAuctionInfoResp:
         """
         summary: Get Call Auction Info
-        description: Get call auction data, This interface will return the following information for the specified symbol during the call auction phase: estimated transaction price, estimated transaction quantity, bid price range, and ask price range.
+        description: Get call auction data. This interface will return the following information for the specified symbol during the call auction phase: estimated transaction price, estimated transaction quantity, bid price range, and ask price range.
         documentation: https://www.kucoin.com/docs-new/api-3471565
         +-----------------------+--------+
         | Extra API Info        | Value  |
@@ -307,8 +307,8 @@ class MarketAPI(ABC):
     def get24hr_stats(self, req: Get24hrStatsReq,
                       **kwargs: Any) -> Get24hrStatsResp:
         """
-        summary: Get 24hr stats
-        description: Request the statistics of the specified ticker in the last 24 hours via this endpoint.
+        summary: Get 24hr Stats
+        description: Request via this endpoint to get the statistics of the specified ticker in the last 24 hours.
         documentation: https://www.kucoin.com/docs-new/api-3470161
         +-----------------------+--------+
         | Extra API Info        | Value  |

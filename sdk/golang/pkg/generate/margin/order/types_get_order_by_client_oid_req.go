@@ -4,10 +4,10 @@ package order
 
 // GetOrderByClientOidReq struct for GetOrderByClientOidReq
 type GetOrderByClientOidReq struct {
-	// symbol
-	Symbol *string `json:"symbol,omitempty" url:"symbol,omitempty"`
 	// Client Order Id, unique identifier created by the user
 	ClientOid *string `json:"clientOid,omitempty" path:"clientOid" url:"-"`
+	// symbol
+	Symbol *string `json:"symbol,omitempty" url:"symbol,omitempty"`
 }
 
 // NewGetOrderByClientOidReq instantiates a new GetOrderByClientOidReq object
@@ -26,8 +26,8 @@ func NewGetOrderByClientOidReqWithDefaults() *GetOrderByClientOidReq {
 
 func (o *GetOrderByClientOidReq) ToMap() map[string]interface{} {
 	toSerialize := map[string]interface{}{}
-	toSerialize["symbol"] = o.Symbol
 	toSerialize["clientOid"] = o.ClientOid
+	toSerialize["symbol"] = o.Symbol
 	return toSerialize
 }
 
@@ -39,15 +39,15 @@ func NewGetOrderByClientOidReqBuilder() *GetOrderByClientOidReqBuilder {
 	return &GetOrderByClientOidReqBuilder{obj: NewGetOrderByClientOidReqWithDefaults()}
 }
 
-// symbol
-func (builder *GetOrderByClientOidReqBuilder) SetSymbol(value string) *GetOrderByClientOidReqBuilder {
-	builder.obj.Symbol = &value
-	return builder
-}
-
 // Client Order Id, unique identifier created by the user
 func (builder *GetOrderByClientOidReqBuilder) SetClientOid(value string) *GetOrderByClientOidReqBuilder {
 	builder.obj.ClientOid = &value
+	return builder
+}
+
+// symbol
+func (builder *GetOrderByClientOidReqBuilder) SetSymbol(value string) *GetOrderByClientOidReqBuilder {
+	builder.obj.Symbol = &value
 	return builder
 }
 

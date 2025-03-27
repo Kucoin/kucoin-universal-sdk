@@ -1126,7 +1126,7 @@
                                                     },
                                                     "userLowerLimit": {
                                                         "type": "string",
-                                                        "description": "Min. user subscribe amount"
+                                                        "description": "Min. user subscription amount"
                                                     },
                                                     "redeemPeriod": {
                                                         "type": "integer",
@@ -1191,7 +1191,7 @@
                                                     },
                                                     "status": {
                                                         "type": "string",
-                                                        "description": "Product status: ONGOING (Subscription in progress), PENDING (Preheating Subscription), FULL (Subscribed), INTERESTING (Interest in progress)",
+                                                        "description": "Product status: ONGOING (Subscription in progress), PENDING (Preheating Subscription), FULL (Subscribed), INTERESTING (Interest accrual in progress)",
                                                         "enum": [
                                                             "ONGOING",
                                                             "PENDING",

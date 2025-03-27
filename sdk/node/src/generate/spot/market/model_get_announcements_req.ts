@@ -5,23 +5,23 @@ import { Serializable } from '@internal/interfaces/serializable';
 
 export class GetAnnouncementsReq implements Serializable {
     /**
-     * Page number
+     * page number
      */
     currentPage?: number;
 
     /**
-     * Page Size
+     * page Size
      */
     pageSize?: number;
 
     /**
-     * Announcement types: latest-announcements, activities (latest activities), new-listings (new currency online), product-updates (product updates), vip (institutions and VIPs), maintenance-updates (system maintenance), product-updates (product news), delistings (currency offline), others, api-campaigns (API user activities), default: latest-announcements
+     * Announcement types: latest-announcements , activities (latest activities), new-listings (new currency online), product-updates (product updates), vip (institutions and VIPs), maintenance-updates (system maintenance), product -updates (product news), delistings (currency offline), others, api-campaigns (API user activities), default : latest-announcements
      */
     annType?: GetAnnouncementsReq.AnnTypeEnum =
         GetAnnouncementsReq.AnnTypeEnum.LATEST_ANNOUNCEMENTS;
 
     /**
-     * Language type: The default is en_US, the specific value parameters are as follows
+     * Language type, the default is en_US, the specific value parameters are as follows
      */
     lang?: GetAnnouncementsReq.LangEnum = GetAnnouncementsReq.LangEnum.EN_US;
 
@@ -52,19 +52,19 @@ export class GetAnnouncementsReq implements Serializable {
      */
     static create(data: {
         /**
-         * Page number
+         * page number
          */
         currentPage?: number;
         /**
-         * Page Size
+         * page Size
          */
         pageSize?: number;
         /**
-         * Announcement types: latest-announcements, activities (latest activities), new-listings (new currency online), product-updates (product updates), vip (institutions and VIPs), maintenance-updates (system maintenance), product-updates (product news), delistings (currency offline), others, api-campaigns (API user activities), default: latest-announcements
+         * Announcement types: latest-announcements , activities (latest activities), new-listings (new currency online), product-updates (product updates), vip (institutions and VIPs), maintenance-updates (system maintenance), product -updates (product news), delistings (currency offline), others, api-campaigns (API user activities), default : latest-announcements
          */
         annType?: GetAnnouncementsReq.AnnTypeEnum;
         /**
-         * Language type: The default is en_US, the specific value parameters are as follows
+         * Language type, the default is en_US, the specific value parameters are as follows
          */
         lang?: GetAnnouncementsReq.LangEnum;
         /**
@@ -250,7 +250,7 @@ export class GetAnnouncementsReqBuilder {
         this.obj = obj;
     }
     /**
-     * Page number
+     * page number
      */
     setCurrentPage(value: number): GetAnnouncementsReqBuilder {
         this.obj.currentPage = value;
@@ -258,7 +258,7 @@ export class GetAnnouncementsReqBuilder {
     }
 
     /**
-     * Page Size
+     * page Size
      */
     setPageSize(value: number): GetAnnouncementsReqBuilder {
         this.obj.pageSize = value;
@@ -266,7 +266,7 @@ export class GetAnnouncementsReqBuilder {
     }
 
     /**
-     * Announcement types: latest-announcements, activities (latest activities), new-listings (new currency online), product-updates (product updates), vip (institutions and VIPs), maintenance-updates (system maintenance), product-updates (product news), delistings (currency offline), others, api-campaigns (API user activities), default: latest-announcements
+     * Announcement types: latest-announcements , activities (latest activities), new-listings (new currency online), product-updates (product updates), vip (institutions and VIPs), maintenance-updates (system maintenance), product -updates (product news), delistings (currency offline), others, api-campaigns (API user activities), default : latest-announcements
      */
     setAnnType(value: GetAnnouncementsReq.AnnTypeEnum): GetAnnouncementsReqBuilder {
         this.obj.annType = value;
@@ -274,7 +274,7 @@ export class GetAnnouncementsReqBuilder {
     }
 
     /**
-     * Language type: The default is en_US, the specific value parameters are as follows
+     * Language type, the default is en_US, the specific value parameters are as follows
      */
     setLang(value: GetAnnouncementsReq.LangEnum): GetAnnouncementsReqBuilder {
         this.obj.lang = value;

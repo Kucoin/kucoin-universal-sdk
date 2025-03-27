@@ -77,6 +77,25 @@ def test_inner_transfer_req(self):
         print("error: ", e)
         raise e
 
+def test_get_futures_account_transfer_out_ledger_req(self):
+    """
+        get_futures_account_transfer_out_ledger
+        Get Futures Account Transfer Out Ledger
+        /api/v1/transfer-list
+    """
+
+    builder = GetFuturesAccountTransferOutLedgerReqBuilder()
+    builder.set_currency(?).set_type(?).set_tag(?).set_start_at(?).set_end_at(?).set_current_page(?).set_page_size(?)
+    req = builder.build()
+    try:
+        resp = self.api.get_futures_account_transfer_out_ledger(req)
+        print("code: ", resp.common_response.code)
+        print("msg: ", resp.common_response.message)
+        print("data: ", resp.to_json())
+    except Exception as e:
+        print("error: ", e)
+        raise e
+
 def test_futures_account_transfer_out_req(self):
     """
         futures_account_transfer_out
@@ -108,25 +127,6 @@ def test_futures_account_transfer_in_req(self):
     req = builder.build()
     try:
         resp = self.api.futures_account_transfer_in(req)
-        print("code: ", resp.common_response.code)
-        print("msg: ", resp.common_response.message)
-        print("data: ", resp.to_json())
-    except Exception as e:
-        print("error: ", e)
-        raise e
-
-def test_get_futures_account_transfer_out_ledger_req(self):
-    """
-        get_futures_account_transfer_out_ledger
-        Get Futures Account Transfer Out Ledger
-        /api/v1/transfer-list
-    """
-
-    builder = GetFuturesAccountTransferOutLedgerReqBuilder()
-    builder.set_currency(?).set_type(?).set_tag(?).set_start_at(?).set_end_at(?).set_current_page(?).set_page_size(?)
-    req = builder.build()
-    try:
-        resp = self.api.get_futures_account_transfer_out_ledger(req)
         print("code: ", resp.common_response.code)
         print("msg: ", resp.common_response.message)
         print("data: ", resp.to_json())

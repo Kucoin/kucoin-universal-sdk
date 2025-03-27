@@ -86,12 +86,12 @@ export class BatchAddOrdersSyncOrderList implements Serializable {
     funds?: string;
 
     /**
-     * Order failed after timeout of specified milliseconds, If clientTimestamp + allowMaxTimeWindow < the server reaches time, this order will fail.
+     * The order will fail if it times out after the specified duration in milliseconds. Specifically, if clientTimestamp + allowMaxTimeWindow (in milliseconds) is less than the time the server receives the message, the order will fail.
      */
     allowMaxTimeWindow?: number;
 
     /**
-     * Equal to KC-API-TIMESTAMP, Need to be defined if iceberg is specified.
+     * Equal to KC-API-TIMESTAMP. Needs to be defined if iceberg is specified.
      */
     clientTimestamp?: number;
 
@@ -185,11 +185,11 @@ export class BatchAddOrdersSyncOrderList implements Serializable {
          */
         funds?: string;
         /**
-         * Order failed after timeout of specified milliseconds, If clientTimestamp + allowMaxTimeWindow < the server reaches time, this order will fail.
+         * The order will fail if it times out after the specified duration in milliseconds. Specifically, if clientTimestamp + allowMaxTimeWindow (in milliseconds) is less than the time the server receives the message, the order will fail.
          */
         allowMaxTimeWindow?: number;
         /**
-         * Equal to KC-API-TIMESTAMP, Need to be defined if iceberg is specified.
+         * Equal to KC-API-TIMESTAMP. Needs to be defined if iceberg is specified.
          */
         clientTimestamp?: number;
     }): BatchAddOrdersSyncOrderList {
@@ -445,7 +445,7 @@ export class BatchAddOrdersSyncOrderListBuilder {
     }
 
     /**
-     * Order failed after timeout of specified milliseconds, If clientTimestamp + allowMaxTimeWindow < the server reaches time, this order will fail.
+     * The order will fail if it times out after the specified duration in milliseconds. Specifically, if clientTimestamp + allowMaxTimeWindow (in milliseconds) is less than the time the server receives the message, the order will fail.
      */
     setAllowMaxTimeWindow(value: number): BatchAddOrdersSyncOrderListBuilder {
         this.obj.allowMaxTimeWindow = value;
@@ -453,7 +453,7 @@ export class BatchAddOrdersSyncOrderListBuilder {
     }
 
     /**
-     * Equal to KC-API-TIMESTAMP, Need to be defined if iceberg is specified.
+     * Equal to KC-API-TIMESTAMP. Needs to be defined if iceberg is specified.
      */
     setClientTimestamp(value: number): BatchAddOrdersSyncOrderListBuilder {
         this.obj.clientTimestamp = value;
