@@ -1,0 +1,186 @@
+<?php
+{{#models}}
+{{#model}}
+{{>partial_header}}
+namespace {{modelPackage}};
+
+{{#vendorExtensions.x-imports}}
+{{{.}}}
+{{/vendorExtensions.x-imports}}
+{{#vendorExtensions.x-response-model}}
+use KuCoin\UniversalSDK\Internal\Interfaces\Response;
+use KuCoin\UniversalSDK\Model\RestResponse;
+
+class {{classname}} implements Response {
+{{/vendorExtensions.x-response-model}}
+{{^vendorExtensions.x-response-model}}
+use KuCoin\UniversalSDK\Internal\Interfaces\Request;
+
+class {{classname}} implements Request {
+    /**
+     * @var string[] $pathVarMapping
+     * @Exclude()
+     */
+    public static $pathVarMapping = [
+    {{#vars}}
+    {{#vendorExtensions.x-tag-path}}
+        '{{baseName}}'  => '{{name}}',
+    {{/vendorExtensions.x-tag-path}}
+{{/vars}}
+    ];
+
+    public function pathVarMapping()
+    {
+        return self::$pathVarMapping;
+    }
+{{/vendorExtensions.x-response-model}}
+{{#vars}}
+    /**
+    * {{#description}}{{{.}}}{{/description}}
+    * @var {{{dataType}}}{{^required}}|null{{/required}} ${{name}}
+    * @Type("{{{dataType}}}")
+    * @SerializedName("{{baseName}}")
+    {{#vendorExtensions.x-tag-path}}
+    * @Exclude()
+    {{/vendorExtensions.x-tag-path}}
+    */
+    public ${{name}}{{#defaultValue}} = {{{.}}}{{/defaultValue}};
+{{/vars}}
+
+{{#vendorExtensions.x-response-model}}
+    /**
+    * common response
+    * @Exclude()
+    * @var RestResponse $commonResponse
+    */
+    public $commonResponse;
+
+    public function setCommonResponse($response): void {
+        $this->commonResponse = $response;
+    }
+{{/vendorExtensions.x-response-model}}
+
+    private function __construct() {
+    }
+
+{{#vendorExtensions.x-original-response}}
+    /**
+    * @param Serializer $serializer
+    * @return string
+    */
+    public function jsonSerialize($serializer) {
+        return $serializer->serialize($this, 'json');
+    }
+
+    /**
+    * @param string $json
+    * @param Serializer $serializer
+    * @return self
+    */
+    public static function jsonDeserialize($json , $serializer) {
+        $obj = new self();
+        $obj->data= $json;
+        return $obj;
+    }
+}
+{{/vendorExtensions.x-original-response}}
+{{#vendorExtensions.x-request-raw-array}}
+    /**
+    * @param Serializer $serializer
+    * @return string
+    */
+    public function jsonSerialize($serializer) {
+    return $serializer->serialize($this->items, 'json');
+    }
+
+    /**
+    * @param string $json
+    * @param Serializer $serializer
+    * @return self
+    */
+    public static function jsonDeserialize($serializer) {
+    return {{classname}}.create(['items'=> $serializer->deserialize($this->items, 'json')]);
+    }
+{{/vendorExtensions.x-request-raw-array}}
+{{^vendorExtensions.x-original-response}}
+{{^vendorExtensions.x-request-raw-array}}
+    /**
+    * @param Serializer $serializer
+    * @return string
+    */
+    public function jsonSerialize($serializer) {
+        return $serializer->serialize($this, 'json');
+    }
+
+    /**
+    * @param string $json
+    * @param Serializer $serializer
+    * @return self
+    */
+    public static function jsonDeserialize($json, $serializer) {
+        return $serializer->deserialize($json, {{classname}}::class, 'json');
+    }
+{{/vendorExtensions.x-request-raw-array}}
+{{/vendorExtensions.x-original-response}}
+{{^vendorExtensions.x-request-model}}
+}
+{{/vendorExtensions.x-request-model}}
+{{#vendorExtensions.x-request-model}}
+    /**
+    * Creates a new instance of the `{{classname}}` class.
+    * The builder pattern allows step-by-step construction of a `{{classname}}` object.
+    * @return {{classname}}Builder
+    */
+    public static function builder() {
+        return new {{classname}}Builder(new self());
+    }
+
+    /**
+    * Creates a new instance of the `{{classname}}` class with the given data.
+    * Ensure that the keys in data match the target field names in the documentation,
+    * rather than the variable names in the class.
+    * @return self
+    */
+    public static function create(array $data) {
+      $obj = new self();
+      foreach ($data as $key => $value) {
+          if (property_exists($obj, $key)) {
+              $obj->$key = $value;
+          }
+      }
+      return $obj;
+    }
+}
+
+
+class {{classname}}Builder {
+    /**
+    * @var {{classname}} $obj
+    */
+    private $obj;
+
+    public function __construct({{classname}} $obj) {
+        $this->obj = $obj;
+    }
+{{#vars}}
+    /**
+    * @param {{{dataType}}} $value {{#description}}{{{.}}}{{/description}}
+    * @return self
+    */
+    public function set{{nameInPascalCase}}($value) {
+        $this->obj->{{name}} = $value;
+        return $this;
+    }
+
+{{/vars}}
+    /**
+    * Get the final object.
+    * @return {{classname}}
+    */
+    public function build() {
+        return $this->obj;
+    }
+}
+
+{{/vendorExtensions.x-request-model}}
+{{/model}}{{/models}}

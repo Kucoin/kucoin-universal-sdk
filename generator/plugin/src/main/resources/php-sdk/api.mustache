@@ -1,0 +1,24 @@
+<?php
+{{>partial_header}}
+namespace {{package}};
+use KuCoin\UniversalSDK\Internal\Interfaces\Transport;
+
+interface {{classname}} {
+{{#operations}}
+    {{#operation}}
+    /**
+    * {{summary}}
+    *
+    * {{notes}}{{#isDeprecated}}
+    * @deprecated{{/isDeprecated}}
+    * @see: {{vendorExtensions.x-api-doc}}
+    *
+    {{#vendorExtensions.x-extra-comment}}
+    * {{.}}
+    {{/vendorExtensions.x-extra-comment}}
+    */
+    public function {{vendorExtensions.x-meta.method}}({{#hasParams}}{{vendorExtensions.x-meta.methodServiceFmt}}Req $req{{/hasParams}}): {{vendorExtensions.x-meta.methodServiceFmt}}Resp;
+
+    {{/operation}}
+{{/operations}}
+}

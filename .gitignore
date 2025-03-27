@@ -9,3 +9,4 @@ logs
 test.log
 build/
 dist/
+vendor

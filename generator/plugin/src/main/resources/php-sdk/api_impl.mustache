@@ -1,0 +1,22 @@
+<?php
+{{>partial_header}}
+namespace {{package}};
+use KuCoin\UniversalSDK\Internal\Interfaces\Transport;
+
+class {{classname}}Impl implements {{classname}} {
+    private $transport;
+
+    public function __construct(Transport $transport)
+    {
+        $this->transport = $transport;
+    }
+
+{{#operations}}
+    {{#operation}}
+     public function {{vendorExtensions.x-meta.method}}({{#hasParams}}{{vendorExtensions.x-meta.methodServiceFmt}}Req $req{{/hasParams}}): {{vendorExtensions.x-meta.methodServiceFmt}}Resp {
+        return $this->transport->call("{{vendorExtensions.x-meta.domain}}", {{vendorExtensions.x-meta.broker}}, "{{httpMethod}}", "{{path}}", {{#hasParams}}$req{{/hasParams}}{{^hasParams}}null{{/hasParams}}, {{vendorExtensions.x-meta.methodServiceFmt}}Resp::class, {{#vendorExtensions.x-request-force-json}}true{{/vendorExtensions.x-request-force-json}}{{^vendorExtensions.x-request-force-json}}false{{/vendorExtensions.x-request-force-json}});
+    }
+
+    {{/operation}}
+{{/operations}}
+}

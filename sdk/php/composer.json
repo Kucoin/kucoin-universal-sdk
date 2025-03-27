@@ -1,0 +1,53 @@
+{
+  "name": "kucoin/kucoin-universal-sdk",
+  "type": "library",
+  "license": "MIT",
+  "description": "Official KuCoin Universal SDK",
+  "keywords": [
+    "kucoin",
+    "api",
+    "sdk",
+    "cryptocurrency",
+    "trading",
+    "exchange"
+  ],
+  "homepage": "https://github.com/kucoin/kucoin-universal-sdk",
+  "support": {
+    "source": "https://github.com/kucoin/kucoin-universal-sdk",
+    "issues": "https://github.com/kucoin/kucoin-universal-sdk/issues"
+  },
+  "authors": [
+    {
+      "name": "KuCoin",
+      "email": "api@kucoin.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.4",
+    "jms/serializer": "^3.32",
+    "doctrine/annotations": "^2.0",
+    "guzzlehttp/guzzle": "^7.9"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "KuCoin\\UniversalSDK\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "test/"
+    }
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true,
+  "config": {
+    "optimize-autoloader": true,
+    "secure-http": true
+  },
+  "scripts": {
+    "test": "phpunit --colors=always"
+  }
+}
