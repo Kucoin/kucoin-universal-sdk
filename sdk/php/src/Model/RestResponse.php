@@ -3,8 +3,6 @@
 namespace KuCoin\UniversalSDK\Model;
 
 use Exception;
-use JMS\Serializer\Annotation\SerializedName;
-use JMS\Serializer\Annotation\Type;
 use JMS\Serializer\Serializer;
 
 
@@ -62,7 +60,7 @@ class RestResponse
      * @param Serializer $serializer
      * @return self
      */
-    public static function jsonDeserialize($json, $serializer)
+    public static function jsonDeserialize(string $json, Serializer $serializer): RestResponse
     {
         return $serializer->deserialize($json, self::class, 'json');
     }

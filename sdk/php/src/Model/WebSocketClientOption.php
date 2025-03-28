@@ -4,7 +4,6 @@ namespace KuCoin\UniversalSDK\Model;
 
 
 /**
- * Class WebSocketClientOption
  * Configuration for WebSocket client behavior.
  */
 class WebSocketClientOption
@@ -61,112 +60,5 @@ class WebSocketClientOption
 
     public function __construct()
     {
-    }
-}
-
-/**
- * Class WebSocketClientOptionBuilder
- * Fluent builder for WebSocketClientOption.
- */
-class WebSocketClientOptionBuilder
-{
-    /**
-     * @var WebSocketClientOption
-     */
-    private $option;
-
-    public function __construct()
-    {
-        $this->option = new WebSocketClientOption();
-    }
-
-    /**
-     * @param bool $reconnect
-     * @return $this
-     */
-    public function withReconnect($reconnect)
-    {
-        $this->option->reconnect = $reconnect;
-        return $this;
-    }
-
-    /**
-     * @param int $attempts
-     * @return $this
-     */
-    public function withReconnectAttempts($attempts)
-    {
-        $this->option->reconnectAttempts = $attempts;
-        return $this;
-    }
-
-    /**
-     * @param float $interval
-     * @return $this
-     */
-    public function withReconnectInterval($interval)
-    {
-        $this->option->reconnectInterval = $interval;
-        return $this;
-    }
-
-    /**
-     * @param float $timeout
-     * @return $this
-     */
-    public function withDialTimeout($timeout)
-    {
-        $this->option->dialTimeout = $timeout;
-        return $this;
-    }
-
-    /**
-     * @param int $size
-     * @return $this
-     */
-    public function withReadMessageBuffer($size)
-    {
-        $this->option->readMessageBuffer = $size;
-        return $this;
-    }
-
-    /**
-     * @param int $size
-     * @return $this
-     */
-    public function withWriteMessageBuffer($size)
-    {
-        $this->option->writeMessageBuffer = $size;
-        return $this;
-    }
-
-    /**
-     * @param float $timeout
-     * @return $this
-     */
-    public function withWriteTimeout($timeout)
-    {
-        $this->option->writeTimeout = $timeout;
-        return $this;
-    }
-
-    /**
-     * @param callable $callback
-     * @return $this
-     */
-    public function withEventCallback($callback)
-    {
-        $this->option->eventCallback = $callback;
-        return $this;
-    }
-
-    /**
-     * Finalizes the configuration and returns the WebSocketClientOption instance.
-     *
-     * @return WebSocketClientOption
-     */
-    public function build()
-    {
-        return $this->option;
     }
 }

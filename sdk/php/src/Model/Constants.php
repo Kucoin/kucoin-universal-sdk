@@ -3,7 +3,6 @@
 namespace KuCoin\UniversalSDK\Model;
 
 /**
- * Class Constants
  * Contains API endpoints and enum-like constants for domain types, result codes, and WS message types.
  */
 class Constants

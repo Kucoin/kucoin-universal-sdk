@@ -3,7 +3,6 @@
 namespace KuCoin\UniversalSDK\Model;
 
 /**
- * Class WebSocketEvent
  * Defines the types of WebSocket events.
  */
 class WebSocketEvent

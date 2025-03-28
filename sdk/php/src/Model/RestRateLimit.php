@@ -37,6 +37,4 @@ class RestRateLimit
         $this->remaining = $remaining;
         $this->reset = $reset;
     }
-
-
 }

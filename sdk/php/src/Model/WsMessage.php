@@ -2,8 +2,6 @@
 
 namespace KuCoin\UniversalSDK\Model;
 
-use JMS\Serializer\Annotation\SerializedName;
-use JMS\Serializer\Annotation\Type;
 use JMS\Serializer\Serializer;
 
 /**
@@ -81,7 +79,7 @@ class WsMessage
      * @param Serializer $serializer
      * @return self
      */
-    public static function jsonDeserialize($json, $serializer)
+    public static function jsonDeserialize(string $json, Serializer $serializer): WsMessage
     {
         return $serializer->deserialize($json, self::class, 'json');
     }

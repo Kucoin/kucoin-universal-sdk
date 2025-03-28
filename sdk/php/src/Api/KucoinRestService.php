@@ -2,7 +2,15 @@
 
 namespace KuCoin\UniversalSDK\Api;
 
+use KuCoin\UniversalSDK\Generate\Service\AccountService;
+use KuCoin\UniversalSDK\Generate\Service\AffiliateService;
+use KuCoin\UniversalSDK\Generate\Service\BrokerService;
+use KuCoin\UniversalSDK\Generate\Service\CopyTradingService;
+use KuCoin\UniversalSDK\Generate\Service\EarnService;
+use KuCoin\UniversalSDK\Generate\Service\FuturesService;
+use KuCoin\UniversalSDK\Generate\Service\MarginService;
 use KuCoin\UniversalSDK\Generate\Service\SpotService;
+use KuCoin\UniversalSDK\Generate\Service\VIPLendingService;
 
 /**
  * Interface KucoinRestService
@@ -15,49 +23,49 @@ interface KucoinRestService
      *
      * @return AccountService
      */
-    public function getAccountService();
+    public function getAccountService(): AccountService;
 
     /**
      * Provides functions to access affiliate-related data.
      *
      * @return AffiliateService
      */
-    public function getAffiliateService();
+    public function getAffiliateService(): AffiliateService;
 
     /**
      * Provides functions to access and manage broker-related data.
      *
      * @return BrokerService
      */
-    public function getBrokerService();
+    public function getBrokerService(): BrokerService;
 
     /**
      * Provides functions to access and manage copy trading-related data.
      *
      * @return CopyTradingService
      */
-    public function getCopytradingService();
+    public function getCopytradingService(): CopyTradingService;
 
     /**
      * Provides functions to access and manage earn-related data.
      *
      * @return EarnService
      */
-    public function getEarnService();
+    public function getEarnService(): EarnService;
 
     /**
      * Provides functions to perform actions in the futures market.
      *
      * @return FuturesService
      */
-    public function getFuturesService();
+    public function getFuturesService(): FuturesService;
 
     /**
      * Provides functions to access and manage margin-related data.
      *
      * @return MarginService
      */
-    public function getMarginService();
+    public function getMarginService(): MarginService;
 
     /**
      * Provides functions to perform actions in the spot market.
@@ -71,5 +79,5 @@ interface KucoinRestService
      *
      * @return VIPLendingService
      */
-    public function getVipLendingService();
+    public function getVipLendingService(): VIPLendingService;
 }
