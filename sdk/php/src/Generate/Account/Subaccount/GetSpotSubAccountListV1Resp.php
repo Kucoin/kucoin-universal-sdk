@@ -50,8 +50,13 @@ class GetSpotSubAccountListV1Resp implements Response
      */
     public static function jsonDeserialize($json, $serializer)
     {
+        $item = $serializer->deserialize(
+            $json,
+            "array<KuCoin\UniversalSDK\Generate\Account\Subaccount\GetSpotSubAccountListV1Data>",
+            "json"
+        );
         $obj = new self();
-        $obj->data = $json;
+        $obj->data = $item;
         return $obj;
     }
 }

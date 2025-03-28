@@ -45,10 +45,14 @@ class BatchAddOrdersReq implements Request
      * @param Serializer $serializer
      * @return self
      */
-    public static function jsonDeserialize($serializer)
+    public static function jsonDeserialize($json, $serializer)
     {
-        return BatchAddOrdersReq .
-            create(["items" => $serializer->deserialize($this->items, "json")]);
+        $item = $serializer->deserialize(
+            $json,
+            "array<KuCoin\UniversalSDK\Generate\Futures\Order\BatchAddOrdersItem>",
+            "json"
+        );
+        return self::create(["items" => $item]);
     }
     /**
      * Creates a new instance of the `BatchAddOrdersReq` class.

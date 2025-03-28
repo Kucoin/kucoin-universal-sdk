@@ -50,8 +50,13 @@ class GetSubAccountAPIResp implements Response
      */
     public static function jsonDeserialize($json, $serializer)
     {
+        $item = $serializer->deserialize(
+            $json,
+            "array<KuCoin\UniversalSDK\Generate\Broker\Ndbroker\GetSubAccountAPIData>",
+            "json"
+        );
         $obj = new self();
-        $obj->data = $json;
+        $obj->data = $item;
         return $obj;
     }
 }

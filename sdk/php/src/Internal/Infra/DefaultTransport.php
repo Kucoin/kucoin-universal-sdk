@@ -104,7 +104,7 @@ class DefaultTransport implements Transport
     private function processPathVariable($path, $requestObj)
     {
         if (!$requestObj) {
-            return $path;
+            return [$path, []];
         }
 
         $pathVarMapping = $requestObj->pathVarMapping();

@@ -4,6 +4,7 @@ namespace KuCoin\UniversalSDK\Internal\Rest;
 
 use Exception;
 use KuCoin\UniversalSDK\Api\KucoinRestService;
+use KuCoin\UniversalSDK\Generate\Service\AccountServiceImpl;
 use KuCoin\UniversalSDK\Generate\Service\SpotService;
 use KuCoin\UniversalSDK\Generate\Service\SpotServiceImpl;
 use KuCoin\UniversalSDK\Generate\Version;
@@ -13,6 +14,7 @@ use KuCoin\UniversalSDK\Model\ClientOption;
 class DefaultKucoinRestAPIImpl implements KucoinRestService
 {
     private $spotService;
+    private $accountService;
 
     public function __construct(ClientOption $option)
     {
@@ -21,12 +23,13 @@ class DefaultKucoinRestAPIImpl implements KucoinRestService
         }
         $transport = new DefaultTransport($option, Version::SDK_VERSION);
         $this->spotService = new SpotServiceImpl($transport);
+        $this->accountService = new AccountServiceImpl($transport);
     }
 
 
     public function getAccountService()
     {
-        return $this->api;
+        return $this->accountService;
     }
 
     public function getAffiliateService()

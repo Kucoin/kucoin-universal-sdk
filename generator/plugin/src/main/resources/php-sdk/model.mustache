@@ -78,9 +78,19 @@ class {{classname}} implements Request {
     * @return self
     */
     public static function jsonDeserialize($json , $serializer) {
-        $obj = new self();
-        $obj->data= $json;
-        return $obj;
+    {{#vars}}
+        {{#isPrimitiveType}}
+            $obj = new self();
+            $obj->data = $json;
+            return $obj;
+        {{/isPrimitiveType}}
+        {{^isPrimitiveType}}
+            $item = $serializer->deserialize($json, 'array<{{modelPackage}}\{{complexType}}>', 'json');
+            $obj = new self();
+            $obj->data = $item;
+            return $obj;
+        {{/isPrimitiveType}}
+    {{/vars}}
     }
 {{/vendorExtensions.x-original-response}}
 {{#vendorExtensions.x-request-raw-array}}
@@ -97,8 +107,9 @@ class {{classname}} implements Request {
     * @param Serializer $serializer
     * @return self
     */
-    public static function jsonDeserialize($serializer) {
-    return {{classname}}.create(['items'=> $serializer->deserialize($this->items, 'json')]);
+    public static function jsonDeserialize($json ,$serializer) {
+        $item = $serializer->deserialize($json, 'array<{{modelPackage}}\{{#vars}}{{complexType}}{{/vars}}>', 'json');
+        return self::create(["items"=> $item]);
     }
 {{/vendorExtensions.x-request-raw-array}}
 {{^vendorExtensions.x-original-response}}

@@ -50,8 +50,13 @@ class GetSpotHFLedgerResp implements Response
      */
     public static function jsonDeserialize($json, $serializer)
     {
+        $item = $serializer->deserialize(
+            $json,
+            "array<KuCoin\UniversalSDK\Generate\Account\Account\GetSpotHFLedgerData>",
+            "json"
+        );
         $obj = new self();
-        $obj->data = $json;
+        $obj->data = $item;
         return $obj;
     }
 }
