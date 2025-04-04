@@ -97,4 +97,4 @@ class TopicManager:
         with self.lock:
             for key, value in self.topic_prefix.items():
                 if not func(key, value):
-                    break
+                    continue
