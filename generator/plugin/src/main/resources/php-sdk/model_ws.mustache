@@ -1,0 +1,116 @@
+<?php
+{{>partial_header}}
+{{#models}}
+{{#model}}
+namespace {{modelPackage}};
+{{#vendorExtensions.x-response-model}}
+use KuCoin\UniversalSDK\Internal\Interfaces\Response;
+use KuCoin\UniversalSDK\Internal\Interfaces\WebSocketMessageCallback;
+use KuCoin\UniversalSDK\Model\WsMessage;
+use JMS\Serializer\Serializer;
+
+class {{classname}} implements Response {
+{{/vendorExtensions.x-response-model}}
+{{^vendorExtensions.x-response-model}}
+use KuCoin\UniversalSDK\Internal\Interfaces\Serializable;
+
+
+class {{classname}} implements Serializable{
+{{/vendorExtensions.x-response-model}}
+
+{{#vars}}
+    /**
+    * {{#description}}{{{.}}}{{/description}}
+    * @var {{{dataType}}}{{^required}}|null{{/required}} ${{name}}
+    * @Type("{{{dataType}}}")
+    * @SerializedName("{{baseName}}")
+    */
+    public ${{name}}{{#defaultValue}} = {{{.}}}{{/defaultValue}};
+{{/vars}}
+
+   private function __construct() {
+    }
+
+{{#vendorExtensions.x-response-model}}
+    /**
+    * common response
+    * @Exclude()
+    * @var WsMessage $commonResponse
+    */
+    public $commonResponse;
+
+    public function setCommonResponse($response): void {
+        $this->commonResponse = $response;
+    }
+{{/vendorExtensions.x-response-model}}
+{{#vendorExtensions.x-original-response}}
+    /**
+    * @param Serializer $serializer
+    * @return string
+    */
+    public function jsonSerialize($serializer) {
+        return $serializer->serialize($this, 'json');
+    }
+
+    public static function jsonDeserialize($json , $serializer) {
+    {{#vars}}
+        {{#isPrimitiveType}}
+            $obj = new self();
+            $obj->data = $json;
+            return $obj;
+        {{/isPrimitiveType}}
+        {{^isPrimitiveType}}
+            $item = $serializer->deserialize($json, 'array<{{modelPackage}}\{{complexType}}>', 'json');
+            $obj = new self();
+            $obj->data = $item;
+            return $obj;
+        {{/isPrimitiveType}}
+    {{/vars}}
+    }
+
+{{/vendorExtensions.x-original-response}}
+{{^vendorExtensions.x-original-response}}
+    /**
+    * @param Serializer $serializer
+    * @return string
+    */
+    public function jsonSerialize($serializer) {
+        return $serializer->serialize($this, 'json');
+    }
+
+    /**
+    * @param string $json
+    * @param Serializer $serializer
+    * @return self
+    */
+    public static function jsonDeserialize($json , $serializer) {
+        return $serializer->deserialize($json, {{classname}}::class, 'json');
+    }
+
+{{/vendorExtensions.x-original-response}}
+}
+
+{{#vendorExtensions.x-response-model}}
+class {{classname}}CallbackWrapper implements WebSocketMessageCallback {
+    /**
+     * @var callable
+     */
+    private $callback;
+
+    /**
+     * @param callable $callback function(string $topic, string $subject, {{classname}} $data): void
+     */
+    public function __construct(callable $callback)
+    {
+        $this->callback = $callback;
+    }
+
+    public function onMessage(WsMessage $msg, Serializer $serializer) {
+        $event = {{classname}}::jsonDeserialize($msg->rawData, $serializer);
+        $event->setCommonResponse($msg);
+        $this->callback($msg->topic, $msg->subject, $event);
+    }
+}
+{{/vendorExtensions.x-response-model}}
+{{/model}}
+{{/models}}

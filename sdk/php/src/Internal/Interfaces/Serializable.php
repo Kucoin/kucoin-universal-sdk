@@ -17,6 +17,11 @@ interface Serializable
     public function jsonSerialize($serializer);
 
 
+    /**
+     * @param mixed $json
+     * @param Serializer $serializer
+     * @return mixed
+     */
     public static function jsonDeserialize($json, $serializer);
 }
 

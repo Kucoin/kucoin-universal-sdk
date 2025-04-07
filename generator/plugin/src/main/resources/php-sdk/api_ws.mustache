@@ -1,0 +1,76 @@
+<?php
+{{>partial_header}}
+{{#imports}}
+{{{.}}}
+{{/imports}}
+namespace {{package}};
+use KuCoin\UniversalSDK\Internal\Interfaces\WebSocketService;
+
+interface {{classname}} {
+
+{{#operations}}
+    {{#operation}}
+
+    /**
+    * {{summary}}
+    * {{notes}}
+    * push frequency: {{vendorExtensions.x-push_frequency}}
+    * @param callable $callback function(string $topic, string $subject, {{vendorExtensions.x-meta.methodServiceFmt}}Event $data): void
+    */
+    public function {{vendorExtensions.x-meta.method}}{{operationName}}({{#vendorExtensions.x-meta.otherProperties}}{{#parameters}}{{#type}}{{#type.simple}}string ${{paras}},{{/type.simple}}{{#type.array}}array ${{paras}},{{/type.array}}{{#type.object}}{{#paras}}string ${{.}},{{/paras}}{{/type.object}}{{/type}}{{/parameters}}{{/vendorExtensions.x-meta.otherProperties}}callable $callback) :string;
+    {{/operation}}
+
+    /**
+    * Unsubscribe from topics
+    */
+    public function unSubscribe(string $id);
+
+    /**
+    * Start websocket
+    */
+    public function start();
+
+    /**
+    * Stop websocket
+    */
+    public function stop();
+{{/operations}}
+}
+
+class {{classname}}Impl implements {{classname}} {
+    /**@var WebSocketService $wsService*/
+    private $wsService;
+
+    public function __construct(WebSocketService $wsService) {
+        $this->wsService = $wsService;
+    }
+
+{{#operations}}
+    {{#operation}}
+
+    public function {{vendorExtensions.x-meta.method}}{{operationName}}({{#vendorExtensions.x-meta.otherProperties}}{{#parameters}}{{#type}}{{#type.simple}}string ${{paras}},{{/type.simple}}{{#type.array}}array ${{paras}},{{/type.array}}{{#type.object}}{{#paras}}string ${{.}},{{/paras}}{{/type.object}}{{/type}}{{/parameters}}{{/vendorExtensions.x-meta.otherProperties}}callable $callback) :string{
+        $topicPrefix = "{{vendorExtensions.x-meta.otherProperties.topic}}";
+        {{#vendorExtensions.x-meta.otherProperties}}{{#parameters}}{{#type}}
+        {{#type.none}}$args = [];{{/type.none}}
+        {{#type.simple}}$args = [ {{#paras}}${{.}}{{/paras}}];{{/type.simple}}
+        {{#type.array}}$args = ${{paras}};{{/type.array}}
+        {{#type.object}}$args = [implode('_', [{{#paras}}${{.}},{{/paras}}])];{{/type.object}}
+        {{/type}}{{/parameters}}{{/vendorExtensions.x-meta.otherProperties}}
+        return $this->wsService->subscribe($topicPrefix,  $args, new {{vendorExtensions.x-meta.methodServiceFmt}}EventCallbackWrapper($callback));
+    }
+    {{/operation}}
+{{/operations}}
+
+    public function unSubscribe(string $id) {
+        return $this->wsService->unsubscribe($id);
+    }
+
+    public function start() {
+        return $this->wsService->start();
+    }
+
+    public function stop() {
+        return $this->wsService->stop();
+    }
+
+}

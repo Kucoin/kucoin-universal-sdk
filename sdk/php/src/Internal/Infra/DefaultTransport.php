@@ -4,7 +4,6 @@ namespace KuCoin\UniversalSDK\Internal\Infra;
 
 use Exception;
 use GuzzleHttp\Client;
-use http\Exception\RuntimeException;
 use InvalidArgumentException;
 use JMS\Serializer\Serializer;
 use JMS\Serializer\SerializerBuilder;
@@ -20,11 +19,8 @@ use KuCoin\UniversalSDK\Model\RestResponse;
 use KuCoin\UniversalSDK\Model\TransportOption;
 use Psr\Http\Message\ResponseInterface;
 use ReflectionClass;
+use RuntimeException;
 
-/**
- * Class DefaultTransport
- * PHP 7.2 Implementation of Transport using Guzzle.
- */
 class DefaultTransport implements Transport
 {
     /** @var ClientOption $option */
@@ -205,7 +201,7 @@ class DefaultTransport implements Transport
         $statusCode = $response->getStatusCode();
 
         if ($statusCode !== 200) {
-            throw new \RuntimeException("Invalid status code: $statusCode, body: $body");
+            throw new RuntimeException("Invalid status code: $statusCode, body: $body");
         }
 
         $commonResponse = RestResponse::jsonDeserialize($body, $this->serializer);

@@ -97,6 +97,9 @@ public class PhpSdkGenerator extends AbstractPhpCodegen implements NameService {
                 break;
             }
             case WS: {
+                modelTemplateFiles.put("model_ws.mustache", ".php");
+                apiTemplateFiles.put("api_ws.mustache", ".php");
+                additionalProperties.put("WS_MODE", "true");
                 break;
             }
             case WS_TEST: {
@@ -265,13 +268,17 @@ public class PhpSdkGenerator extends AbstractPhpCodegen implements NameService {
     public String toApiFilename(String name) {
         String apiName = name.replaceAll("-", "_");
         switch (modeSwitch.getMode()) {
-            case WS:
             case API:
             case ENTRY:
             case TEST_TEMPLATE: {
                 apiName = apiName + "Api";
                 break;
             }
+            case WS: {
+                apiName = apiName + "Ws";
+                break;
+            }
+
             case TEST: {
                 apiName = apiName + "Api" + ".test";
                 break;

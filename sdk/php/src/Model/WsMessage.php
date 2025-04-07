@@ -69,7 +69,7 @@ class WsMessage
     /**
      * Raw message data
      * @var mixed
-     * @Type("array")
+     * @Type("JsonSerialized")
      * @SerializedName("data")
      */
     public $rawData;
