@@ -15,7 +15,7 @@ class GetPositionListResp implements Response
     /**
      *
      * @var GetPositionListData[] $data
-     * @Type("array<GetPositionListData>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Futures\Positions\GetPositionListData>")
      * @SerializedName("data")
      */
     public $data;
@@ -50,13 +50,13 @@ class GetPositionListResp implements Response
      */
     public static function jsonDeserialize($json, $serializer)
     {
-        $item = $serializer->deserialize(
+        $data = $serializer->deserialize(
             $json,
             "array<KuCoin\UniversalSDK\Generate\Futures\Positions\GetPositionListData>",
             "json"
         );
         $obj = new self();
-        $obj->data = $item;
+        $obj->data = $data;
         return $obj;
     }
 }

@@ -15,7 +15,7 @@ class GetMarginRiskLimitResp implements Response
     /**
      *
      * @var GetMarginRiskLimitData[] $data
-     * @Type("array<GetMarginRiskLimitData>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Margin\Risklimit\GetMarginRiskLimitData>")
      * @SerializedName("data")
      */
     public $data;
@@ -50,13 +50,13 @@ class GetMarginRiskLimitResp implements Response
      */
     public static function jsonDeserialize($json, $serializer)
     {
-        $item = $serializer->deserialize(
+        $data = $serializer->deserialize(
             $json,
             "array<KuCoin\UniversalSDK\Generate\Margin\Risklimit\GetMarginRiskLimitData>",
             "json"
         );
         $obj = new self();
-        $obj->data = $item;
+        $obj->data = $data;
         return $obj;
     }
 }

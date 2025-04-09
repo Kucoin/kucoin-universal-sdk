@@ -52,14 +52,14 @@ class GetIsolatedMarginAccountListV1Assets implements Serializable
     /**
      *
      * @var GetIsolatedMarginAccountListV1AssetsBaseAsset $baseAsset
-     * @Type("GetIsolatedMarginAccountListV1AssetsBaseAsset")
+     * @Type("KuCoin\UniversalSDK\Generate\Account\Account\GetIsolatedMarginAccountListV1AssetsBaseAsset")
      * @SerializedName("baseAsset")
      */
     public $baseAsset;
     /**
      *
      * @var GetIsolatedMarginAccountListV1AssetsQuoteAsset $quoteAsset
-     * @Type("GetIsolatedMarginAccountListV1AssetsQuoteAsset")
+     * @Type("KuCoin\UniversalSDK\Generate\Account\Account\GetIsolatedMarginAccountListV1AssetsQuoteAsset")
      * @SerializedName("quoteAsset")
      */
     public $quoteAsset;

@@ -38,21 +38,21 @@ class GetSpotSubAccountListV2Items implements Serializable
     /**
      * Funding Account
      * @var GetSpotSubAccountListV2ItemsMainAccounts[] $mainAccounts
-     * @Type("array<GetSpotSubAccountListV2ItemsMainAccounts>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Account\Subaccount\GetSpotSubAccountListV2ItemsMainAccounts>")
      * @SerializedName("mainAccounts")
      */
     public $mainAccounts;
     /**
      * Spot Account
      * @var GetSpotSubAccountListV2ItemsTradeAccounts[] $tradeAccounts
-     * @Type("array<GetSpotSubAccountListV2ItemsTradeAccounts>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Account\Subaccount\GetSpotSubAccountListV2ItemsTradeAccounts>")
      * @SerializedName("tradeAccounts")
      */
     public $tradeAccounts;
     /**
      * Margin Account
      * @var GetSpotSubAccountListV2ItemsMarginAccounts[] $marginAccounts
-     * @Type("array<GetSpotSubAccountListV2ItemsMarginAccounts>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Account\Subaccount\GetSpotSubAccountListV2ItemsMarginAccounts>")
      * @SerializedName("marginAccounts")
      */
     public $marginAccounts;

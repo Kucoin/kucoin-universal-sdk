@@ -40,7 +40,7 @@ class CrossMarginPositionEvent implements Response
     /**
      * Asset list (interest included)
      * @var array<string,CrossMarginPositionAssetListValue> $assetList
-     * @Type("array<string, CrossMarginPositionAssetListValue>")
+     * @Type("array<string, KuCoin\UniversalSDK\Generate\Margin\MarginPrivate\CrossMarginPositionAssetListValue>")
      * @SerializedName("assetList")
      */
     public $assetList;

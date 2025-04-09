@@ -12,7 +12,7 @@ class CrossLeverageEvent implements Response
     /**
      *
      * @var array<string,CrossLeverageDataValue> $data
-     * @Type("array<string, CrossLeverageDataValue>")
+     * @Type("array<string, KuCoin\UniversalSDK\Generate\Futures\FuturesPrivate\CrossLeverageDataValue>")
      * @SerializedName("data")
      */
     public $data;

@@ -131,7 +131,6 @@ function futures_service_example(FuturesService $futuresService)
         $rows = [];
 
 
-        echo gettype($getKlineResp->data);
         foreach ($getKlineResp->data as $row) {
             $timestamp = date("Y-m-d H:i:s", $row[0] / 1000);
             $formattedRow = sprintf(

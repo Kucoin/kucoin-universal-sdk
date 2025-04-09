@@ -36,7 +36,7 @@ class GetIsolatedMarginAccountResp implements Response
     /**
      *
      * @var GetIsolatedMarginAccountAssets[] $assets
-     * @Type("array<GetIsolatedMarginAccountAssets>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Account\Account\GetIsolatedMarginAccountAssets>")
      * @SerializedName("assets")
      */
     public $assets;

@@ -40,7 +40,7 @@ class IsolatedMarginPositionEvent implements Response
     /**
      *
      * @var array<string,IsolatedMarginPositionChangeAssetsValue> $changeAssets
-     * @Type("array<string, IsolatedMarginPositionChangeAssetsValue>")
+     * @Type("array<string, KuCoin\UniversalSDK\Generate\Margin\MarginPrivate\IsolatedMarginPositionChangeAssetsValue>")
      * @SerializedName("changeAssets")
      */
     public $changeAssets;

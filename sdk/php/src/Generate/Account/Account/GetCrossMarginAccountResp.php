@@ -48,7 +48,7 @@ class GetCrossMarginAccountResp implements Response
     /**
      * Margin account list
      * @var GetCrossMarginAccountAccounts[] $accounts
-     * @Type("array<GetCrossMarginAccountAccounts>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Account\Account\GetCrossMarginAccountAccounts>")
      * @SerializedName("accounts")
      */
     public $accounts;

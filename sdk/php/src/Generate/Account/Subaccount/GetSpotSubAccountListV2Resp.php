@@ -43,7 +43,7 @@ class GetSpotSubAccountListV2Resp implements Response
     /**
      *
      * @var GetSpotSubAccountListV2Items[] $items
-     * @Type("array<GetSpotSubAccountListV2Items>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Account\Subaccount\GetSpotSubAccountListV2Items>")
      * @SerializedName("items")
      */
     public $items;

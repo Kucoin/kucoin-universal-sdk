@@ -43,7 +43,7 @@ class GetOrdersListOldResp implements Response
     /**
      *
      * @var GetOrdersListOldItems[] $items
-     * @Type("array<GetOrdersListOldItems>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Spot\Order\GetOrdersListOldItems>")
      * @SerializedName("items")
      */
     public $items;

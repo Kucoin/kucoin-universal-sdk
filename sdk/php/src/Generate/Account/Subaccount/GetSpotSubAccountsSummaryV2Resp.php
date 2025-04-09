@@ -43,7 +43,7 @@ class GetSpotSubAccountsSummaryV2Resp implements Response
     /**
      *
      * @var GetSpotSubAccountsSummaryV2Items[] $items
-     * @Type("array<GetSpotSubAccountsSummaryV2Items>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Account\Subaccount\GetSpotSubAccountsSummaryV2Items>")
      * @SerializedName("items")
      */
     public $items;

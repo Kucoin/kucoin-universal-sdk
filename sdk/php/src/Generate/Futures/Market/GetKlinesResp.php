@@ -50,8 +50,9 @@ class GetKlinesResp implements Response
      */
     public static function jsonDeserialize($json, $serializer)
     {
+        $data = $serializer->deserialize($json, "array<array<float>>", "json");
         $obj = new self();
-        $obj->data = $json;
+        $obj->data = $data;
         return $obj;
     }
 }

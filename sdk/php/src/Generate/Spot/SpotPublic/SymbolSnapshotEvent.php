@@ -19,7 +19,7 @@ class SymbolSnapshotEvent implements Response
     /**
      *
      * @var SymbolSnapshotData $data
-     * @Type("SymbolSnapshotData")
+     * @Type("KuCoin\UniversalSDK\Generate\Spot\SpotPublic\SymbolSnapshotData")
      * @SerializedName("data")
      */
     public $data;

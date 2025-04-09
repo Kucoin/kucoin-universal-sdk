@@ -29,21 +29,21 @@ class GetSpotSubAccountDetailResp implements Response
     /**
      * Funding Account
      * @var GetSpotSubAccountDetailMainAccounts[] $mainAccounts
-     * @Type("array<GetSpotSubAccountDetailMainAccounts>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Account\Subaccount\GetSpotSubAccountDetailMainAccounts>")
      * @SerializedName("mainAccounts")
      */
     public $mainAccounts;
     /**
      * Spot Account
      * @var GetSpotSubAccountDetailTradeAccounts[] $tradeAccounts
-     * @Type("array<GetSpotSubAccountDetailTradeAccounts>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Account\Subaccount\GetSpotSubAccountDetailTradeAccounts>")
      * @SerializedName("tradeAccounts")
      */
     public $tradeAccounts;
     /**
      * Margin Account
      * @var GetSpotSubAccountDetailMarginAccounts[] $marginAccounts
-     * @Type("array<GetSpotSubAccountDetailMarginAccounts>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Account\Subaccount\GetSpotSubAccountDetailMarginAccounts>")
      * @SerializedName("marginAccounts")
      */
     public $marginAccounts;

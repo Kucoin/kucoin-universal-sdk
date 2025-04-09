@@ -15,7 +15,7 @@ class GetInterestRateIndexResp implements Response
     /**
      *
      * @var GetInterestRateIndexDataList[] $dataList
-     * @Type("array<GetInterestRateIndexDataList>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Futures\Market\GetInterestRateIndexDataList>")
      * @SerializedName("dataList")
      */
     public $dataList;

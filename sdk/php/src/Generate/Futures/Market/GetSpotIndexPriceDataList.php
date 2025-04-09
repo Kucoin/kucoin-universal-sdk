@@ -52,7 +52,7 @@ class GetSpotIndexPriceDataList implements Serializable
     /**
      * Component List
      * @var GetSpotIndexPriceDataListDecomposionList[] $decomposionList
-     * @Type("array<GetSpotIndexPriceDataListDecomposionList>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Futures\Market\GetSpotIndexPriceDataListDecomposionList>")
      * @SerializedName("decomposionList")
      */
     public $decomposionList;

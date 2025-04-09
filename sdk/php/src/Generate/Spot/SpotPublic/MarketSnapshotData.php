@@ -135,21 +135,21 @@ class MarketSnapshotData implements Serializable
     /**
      *
      * @var MarketSnapshotDataMarketChange1h $marketChange1h
-     * @Type("MarketSnapshotDataMarketChange1h")
+     * @Type("KuCoin\UniversalSDK\Generate\Spot\SpotPublic\MarketSnapshotDataMarketChange1h")
      * @SerializedName("marketChange1h")
      */
     public $marketChange1h;
     /**
      *
      * @var MarketSnapshotDataMarketChange24h $marketChange24h
-     * @Type("MarketSnapshotDataMarketChange24h")
+     * @Type("KuCoin\UniversalSDK\Generate\Spot\SpotPublic\MarketSnapshotDataMarketChange24h")
      * @SerializedName("marketChange24h")
      */
     public $marketChange24h;
     /**
      *
      * @var MarketSnapshotDataMarketChange4h $marketChange4h
-     * @Type("MarketSnapshotDataMarketChange4h")
+     * @Type("KuCoin\UniversalSDK\Generate\Spot\SpotPublic\MarketSnapshotDataMarketChange4h")
      * @SerializedName("marketChange4h")
      */
     public $marketChange4h;

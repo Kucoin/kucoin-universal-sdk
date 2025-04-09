@@ -80,7 +80,7 @@ class GetAllCurrenciesData implements Serializable
     /**
      * Chain list
      * @var GetAllCurrenciesDataChains[] $chains
-     * @Type("array<GetAllCurrenciesDataChains>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Spot\Market\GetAllCurrenciesDataChains>")
      * @SerializedName("chains")
      */
     public $chains;

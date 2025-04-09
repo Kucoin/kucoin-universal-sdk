@@ -50,7 +50,7 @@ class GetRepayHistoryResp implements Response
     /**
      *
      * @var GetRepayHistoryItems[] $items
-     * @Type("array<GetRepayHistoryItems>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Margin\Debit\GetRepayHistoryItems>")
      * @SerializedName("items")
      */
     public $items;

@@ -15,7 +15,7 @@ class GetMarkPriceListResp implements Response
     /**
      *
      * @var GetMarkPriceListData[] $data
-     * @Type("array<GetMarkPriceListData>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Margin\Market\GetMarkPriceListData>")
      * @SerializedName("data")
      */
     public $data;
@@ -50,13 +50,13 @@ class GetMarkPriceListResp implements Response
      */
     public static function jsonDeserialize($json, $serializer)
     {
-        $item = $serializer->deserialize(
+        $data = $serializer->deserialize(
             $json,
             "array<KuCoin\UniversalSDK\Generate\Margin\Market\GetMarkPriceListData>",
             "json"
         );
         $obj = new self();
-        $obj->data = $item;
+        $obj->data = $data;
         return $obj;
     }
 }

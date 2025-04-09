@@ -15,7 +15,7 @@ class GetDepositListResp implements Response
     /**
      *
      * @var GetDepositListData[] $data
-     * @Type("array<GetDepositListData>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Broker\Ndbroker\GetDepositListData>")
      * @SerializedName("data")
      */
     public $data;
@@ -50,13 +50,13 @@ class GetDepositListResp implements Response
      */
     public static function jsonDeserialize($json, $serializer)
     {
-        $item = $serializer->deserialize(
+        $data = $serializer->deserialize(
             $json,
             "array<KuCoin\UniversalSDK\Generate\Broker\Ndbroker\GetDepositListData>",
             "json"
         );
         $obj = new self();
-        $obj->data = $item;
+        $obj->data = $data;
         return $obj;
     }
 }

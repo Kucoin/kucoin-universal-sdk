@@ -43,7 +43,7 @@ class GetDepositHistoryResp implements Response
     /**
      *
      * @var GetDepositHistoryItems[] $items
-     * @Type("array<GetDepositHistoryItems>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Account\Deposit\GetDepositHistoryItems>")
      * @SerializedName("items")
      */
     public $items;

@@ -15,7 +15,7 @@ class GetOpenOrdersResp implements Response
     /**
      *
      * @var GetOpenOrdersData[] $data
-     * @Type("array<GetOpenOrdersData>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Margin\Order\GetOpenOrdersData>")
      * @SerializedName("data")
      */
     public $data;
@@ -50,13 +50,13 @@ class GetOpenOrdersResp implements Response
      */
     public static function jsonDeserialize($json, $serializer)
     {
-        $item = $serializer->deserialize(
+        $data = $serializer->deserialize(
             $json,
             "array<KuCoin\UniversalSDK\Generate\Margin\Order\GetOpenOrdersData>",
             "json"
         );
         $obj = new self();
-        $obj->data = $item;
+        $obj->data = $data;
         return $obj;
     }
 }

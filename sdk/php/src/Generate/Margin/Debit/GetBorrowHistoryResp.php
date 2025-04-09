@@ -50,7 +50,7 @@ class GetBorrowHistoryResp implements Response
     /**
      *
      * @var GetBorrowHistoryItems[] $items
-     * @Type("array<GetBorrowHistoryItems>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Margin\Debit\GetBorrowHistoryItems>")
      * @SerializedName("items")
      */
     public $items;

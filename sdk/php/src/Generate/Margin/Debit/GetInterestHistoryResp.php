@@ -50,7 +50,7 @@ class GetInterestHistoryResp implements Response
     /**
      *
      * @var GetInterestHistoryItems[] $items
-     * @Type("array<GetInterestHistoryItems>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Margin\Debit\GetInterestHistoryItems>")
      * @SerializedName("items")
      */
     public $items;

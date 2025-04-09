@@ -22,7 +22,7 @@ class CancelAllOrdersResp implements Response
     /**
      * The Symbols Failed to cancel
      * @var CancelAllOrdersFailedSymbols[] $failedSymbols
-     * @Type("array<CancelAllOrdersFailedSymbols>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Spot\Order\CancelAllOrdersFailedSymbols>")
      * @SerializedName("failedSymbols")
      */
     public $failedSymbols;

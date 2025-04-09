@@ -43,7 +43,7 @@ class GetRedeemOrdersResp implements Response
     /**
      *
      * @var GetRedeemOrdersItems[] $items
-     * @Type("array<GetRedeemOrdersItems>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Margin\Credit\GetRedeemOrdersItems>")
      * @SerializedName("items")
      */
     public $items;

@@ -43,7 +43,7 @@ class GetPositionsHistoryResp implements Response
     /**
      *
      * @var GetPositionsHistoryItems[] $items
-     * @Type("array<GetPositionsHistoryItems>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Futures\Positions\GetPositionsHistoryItems>")
      * @SerializedName("items")
      */
     public $items;

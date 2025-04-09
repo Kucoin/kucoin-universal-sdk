@@ -22,7 +22,7 @@ class GetAccountHoldingResp implements Response
     /**
      *
      * @var GetAccountHoldingItems[] $items
-     * @Type("array<GetAccountHoldingItems>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Earn\Earn\GetAccountHoldingItems>")
      * @SerializedName("items")
      */
     public $items;

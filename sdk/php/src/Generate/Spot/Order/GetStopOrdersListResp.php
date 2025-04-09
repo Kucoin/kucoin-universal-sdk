@@ -43,7 +43,7 @@ class GetStopOrdersListResp implements Response
     /**
      * the list of stop orders
      * @var GetStopOrdersListItems[] $items
-     * @Type("array<GetStopOrdersListItems>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Spot\Order\GetStopOrdersListItems>")
      * @SerializedName("items")
      */
     public $items;

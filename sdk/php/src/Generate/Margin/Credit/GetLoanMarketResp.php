@@ -15,7 +15,7 @@ class GetLoanMarketResp implements Response
     /**
      *
      * @var GetLoanMarketData[] $data
-     * @Type("array<GetLoanMarketData>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Margin\Credit\GetLoanMarketData>")
      * @SerializedName("data")
      */
     public $data;
@@ -50,13 +50,13 @@ class GetLoanMarketResp implements Response
      */
     public static function jsonDeserialize($json, $serializer)
     {
-        $item = $serializer->deserialize(
+        $data = $serializer->deserialize(
             $json,
             "array<KuCoin\UniversalSDK\Generate\Margin\Credit\GetLoanMarketData>",
             "json"
         );
         $obj = new self();
-        $obj->data = $item;
+        $obj->data = $data;
         return $obj;
     }
 }

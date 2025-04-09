@@ -15,7 +15,7 @@ class BatchAddOrdersOldResp implements Response
     /**
      *
      * @var BatchAddOrdersOldData[] $data
-     * @Type("array<BatchAddOrdersOldData>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Spot\Order\BatchAddOrdersOldData>")
      * @SerializedName("data")
      */
     public $data;

@@ -15,7 +15,7 @@ class GetPrivateFundingHistoryResp implements Response
     /**
      *
      * @var GetPrivateFundingHistoryDataList[] $dataList
-     * @Type("array<GetPrivateFundingHistoryDataList>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Futures\Fundingfees\GetPrivateFundingHistoryDataList>")
      * @SerializedName("dataList")
      */
     public $dataList;

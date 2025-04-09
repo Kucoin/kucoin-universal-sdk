@@ -22,7 +22,7 @@ class GetMarginAccountDetailResp implements Response
     /**
      * Margin account list
      * @var GetMarginAccountDetailAccounts[] $accounts
-     * @Type("array<GetMarginAccountDetailAccounts>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Account\Account\GetMarginAccountDetailAccounts>")
      * @SerializedName("accounts")
      */
     public $accounts;

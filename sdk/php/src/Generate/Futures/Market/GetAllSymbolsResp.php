@@ -15,7 +15,7 @@ class GetAllSymbolsResp implements Response
     /**
      * List of all contracts
      * @var GetAllSymbolsData[] $data
-     * @Type("array<GetAllSymbolsData>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Futures\Market\GetAllSymbolsData>")
      * @SerializedName("data")
      */
     public $data;
@@ -50,13 +50,13 @@ class GetAllSymbolsResp implements Response
      */
     public static function jsonDeserialize($json, $serializer)
     {
-        $item = $serializer->deserialize(
+        $data = $serializer->deserialize(
             $json,
             "array<KuCoin\UniversalSDK\Generate\Futures\Market\GetAllSymbolsData>",
             "json"
         );
         $obj = new self();
-        $obj->data = $item;
+        $obj->data = $data;
         return $obj;
     }
 }

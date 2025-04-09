@@ -43,7 +43,7 @@ class GetOrderListResp implements Response
     /**
      *
      * @var GetOrderListItems[] $items
-     * @Type("array<GetOrderListItems>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Futures\Order\GetOrderListItems>")
      * @SerializedName("items")
      */
     public $items;

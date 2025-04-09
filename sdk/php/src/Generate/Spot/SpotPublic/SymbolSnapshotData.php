@@ -135,21 +135,21 @@ class SymbolSnapshotData implements Serializable
     /**
      *
      * @var SymbolSnapshotDataMarketChange1h $marketChange1h
-     * @Type("SymbolSnapshotDataMarketChange1h")
+     * @Type("KuCoin\UniversalSDK\Generate\Spot\SpotPublic\SymbolSnapshotDataMarketChange1h")
      * @SerializedName("marketChange1h")
      */
     public $marketChange1h;
     /**
      *
      * @var SymbolSnapshotDataMarketChange24h $marketChange24h
-     * @Type("SymbolSnapshotDataMarketChange24h")
+     * @Type("KuCoin\UniversalSDK\Generate\Spot\SpotPublic\SymbolSnapshotDataMarketChange24h")
      * @SerializedName("marketChange24h")
      */
     public $marketChange24h;
     /**
      *
      * @var SymbolSnapshotDataMarketChange4h $marketChange4h
-     * @Type("SymbolSnapshotDataMarketChange4h")
+     * @Type("KuCoin\UniversalSDK\Generate\Spot\SpotPublic\SymbolSnapshotDataMarketChange4h")
      * @SerializedName("marketChange4h")
      */
     public $marketChange4h;

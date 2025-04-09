@@ -22,7 +22,7 @@ class GetClosedOrdersResp implements Response
     /**
      *
      * @var GetClosedOrdersItems[] $items
-     * @Type("array<GetClosedOrdersItems>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Spot\Order\GetClosedOrdersItems>")
      * @SerializedName("items")
      */
     public $items;

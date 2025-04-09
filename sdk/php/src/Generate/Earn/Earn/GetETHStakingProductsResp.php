@@ -15,7 +15,7 @@ class GetETHStakingProductsResp implements Response
     /**
      *
      * @var GetETHStakingProductsData[] $data
-     * @Type("array<GetETHStakingProductsData>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Earn\Earn\GetETHStakingProductsData>")
      * @SerializedName("data")
      */
     public $data;
@@ -50,13 +50,13 @@ class GetETHStakingProductsResp implements Response
      */
     public static function jsonDeserialize($json, $serializer)
     {
-        $item = $serializer->deserialize(
+        $data = $serializer->deserialize(
             $json,
             "array<KuCoin\UniversalSDK\Generate\Earn\Earn\GetETHStakingProductsData>",
             "json"
         );
         $obj = new self();
-        $obj->data = $item;
+        $obj->data = $data;
         return $obj;
     }
 }

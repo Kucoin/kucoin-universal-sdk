@@ -15,14 +15,14 @@ class GetFuturesSubAccountListV2Resp implements Response
     /**
      *
      * @var GetFuturesSubAccountListV2Summary $summary
-     * @Type("GetFuturesSubAccountListV2Summary")
+     * @Type("KuCoin\UniversalSDK\Generate\Account\Subaccount\GetFuturesSubAccountListV2Summary")
      * @SerializedName("summary")
      */
     public $summary;
     /**
      * Account List
      * @var GetFuturesSubAccountListV2Accounts[] $accounts
-     * @Type("array<GetFuturesSubAccountListV2Accounts>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Account\Subaccount\GetFuturesSubAccountListV2Accounts>")
      * @SerializedName("accounts")
      */
     public $accounts;

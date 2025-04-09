@@ -22,7 +22,7 @@ class GetAllTickersResp implements Response
     /**
      *
      * @var GetAllTickersTicker[] $ticker
-     * @Type("array<GetAllTickersTicker>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Spot\Market\GetAllTickersTicker>")
      * @SerializedName("ticker")
      */
     public $ticker;

@@ -15,7 +15,7 @@ class GetPublicFundingHistoryResp implements Response
     /**
      *
      * @var GetPublicFundingHistoryData[] $data
-     * @Type("array<GetPublicFundingHistoryData>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Futures\Fundingfees\GetPublicFundingHistoryData>")
      * @SerializedName("data")
      */
     public $data;
@@ -50,13 +50,13 @@ class GetPublicFundingHistoryResp implements Response
      */
     public static function jsonDeserialize($json, $serializer)
     {
-        $item = $serializer->deserialize(
+        $data = $serializer->deserialize(
             $json,
             "array<KuCoin\UniversalSDK\Generate\Futures\Fundingfees\GetPublicFundingHistoryData>",
             "json"
         );
         $obj = new self();
-        $obj->data = $item;
+        $obj->data = $data;
         return $obj;
     }
 }

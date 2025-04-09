@@ -15,7 +15,7 @@ class GetPremiumIndexResp implements Response
     /**
      *
      * @var GetPremiumIndexDataList[] $dataList
-     * @Type("array<GetPremiumIndexDataList>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Futures\Market\GetPremiumIndexDataList>")
      * @SerializedName("dataList")
      */
     public $dataList;

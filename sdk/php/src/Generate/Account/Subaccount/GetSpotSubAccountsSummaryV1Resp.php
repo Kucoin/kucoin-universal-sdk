@@ -15,7 +15,7 @@ class GetSpotSubAccountsSummaryV1Resp implements Response
     /**
      *
      * @var GetSpotSubAccountsSummaryV1Data[] $data
-     * @Type("array<GetSpotSubAccountsSummaryV1Data>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Account\Subaccount\GetSpotSubAccountsSummaryV1Data>")
      * @SerializedName("data")
      */
     public $data;
@@ -50,13 +50,13 @@ class GetSpotSubAccountsSummaryV1Resp implements Response
      */
     public static function jsonDeserialize($json, $serializer)
     {
-        $item = $serializer->deserialize(
+        $data = $serializer->deserialize(
             $json,
             "array<KuCoin\UniversalSDK\Generate\Account\Subaccount\GetSpotSubAccountsSummaryV1Data>",
             "json"
         );
         $obj = new self();
-        $obj->data = $item;
+        $obj->data = $data;
         return $obj;
     }
 }

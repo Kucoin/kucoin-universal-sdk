@@ -22,14 +22,14 @@ class GetAccountResp implements Response
     /**
      * Loan Orders
      * @var GetAccountOrders[] $orders
-     * @Type("array<GetAccountOrders>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Affiliate\Affiliate\GetAccountOrders>")
      * @SerializedName("orders")
      */
     public $orders;
     /**
      *
      * @var GetAccountLtv $ltv
-     * @Type("GetAccountLtv")
+     * @Type("KuCoin\UniversalSDK\Generate\Affiliate\Affiliate\GetAccountLtv")
      * @SerializedName("ltv")
      */
     public $ltv;
@@ -50,7 +50,7 @@ class GetAccountResp implements Response
     /**
      * Margins
      * @var GetAccountMargins[] $margins
-     * @Type("array<GetAccountMargins>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Affiliate\Affiliate\GetAccountMargins>")
      * @SerializedName("margins")
      */
     public $margins;

@@ -22,7 +22,7 @@ class GetAnnouncementsResp implements Response
     /**
      *
      * @var GetAnnouncementsItems[] $items
-     * @Type("array<GetAnnouncementsItems>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Spot\Market\GetAnnouncementsItems>")
      * @SerializedName("items")
      */
     public $items;

@@ -43,7 +43,7 @@ class GetWithdrawalHistoryResp implements Response
     /**
      *
      * @var GetWithdrawalHistoryItems[] $items
-     * @Type("array<GetWithdrawalHistoryItems>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Account\Withdrawal\GetWithdrawalHistoryItems>")
      * @SerializedName("items")
      */
     public $items;

@@ -15,7 +15,7 @@ class GetDiscountRateConfigsResp implements Response
     /**
      *
      * @var GetDiscountRateConfigsData[] $data
-     * @Type("array<GetDiscountRateConfigsData>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Viplending\Viplending\GetDiscountRateConfigsData>")
      * @SerializedName("data")
      */
     public $data;
@@ -50,13 +50,13 @@ class GetDiscountRateConfigsResp implements Response
      */
     public static function jsonDeserialize($json, $serializer)
     {
-        $item = $serializer->deserialize(
+        $data = $serializer->deserialize(
             $json,
             "array<KuCoin\UniversalSDK\Generate\Viplending\Viplending\GetDiscountRateConfigsData>",
             "json"
         );
         $obj = new self();
-        $obj->data = $item;
+        $obj->data = $data;
         return $obj;
     }
 }

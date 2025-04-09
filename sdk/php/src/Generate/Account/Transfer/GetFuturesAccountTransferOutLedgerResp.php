@@ -43,7 +43,7 @@ class GetFuturesAccountTransferOutLedgerResp implements Response
     /**
      *
      * @var GetFuturesAccountTransferOutLedgerItems[] $items
-     * @Type("array<GetFuturesAccountTransferOutLedgerItems>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Account\Transfer\GetFuturesAccountTransferOutLedgerItems>")
      * @SerializedName("items")
      */
     public $items;

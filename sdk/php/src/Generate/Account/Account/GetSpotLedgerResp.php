@@ -43,7 +43,7 @@ class GetSpotLedgerResp implements Response
     /**
      *
      * @var GetSpotLedgerItems[] $items
-     * @Type("array<GetSpotLedgerItems>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Account\Account\GetSpotLedgerItems>")
      * @SerializedName("items")
      */
     public $items;

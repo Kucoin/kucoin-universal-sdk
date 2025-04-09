@@ -15,7 +15,7 @@ class GetSpotIndexPriceResp implements Response
     /**
      *
      * @var GetSpotIndexPriceDataList[] $dataList
-     * @Type("array<GetSpotIndexPriceDataList>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Futures\Market\GetSpotIndexPriceDataList>")
      * @SerializedName("dataList")
      */
     public $dataList;

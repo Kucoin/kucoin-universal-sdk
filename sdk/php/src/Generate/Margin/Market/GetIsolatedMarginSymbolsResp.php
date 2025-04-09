@@ -15,7 +15,7 @@ class GetIsolatedMarginSymbolsResp implements Response
     /**
      *
      * @var GetIsolatedMarginSymbolsData[] $data
-     * @Type("array<GetIsolatedMarginSymbolsData>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Margin\Market\GetIsolatedMarginSymbolsData>")
      * @SerializedName("data")
      */
     public $data;
@@ -50,13 +50,13 @@ class GetIsolatedMarginSymbolsResp implements Response
      */
     public static function jsonDeserialize($json, $serializer)
     {
-        $item = $serializer->deserialize(
+        $data = $serializer->deserialize(
             $json,
             "array<KuCoin\UniversalSDK\Generate\Margin\Market\GetIsolatedMarginSymbolsData>",
             "json"
         );
         $obj = new self();
-        $obj->data = $item;
+        $obj->data = $data;
         return $obj;
     }
 }

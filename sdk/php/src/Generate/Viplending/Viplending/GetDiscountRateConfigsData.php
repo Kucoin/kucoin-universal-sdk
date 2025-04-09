@@ -31,7 +31,7 @@ class GetDiscountRateConfigsData implements Serializable
     /**
      * Gradient configuration list, amount converted into USDT
      * @var GetDiscountRateConfigsDataUsdtLevels[] $usdtLevels
-     * @Type("array<GetDiscountRateConfigsDataUsdtLevels>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Viplending\Viplending\GetDiscountRateConfigsDataUsdtLevels>")
      * @SerializedName("usdtLevels")
      */
     public $usdtLevels;

@@ -31,7 +31,7 @@ class BatchCancelOrdersReq implements Serializable
     /**
      * the list of client orderId
      * @var BatchCancelOrdersClientOidsList[] $clientOidsList
-     * @Type("array<BatchCancelOrdersClientOidsList>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Futures\Order\BatchCancelOrdersClientOidsList>")
      * @SerializedName("clientOidsList")
      */
     public $clientOidsList;

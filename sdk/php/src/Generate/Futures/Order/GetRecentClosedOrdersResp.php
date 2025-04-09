@@ -15,7 +15,7 @@ class GetRecentClosedOrdersResp implements Response
     /**
      *
      * @var GetRecentClosedOrdersData[] $data
-     * @Type("array<GetRecentClosedOrdersData>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Futures\Order\GetRecentClosedOrdersData>")
      * @SerializedName("data")
      */
     public $data;
@@ -50,13 +50,13 @@ class GetRecentClosedOrdersResp implements Response
      */
     public static function jsonDeserialize($json, $serializer)
     {
-        $item = $serializer->deserialize(
+        $data = $serializer->deserialize(
             $json,
             "array<KuCoin\UniversalSDK\Generate\Futures\Order\GetRecentClosedOrdersData>",
             "json"
         );
         $obj = new self();
-        $obj->data = $item;
+        $obj->data = $data;
         return $obj;
     }
 }

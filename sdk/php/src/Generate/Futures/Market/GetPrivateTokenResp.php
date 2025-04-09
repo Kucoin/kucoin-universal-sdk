@@ -22,7 +22,7 @@ class GetPrivateTokenResp implements Response
     /**
      *
      * @var GetPrivateTokenInstanceServers[] $instanceServers
-     * @Type("array<GetPrivateTokenInstanceServers>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Futures\Market\GetPrivateTokenInstanceServers>")
      * @SerializedName("instanceServers")
      */
     public $instanceServers;

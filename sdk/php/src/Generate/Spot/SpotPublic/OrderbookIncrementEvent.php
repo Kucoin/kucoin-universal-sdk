@@ -12,7 +12,7 @@ class OrderbookIncrementEvent implements Response
     /**
      *
      * @var OrderbookIncrementChanges $changes
-     * @Type("OrderbookIncrementChanges")
+     * @Type("KuCoin\UniversalSDK\Generate\Spot\SpotPublic\OrderbookIncrementChanges")
      * @SerializedName("changes")
      */
     public $changes;

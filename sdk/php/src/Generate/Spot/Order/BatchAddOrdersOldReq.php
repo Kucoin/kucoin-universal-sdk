@@ -24,7 +24,7 @@ class BatchAddOrdersOldReq implements Serializable
     /**
      *
      * @var BatchAddOrdersOldOrderList[]|null $orderList
-     * @Type("array<BatchAddOrdersOldOrderList>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Spot\Order\BatchAddOrdersOldOrderList>")
      * @SerializedName("orderList")
      */
     public $orderList;

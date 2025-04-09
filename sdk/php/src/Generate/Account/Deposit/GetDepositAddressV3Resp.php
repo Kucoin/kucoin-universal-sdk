@@ -15,7 +15,7 @@ class GetDepositAddressV3Resp implements Response
     /**
      *
      * @var GetDepositAddressV3Data[] $data
-     * @Type("array<GetDepositAddressV3Data>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Account\Deposit\GetDepositAddressV3Data>")
      * @SerializedName("data")
      */
     public $data;
@@ -50,13 +50,13 @@ class GetDepositAddressV3Resp implements Response
      */
     public static function jsonDeserialize($json, $serializer)
     {
-        $item = $serializer->deserialize(
+        $data = $serializer->deserialize(
             $json,
             "array<KuCoin\UniversalSDK\Generate\Account\Deposit\GetDepositAddressV3Data>",
             "json"
         );
         $obj = new self();
-        $obj->data = $item;
+        $obj->data = $data;
         return $obj;
     }
 }

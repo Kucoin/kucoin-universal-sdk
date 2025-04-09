@@ -24,7 +24,7 @@ class BatchAddOrdersReq implements Serializable
     /**
      *
      * @var BatchAddOrdersItem[]|null $items
-     * @Type("array<BatchAddOrdersItem>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Futures\Order\BatchAddOrdersItem>")
      * @SerializedName("items")
      */
     public $items;

@@ -15,7 +15,7 @@ class GetSavingsProductsResp implements Response
     /**
      *
      * @var GetSavingsProductsData[] $data
-     * @Type("array<GetSavingsProductsData>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Earn\Earn\GetSavingsProductsData>")
      * @SerializedName("data")
      */
     public $data;
@@ -50,13 +50,13 @@ class GetSavingsProductsResp implements Response
      */
     public static function jsonDeserialize($json, $serializer)
     {
-        $item = $serializer->deserialize(
+        $data = $serializer->deserialize(
             $json,
             "array<KuCoin\UniversalSDK\Generate\Earn\Earn\GetSavingsProductsData>",
             "json"
         );
         $obj = new self();
-        $obj->data = $item;
+        $obj->data = $data;
         return $obj;
     }
 }

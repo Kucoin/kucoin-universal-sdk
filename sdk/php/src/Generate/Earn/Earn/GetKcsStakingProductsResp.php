@@ -15,7 +15,7 @@ class GetKcsStakingProductsResp implements Response
     /**
      *
      * @var GetKcsStakingProductsData[] $data
-     * @Type("array<GetKcsStakingProductsData>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Earn\Earn\GetKcsStakingProductsData>")
      * @SerializedName("data")
      */
     public $data;
@@ -50,13 +50,13 @@ class GetKcsStakingProductsResp implements Response
      */
     public static function jsonDeserialize($json, $serializer)
     {
-        $item = $serializer->deserialize(
+        $data = $serializer->deserialize(
             $json,
             "array<KuCoin\UniversalSDK\Generate\Earn\Earn\GetKcsStakingProductsData>",
             "json"
         );
         $obj = new self();
-        $obj->data = $item;
+        $obj->data = $data;
         return $obj;
     }
 }

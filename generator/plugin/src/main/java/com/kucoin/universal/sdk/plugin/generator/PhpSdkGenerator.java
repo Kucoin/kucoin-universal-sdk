@@ -242,7 +242,7 @@ public class PhpSdkGenerator extends AbstractPhpCodegen implements NameService {
         }
 
         if (prop.isModel) {
-            return prop.complexType;
+            return String.format("%s\\%s", modelPackage, prop.complexType);
         }
 
         return "mixed";

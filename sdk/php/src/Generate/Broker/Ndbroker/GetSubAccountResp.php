@@ -43,7 +43,7 @@ class GetSubAccountResp implements Response
     /**
      *
      * @var GetSubAccountItems[] $items
-     * @Type("array<GetSubAccountItems>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Broker\Ndbroker\GetSubAccountItems>")
      * @SerializedName("items")
      */
     public $items;

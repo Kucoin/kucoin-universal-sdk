@@ -15,7 +15,7 @@ class GetRecentTradeHistoryResp implements Response
     /**
      *
      * @var GetRecentTradeHistoryData[] $data
-     * @Type("array<GetRecentTradeHistoryData>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Futures\Order\GetRecentTradeHistoryData>")
      * @SerializedName("data")
      */
     public $data;
@@ -50,13 +50,13 @@ class GetRecentTradeHistoryResp implements Response
      */
     public static function jsonDeserialize($json, $serializer)
     {
-        $item = $serializer->deserialize(
+        $data = $serializer->deserialize(
             $json,
             "array<KuCoin\UniversalSDK\Generate\Futures\Order\GetRecentTradeHistoryData>",
             "json"
         );
         $obj = new self();
-        $obj->data = $item;
+        $obj->data = $data;
         return $obj;
     }
 }

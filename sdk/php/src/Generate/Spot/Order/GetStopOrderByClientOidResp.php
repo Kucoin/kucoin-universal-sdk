@@ -15,7 +15,7 @@ class GetStopOrderByClientOidResp implements Response
     /**
      * the return code
      * @var GetStopOrderByClientOidData[] $data
-     * @Type("array<GetStopOrderByClientOidData>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Spot\Order\GetStopOrderByClientOidData>")
      * @SerializedName("data")
      */
     public $data;
@@ -50,13 +50,13 @@ class GetStopOrderByClientOidResp implements Response
      */
     public static function jsonDeserialize($json, $serializer)
     {
-        $item = $serializer->deserialize(
+        $data = $serializer->deserialize(
             $json,
             "array<KuCoin\UniversalSDK\Generate\Spot\Order\GetStopOrderByClientOidData>",
             "json"
         );
         $obj = new self();
-        $obj->data = $item;
+        $obj->data = $data;
         return $obj;
     }
 }

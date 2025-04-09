@@ -19,7 +19,7 @@ class MarketSnapshotEvent implements Response
     /**
      *
      * @var MarketSnapshotData $data
-     * @Type("MarketSnapshotData")
+     * @Type("KuCoin\UniversalSDK\Generate\Spot\SpotPublic\MarketSnapshotData")
      * @SerializedName("data")
      */
     public $data;

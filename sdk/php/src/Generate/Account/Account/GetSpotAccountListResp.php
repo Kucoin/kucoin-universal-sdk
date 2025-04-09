@@ -15,7 +15,7 @@ class GetSpotAccountListResp implements Response
     /**
      *
      * @var GetSpotAccountListData[] $data
-     * @Type("array<GetSpotAccountListData>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Account\Account\GetSpotAccountListData>")
      * @SerializedName("data")
      */
     public $data;
@@ -50,13 +50,13 @@ class GetSpotAccountListResp implements Response
      */
     public static function jsonDeserialize($json, $serializer)
     {
-        $item = $serializer->deserialize(
+        $data = $serializer->deserialize(
             $json,
             "array<KuCoin\UniversalSDK\Generate\Account\Account\GetSpotAccountListData>",
             "json"
         );
         $obj = new self();
-        $obj->data = $item;
+        $obj->data = $data;
         return $obj;
     }
 }

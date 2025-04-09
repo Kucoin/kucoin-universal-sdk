@@ -50,7 +50,7 @@ class GetOcoOrderDetailByOrderIdResp implements Response
     /**
      *
      * @var GetOcoOrderDetailByOrderIdOrders[] $orders
-     * @Type("array<GetOcoOrderDetailByOrderIdOrders>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Spot\Order\GetOcoOrderDetailByOrderIdOrders>")
      * @SerializedName("orders")
      */
     public $orders;

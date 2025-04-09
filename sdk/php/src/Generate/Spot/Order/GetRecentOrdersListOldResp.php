@@ -15,7 +15,7 @@ class GetRecentOrdersListOldResp implements Response
     /**
      *
      * @var GetRecentOrdersListOldData[] $data
-     * @Type("array<GetRecentOrdersListOldData>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Spot\Order\GetRecentOrdersListOldData>")
      * @SerializedName("data")
      */
     public $data;
@@ -50,13 +50,13 @@ class GetRecentOrdersListOldResp implements Response
      */
     public static function jsonDeserialize($json, $serializer)
     {
-        $item = $serializer->deserialize(
+        $data = $serializer->deserialize(
             $json,
             "array<KuCoin\UniversalSDK\Generate\Spot\Order\GetRecentOrdersListOldData>",
             "json"
         );
         $obj = new self();
-        $obj->data = $item;
+        $obj->data = $data;
         return $obj;
     }
 }

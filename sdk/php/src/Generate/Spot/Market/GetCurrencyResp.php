@@ -71,7 +71,7 @@ class GetCurrencyResp implements Response
     /**
      * Chain list
      * @var GetCurrencyChains[] $chains
-     * @Type("array<GetCurrencyChains>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Spot\Market\GetCurrencyChains>")
      * @SerializedName("chains")
      */
     public $chains;

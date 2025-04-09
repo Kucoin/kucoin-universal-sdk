@@ -84,17 +84,10 @@ class {{classname}} implements Serializable {
     */
     public static function jsonDeserialize($json , $serializer) {
     {{#vars}}
-        {{#isPrimitiveType}}
-            $obj = new self();
-            $obj->data = $json;
-            return $obj;
-        {{/isPrimitiveType}}
-        {{^isPrimitiveType}}
-            $item = $serializer->deserialize($json, 'array<{{modelPackage}}\{{complexType}}>', 'json');
-            $obj = new self();
-            $obj->data = $item;
-            return $obj;
-        {{/isPrimitiveType}}
+        $data = $serializer->deserialize($json, '{{{vendorExtensions.annotationType}}}', 'json');
+        $obj = new self();
+        $obj->data = $data;
+        return $obj;
     {{/vars}}
     }
 {{/vendorExtensions.x-original-response}}

@@ -50,8 +50,9 @@ class ModifyAutoDepositStatusResp implements Response
      */
     public static function jsonDeserialize($json, $serializer)
     {
+        $data = $serializer->deserialize($json, "bool", "json");
         $obj = new self();
-        $obj->data = $json;
+        $obj->data = $data;
         return $obj;
     }
 }

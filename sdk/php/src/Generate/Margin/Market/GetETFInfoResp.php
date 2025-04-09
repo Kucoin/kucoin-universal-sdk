@@ -15,7 +15,7 @@ class GetETFInfoResp implements Response
     /**
      *
      * @var GetETFInfoData[] $data
-     * @Type("array<GetETFInfoData>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Margin\Market\GetETFInfoData>")
      * @SerializedName("data")
      */
     public $data;
@@ -50,13 +50,13 @@ class GetETFInfoResp implements Response
      */
     public static function jsonDeserialize($json, $serializer)
     {
-        $item = $serializer->deserialize(
+        $data = $serializer->deserialize(
             $json,
             "array<KuCoin\UniversalSDK\Generate\Margin\Market\GetETFInfoData>",
             "json"
         );
         $obj = new self();
-        $obj->data = $item;
+        $obj->data = $data;
         return $obj;
     }
 }

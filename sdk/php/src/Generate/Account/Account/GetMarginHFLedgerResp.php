@@ -15,7 +15,7 @@ class GetMarginHFLedgerResp implements Response
     /**
      *
      * @var GetMarginHFLedgerData[] $data
-     * @Type("array<GetMarginHFLedgerData>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Account\Account\GetMarginHFLedgerData>")
      * @SerializedName("data")
      */
     public $data;
@@ -50,13 +50,13 @@ class GetMarginHFLedgerResp implements Response
      */
     public static function jsonDeserialize($json, $serializer)
     {
-        $item = $serializer->deserialize(
+        $data = $serializer->deserialize(
             $json,
             "array<KuCoin\UniversalSDK\Generate\Account\Account\GetMarginHFLedgerData>",
             "json"
         );
         $obj = new self();
-        $obj->data = $item;
+        $obj->data = $data;
         return $obj;
     }
 }

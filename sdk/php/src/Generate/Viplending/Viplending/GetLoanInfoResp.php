@@ -22,14 +22,14 @@ class GetLoanInfoResp implements Response
     /**
      * Loan Orders
      * @var GetLoanInfoOrders[] $orders
-     * @Type("array<GetLoanInfoOrders>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Viplending\Viplending\GetLoanInfoOrders>")
      * @SerializedName("orders")
      */
     public $orders;
     /**
      *
      * @var GetLoanInfoLtv $ltv
-     * @Type("GetLoanInfoLtv")
+     * @Type("KuCoin\UniversalSDK\Generate\Viplending\Viplending\GetLoanInfoLtv")
      * @SerializedName("ltv")
      */
     public $ltv;
@@ -50,7 +50,7 @@ class GetLoanInfoResp implements Response
     /**
      *
      * @var GetLoanInfoMargins[] $margins
-     * @Type("array<GetLoanInfoMargins>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Viplending\Viplending\GetLoanInfoMargins>")
      * @SerializedName("margins")
      */
     public $margins;

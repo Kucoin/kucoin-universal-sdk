@@ -43,14 +43,14 @@ class GetIsolatedMarginAccountDetailV1Resp implements Response
     /**
      *
      * @var GetIsolatedMarginAccountDetailV1BaseAsset $baseAsset
-     * @Type("GetIsolatedMarginAccountDetailV1BaseAsset")
+     * @Type("KuCoin\UniversalSDK\Generate\Account\Account\GetIsolatedMarginAccountDetailV1BaseAsset")
      * @SerializedName("baseAsset")
      */
     public $baseAsset;
     /**
      *
      * @var GetIsolatedMarginAccountDetailV1QuoteAsset $quoteAsset
-     * @Type("GetIsolatedMarginAccountDetailV1QuoteAsset")
+     * @Type("KuCoin\UniversalSDK\Generate\Account\Account\GetIsolatedMarginAccountDetailV1QuoteAsset")
      * @SerializedName("quoteAsset")
      */
     public $quoteAsset;

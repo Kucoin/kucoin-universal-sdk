@@ -43,7 +43,7 @@ class GetPurchaseOrdersResp implements Response
     /**
      *
      * @var GetPurchaseOrdersItems[] $items
-     * @Type("array<GetPurchaseOrdersItems>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Margin\Credit\GetPurchaseOrdersItems>")
      * @SerializedName("items")
      */
     public $items;

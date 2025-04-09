@@ -54,7 +54,7 @@ class AccountEvent implements Response
     /**
      *
      * @var AccountRelationContext $relationContext
-     * @Type("AccountRelationContext")
+     * @Type("KuCoin\UniversalSDK\Generate\Spot\SpotPrivate\AccountRelationContext")
      * @SerializedName("relationContext")
      */
     public $relationContext;

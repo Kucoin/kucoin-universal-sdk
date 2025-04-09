@@ -15,7 +15,7 @@ class GetFuturesLedgerResp implements Response
     /**
      *
      * @var GetFuturesLedgerDataList[] $dataList
-     * @Type("array<GetFuturesLedgerDataList>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Account\Account\GetFuturesLedgerDataList>")
      * @SerializedName("dataList")
      */
     public $dataList;

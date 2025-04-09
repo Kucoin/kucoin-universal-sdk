@@ -22,7 +22,7 @@ class GetCrossMarginSymbolsResp implements Response
     /**
      *
      * @var GetCrossMarginSymbolsItems[] $items
-     * @Type("array<GetCrossMarginSymbolsItems>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Margin\Market\GetCrossMarginSymbolsItems>")
      * @SerializedName("items")
      */
     public $items;

@@ -15,7 +15,7 @@ class GetAccountsResp implements Response
     /**
      *
      * @var GetAccountsData[] $data
-     * @Type("array<GetAccountsData>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Viplending\Viplending\GetAccountsData>")
      * @SerializedName("data")
      */
     public $data;
@@ -50,13 +50,13 @@ class GetAccountsResp implements Response
      */
     public static function jsonDeserialize($json, $serializer)
     {
-        $item = $serializer->deserialize(
+        $data = $serializer->deserialize(
             $json,
             "array<KuCoin\UniversalSDK\Generate\Viplending\Viplending\GetAccountsData>",
             "json"
         );
         $obj = new self();
-        $obj->data = $item;
+        $obj->data = $data;
         return $obj;
     }
 }

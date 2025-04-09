@@ -43,7 +43,7 @@ class GetOpenOrdersByPageResp implements Response
     /**
      *
      * @var GetOpenOrdersByPageItems[] $items
-     * @Type("array<GetOpenOrdersByPageItems>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Spot\Order\GetOpenOrdersByPageItems>")
      * @SerializedName("items")
      */
     public $items;

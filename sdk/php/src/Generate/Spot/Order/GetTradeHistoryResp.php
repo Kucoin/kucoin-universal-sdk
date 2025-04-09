@@ -15,7 +15,7 @@ class GetTradeHistoryResp implements Response
     /**
      *
      * @var GetTradeHistoryItems[] $items
-     * @Type("array<GetTradeHistoryItems>")
+     * @Type("array<KuCoin\UniversalSDK\Generate\Spot\Order\GetTradeHistoryItems>")
      * @SerializedName("items")
      */
     public $items;
