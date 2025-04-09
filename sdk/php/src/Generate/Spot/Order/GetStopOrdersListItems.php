@@ -51,6 +51,8 @@ class GetStopOrdersListItems implements Request
     public $status;
     /**
      * Order type
+     * - 'limit' : Limit order
+     * - 'market' : Market order
      * @var string $type
      * @Type("string")
      * @SerializedName("type")

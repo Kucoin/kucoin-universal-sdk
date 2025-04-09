@@ -142,6 +142,9 @@ class GetAllSymbolsData implements Request
     public $enableTrading;
     /**
      * [Fee Type](https://www.kucoin.com/vip/privilege)
+     * - 1 : classA
+     * - 2 : classB
+     * - 3 : classC
      * @var int $feeCategory
      * @Type("int")
      * @SerializedName("feeCategory")

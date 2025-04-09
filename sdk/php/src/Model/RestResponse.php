@@ -4,7 +4,8 @@ namespace KuCoin\UniversalSDK\Model;
 
 use Exception;
 use JMS\Serializer\Serializer;
-
+use JMS\Serializer\Annotation\Type;
+use JMS\Serializer\Annotation\SerializedName;
 
 /**
  * Class RestResponse

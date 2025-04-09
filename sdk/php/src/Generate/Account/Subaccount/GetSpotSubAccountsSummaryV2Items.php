@@ -44,6 +44,8 @@ class GetSpotSubAccountsSummaryV2Items implements Request
     public $subName;
     /**
      * Sub-account; 2:Enable, 3:Frozen
+     * - 2 : Enable
+     * - 3 : Frozen
      * @var int $status
      * @Type("int")
      * @SerializedName("status")
@@ -51,6 +53,10 @@ class GetSpotSubAccountsSummaryV2Items implements Request
     public $status;
     /**
      * Sub-account type
+     * - 0 : Normal sub-account
+     * - 1 : Robot sub-account
+     * - 2 : New financial sub-account
+     * - 5 : Asset management sub-account
      * @var int $type
      * @Type("int")
      * @SerializedName("type")

@@ -72,6 +72,8 @@ class BatchAddOrdersSyncData implements Request
     public $canceledSize;
     /**
      * Order Status. open: order is active; done: order has been completed
+     * - 'open' :
+     * - 'done' :
      * @var string|null $status
      * @Type("string")
      * @SerializedName("status")

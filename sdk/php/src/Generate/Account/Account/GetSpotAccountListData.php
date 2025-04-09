@@ -37,6 +37,8 @@ class GetSpotAccountListData implements Request
     public $currency;
     /**
      * Account type: main, trade, isolated (abandon), margin (abandon)
+     * - 'main' : Funding account
+     * - 'trade' : Spot account
      * @var string $type
      * @Type("string")
      * @SerializedName("type")

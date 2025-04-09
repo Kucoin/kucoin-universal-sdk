@@ -2,12 +2,12 @@
 
 namespace KuCoin\UniversalSDK\Api;
 
-use KuCoin\UniversalSDK\Generate\Spot\SpotPublicWS;
-use KuCoin\UniversalSDK\Generate\Spot\SpotPrivateWS;
-use KuCoin\UniversalSDK\Generate\Margin\MarginPublicWS;
-use KuCoin\UniversalSDK\Generate\Margin\MarginPrivateWS;
-use KuCoin\UniversalSDK\Generate\Futures\FuturesPublicWS;
-use KuCoin\UniversalSDK\Generate\Futures\FuturesPrivateWS;
+use KuCoin\UniversalSDK\Generate\Futures\FuturesPrivate\FuturesPrivateWs;
+use KuCoin\UniversalSDK\Generate\Futures\FuturesPublic\FuturesPublicWs;
+use KuCoin\UniversalSDK\Generate\Margin\MarginPrivate\MarginPrivateWs;
+use KuCoin\UniversalSDK\Generate\Margin\MarginPublic\MarginPublicWs;
+use KuCoin\UniversalSDK\Generate\Spot\SpotPrivate\SpotPrivateWs;
+use KuCoin\UniversalSDK\Generate\Spot\SpotPublic\SpotPublicWs;
 
 /**
  * KucoinWSService provides WebSocket interfaces for Spot, Margin, and Futures trading.

@@ -1,0 +1,103 @@
+<?php
+
+namespace KuCoin\UniversalSDK\Internal\Ws;
+
+use KuCoin\UniversalSDK\Api\KucoinWSService;
+use KuCoin\UniversalSDK\Generate\Futures\FuturesPrivate\FuturesPrivateWs;
+use KuCoin\UniversalSDK\Generate\Futures\FuturesPrivate\FuturesPrivateWsImpl;
+use KuCoin\UniversalSDK\Generate\Futures\FuturesPublic\FuturesPublicWs;
+use KuCoin\UniversalSDK\Generate\Futures\FuturesPublic\FuturesPublicWsImpl;
+use KuCoin\UniversalSDK\Generate\Margin\MarginPrivate\MarginPrivateWs;
+use KuCoin\UniversalSDK\Generate\Margin\MarginPrivate\MarginPrivateWsImpl;
+use KuCoin\UniversalSDK\Generate\Margin\MarginPublic\MarginPublicWs;
+use KuCoin\UniversalSDK\Generate\Margin\MarginPublic\MarginPublicWsImpl;
+use KuCoin\UniversalSDK\Generate\Spot\SpotPrivate\SpotPrivateWs;
+use KuCoin\UniversalSDK\Generate\Spot\SpotPrivate\SpotPrivateWsImpl;
+use KuCoin\UniversalSDK\Generate\Spot\SpotPublic\SpotPublicWs;
+use KuCoin\UniversalSDK\Generate\Spot\SpotPublic\SpotPublicWsImpl;
+use KuCoin\UniversalSDK\Generate\Version;
+use KuCoin\UniversalSDK\Internal\Infra\DefaultWsService;
+use KuCoin\UniversalSDK\Model\ClientOption;
+use KuCoin\UniversalSDK\Model\Constants;
+
+class DefaultKucoinWsImpl implements KucoinWSService
+{
+    /**
+     * @var ClientOption $clientOption
+     */
+    private $clientOption;
+
+    /**
+     * @param ClientOption $clientOption
+     */
+    public function __construct(ClientOption $clientOption)
+    {
+        $this->clientOption = $clientOption;
+    }
+
+    public function newSpotPublicWS(): SpotPublicWs
+    {
+        $wsService = new DefaultWsService(
+            $this->clientOption,
+            Constants::DOMAIN_TYPE_SPOT,
+            false,
+            Version::SDK_VERSION);
+
+        return new SpotPublicWsImpl($wsService);
+    }
+
+    public function newSpotPrivateWS(): SpotPrivateWs
+    {
+        $wsService = new DefaultWsService(
+            $this->clientOption,
+            Constants::DOMAIN_TYPE_SPOT,
+            true,
+            Version::SDK_VERSION);
+
+        return new SpotPrivateWsImpl($wsService);
+    }
+
+    public function newMarginPublicWS(): MarginPublicWs
+    {
+        $wsService = new DefaultWsService(
+            $this->clientOption,
+            Constants::DOMAIN_TYPE_SPOT,
+            false,
+            Version::SDK_VERSION);
+
+        return new MarginPublicWsImpl($wsService);
+    }
+
+    public function newMarginPrivateWS(): MarginPrivateWs
+    {
+        $wsService = new DefaultWsService(
+            $this->clientOption,
+            Constants::DOMAIN_TYPE_SPOT,
+            true,
+            Version::SDK_VERSION);
+
+        return new MarginPrivateWsImpl($wsService);
+    }
+
+    public function newFuturesPublicWS(): FuturesPublicWs
+    {
+        $wsService = new DefaultWsService(
+            $this->clientOption,
+            Constants::DOMAIN_TYPE_FUTURES,
+            false,
+            Version::SDK_VERSION);
+
+        return new FuturesPublicWsImpl($wsService);
+    }
+
+    public function newFuturesPrivateWS(): FuturesPrivateWs
+    {
+        $wsService = new DefaultWsService(
+            $this->clientOption,
+            Constants::DOMAIN_TYPE_FUTURES,
+            true,
+            Version::SDK_VERSION);
+
+        return new FuturesPrivateWsImpl($wsService);
+    }
+}

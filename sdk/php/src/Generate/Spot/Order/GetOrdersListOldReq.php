@@ -30,6 +30,8 @@ class GetOrdersListOldReq implements Request
     public $symbol;
     /**
      * Active or done (done as default); only list orders with a specific status.
+     * - 'active' : Active order
+     * - 'done' : Done orders
      * @var string|null $status
      * @Type("string")
      * @SerializedName("status")
@@ -37,6 +39,8 @@ class GetOrdersListOldReq implements Request
     public $status = "done";
     /**
      * Buy or Sell
+     * - 'buy' : buy
+     * - 'sell' : sell
      * @var string|null $side
      * @Type("string")
      * @SerializedName("side")
@@ -44,6 +48,12 @@ class GetOrdersListOldReq implements Request
     public $side;
     /**
      * Order type
+     * - 'limit' : limit
+     * - 'market' : market
+     * - 'limit_stop' : limit_stop
+     * - 'market_stop' : market_stop
+     * - 'oco_limit' : oco_limit
+     * - 'oco_stop' : oco_stop
      * @var string|null $type
      * @Type("string")
      * @SerializedName("type")
@@ -51,6 +61,9 @@ class GetOrdersListOldReq implements Request
     public $type;
     /**
      * The type of trading: TRADE - Spot Trading (TRADE as default), MARGIN_TRADE - Cross Margin Trading, MARGIN_ISOLATED_TRADE - Isolated Margin Trading.
+     * - 'TRADE' : Spot Trading
+     * - 'MARGIN_TRADE' : Cross Margin Trading
+     * - 'MARGIN_ISOLATED_TRADE' : Isolated Margin Trading
      * @var string|null $tradeType
      * @Type("string")
      * @SerializedName("tradeType")
@@ -149,7 +162,8 @@ class GetOrdersListOldReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Symbol
+     * Symbol
+     * @param string $value
      * @return self
      */
     public function setSymbol($value)
@@ -159,7 +173,10 @@ class GetOrdersListOldReqBuilder
     }
 
     /**
-     * @param string $value Active or done (done as default); only list orders with a specific status.
+     * Active or done (done as default); only list orders with a specific status.
+     * - 'active' : Active order
+     * - 'done' : Done orders
+     * @param string $value
      * @return self
      */
     public function setStatus($value)
@@ -169,7 +186,10 @@ class GetOrdersListOldReqBuilder
     }
 
     /**
-     * @param string $value Buy or Sell
+     * Buy or Sell
+     * - 'buy' : buy
+     * - 'sell' : sell
+     * @param string $value
      * @return self
      */
     public function setSide($value)
@@ -179,7 +199,14 @@ class GetOrdersListOldReqBuilder
     }
 
     /**
-     * @param string $value Order type
+     * Order type
+     * - 'limit' : limit
+     * - 'market' : market
+     * - 'limit_stop' : limit_stop
+     * - 'market_stop' : market_stop
+     * - 'oco_limit' : oco_limit
+     * - 'oco_stop' : oco_stop
+     * @param string $value
      * @return self
      */
     public function setType($value)
@@ -189,7 +216,11 @@ class GetOrdersListOldReqBuilder
     }
 
     /**
-     * @param string $value The type of trading: TRADE - Spot Trading (TRADE as default), MARGIN_TRADE - Cross Margin Trading, MARGIN_ISOLATED_TRADE - Isolated Margin Trading.
+     * The type of trading: TRADE - Spot Trading (TRADE as default), MARGIN_TRADE - Cross Margin Trading, MARGIN_ISOLATED_TRADE - Isolated Margin Trading.
+     * - 'TRADE' : Spot Trading
+     * - 'MARGIN_TRADE' : Cross Margin Trading
+     * - 'MARGIN_ISOLATED_TRADE' : Isolated Margin Trading
+     * @param string $value
      * @return self
      */
     public function setTradeType($value)
@@ -199,7 +230,8 @@ class GetOrdersListOldReqBuilder
     }
 
     /**
-     * @param int $value Start time (milliseconds)
+     * Start time (milliseconds)
+     * @param int $value
      * @return self
      */
     public function setStartAt($value)
@@ -209,7 +241,8 @@ class GetOrdersListOldReqBuilder
     }
 
     /**
-     * @param int $value End time (milliseconds)
+     * End time (milliseconds)
+     * @param int $value
      * @return self
      */
     public function setEndAt($value)
@@ -219,7 +252,8 @@ class GetOrdersListOldReqBuilder
     }
 
     /**
-     * @param int $value Current request page.
+     * Current request page.
+     * @param int $value
      * @return self
      */
     public function setCurrentPage($value)
@@ -229,7 +263,8 @@ class GetOrdersListOldReqBuilder
     }
 
     /**
-     * @param int $value Number of results per request. Minimum is 10, maximum is 500.
+     * Number of results per request. Minimum is 10, maximum is 500.
+     * @param int $value
      * @return self
      */
     public function setPageSize($value)

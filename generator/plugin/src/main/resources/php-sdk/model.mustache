@@ -37,6 +37,11 @@ class {{classname}} implements Request {
 {{#vars}}
     /**
     * {{#description}}{{{.}}}{{/description}}
+    {{#isEnum}}
+        {{#vendorExtensions.x-enums}}
+    * - {{{value}}} : {{description}}
+        {{/vendorExtensions.x-enums}}
+    {{/isEnum}}
     * @var {{{dataType}}}{{^required}}|null{{/required}} ${{name}}
     * @Type("{{{dataType}}}")
     * @SerializedName("{{baseName}}")
@@ -174,7 +179,13 @@ class {{classname}}Builder {
     }
 {{#vars}}
     /**
-    * @param {{{dataType}}} $value {{#description}}{{{.}}}{{/description}}
+    * {{#description}}{{{.}}}{{/description}}
+    {{#isEnum}}
+        {{#vendorExtensions.x-enums}}
+    * - {{{value}}} : {{description}}
+        {{/vendorExtensions.x-enums}}
+    {{/isEnum}}
+    * @param {{{dataType}}} $value
     * @return self
     */
     public function set{{nameInPascalCase}}($value) {

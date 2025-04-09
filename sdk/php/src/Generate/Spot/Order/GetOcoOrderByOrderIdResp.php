@@ -42,6 +42,10 @@ class GetOcoOrderByOrderIdResp implements Response
     public $orderTime;
     /**
      * Order status: NEW: New, DONE: Completed, TRIGGERED: Triggered, CANCELED: Canceled
+     * - 'NEW' : New
+     * - 'DONE' : Completed
+     * - 'TRIGGERED' : Triggered
+     * - 'CANCELLED' : Canceled
      * @var string $status
      * @Type("string")
      * @SerializedName("status")

@@ -107,7 +107,8 @@ class BatchCancelStopOrderReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Cancel the open order for the specified symbol
+     * Cancel the open order for the specified symbol
+     * @param string $value
      * @return self
      */
     public function setSymbol($value)
@@ -117,7 +118,8 @@ class BatchCancelStopOrderReqBuilder
     }
 
     /**
-     * @param string $value The type of trading : TRADE（Spot）, MARGIN_TRADE (Cross Margin), MARGIN_ISOLATED_TRADE (Isolated Margin).
+     * The type of trading : TRADE（Spot）, MARGIN_TRADE (Cross Margin), MARGIN_ISOLATED_TRADE (Isolated Margin).
+     * @param string $value
      * @return self
      */
     public function setTradeType($value)
@@ -127,7 +129,8 @@ class BatchCancelStopOrderReqBuilder
     }
 
     /**
-     * @param string $value Comma seperated order IDs.
+     * Comma seperated order IDs.
+     * @param string $value
      * @return self
      */
     public function setOrderIds($value)

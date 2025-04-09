@@ -93,7 +93,8 @@ class CancelAllStopOrdersReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Cancel all limit orders for a specific contract only,  If not specified, all the limit orders will be deleted, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)
+     * Cancel all limit orders for a specific contract only,  If not specified, all the limit orders will be deleted, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)
+     * @param string $value
      * @return self
      */
     public function setSymbol($value)

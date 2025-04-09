@@ -100,7 +100,8 @@ class DeleteSubAccountAPIReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Sub-account UID
+     * Sub-account UID
+     * @param string $value
      * @return self
      */
     public function setUid($value)
@@ -110,7 +111,8 @@ class DeleteSubAccountAPIReqBuilder
     }
 
     /**
-     * @param string $value Sub-account apiKey
+     * Sub-account apiKey
+     * @param string $value
      * @return self
      */
     public function setApiKey($value)

@@ -117,7 +117,8 @@ class ModifyOrderReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value One must be chose out of the old client order ID, orderId and clientOid
+     * One must be chose out of the old client order ID, orderId and clientOid
+     * @param string $value
      * @return self
      */
     public function setClientOid($value)
@@ -127,7 +128,8 @@ class ModifyOrderReqBuilder
     }
 
     /**
-     * @param string $value symbol
+     * symbol
+     * @param string $value
      * @return self
      */
     public function setSymbol($value)
@@ -137,7 +139,8 @@ class ModifyOrderReqBuilder
     }
 
     /**
-     * @param string $value One must be chosen out of the old order id, orderId and clientOid
+     * One must be chosen out of the old order id, orderId and clientOid
+     * @param string $value
      * @return self
      */
     public function setOrderId($value)
@@ -147,7 +150,8 @@ class ModifyOrderReqBuilder
     }
 
     /**
-     * @param string $value One must be chosen out of the modified price of the new order, newPrice and newSize
+     * One must be chosen out of the modified price of the new order, newPrice and newSize
+     * @param string $value
      * @return self
      */
     public function setNewPrice($value)
@@ -157,7 +161,8 @@ class ModifyOrderReqBuilder
     }
 
     /**
-     * @param string $value One must be chosen out of the modified size of the new order, newPrice and newSize
+     * One must be chosen out of the modified size of the new order, newPrice and newSize
+     * @param string $value
      * @return self
      */
     public function setNewSize($value)

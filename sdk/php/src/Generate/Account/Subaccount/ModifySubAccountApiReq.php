@@ -44,6 +44,11 @@ class ModifySubAccountApiReq implements Request
     public $ipWhitelist;
     /**
      * API expiration time: Never expire(default)-1, 30Day30, 90Day90, 180Day180, 360Day360
+     * - '-1' :
+     * - '30' :
+     * - '90' :
+     * - '180' :
+     * - '360' :
      * @var string|null $expire
      * @Type("string")
      * @SerializedName("expire")
@@ -128,7 +133,8 @@ class ModifySubAccountApiReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Password (Must contain 7–32 characters. Cannot contain any spaces.)
+     * Password (Must contain 7–32 characters. Cannot contain any spaces.)
+     * @param string $value
      * @return self
      */
     public function setPassphrase($value)
@@ -138,7 +144,8 @@ class ModifySubAccountApiReqBuilder
     }
 
     /**
-     * @param string $value [Permissions](https://www.kucoin.com/docs-new/doc-338144)(Only General, Spot, Futures, Margin, InnerTransfer (Flex Transfer) permissions can be set, such as \"General, Trade\". The default is \"General\")
+     * [Permissions](https://www.kucoin.com/docs-new/doc-338144)(Only General, Spot, Futures, Margin, InnerTransfer (Flex Transfer) permissions can be set, such as \"General, Trade\". The default is \"General\")
+     * @param string $value
      * @return self
      */
     public function setPermission($value)
@@ -148,7 +155,8 @@ class ModifySubAccountApiReqBuilder
     }
 
     /**
-     * @param string $value IP whitelist (You may add up to 20 IPs. Use a halfwidth comma to each IP)
+     * IP whitelist (You may add up to 20 IPs. Use a halfwidth comma to each IP)
+     * @param string $value
      * @return self
      */
     public function setIpWhitelist($value)
@@ -158,7 +166,13 @@ class ModifySubAccountApiReqBuilder
     }
 
     /**
-     * @param string $value API expiration time: Never expire(default)-1, 30Day30, 90Day90, 180Day180, 360Day360
+     * API expiration time: Never expire(default)-1, 30Day30, 90Day90, 180Day180, 360Day360
+     * - '-1' :
+     * - '30' :
+     * - '90' :
+     * - '180' :
+     * - '360' :
+     * @param string $value
      * @return self
      */
     public function setExpire($value)
@@ -168,7 +182,8 @@ class ModifySubAccountApiReqBuilder
     }
 
     /**
-     * @param string $value Sub-account name, create sub account name of API Key.
+     * Sub-account name, create sub account name of API Key.
+     * @param string $value
      * @return self
      */
     public function setSubName($value)
@@ -178,7 +193,8 @@ class ModifySubAccountApiReqBuilder
     }
 
     /**
-     * @param string $value API-Key (Sub-account APIKey)
+     * API-Key (Sub-account APIKey)
+     * @param string $value
      * @return self
      */
     public function setApiKey($value)

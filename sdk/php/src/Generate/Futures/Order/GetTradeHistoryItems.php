@@ -44,6 +44,8 @@ class GetTradeHistoryItems implements Request
     public $orderId;
     /**
      * Transaction side
+     * - 'buy' : buy
+     * - 'sell' : sell
      * @var string $side
      * @Type("string")
      * @SerializedName("side")
@@ -51,6 +53,8 @@ class GetTradeHistoryItems implements Request
     public $side;
     /**
      * Liquidity-taker or -maker
+     * - 'taker' : taker
+     * - 'maker' : maker
      * @var string $liquidity
      * @Type("string")
      * @SerializedName("liquidity")
@@ -142,6 +146,8 @@ class GetTradeHistoryItems implements Request
     public $subTradeType;
     /**
      * Margin mode: ISOLATED (isolated), CROSS (cross margin).
+     * - 'ISOLATED' : Isolated margin
+     * - 'CROSS' : Cross margin
      * @var string $marginMode
      * @Type("string")
      * @SerializedName("marginMode")
@@ -156,6 +162,10 @@ class GetTradeHistoryItems implements Request
     public $settleCurrency;
     /**
      * Order type
+     * - 'limit' : limit order
+     * - 'market' : market order
+     * - 'limit_stop' : stop limit order
+     * - 'market_stop' : stop market order
      * @var string $displayType
      * @Type("string")
      * @SerializedName("displayType")
@@ -170,6 +180,8 @@ class GetTradeHistoryItems implements Request
     public $fee;
     /**
      * Order type
+     * - 'market' : market
+     * - 'limit' : limit
      * @var string $orderType
      * @Type("string")
      * @SerializedName("orderType")
@@ -177,6 +189,10 @@ class GetTradeHistoryItems implements Request
     public $orderType;
     /**
      * Trade type (trade, liquid, adl or settlement)
+     * - 'trade' : trade
+     * - 'liquid' : liquid
+     * - 'adl' : adl
+     * - 'settlement' : settlement
      * @var string $tradeType
      * @Type("string")
      * @SerializedName("tradeType")

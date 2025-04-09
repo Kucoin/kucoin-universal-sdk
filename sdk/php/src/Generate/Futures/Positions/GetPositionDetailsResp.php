@@ -210,6 +210,8 @@ class GetPositionDetailsResp implements Response
     public $isInverse;
     /**
      * Margin Mode: CROSS，ISOLATED
+     * - 'CROSS' : cross margin
+     * - 'ISOLATED' : isolated margin
      * @var string $marginMode
      * @Type("string")
      * @SerializedName("marginMode")
@@ -217,6 +219,7 @@ class GetPositionDetailsResp implements Response
     public $marginMode;
     /**
      * Position Side
+     * - 'BOTH' : One-way position
      * @var string $positionSide
      * @Type("string")
      * @SerializedName("positionSide")

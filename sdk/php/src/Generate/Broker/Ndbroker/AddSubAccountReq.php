@@ -89,7 +89,8 @@ class AddSubAccountReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Sub-account Name. Note that this name is unique across the exchange. It is recommended to add a special identifier to prevent name duplication.
+     * Sub-account Name. Note that this name is unique across the exchange. It is recommended to add a special identifier to prevent name duplication.
+     * @param string $value
      * @return self
      */
     public function setAccountName($value)

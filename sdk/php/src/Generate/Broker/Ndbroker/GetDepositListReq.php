@@ -128,7 +128,8 @@ class GetDepositListReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value currency
+     * currency
+     * @param string $value
      * @return self
      */
     public function setCurrency($value)
@@ -138,7 +139,8 @@ class GetDepositListReqBuilder
     }
 
     /**
-     * @param string $value Status. Available value: PROCESSING, SUCCESS, FAILURE
+     * Status. Available value: PROCESSING, SUCCESS, FAILURE
+     * @param string $value
      * @return self
      */
     public function setStatus($value)
@@ -148,7 +150,8 @@ class GetDepositListReqBuilder
     }
 
     /**
-     * @param string $value hash
+     * hash
+     * @param string $value
      * @return self
      */
     public function setHash($value)
@@ -158,7 +161,8 @@ class GetDepositListReqBuilder
     }
 
     /**
-     * @param int $value Start time (milliseconds)
+     * Start time (milliseconds)
+     * @param int $value
      * @return self
      */
     public function setStartTimestamp($value)
@@ -168,7 +172,8 @@ class GetDepositListReqBuilder
     }
 
     /**
-     * @param int $value End time (milliseconds); default sorting in descending order
+     * End time (milliseconds); default sorting in descending order
+     * @param int $value
      * @return self
      */
     public function setEndTimestamp($value)
@@ -178,7 +183,8 @@ class GetDepositListReqBuilder
     }
 
     /**
-     * @param int $value Maximum number of returned items, maximum 1000, default 1000
+     * Maximum number of returned items, maximum 1000, default 1000
+     * @param int $value
      * @return self
      */
     public function setLimit($value)

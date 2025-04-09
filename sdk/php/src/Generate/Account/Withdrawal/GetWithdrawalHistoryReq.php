@@ -30,6 +30,11 @@ class GetWithdrawalHistoryReq implements Request
     public $currency;
     /**
      * Status. Available value: REVIEW, PROCESSING, WALLET_PROCESSING, SUCCESS and FAILURE
+     * - 'PROCESSING' :
+     * - 'REVIEW' :
+     * - 'WALLET_PROCESSING' :
+     * - 'SUCCESS' :
+     * - 'FAILURE' :
      * @var string|null $status
      * @Type("string")
      * @SerializedName("status")
@@ -128,7 +133,8 @@ class GetWithdrawalHistoryReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value currency
+     * currency
+     * @param string $value
      * @return self
      */
     public function setCurrency($value)
@@ -138,7 +144,13 @@ class GetWithdrawalHistoryReqBuilder
     }
 
     /**
-     * @param string $value Status. Available value: REVIEW, PROCESSING, WALLET_PROCESSING, SUCCESS and FAILURE
+     * Status. Available value: REVIEW, PROCESSING, WALLET_PROCESSING, SUCCESS and FAILURE
+     * - 'PROCESSING' :
+     * - 'REVIEW' :
+     * - 'WALLET_PROCESSING' :
+     * - 'SUCCESS' :
+     * - 'FAILURE' :
+     * @param string $value
      * @return self
      */
     public function setStatus($value)
@@ -148,7 +160,8 @@ class GetWithdrawalHistoryReqBuilder
     }
 
     /**
-     * @param int $value Start time (milliseconds)
+     * Start time (milliseconds)
+     * @param int $value
      * @return self
      */
     public function setStartAt($value)
@@ -158,7 +171,8 @@ class GetWithdrawalHistoryReqBuilder
     }
 
     /**
-     * @param int $value End time (milliseconds)
+     * End time (milliseconds)
+     * @param int $value
      * @return self
      */
     public function setEndAt($value)
@@ -168,7 +182,8 @@ class GetWithdrawalHistoryReqBuilder
     }
 
     /**
-     * @param int $value Current request page.
+     * Current request page.
+     * @param int $value
      * @return self
      */
     public function setCurrentPage($value)
@@ -178,7 +193,8 @@ class GetWithdrawalHistoryReqBuilder
     }
 
     /**
-     * @param int $value Number of results per request. Minimum is 10, maximum is 500.
+     * Number of results per request. Minimum is 10, maximum is 500.
+     * @param int $value
      * @return self
      */
     public function setPageSize($value)

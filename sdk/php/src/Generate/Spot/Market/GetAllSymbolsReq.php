@@ -89,7 +89,8 @@ class GetAllSymbolsReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value [The trading market](https://www.kucoin.com/docs-new/api-222921786)
+     * [The trading market](https://www.kucoin.com/docs-new/api-222921786)
+     * @param string $value
      * @return self
      */
     public function setMarket($value)

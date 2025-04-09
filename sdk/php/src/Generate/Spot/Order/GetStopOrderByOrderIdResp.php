@@ -42,6 +42,8 @@ class GetStopOrderByOrderIdResp implements Response
     public $status;
     /**
      * Order type
+     * - 'limit' : Limit order
+     * - 'market' : Market order
      * @var string|null $type
      * @Type("string")
      * @SerializedName("type")

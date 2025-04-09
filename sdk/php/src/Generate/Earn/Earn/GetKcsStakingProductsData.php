@@ -37,6 +37,7 @@ class GetKcsStakingProductsData implements Request
     public $currency;
     /**
      * Product category: KCS_STAKING
+     * - 'KCS_STAKING' :
      * @var string $category
      * @Type("string")
      * @SerializedName("category")
@@ -44,6 +45,8 @@ class GetKcsStakingProductsData implements Request
     public $category;
     /**
      * Product subtype: TIME (fixed), DEMAND (demand)
+     * - 'TIME' : fixed
+     * - 'DEMAND' : demand
      * @var string $type
      * @Type("string")
      * @SerializedName("type")
@@ -128,6 +131,8 @@ class GetKcsStakingProductsData implements Request
     public $incomeCurrency;
     /**
      * Whether the fixed product supports early redemption: 0 (no), 1 (yes)
+     * - 0 :
+     * - 1 :
      * @var int $earlyRedeemSupported
      * @Type("int")
      * @SerializedName("earlyRedeemSupported")
@@ -142,6 +147,10 @@ class GetKcsStakingProductsData implements Request
     public $productRemainAmount;
     /**
      * Product status: ONGOING (Subscription in progress), PENDING (Preheating Subscription), FULL (Subscribed), INTERESTING (Interest in progress)
+     * - 'ONGOING' :
+     * - 'PENDING' :
+     * - 'FULL' :
+     * - 'INTERESTING' :
      * @var string $status
      * @Type("string")
      * @SerializedName("status")
@@ -149,6 +158,9 @@ class GetKcsStakingProductsData implements Request
     public $status;
     /**
      * Redemption channel: MANUAL (manual redemption), TRANS_DEMAND (transfer to corresponding demand product upon maturity), AUTO (redeem to funding account upon maturity)
+     * - 'MANUAL' :
+     * - 'TRANS_DEMAND' :
+     * - 'AUTO' :
      * @var string $redeemType
      * @Type("string")
      * @SerializedName("redeemType")
@@ -156,6 +168,8 @@ class GetKcsStakingProductsData implements Request
     public $redeemType;
     /**
      * Income release type: DAILY (daily release), AFTER (release after product ends)
+     * - 'DAILY' :
+     * - 'AFTER' :
      * @var string $incomeReleaseType
      * @Type("string")
      * @SerializedName("incomeReleaseType")
@@ -177,6 +191,8 @@ class GetKcsStakingProductsData implements Request
     public $duration;
     /**
      * Whether the product is exclusive to new users: 0 (no), 1 (yes)
+     * - 0 :
+     * - 1 :
      * @var int $newUserOnly
      * @Type("int")
      * @SerializedName("newUserOnly")

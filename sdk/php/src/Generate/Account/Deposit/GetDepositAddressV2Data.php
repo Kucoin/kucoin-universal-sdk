@@ -51,6 +51,8 @@ class GetDepositAddressV2Data implements Request
     public $chainId;
     /**
      * Deposit account type: main (funding account), trade (spot trading account)
+     * - 'MAIN' :
+     * - 'TRADE' :
      * @var string|null $to
      * @Type("string")
      * @SerializedName("to")

@@ -30,6 +30,8 @@ class GetSpotLedgerReq implements Request
     public $currency;
     /**
      * direction: in, out
+     * - 'in' : Funds in
+     * - 'out' : Funds out
      * @var string|null $direction
      * @Type("string")
      * @SerializedName("direction")
@@ -131,7 +133,8 @@ class GetSpotLedgerReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Currency (you can choose more than one currency). You can specify a max. of 10 currencies in one go. If not specified, all currencies will be queried by default.
+     * Currency (you can choose more than one currency). You can specify a max. of 10 currencies in one go. If not specified, all currencies will be queried by default.
+     * @param string $value
      * @return self
      */
     public function setCurrency($value)
@@ -141,7 +144,10 @@ class GetSpotLedgerReqBuilder
     }
 
     /**
-     * @param string $value direction: in, out
+     * direction: in, out
+     * - 'in' : Funds in
+     * - 'out' : Funds out
+     * @param string $value
      * @return self
      */
     public function setDirection($value)
@@ -151,7 +157,8 @@ class GetSpotLedgerReqBuilder
     }
 
     /**
-     * @param string $value Type: DEPOSIT-deposit, WITHDRAW-withdraw, TRANSFER-transfer, SUB_TRANSFER-sub-account transfer, TRADE_EXCHANGE-trade, MARGIN_EXCHANGE-margin trade, KUCOIN_BONUS-bonus, BROKER_TRANSFER-Broker transfer record
+     * Type: DEPOSIT-deposit, WITHDRAW-withdraw, TRANSFER-transfer, SUB_TRANSFER-sub-account transfer, TRADE_EXCHANGE-trade, MARGIN_EXCHANGE-margin trade, KUCOIN_BONUS-bonus, BROKER_TRANSFER-Broker transfer record
+     * @param string $value
      * @return self
      */
     public function setBizType($value)
@@ -161,7 +168,8 @@ class GetSpotLedgerReqBuilder
     }
 
     /**
-     * @param int $value Start time (milliseconds)
+     * Start time (milliseconds)
+     * @param int $value
      * @return self
      */
     public function setStartAt($value)
@@ -171,7 +179,8 @@ class GetSpotLedgerReqBuilder
     }
 
     /**
-     * @param int $value End time (milliseconds)
+     * End time (milliseconds)
+     * @param int $value
      * @return self
      */
     public function setEndAt($value)
@@ -181,7 +190,8 @@ class GetSpotLedgerReqBuilder
     }
 
     /**
-     * @param int $value Current request page.
+     * Current request page.
+     * @param int $value
      * @return self
      */
     public function setCurrentPage($value)
@@ -191,7 +201,8 @@ class GetSpotLedgerReqBuilder
     }
 
     /**
-     * @param int $value Number of results per request. Minimum is 10, maximum is 500.
+     * Number of results per request. Minimum is 10, maximum is 500.
+     * @param int $value
      * @return self
      */
     public function setPageSize($value)

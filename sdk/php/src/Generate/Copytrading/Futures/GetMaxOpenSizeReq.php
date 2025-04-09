@@ -107,7 +107,8 @@ class GetMaxOpenSizeReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)
+     * Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)
+     * @param string $value
      * @return self
      */
     public function setSymbol($value)
@@ -117,7 +118,8 @@ class GetMaxOpenSizeReqBuilder
     }
 
     /**
-     * @param float $value Order Price
+     * Order Price
+     * @param float $value
      * @return self
      */
     public function setPrice($value)
@@ -127,7 +129,8 @@ class GetMaxOpenSizeReqBuilder
     }
 
     /**
-     * @param int $value Leverage
+     * Leverage
+     * @param int $value
      * @return self
      */
     public function setLeverage($value)

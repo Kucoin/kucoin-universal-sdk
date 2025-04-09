@@ -107,7 +107,8 @@ class GetMarginRiskLimitReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param bool $value True-isolated, false-cross
+     * True-isolated, false-cross
+     * @param bool $value
      * @return self
      */
     public function setIsIsolated($value)
@@ -117,7 +118,8 @@ class GetMarginRiskLimitReqBuilder
     }
 
     /**
-     * @param string $value Currency: This field is only required for cross margin
+     * Currency: This field is only required for cross margin
+     * @param string $value
      * @return self
      */
     public function setCurrency($value)
@@ -127,7 +129,8 @@ class GetMarginRiskLimitReqBuilder
     }
 
     /**
-     * @param string $value Symbol: This field is only required for isolated margin
+     * Symbol: This field is only required for isolated margin
+     * @param string $value
      * @return self
      */
     public function setSymbol($value)

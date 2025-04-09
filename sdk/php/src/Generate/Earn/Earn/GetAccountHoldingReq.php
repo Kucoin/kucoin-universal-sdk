@@ -37,6 +37,11 @@ class GetAccountHoldingReq implements Request
     public $productId;
     /**
      * Product category
+     * - 'DEMAND' : Savings
+     * - 'ACTIVITY' : Activity
+     * - 'STAKING' : Staking
+     * - 'KCS_STAKING' : KCS Staking
+     * - 'ETH2' : ETHStaking
      * @var string|null $productCategory
      * @Type("string")
      * @SerializedName("productCategory")
@@ -121,7 +126,8 @@ class GetAccountHoldingReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value currency
+     * currency
+     * @param string $value
      * @return self
      */
     public function setCurrency($value)
@@ -131,7 +137,8 @@ class GetAccountHoldingReqBuilder
     }
 
     /**
-     * @param string $value Product ID
+     * Product ID
+     * @param string $value
      * @return self
      */
     public function setProductId($value)
@@ -141,7 +148,13 @@ class GetAccountHoldingReqBuilder
     }
 
     /**
-     * @param string $value Product category
+     * Product category
+     * - 'DEMAND' : Savings
+     * - 'ACTIVITY' : Activity
+     * - 'STAKING' : Staking
+     * - 'KCS_STAKING' : KCS Staking
+     * - 'ETH2' : ETHStaking
+     * @param string $value
      * @return self
      */
     public function setProductCategory($value)
@@ -151,7 +164,8 @@ class GetAccountHoldingReqBuilder
     }
 
     /**
-     * @param int $value Current request page.
+     * Current request page.
+     * @param int $value
      * @return self
      */
     public function setCurrentPage($value)
@@ -161,7 +175,8 @@ class GetAccountHoldingReqBuilder
     }
 
     /**
-     * @param int $value Number of results per request. Minimum is 10, maximum is 500.
+     * Number of results per request. Minimum is 10, maximum is 500.
+     * @param int $value
      * @return self
      */
     public function setPageSize($value)

@@ -103,7 +103,8 @@ class GetSubAccountReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Sub-account UID
+     * Sub-account UID
+     * @param string $value
      * @return self
      */
     public function setUid($value)
@@ -113,7 +114,8 @@ class GetSubAccountReqBuilder
     }
 
     /**
-     * @param int $value Current page, default is 1
+     * Current page, default is 1
+     * @param int $value
      * @return self
      */
     public function setCurrentPage($value)
@@ -123,7 +125,8 @@ class GetSubAccountReqBuilder
     }
 
     /**
-     * @param int $value The number returned per page, the default is 20, the maximum is 100
+     * The number returned per page, the default is 20, the maximum is 100
+     * @param int $value
      * @return self
      */
     public function setPageSize($value)

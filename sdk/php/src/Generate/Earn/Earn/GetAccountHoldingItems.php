@@ -121,6 +121,8 @@ class GetAccountHoldingItems implements Request
     public $redeemPeriod;
     /**
      * Status: LOCKED (holding), REDEEMING (redeeming)
+     * - 'LOCKED' :
+     * - 'REDEEMING' :
      * @var string $status
      * @Type("string")
      * @SerializedName("status")
@@ -128,6 +130,8 @@ class GetAccountHoldingItems implements Request
     public $status;
     /**
      * Whether the fixed product supports early redemption: 0 (no), 1 (yes)
+     * - 0 :
+     * - 1 :
      * @var int $earlyRedeemSupported
      * @Type("int")
      * @SerializedName("earlyRedeemSupported")

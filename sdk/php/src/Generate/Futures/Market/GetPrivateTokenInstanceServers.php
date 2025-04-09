@@ -37,6 +37,7 @@ class GetPrivateTokenInstanceServers implements Request
     public $encrypt;
     /**
      * Network Protocol
+     * - 'websocket' : Websocket
      * @var string $protocol
      * @Type("string")
      * @SerializedName("protocol")

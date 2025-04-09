@@ -96,7 +96,8 @@ class GetSpotAccountDetailReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Path parameter. Account ID
+     * Path parameter. Account ID
+     * @param string $value
      * @return self
      */
     public function setAccountId($value)

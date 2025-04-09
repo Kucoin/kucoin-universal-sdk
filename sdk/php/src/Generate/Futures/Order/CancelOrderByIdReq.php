@@ -96,6 +96,7 @@ class CancelOrderByIdReqBuilder
         $this->obj = $obj;
     }
     /**
+     *
      * @param string $value
      * @return self
      */

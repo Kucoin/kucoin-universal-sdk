@@ -30,6 +30,8 @@ class AddOrderTestReq implements Request
     public $clientOid;
     /**
      * specify if the order is to 'buy' or 'sell'
+     * - 'buy' :
+     * - 'sell' :
      * @var string $side
      * @Type("string")
      * @SerializedName("side")
@@ -44,6 +46,8 @@ class AddOrderTestReq implements Request
     public $symbol;
     /**
      * specify if the order is an 'limit' order or 'market' order.   The type of order you specify when you place your order determines whether or not you need to request other parameters and also affects the execution of the matching engine.  When placing a limit order, you must specify a price and size. The system will try to match the order according to market price or a price better than market price. If the order cannot be immediately matched, it will stay in the order book until it is matched or the user cancels.  Unlike limit orders, the price for market orders fluctuates with market prices. When placing a market order, you do not need to specify a price, you only need to specify a quantity. Market orders are filled immediately and will not enter the order book. All market orders are takers and a taker fee will be charged.
+     * - 'limit' :
+     * - 'market' :
      * @var string $type
      * @Type("string")
      * @SerializedName("type")
@@ -58,6 +62,10 @@ class AddOrderTestReq implements Request
     public $remark;
     /**
      * [Self Trade Prevention](https://www.kucoin.com/docs-new/doc-338146) is divided into four strategies: CN, CO, CB , and DC
+     * - 'DC' :
+     * - 'CO' :
+     * - 'CN' :
+     * - 'CB' :
      * @var string|null $stp
      * @Type("string")
      * @SerializedName("stp")
@@ -79,6 +87,10 @@ class AddOrderTestReq implements Request
     public $size;
     /**
      * [Time in force](https://www.kucoin.com/docs-new/doc-338146) is a special strategy used during trading
+     * - 'GTC' :
+     * - 'GTT' :
+     * - 'IOC' :
+     * - 'FOK' :
      * @var string|null $timeInForce
      * @Type("string")
      * @SerializedName("timeInForce")
@@ -208,7 +220,8 @@ class AddOrderTestReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Client Order Id，The ClientOid field is a unique ID created by the user（we recommend using a UUID）, and can only contain numbers, letters, underscores （_）, and hyphens （-）. This field is returned when order information is obtained. You can use clientOid to tag your orders. ClientOid is different from the order ID created by the service provider. Please do not initiate requests using the same clientOid. The maximum length for the ClientOid is 40 characters.  Please remember the orderId created by the service provider, it used to check for updates in order status.
+     * Client Order Id，The ClientOid field is a unique ID created by the user（we recommend using a UUID）, and can only contain numbers, letters, underscores （_）, and hyphens （-）. This field is returned when order information is obtained. You can use clientOid to tag your orders. ClientOid is different from the order ID created by the service provider. Please do not initiate requests using the same clientOid. The maximum length for the ClientOid is 40 characters.  Please remember the orderId created by the service provider, it used to check for updates in order status.
+     * @param string $value
      * @return self
      */
     public function setClientOid($value)
@@ -218,7 +231,10 @@ class AddOrderTestReqBuilder
     }
 
     /**
-     * @param string $value specify if the order is to 'buy' or 'sell'
+     * specify if the order is to 'buy' or 'sell'
+     * - 'buy' :
+     * - 'sell' :
+     * @param string $value
      * @return self
      */
     public function setSide($value)
@@ -228,7 +244,8 @@ class AddOrderTestReqBuilder
     }
 
     /**
-     * @param string $value symbol
+     * symbol
+     * @param string $value
      * @return self
      */
     public function setSymbol($value)
@@ -238,7 +255,10 @@ class AddOrderTestReqBuilder
     }
 
     /**
-     * @param string $value specify if the order is an 'limit' order or 'market' order.   The type of order you specify when you place your order determines whether or not you need to request other parameters and also affects the execution of the matching engine.  When placing a limit order, you must specify a price and size. The system will try to match the order according to market price or a price better than market price. If the order cannot be immediately matched, it will stay in the order book until it is matched or the user cancels.  Unlike limit orders, the price for market orders fluctuates with market prices. When placing a market order, you do not need to specify a price, you only need to specify a quantity. Market orders are filled immediately and will not enter the order book. All market orders are takers and a taker fee will be charged.
+     * specify if the order is an 'limit' order or 'market' order.   The type of order you specify when you place your order determines whether or not you need to request other parameters and also affects the execution of the matching engine.  When placing a limit order, you must specify a price and size. The system will try to match the order according to market price or a price better than market price. If the order cannot be immediately matched, it will stay in the order book until it is matched or the user cancels.  Unlike limit orders, the price for market orders fluctuates with market prices. When placing a market order, you do not need to specify a price, you only need to specify a quantity. Market orders are filled immediately and will not enter the order book. All market orders are takers and a taker fee will be charged.
+     * - 'limit' :
+     * - 'market' :
+     * @param string $value
      * @return self
      */
     public function setType($value)
@@ -248,7 +268,8 @@ class AddOrderTestReqBuilder
     }
 
     /**
-     * @param string $value Order placement remarks, length cannot exceed 20 characters (ASCII)
+     * Order placement remarks, length cannot exceed 20 characters (ASCII)
+     * @param string $value
      * @return self
      */
     public function setRemark($value)
@@ -258,7 +279,12 @@ class AddOrderTestReqBuilder
     }
 
     /**
-     * @param string $value [Self Trade Prevention](https://www.kucoin.com/docs-new/doc-338146) is divided into four strategies: CN, CO, CB , and DC
+     * [Self Trade Prevention](https://www.kucoin.com/docs-new/doc-338146) is divided into four strategies: CN, CO, CB , and DC
+     * - 'DC' :
+     * - 'CO' :
+     * - 'CN' :
+     * - 'CB' :
+     * @param string $value
      * @return self
      */
     public function setStp($value)
@@ -268,7 +294,8 @@ class AddOrderTestReqBuilder
     }
 
     /**
-     * @param string $value Specify price for order  When placing a limit order, the price must be based on priceIncrement for the trading pair. The price increment (priceIncrement) is the price precision for the trading pair. For example, for the BTC-USDT trading pair, the priceIncrement is 0.00001000. So the price for your orders cannot be less than 0.00001000 and must be a multiple of priceIncrement. Otherwise, the order will return an invalid priceIncrement error.
+     * Specify price for order  When placing a limit order, the price must be based on priceIncrement for the trading pair. The price increment (priceIncrement) is the price precision for the trading pair. For example, for the BTC-USDT trading pair, the priceIncrement is 0.00001000. So the price for your orders cannot be less than 0.00001000 and must be a multiple of priceIncrement. Otherwise, the order will return an invalid priceIncrement error.
+     * @param string $value
      * @return self
      */
     public function setPrice($value)
@@ -278,7 +305,8 @@ class AddOrderTestReqBuilder
     }
 
     /**
-     * @param string $value Specify quantity for order  When **type** is limit, size refers to the amount of trading targets (the asset name written in front) for the trading pair. Teh Size must be based on the baseIncrement of the trading pair. The baseIncrement represents the precision for the trading pair. The size of an order must be a positive-integer multiple of baseIncrement and must be between baseMinSize and baseMaxSize.  When **type** is market, select one out of two: size or funds
+     * Specify quantity for order  When **type** is limit, size refers to the amount of trading targets (the asset name written in front) for the trading pair. Teh Size must be based on the baseIncrement of the trading pair. The baseIncrement represents the precision for the trading pair. The size of an order must be a positive-integer multiple of baseIncrement and must be between baseMinSize and baseMaxSize.  When **type** is market, select one out of two: size or funds
+     * @param string $value
      * @return self
      */
     public function setSize($value)
@@ -288,7 +316,12 @@ class AddOrderTestReqBuilder
     }
 
     /**
-     * @param string $value [Time in force](https://www.kucoin.com/docs-new/doc-338146) is a special strategy used during trading
+     * [Time in force](https://www.kucoin.com/docs-new/doc-338146) is a special strategy used during trading
+     * - 'GTC' :
+     * - 'GTT' :
+     * - 'IOC' :
+     * - 'FOK' :
+     * @param string $value
      * @return self
      */
     public function setTimeInForce($value)
@@ -298,7 +331,8 @@ class AddOrderTestReqBuilder
     }
 
     /**
-     * @param bool $value passive order labels, this is disabled when the order timing strategy is IOC or FOK
+     * passive order labels, this is disabled when the order timing strategy is IOC or FOK
+     * @param bool $value
      * @return self
      */
     public function setPostOnly($value)
@@ -308,7 +342,8 @@ class AddOrderTestReqBuilder
     }
 
     /**
-     * @param bool $value [Hidden order](https://www.kucoin.com/docs-new/doc-338146) or not (not shown in order book)
+     * [Hidden order](https://www.kucoin.com/docs-new/doc-338146) or not (not shown in order book)
+     * @param bool $value
      * @return self
      */
     public function setHidden($value)
@@ -318,7 +353,8 @@ class AddOrderTestReqBuilder
     }
 
     /**
-     * @param bool $value Whether or not only visible portions of orders are shown in [Iceberg orders](https://www.kucoin.com/docs-new/doc-338146)
+     * Whether or not only visible portions of orders are shown in [Iceberg orders](https://www.kucoin.com/docs-new/doc-338146)
+     * @param bool $value
      * @return self
      */
     public function setIceberg($value)
@@ -328,7 +364,8 @@ class AddOrderTestReqBuilder
     }
 
     /**
-     * @param string $value Maximum visible quantity in iceberg orders
+     * Maximum visible quantity in iceberg orders
+     * @param string $value
      * @return self
      */
     public function setVisibleSize($value)
@@ -338,7 +375,8 @@ class AddOrderTestReqBuilder
     }
 
     /**
-     * @param string $value Order tag, length cannot exceed 20 characters (ASCII)
+     * Order tag, length cannot exceed 20 characters (ASCII)
+     * @param string $value
      * @return self
      */
     public function setTags($value)
@@ -348,7 +386,8 @@ class AddOrderTestReqBuilder
     }
 
     /**
-     * @param int $value Cancel after n seconds, the order timing strategy is GTT, -1 means it will not be cancelled automatically, the default value is -1
+     * Cancel after n seconds, the order timing strategy is GTT, -1 means it will not be cancelled automatically, the default value is -1
+     * @param int $value
      * @return self
      */
     public function setCancelAfter($value)
@@ -358,7 +397,8 @@ class AddOrderTestReqBuilder
     }
 
     /**
-     * @param string $value When **type** is market, select one out of two: size or funds
+     * When **type** is market, select one out of two: size or funds
+     * @param string $value
      * @return self
      */
     public function setFunds($value)
@@ -368,7 +408,8 @@ class AddOrderTestReqBuilder
     }
 
     /**
-     * @param int $value Order failed after timeout of specified milliseconds, If clientTimestamp + allowMaxTimeWindow < the server reaches time, this order will fail.
+     * Order failed after timeout of specified milliseconds, If clientTimestamp + allowMaxTimeWindow < the server reaches time, this order will fail.
+     * @param int $value
      * @return self
      */
     public function setAllowMaxTimeWindow($value)
@@ -378,7 +419,8 @@ class AddOrderTestReqBuilder
     }
 
     /**
-     * @param int $value Equal to KC-API-TIMESTAMP, Need to be defined if iceberg is specified.
+     * Equal to KC-API-TIMESTAMP, Need to be defined if iceberg is specified.
+     * @param int $value
      * @return self
      */
     public function setClientTimestamp($value)

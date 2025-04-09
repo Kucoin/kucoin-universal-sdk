@@ -121,7 +121,8 @@ class GetPositionsHistoryReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Symbol of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)
+     * Symbol of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)
+     * @param string $value
      * @return self
      */
     public function setSymbol($value)
@@ -131,7 +132,8 @@ class GetPositionsHistoryReqBuilder
     }
 
     /**
-     * @param int $value Closing start time(ms)
+     * Closing start time(ms)
+     * @param int $value
      * @return self
      */
     public function setFrom($value)
@@ -141,7 +143,8 @@ class GetPositionsHistoryReqBuilder
     }
 
     /**
-     * @param int $value Closing end time(ms)
+     * Closing end time(ms)
+     * @param int $value
      * @return self
      */
     public function setTo($value)
@@ -151,7 +154,8 @@ class GetPositionsHistoryReqBuilder
     }
 
     /**
-     * @param int $value Number of requests per page, max 200, default 10
+     * Number of requests per page, max 200, default 10
+     * @param int $value
      * @return self
      */
     public function setLimit($value)
@@ -161,7 +165,8 @@ class GetPositionsHistoryReqBuilder
     }
 
     /**
-     * @param int $value Current page number, default 1
+     * Current page number, default 1
+     * @param int $value
      * @return self
      */
     public function setPageId($value)

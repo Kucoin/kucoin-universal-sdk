@@ -35,6 +35,8 @@ class GetOrderByClientOidResp implements Response
     public $opType;
     /**
      * Specify if the order is a 'limit' order or 'market' order.
+     * - 'limit' :
+     * - 'market' :
      * @var string $type
      * @Type("string")
      * @SerializedName("type")
@@ -42,6 +44,8 @@ class GetOrderByClientOidResp implements Response
     public $type;
     /**
      * Buy or sell
+     * - 'buy' :
+     * - 'sell' :
      * @var string $side
      * @Type("string")
      * @SerializedName("side")
@@ -98,6 +102,10 @@ class GetOrderByClientOidResp implements Response
     public $feeCurrency;
     /**
      * [Self Trade Prevention](https://www.kucoin.com/docs-new/doc-338146) is divided into these strategies: CN, CO, CB , and DC
+     * - 'DC' :
+     * - 'CO' :
+     * - 'CN' :
+     * - 'CB' :
      * @var string|null $stp
      * @Type("string")
      * @SerializedName("stp")
@@ -126,6 +134,10 @@ class GetOrderByClientOidResp implements Response
     public $stopPrice;
     /**
      * Time in force
+     * - 'GTC' :
+     * - 'GTT' :
+     * - 'IOC' :
+     * - 'FOK' :
      * @var string $timeInForce
      * @Type("string")
      * @SerializedName("timeInForce")

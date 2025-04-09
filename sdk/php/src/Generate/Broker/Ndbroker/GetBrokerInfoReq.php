@@ -37,6 +37,8 @@ class GetBrokerInfoReq implements Request
     public $end;
     /**
      * Transaction type: 1, spot; 2: futures
+     * - '1' : spot
+     * - '2' : futures
      * @var string|null $tradeType
      * @Type("string")
      * @SerializedName("tradeType")
@@ -103,7 +105,8 @@ class GetBrokerInfoReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Start time, for example: 20230110
+     * Start time, for example: 20230110
+     * @param string $value
      * @return self
      */
     public function setBegin($value)
@@ -113,7 +116,8 @@ class GetBrokerInfoReqBuilder
     }
 
     /**
-     * @param string $value End time, for example: 20230210 (query data with a maximum interval of 6 months)
+     * End time, for example: 20230210 (query data with a maximum interval of 6 months)
+     * @param string $value
      * @return self
      */
     public function setEnd($value)
@@ -123,7 +127,10 @@ class GetBrokerInfoReqBuilder
     }
 
     /**
-     * @param string $value Transaction type: 1, spot; 2: futures
+     * Transaction type: 1, spot; 2: futures
+     * - '1' : spot
+     * - '2' : futures
+     * @param string $value
      * @return self
      */
     public function setTradeType($value)

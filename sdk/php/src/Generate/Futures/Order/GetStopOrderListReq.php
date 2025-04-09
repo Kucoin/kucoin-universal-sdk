@@ -30,6 +30,8 @@ class GetStopOrderListReq implements Request
     public $symbol;
     /**
      * buy or sell
+     * - 'buy' :
+     * - 'sell' :
      * @var string|null $side
      * @Type("string")
      * @SerializedName("side")
@@ -37,6 +39,8 @@ class GetStopOrderListReq implements Request
     public $side;
     /**
      * limit, market
+     * - 'limit' :
+     * - 'market' :
      * @var string|null $type
      * @Type("string")
      * @SerializedName("type")
@@ -135,7 +139,8 @@ class GetStopOrderListReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Symbol of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)
+     * Symbol of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)
+     * @param string $value
      * @return self
      */
     public function setSymbol($value)
@@ -145,7 +150,10 @@ class GetStopOrderListReqBuilder
     }
 
     /**
-     * @param string $value buy or sell
+     * buy or sell
+     * - 'buy' :
+     * - 'sell' :
+     * @param string $value
      * @return self
      */
     public function setSide($value)
@@ -155,7 +163,10 @@ class GetStopOrderListReqBuilder
     }
 
     /**
-     * @param string $value limit, market
+     * limit, market
+     * - 'limit' :
+     * - 'market' :
+     * @param string $value
      * @return self
      */
     public function setType($value)
@@ -165,7 +176,8 @@ class GetStopOrderListReqBuilder
     }
 
     /**
-     * @param int $value Start time (milisecond)
+     * Start time (milisecond)
+     * @param int $value
      * @return self
      */
     public function setStartAt($value)
@@ -175,7 +187,8 @@ class GetStopOrderListReqBuilder
     }
 
     /**
-     * @param int $value End time (milisecond)
+     * End time (milisecond)
+     * @param int $value
      * @return self
      */
     public function setEndAt($value)
@@ -185,7 +198,8 @@ class GetStopOrderListReqBuilder
     }
 
     /**
-     * @param int $value Current request page, The default currentPage is 1
+     * Current request page, The default currentPage is 1
+     * @param int $value
      * @return self
      */
     public function setCurrentPage($value)
@@ -195,7 +209,8 @@ class GetStopOrderListReqBuilder
     }
 
     /**
-     * @param int $value pageSize, The default pageSize is 50, The maximum cannot exceed 1000
+     * pageSize, The default pageSize is 50, The maximum cannot exceed 1000
+     * @param int $value
      * @return self
      */
     public function setPageSize($value)

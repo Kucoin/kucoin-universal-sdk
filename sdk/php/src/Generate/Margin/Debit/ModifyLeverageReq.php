@@ -107,7 +107,8 @@ class ModifyLeverageReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value symbol, mandatory for isolated margin account
+     * symbol, mandatory for isolated margin account
+     * @param string $value
      * @return self
      */
     public function setSymbol($value)
@@ -117,7 +118,8 @@ class ModifyLeverageReqBuilder
     }
 
     /**
-     * @param bool $value true-isolated, false-cross; default is false
+     * true-isolated, false-cross; default is false
+     * @param bool $value
      * @return self
      */
     public function setIsIsolated($value)
@@ -127,7 +129,8 @@ class ModifyLeverageReqBuilder
     }
 
     /**
-     * @param string $value New leverage multiplier. Must be greater than 1 and up to two decimal places, and cannot be less than the user's current debt leverage or greater than the system's maximum leverage
+     * New leverage multiplier. Must be greater than 1 and up to two decimal places, and cannot be less than the user's current debt leverage or greater than the system's maximum leverage
+     * @param string $value
      * @return self
      */
     public function setLeverage($value)

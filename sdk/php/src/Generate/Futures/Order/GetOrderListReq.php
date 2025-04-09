@@ -23,6 +23,8 @@ class GetOrderListReq implements Request
     }
     /**
      * active or done, done as default. Only list orders for a specific status
+     * - 'active' :
+     * - 'done' :
      * @var string|null $status
      * @Type("string")
      * @SerializedName("status")
@@ -37,6 +39,8 @@ class GetOrderListReq implements Request
     public $symbol;
     /**
      * buy or sell
+     * - 'buy' :
+     * - 'sell' :
      * @var string|null $side
      * @Type("string")
      * @SerializedName("side")
@@ -44,6 +48,12 @@ class GetOrderListReq implements Request
     public $side;
     /**
      * Order Type
+     * - 'limit' : Limit order
+     * - 'market' : Market order
+     * - 'limit_stop' : Stop limit order
+     * - 'market_stop' : Stop market order
+     * - 'oco_limit' : Oco limit order
+     * - 'oco_stop' : Oco stop order
      * @var string|null $type
      * @Type("string")
      * @SerializedName("type")
@@ -138,7 +148,10 @@ class GetOrderListReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value active or done, done as default. Only list orders for a specific status
+     * active or done, done as default. Only list orders for a specific status
+     * - 'active' :
+     * - 'done' :
+     * @param string $value
      * @return self
      */
     public function setStatus($value)
@@ -148,7 +161,8 @@ class GetOrderListReqBuilder
     }
 
     /**
-     * @param string $value Symbol of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)
+     * Symbol of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)
+     * @param string $value
      * @return self
      */
     public function setSymbol($value)
@@ -158,7 +172,10 @@ class GetOrderListReqBuilder
     }
 
     /**
-     * @param string $value buy or sell
+     * buy or sell
+     * - 'buy' :
+     * - 'sell' :
+     * @param string $value
      * @return self
      */
     public function setSide($value)
@@ -168,7 +185,14 @@ class GetOrderListReqBuilder
     }
 
     /**
-     * @param string $value Order Type
+     * Order Type
+     * - 'limit' : Limit order
+     * - 'market' : Market order
+     * - 'limit_stop' : Stop limit order
+     * - 'market_stop' : Stop market order
+     * - 'oco_limit' : Oco limit order
+     * - 'oco_stop' : Oco stop order
+     * @param string $value
      * @return self
      */
     public function setType($value)
@@ -178,7 +202,8 @@ class GetOrderListReqBuilder
     }
 
     /**
-     * @param int $value Start time (milisecond)
+     * Start time (milisecond)
+     * @param int $value
      * @return self
      */
     public function setStartAt($value)
@@ -188,7 +213,8 @@ class GetOrderListReqBuilder
     }
 
     /**
-     * @param int $value End time (milisecond)
+     * End time (milisecond)
+     * @param int $value
      * @return self
      */
     public function setEndAt($value)
@@ -198,7 +224,8 @@ class GetOrderListReqBuilder
     }
 
     /**
-     * @param int $value Current request page, The default currentPage is 1
+     * Current request page, The default currentPage is 1
+     * @param int $value
      * @return self
      */
     public function setCurrentPage($value)
@@ -208,7 +235,8 @@ class GetOrderListReqBuilder
     }
 
     /**
-     * @param int $value pageSize, The default pageSize is 50, The maximum cannot exceed 1000
+     * pageSize, The default pageSize is 50, The maximum cannot exceed 1000
+     * @param int $value
      * @return self
      */
     public function setPageSize($value)

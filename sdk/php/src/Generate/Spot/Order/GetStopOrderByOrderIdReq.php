@@ -96,7 +96,8 @@ class GetStopOrderByOrderIdReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value The order id
+     * The order id
+     * @param string $value
      * @return self
      */
     public function setOrderId($value)

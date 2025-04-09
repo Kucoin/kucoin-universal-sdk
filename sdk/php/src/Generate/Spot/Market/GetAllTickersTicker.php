@@ -135,6 +135,8 @@ class GetAllTickersTicker implements Request
     public $makerFeeRate;
     /**
      * The taker fee coefficient. The actual fee needs to be multiplied by this coefficient to get the final fee. Most currencies have a coefficient of 1. If set to 0, it means no fee
+     * - '1' : The taker fee coefficient is 1
+     * - '0' : No fee
      * @var string $takerCoefficient
      * @Type("string")
      * @SerializedName("takerCoefficient")
@@ -142,6 +144,8 @@ class GetAllTickersTicker implements Request
     public $takerCoefficient;
     /**
      * The maker fee coefficient. The actual fee needs to be multiplied by this coefficient to get the final fee. Most currencies have a coefficient of 1. If set to 0, it means no fee
+     * - '1' : The maker fee coefficient is 1
+     * - '0' : No fee
      * @var string $makerCoefficient
      * @Type("string")
      * @SerializedName("makerCoefficient")

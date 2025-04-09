@@ -42,6 +42,8 @@ class GetDepositAddressV1Resp implements Response
     public $chainId;
     /**
      * Deposit account type: main (funding account), trade (spot trading account)
+     * - 'MAIN' :
+     * - 'TRADE' :
      * @var string|null $to
      * @Type("string")
      * @SerializedName("to")

@@ -1,5 +1,6 @@
 package com.kucoin.universal.sdk.plugin.generator;
 
+import com.kucoin.universal.sdk.plugin.model.EnumEntry;
 import com.kucoin.universal.sdk.plugin.model.Meta;
 import com.kucoin.universal.sdk.plugin.model.ModeSwitch;
 import com.kucoin.universal.sdk.plugin.service.NameService;
@@ -154,59 +155,59 @@ public class PhpSdkGenerator extends AbstractPhpCodegen implements NameService {
     @Override
     public CodegenProperty fromProperty(String name, Schema p, boolean required) {
         CodegenProperty prop = super.fromProperty(name, p, required);
-//        if (prop.defaultValue != null && prop.defaultValue.equalsIgnoreCase("undefined")) {
-//            prop.defaultValue = null;
-//        }
+        if (prop.defaultValue != null && prop.defaultValue.equalsIgnoreCase("undefined")) {
+            prop.defaultValue = null;
+        }
 
-//        if (prop.isEnum) {
-//            List<EnumEntry> enums = new ArrayList<>();
-//
-//            List<Map<String, Object>> enumList;
-//            if (prop.openApiType.equalsIgnoreCase("array")) {
-//                enumList = (List<Map<String, Object>>) prop.mostInnerItems.vendorExtensions.get("x-api-enum");
-//            } else {
-//                enumList = (List<Map<String, Object>>) prop.vendorExtensions.get("x-api-enum");
-//            }
-//
-//
-//            List<String> names = new ArrayList<>();
-//            List<String> values = new ArrayList<>();
-//            List<String> description = new ArrayList<>();
-//
-//            enumList.forEach(e -> {
-//                Object enumValueOriginal = e.get("value");
-//
-//                String enumValueNameGauss;
-//                if (enumValueOriginal instanceof Integer) {
-//                    enumValueNameGauss = "_" + e.get("value");
-//                } else if (enumValueOriginal instanceof String) {
-//                    enumValueNameGauss = enumValueOriginal.toString();
-//                } else {
-//                    throw new IllegalArgumentException("unknown enum value type..." + e.get("value"));
-//                }
-//
-//                String enumName = (String) e.get("name");
-//                if (StringUtils.isEmpty(enumName)) {
-//                    enumName = enumValueNameGauss;
-//                }
-//
-//                enumName = toVarName(enumName).toUpperCase();
-//                String enumValue = toEnumValue(enumValueOriginal.toString().trim(), typeMapping.get(p.getType()));
-//
-//                names.add(enumName);
-//                values.add(enumValueOriginal.toString().trim());
-//                description.add(e.get("description").toString());
-//
-//                enums.add(new EnumEntry(enumName, enumValue, enumValueOriginal, (String) e.get("description"), enumValueOriginal instanceof String));
-//            });
-//
-//            // update internal enum support
-//            prop._enum = values;
-//            prop.allowableValues.put("values", values);
-//            prop.vendorExtensions.put("x-enum-varnames", names);
-//            prop.vendorExtensions.put("x-enum-descriptions", description);
-//            prop.vendorExtensions.put("x-enums", enums);
-//        }
+        if (prop.isEnum) {
+            List<EnumEntry> enums = new ArrayList<>();
+
+            List<Map<String, Object>> enumList;
+            if (prop.openApiType.equalsIgnoreCase("array")) {
+                enumList = (List<Map<String, Object>>) prop.mostInnerItems.vendorExtensions.get("x-api-enum");
+            } else {
+                enumList = (List<Map<String, Object>>) prop.vendorExtensions.get("x-api-enum");
+            }
+
+
+            List<String> names = new ArrayList<>();
+            List<String> values = new ArrayList<>();
+            List<String> description = new ArrayList<>();
+
+            enumList.forEach(e -> {
+                Object enumValueOriginal = e.get("value");
+
+                String enumValueNameGauss;
+                if (enumValueOriginal instanceof Integer) {
+                    enumValueNameGauss = "_" + e.get("value");
+                } else if (enumValueOriginal instanceof String) {
+                    enumValueNameGauss = enumValueOriginal.toString();
+                } else {
+                    throw new IllegalArgumentException("unknown enum value type..." + e.get("value"));
+                }
+
+                String enumName = (String) e.get("name");
+                if (StringUtils.isEmpty(enumName)) {
+                    enumName = enumValueNameGauss;
+                }
+
+                enumName = toVarName(enumName).toUpperCase();
+                String enumValue = toEnumValue(enumValueOriginal.toString().trim(), typeMapping.get(p.getType()));
+
+                names.add(enumName);
+                values.add(enumValueOriginal.toString().trim());
+                description.add(e.get("description").toString());
+
+                enums.add(new EnumEntry(enumName, enumValue, enumValueOriginal, (String) e.get("description"), enumValueOriginal instanceof String));
+            });
+
+            // update internal enum support
+            prop._enum = values;
+            prop.allowableValues.put("values", values);
+            prop.vendorExtensions.put("x-enum-varnames", names);
+            prop.vendorExtensions.put("x-enum-descriptions", description);
+            prop.vendorExtensions.put("x-enums", enums);
+        }
 
         return prop;
     }

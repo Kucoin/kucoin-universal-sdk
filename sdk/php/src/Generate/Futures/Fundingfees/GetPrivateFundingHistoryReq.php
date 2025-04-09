@@ -135,7 +135,8 @@ class GetPrivateFundingHistoryReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)
+     * Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)
+     * @param string $value
      * @return self
      */
     public function setSymbol($value)
@@ -145,7 +146,8 @@ class GetPrivateFundingHistoryReqBuilder
     }
 
     /**
-     * @param int $value Begin time (milliseconds)
+     * Begin time (milliseconds)
+     * @param int $value
      * @return self
      */
     public function setStartAt($value)
@@ -155,7 +157,8 @@ class GetPrivateFundingHistoryReqBuilder
     }
 
     /**
-     * @param int $value End time (milliseconds)
+     * End time (milliseconds)
+     * @param int $value
      * @return self
      */
     public function setEndAt($value)
@@ -165,7 +168,8 @@ class GetPrivateFundingHistoryReqBuilder
     }
 
     /**
-     * @param bool $value This parameter functions to judge whether the lookup is forward or not. True means “yes” and False means “no”. This parameter is set as true by default.
+     * This parameter functions to judge whether the lookup is forward or not. True means “yes” and False means “no”. This parameter is set as true by default.
+     * @param bool $value
      * @return self
      */
     public function setReverse($value)
@@ -175,7 +179,8 @@ class GetPrivateFundingHistoryReqBuilder
     }
 
     /**
-     * @param int $value Start offset. The unique attribute of the last returned result of the last request. The data of the first page will be returned by default.
+     * Start offset. The unique attribute of the last returned result of the last request. The data of the first page will be returned by default.
+     * @param int $value
      * @return self
      */
     public function setOffset($value)
@@ -185,7 +190,8 @@ class GetPrivateFundingHistoryReqBuilder
     }
 
     /**
-     * @param bool $value This parameter functions to judge whether the lookup is forward or not. True means “yes” and False means “no”. This parameter is set as true by default.
+     * This parameter functions to judge whether the lookup is forward or not. True means “yes” and False means “no”. This parameter is set as true by default.
+     * @param bool $value
      * @return self
      */
     public function setForward($value)
@@ -195,7 +201,8 @@ class GetPrivateFundingHistoryReqBuilder
     }
 
     /**
-     * @param int $value Max. record count. The default record count is 10
+     * Max. record count. The default record count is 10
+     * @param int $value
      * @return self
      */
     public function setMaxCount($value)

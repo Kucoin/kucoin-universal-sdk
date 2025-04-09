@@ -96,7 +96,8 @@ class CancelWithdrawalReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Path parameter, a unique ID for a withdrawalId
+     * Path parameter, a unique ID for a withdrawalId
+     * @param string $value
      * @return self
      */
     public function setWithdrawalId($value)

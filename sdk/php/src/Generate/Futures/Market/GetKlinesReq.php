@@ -30,6 +30,17 @@ class GetKlinesReq implements Request
     public $symbol;
     /**
      * Type of candlestick patterns (minutes)
+     * - 1 : 1min
+     * - 5 : 5min
+     * - 15 : 15min
+     * - 30 : 30min
+     * - 60 : 1hour
+     * - 120 : 2hour
+     * - 240 : 4hour
+     * - 480 : 8hour
+     * - 720 : 12hour
+     * - 1440 : 1day
+     * - 10080 : 1week
      * @var int|null $granularity
      * @Type("int")
      * @SerializedName("granularity")
@@ -110,7 +121,8 @@ class GetKlinesReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Symbol of the contract. Please refer to [Get Symbol endpoint: symbol, indexSymbol, premiumsSymbol1M, premiumsSymbol8H](https://www.kucoin.com/docs-new/api-3470220)
+     * Symbol of the contract. Please refer to [Get Symbol endpoint: symbol, indexSymbol, premiumsSymbol1M, premiumsSymbol8H](https://www.kucoin.com/docs-new/api-3470220)
+     * @param string $value
      * @return self
      */
     public function setSymbol($value)
@@ -120,7 +132,19 @@ class GetKlinesReqBuilder
     }
 
     /**
-     * @param int $value Type of candlestick patterns (minutes)
+     * Type of candlestick patterns (minutes)
+     * - 1 : 1min
+     * - 5 : 5min
+     * - 15 : 15min
+     * - 30 : 30min
+     * - 60 : 1hour
+     * - 120 : 2hour
+     * - 240 : 4hour
+     * - 480 : 8hour
+     * - 720 : 12hour
+     * - 1440 : 1day
+     * - 10080 : 1week
+     * @param int $value
      * @return self
      */
     public function setGranularity($value)
@@ -130,7 +154,8 @@ class GetKlinesReqBuilder
     }
 
     /**
-     * @param int $value Start time (milliseconds)
+     * Start time (milliseconds)
+     * @param int $value
      * @return self
      */
     public function setFrom($value)
@@ -140,7 +165,8 @@ class GetKlinesReqBuilder
     }
 
     /**
-     * @param int $value End time (milliseconds)
+     * End time (milliseconds)
+     * @param int $value
      * @return self
      */
     public function setTo($value)

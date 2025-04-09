@@ -37,6 +37,15 @@ class GetAnnouncementsReq implements Request
     public $pageSize;
     /**
      * Announcement types: latest-announcements , activities (latest activities), new-listings (new currency online), product-updates (product updates), vip (institutions and VIPs), maintenance-updates (system maintenance), product -updates (product news), delistings (currency offline), others, api-campaigns (API user activities), default : latest-announcements
+     * - 'latest-announcements' : latest-announcements
+     * - 'activities' : latest activities
+     * - 'product-updates' : product updates
+     * - 'vip' : institutions and VIPs
+     * - 'maintenance-updates' : system maintenance
+     * - 'delistings' : currency offline
+     * - 'others' : others
+     * - 'api-campaigns' : API user activities
+     * - 'new-listings' : new currency online
      * @var string|null $annType
      * @Type("string")
      * @SerializedName("annType")
@@ -44,6 +53,28 @@ class GetAnnouncementsReq implements Request
     public $annType = "latest-announcements";
     /**
      * Language type, the default is en_US, the specific value parameters are as follows
+     * - 'zh_HK' : Chinese (Hong Kong)
+     * - 'ja_JP' : Japanese (Japan)
+     * - 'ko_KR' : Korean (Korea)
+     * - 'en_US' : English
+     * - 'pl_PL' : Polish (Poland)
+     * - 'es_ES' : Spanish (Spain)
+     * - 'fr_FR' : French (France)
+     * - 'ar_AE' : Arabic (Egypt)
+     * - 'it_IT' : Italian (Italy)
+     * - 'id_ID' : Indonesian (Indonesia)
+     * - 'nl_NL' : Dutch (Netherlands)
+     * - 'pt_PT' : Portuguese (Brazil)
+     * - 'vi_VN' : Vietnamese (Vietnam)
+     * - 'de_DE' : German (Germany)
+     * - 'tr_TR' : Turkish (Turkey)
+     * - 'ms_MY' : Malay (Malaysia)
+     * - 'ru_RU' : Russian (Russia)
+     * - 'th_TH' : Thai (Thailand)
+     * - 'hi_IN' : Hindi (India)
+     * - 'bn_BD' : Bengali (Bangladesh)
+     * - 'fil_PH' : Filipino (Philippines)
+     * - 'ur_PK' : Urdu (Pakistan)
      * @var string|null $lang
      * @Type("string")
      * @SerializedName("lang")
@@ -128,7 +159,8 @@ class GetAnnouncementsReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param int $value page number
+     * page number
+     * @param int $value
      * @return self
      */
     public function setCurrentPage($value)
@@ -138,7 +170,8 @@ class GetAnnouncementsReqBuilder
     }
 
     /**
-     * @param int $value page Size
+     * page Size
+     * @param int $value
      * @return self
      */
     public function setPageSize($value)
@@ -148,7 +181,17 @@ class GetAnnouncementsReqBuilder
     }
 
     /**
-     * @param string $value Announcement types: latest-announcements , activities (latest activities), new-listings (new currency online), product-updates (product updates), vip (institutions and VIPs), maintenance-updates (system maintenance), product -updates (product news), delistings (currency offline), others, api-campaigns (API user activities), default : latest-announcements
+     * Announcement types: latest-announcements , activities (latest activities), new-listings (new currency online), product-updates (product updates), vip (institutions and VIPs), maintenance-updates (system maintenance), product -updates (product news), delistings (currency offline), others, api-campaigns (API user activities), default : latest-announcements
+     * - 'latest-announcements' : latest-announcements
+     * - 'activities' : latest activities
+     * - 'product-updates' : product updates
+     * - 'vip' : institutions and VIPs
+     * - 'maintenance-updates' : system maintenance
+     * - 'delistings' : currency offline
+     * - 'others' : others
+     * - 'api-campaigns' : API user activities
+     * - 'new-listings' : new currency online
+     * @param string $value
      * @return self
      */
     public function setAnnType($value)
@@ -158,7 +201,30 @@ class GetAnnouncementsReqBuilder
     }
 
     /**
-     * @param string $value Language type, the default is en_US, the specific value parameters are as follows
+     * Language type, the default is en_US, the specific value parameters are as follows
+     * - 'zh_HK' : Chinese (Hong Kong)
+     * - 'ja_JP' : Japanese (Japan)
+     * - 'ko_KR' : Korean (Korea)
+     * - 'en_US' : English
+     * - 'pl_PL' : Polish (Poland)
+     * - 'es_ES' : Spanish (Spain)
+     * - 'fr_FR' : French (France)
+     * - 'ar_AE' : Arabic (Egypt)
+     * - 'it_IT' : Italian (Italy)
+     * - 'id_ID' : Indonesian (Indonesia)
+     * - 'nl_NL' : Dutch (Netherlands)
+     * - 'pt_PT' : Portuguese (Brazil)
+     * - 'vi_VN' : Vietnamese (Vietnam)
+     * - 'de_DE' : German (Germany)
+     * - 'tr_TR' : Turkish (Turkey)
+     * - 'ms_MY' : Malay (Malaysia)
+     * - 'ru_RU' : Russian (Russia)
+     * - 'th_TH' : Thai (Thailand)
+     * - 'hi_IN' : Hindi (India)
+     * - 'bn_BD' : Bengali (Bangladesh)
+     * - 'fil_PH' : Filipino (Philippines)
+     * - 'ur_PK' : Urdu (Pakistan)
+     * @param string $value
      * @return self
      */
     public function setLang($value)
@@ -168,7 +234,8 @@ class GetAnnouncementsReqBuilder
     }
 
     /**
-     * @param int $value Announcement online start time (milliseconds)
+     * Announcement online start time (milliseconds)
+     * @param int $value
      * @return self
      */
     public function setStartTime($value)
@@ -178,7 +245,8 @@ class GetAnnouncementsReqBuilder
     }
 
     /**
-     * @param int $value Announcement online end time (milliseconds)
+     * Announcement online end time (milliseconds)
+     * @param int $value
      * @return self
      */
     public function setEndTime($value)

@@ -44,6 +44,13 @@ class InnerTransferReq implements Request
     public $amount;
     /**
      * Receiving Account Type: main, trade, margin, isolated, margin_v2, isolated_v2, contract
+     * - 'main' : Funding account
+     * - 'trade' : Spot account
+     * - 'margin' : Cross margin account
+     * - 'isolated' : Isolated margin account
+     * - 'margin_v2' : Cross margin account
+     * - 'isolated_v2' : Isolated margin account
+     * - 'option' : Option account
      * @var string $to
      * @Type("string")
      * @SerializedName("to")
@@ -65,6 +72,13 @@ class InnerTransferReq implements Request
     public $toTag;
     /**
      * Payment Account Type: main, trade, margin, isolated, margin_v2, isolated_v2
+     * - 'main' : Funding account
+     * - 'trade' : Spot account
+     * - 'margin' : Cross margin account
+     * - 'isolated' : Isolated margin account
+     * - 'margin_v2' : Cross margin account
+     * - 'isolated_v2' : Isolated margin account
+     * - 'option' : Option account
      * @var string $from
      * @Type("string")
      * @SerializedName("from")
@@ -131,7 +145,8 @@ class InnerTransferReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Unique order ID created by users to identify their orders, e.g. UUID, with a maximum length of 128 bits
+     * Unique order ID created by users to identify their orders, e.g. UUID, with a maximum length of 128 bits
+     * @param string $value
      * @return self
      */
     public function setClientOid($value)
@@ -141,7 +156,8 @@ class InnerTransferReqBuilder
     }
 
     /**
-     * @param string $value currency
+     * currency
+     * @param string $value
      * @return self
      */
     public function setCurrency($value)
@@ -151,7 +167,8 @@ class InnerTransferReqBuilder
     }
 
     /**
-     * @param string $value Transfer amount: The amount is a positive integer multiple of the currency precision.
+     * Transfer amount: The amount is a positive integer multiple of the currency precision.
+     * @param string $value
      * @return self
      */
     public function setAmount($value)
@@ -161,7 +178,15 @@ class InnerTransferReqBuilder
     }
 
     /**
-     * @param string $value Receiving Account Type: main, trade, margin, isolated, margin_v2, isolated_v2, contract
+     * Receiving Account Type: main, trade, margin, isolated, margin_v2, isolated_v2, contract
+     * - 'main' : Funding account
+     * - 'trade' : Spot account
+     * - 'margin' : Cross margin account
+     * - 'isolated' : Isolated margin account
+     * - 'margin_v2' : Cross margin account
+     * - 'isolated_v2' : Isolated margin account
+     * - 'option' : Option account
+     * @param string $value
      * @return self
      */
     public function setTo($value)
@@ -171,7 +196,8 @@ class InnerTransferReqBuilder
     }
 
     /**
-     * @param string $value Trading pair, required when the payment account type is isolated, e.g.: BTC-USDT
+     * Trading pair, required when the payment account type is isolated, e.g.: BTC-USDT
+     * @param string $value
      * @return self
      */
     public function setFromTag($value)
@@ -181,7 +207,8 @@ class InnerTransferReqBuilder
     }
 
     /**
-     * @param string $value Trading pair, required when the payment account type is isolated, e.g.: BTC-USDT
+     * Trading pair, required when the payment account type is isolated, e.g.: BTC-USDT
+     * @param string $value
      * @return self
      */
     public function setToTag($value)
@@ -191,7 +218,15 @@ class InnerTransferReqBuilder
     }
 
     /**
-     * @param string $value Payment Account Type: main, trade, margin, isolated, margin_v2, isolated_v2
+     * Payment Account Type: main, trade, margin, isolated, margin_v2, isolated_v2
+     * - 'main' : Funding account
+     * - 'trade' : Spot account
+     * - 'margin' : Cross margin account
+     * - 'isolated' : Isolated margin account
+     * - 'margin_v2' : Cross margin account
+     * - 'isolated_v2' : Isolated margin account
+     * - 'option' : Option account
+     * @param string $value
      * @return self
      */
     public function setFrom($value)

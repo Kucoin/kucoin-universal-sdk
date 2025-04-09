@@ -23,6 +23,8 @@ class GetSymbolsWithOpenOrderReq implements Request
     }
     /**
      * Cross Margin: MARGIN_TRADE, Isolated Margin: MARGIN_ISOLATED_TRADE
+     * - 'MARGIN_TRADE' :
+     * - 'MARGIN_ISOLATED_TRADE' :
      * @var string|null $tradeType
      * @Type("string")
      * @SerializedName("tradeType")
@@ -93,7 +95,10 @@ class GetSymbolsWithOpenOrderReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Cross Margin: MARGIN_TRADE, Isolated Margin: MARGIN_ISOLATED_TRADE
+     * Cross Margin: MARGIN_TRADE, Isolated Margin: MARGIN_ISOLATED_TRADE
+     * - 'MARGIN_TRADE' :
+     * - 'MARGIN_ISOLATED_TRADE' :
+     * @param string $value
      * @return self
      */
     public function setTradeType($value)

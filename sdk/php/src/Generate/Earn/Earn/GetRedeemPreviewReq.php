@@ -30,6 +30,8 @@ class GetRedeemPreviewReq implements Request
     public $orderId;
     /**
      * Account type: MAIN (funding account), TRADE (spot trading account). This parameter is valid only when orderId=ETH2
+     * - 'MAIN' :
+     * - 'TRADE' :
      * @var string|null $fromAccountType
      * @Type("string")
      * @SerializedName("fromAccountType")
@@ -100,7 +102,8 @@ class GetRedeemPreviewReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Holding ID
+     * Holding ID
+     * @param string $value
      * @return self
      */
     public function setOrderId($value)
@@ -110,7 +113,10 @@ class GetRedeemPreviewReqBuilder
     }
 
     /**
-     * @param string $value Account type: MAIN (funding account), TRADE (spot trading account). This parameter is valid only when orderId=ETH2
+     * Account type: MAIN (funding account), TRADE (spot trading account). This parameter is valid only when orderId=ETH2
+     * - 'MAIN' :
+     * - 'TRADE' :
+     * @param string $value
      * @return self
      */
     public function setFromAccountType($value)

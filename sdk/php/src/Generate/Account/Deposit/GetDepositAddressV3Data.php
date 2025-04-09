@@ -44,6 +44,8 @@ class GetDepositAddressV3Data implements Request
     public $chainId;
     /**
      * Deposit account type: MAIN (funding account), TRADE (spot trading account)
+     * - 'MAIN' : Funding account
+     * - 'TRADE' : Spot account
      * @var string $to
      * @Type("string")
      * @SerializedName("to")

@@ -79,6 +79,10 @@ class WithdrawalV3Req implements Request
     public $toAddress;
     /**
      * Withdrawal type, ADDRESS (withdrawal address), UID, MAIL (email), PHONE (mobile phone number). Note: If you withdraw by uid/mail/phone, there will be rate limits: 3 times/10 seconds, 50 times/24 hours (calculated on a rolling basis based on the first request time)
+     * - 'ADDRESS' :
+     * - 'UID' :
+     * - 'MAIL' :
+     * - 'PHONE' :
      * @var string $withdrawType
      * @Type("string")
      * @SerializedName("withdrawType")
@@ -145,7 +149,8 @@ class WithdrawalV3ReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value currency
+     * currency
+     * @param string $value
      * @return self
      */
     public function setCurrency($value)
@@ -155,7 +160,8 @@ class WithdrawalV3ReqBuilder
     }
 
     /**
-     * @param string $value The chainId of currency, For a currency with multiple chains, it is recommended to specify the chain parameter instead of using the default chain; you can query the chainId through the response of the GET /api/v3/currencies/{currency} interface.
+     * The chainId of currency, For a currency with multiple chains, it is recommended to specify the chain parameter instead of using the default chain; you can query the chainId through the response of the GET /api/v3/currencies/{currency} interface.
+     * @param string $value
      * @return self
      */
     public function setChain($value)
@@ -165,7 +171,8 @@ class WithdrawalV3ReqBuilder
     }
 
     /**
-     * @param int $value Withdrawal amount, a positive number which is a multiple of the amount precision
+     * Withdrawal amount, a positive number which is a multiple of the amount precision
+     * @param int $value
      * @return self
      */
     public function setAmount($value)
@@ -175,7 +182,8 @@ class WithdrawalV3ReqBuilder
     }
 
     /**
-     * @param string $value Address remark. If there’s no remark, it is empty. When you withdraw from other platforms to KuCoin, you need to fill in memo(tag). Be careful: If you do not fill in memo(tag), your deposit may not be available.
+     * Address remark. If there’s no remark, it is empty. When you withdraw from other platforms to KuCoin, you need to fill in memo(tag). Be careful: If you do not fill in memo(tag), your deposit may not be available.
+     * @param string $value
      * @return self
      */
     public function setMemo($value)
@@ -185,7 +193,8 @@ class WithdrawalV3ReqBuilder
     }
 
     /**
-     * @param bool $value Internal withdrawal or not. Default: False
+     * Internal withdrawal or not. Default: False
+     * @param bool $value
      * @return self
      */
     public function setIsInner($value)
@@ -195,7 +204,8 @@ class WithdrawalV3ReqBuilder
     }
 
     /**
-     * @param string $value Remark
+     * Remark
+     * @param string $value
      * @return self
      */
     public function setRemark($value)
@@ -205,7 +215,8 @@ class WithdrawalV3ReqBuilder
     }
 
     /**
-     * @param string $value Withdrawal fee deduction type: INTERNAL, EXTERNAL, or not specified  1. INTERNAL: Deduct the transaction fees from your withdrawal amount 2. EXTERNAL: Deduct the transaction fees from your main account 3. If you don't specify the feeDeductType parameter, when the balance in your main account is sufficient to support the withdrawal, the system will initially deduct the transaction fees from your main account. But if the balance in your main account is not sufficient to support the withdrawal, the system will deduct the fees from your withdrawal amount. For example: Suppose you are going to withdraw 1 BTC from the KuCoin platform (transaction fee: 0.0001BTC), if the balance in your main account is insufficient, the system will deduct the transaction fees from your withdrawal amount. In this case, you will be receiving 0.9999BTC.
+     * Withdrawal fee deduction type: INTERNAL, EXTERNAL, or not specified  1. INTERNAL: Deduct the transaction fees from your withdrawal amount 2. EXTERNAL: Deduct the transaction fees from your main account 3. If you don't specify the feeDeductType parameter, when the balance in your main account is sufficient to support the withdrawal, the system will initially deduct the transaction fees from your main account. But if the balance in your main account is not sufficient to support the withdrawal, the system will deduct the fees from your withdrawal amount. For example: Suppose you are going to withdraw 1 BTC from the KuCoin platform (transaction fee: 0.0001BTC), if the balance in your main account is insufficient, the system will deduct the transaction fees from your withdrawal amount. In this case, you will be receiving 0.9999BTC.
+     * @param string $value
      * @return self
      */
     public function setFeeDeductType($value)
@@ -215,7 +226,8 @@ class WithdrawalV3ReqBuilder
     }
 
     /**
-     * @param string $value Withdrawal address
+     * Withdrawal address
+     * @param string $value
      * @return self
      */
     public function setToAddress($value)
@@ -225,7 +237,12 @@ class WithdrawalV3ReqBuilder
     }
 
     /**
-     * @param string $value Withdrawal type, ADDRESS (withdrawal address), UID, MAIL (email), PHONE (mobile phone number). Note: If you withdraw by uid/mail/phone, there will be rate limits: 3 times/10 seconds, 50 times/24 hours (calculated on a rolling basis based on the first request time)
+     * Withdrawal type, ADDRESS (withdrawal address), UID, MAIL (email), PHONE (mobile phone number). Note: If you withdraw by uid/mail/phone, there will be rate limits: 3 times/10 seconds, 50 times/24 hours (calculated on a rolling basis based on the first request time)
+     * - 'ADDRESS' :
+     * - 'UID' :
+     * - 'MAIL' :
+     * - 'PHONE' :
+     * @param string $value
      * @return self
      */
     public function setWithdrawType($value)

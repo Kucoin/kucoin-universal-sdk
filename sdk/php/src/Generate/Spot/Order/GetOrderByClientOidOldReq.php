@@ -96,7 +96,8 @@ class GetOrderByClientOidOldReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Unique order ID created by users to identify their orders
+     * Unique order ID created by users to identify their orders
+     * @param string $value
      * @return self
      */
     public function setClientOid($value)

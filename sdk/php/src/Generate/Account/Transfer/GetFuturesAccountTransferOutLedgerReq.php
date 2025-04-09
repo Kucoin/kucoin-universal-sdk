@@ -30,6 +30,10 @@ class GetFuturesAccountTransferOutLedgerReq implements Request
     public $currency;
     /**
      * Status PROCESSING, SUCCESS, FAILURE
+     * - 'MAIN' :
+     * - 'TRADE' :
+     * - 'MARGIN' :
+     * - 'ISOLATED' :
      * @var string|null $type
      * @Type("string")
      * @SerializedName("type")
@@ -135,7 +139,8 @@ class GetFuturesAccountTransferOutLedgerReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value currency
+     * currency
+     * @param string $value
      * @return self
      */
     public function setCurrency($value)
@@ -145,7 +150,12 @@ class GetFuturesAccountTransferOutLedgerReqBuilder
     }
 
     /**
-     * @param string $value Status PROCESSING, SUCCESS, FAILURE
+     * Status PROCESSING, SUCCESS, FAILURE
+     * - 'MAIN' :
+     * - 'TRADE' :
+     * - 'MARGIN' :
+     * - 'ISOLATED' :
+     * @param string $value
      * @return self
      */
     public function setType($value)
@@ -155,7 +165,8 @@ class GetFuturesAccountTransferOutLedgerReqBuilder
     }
 
     /**
-     * @param string[] $value Status List PROCESSING, SUCCESS, FAILURE
+     * Status List PROCESSING, SUCCESS, FAILURE
+     * @param string[] $value
      * @return self
      */
     public function setTag($value)
@@ -165,7 +176,8 @@ class GetFuturesAccountTransferOutLedgerReqBuilder
     }
 
     /**
-     * @param int $value Start time (milliseconds)
+     * Start time (milliseconds)
+     * @param int $value
      * @return self
      */
     public function setStartAt($value)
@@ -175,7 +187,8 @@ class GetFuturesAccountTransferOutLedgerReqBuilder
     }
 
     /**
-     * @param int $value End time (milliseconds)
+     * End time (milliseconds)
+     * @param int $value
      * @return self
      */
     public function setEndAt($value)
@@ -185,7 +198,8 @@ class GetFuturesAccountTransferOutLedgerReqBuilder
     }
 
     /**
-     * @param int $value Current request page. The default currentPage is 1
+     * Current request page. The default currentPage is 1
+     * @param int $value
      * @return self
      */
     public function setCurrentPage($value)
@@ -195,7 +209,8 @@ class GetFuturesAccountTransferOutLedgerReqBuilder
     }
 
     /**
-     * @param int $value pageSize; the default pageSize is 50
+     * pageSize; the default pageSize is 50
+     * @param int $value
      * @return self
      */
     public function setPageSize($value)

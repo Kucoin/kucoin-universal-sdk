@@ -103,7 +103,8 @@ class RedeemReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Currency
+     * Currency
+     * @param string $value
      * @return self
      */
     public function setCurrency($value)
@@ -113,7 +114,8 @@ class RedeemReqBuilder
     }
 
     /**
-     * @param string $value Redemption amount
+     * Redemption amount
+     * @param string $value
      * @return self
      */
     public function setSize($value)
@@ -123,7 +125,8 @@ class RedeemReqBuilder
     }
 
     /**
-     * @param string $value Purchase order ID
+     * Purchase order ID
+     * @param string $value
      * @return self
      */
     public function setPurchaseOrderNo($value)

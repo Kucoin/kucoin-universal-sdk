@@ -30,6 +30,8 @@ class GetSpotHFLedgerReq implements Request
     public $currency;
     /**
      * direction: in, out
+     * - 'in' :
+     * - 'out' :
      * @var string|null $direction
      * @Type("string")
      * @SerializedName("direction")
@@ -37,6 +39,11 @@ class GetSpotHFLedgerReq implements Request
     public $direction;
     /**
      * Transaction type
+     * - 'TRADE_EXCHANGE' : trade exchange
+     * - 'TRANSFER' : transfer
+     * - 'RETURNED_FEES' : returned fees
+     * - 'DEDUCTION_FEES' : deduction fees
+     * - 'OTHER' : other
      * @var string|null $bizType
      * @Type("string")
      * @SerializedName("bizType")
@@ -135,7 +142,8 @@ class GetSpotHFLedgerReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Currency (you can choose more than one currency). You can specify a max. of 10 currencies in one go. If not specified, all currencies will be queried by default.
+     * Currency (you can choose more than one currency). You can specify a max. of 10 currencies in one go. If not specified, all currencies will be queried by default.
+     * @param string $value
      * @return self
      */
     public function setCurrency($value)
@@ -145,7 +153,10 @@ class GetSpotHFLedgerReqBuilder
     }
 
     /**
-     * @param string $value direction: in, out
+     * direction: in, out
+     * - 'in' :
+     * - 'out' :
+     * @param string $value
      * @return self
      */
     public function setDirection($value)
@@ -155,7 +166,13 @@ class GetSpotHFLedgerReqBuilder
     }
 
     /**
-     * @param string $value Transaction type
+     * Transaction type
+     * - 'TRADE_EXCHANGE' : trade exchange
+     * - 'TRANSFER' : transfer
+     * - 'RETURNED_FEES' : returned fees
+     * - 'DEDUCTION_FEES' : deduction fees
+     * - 'OTHER' : other
+     * @param string $value
      * @return self
      */
     public function setBizType($value)
@@ -165,7 +182,8 @@ class GetSpotHFLedgerReqBuilder
     }
 
     /**
-     * @param int $value The ID of the last set of data from the previous data batch. By default, the latest information is given.
+     * The ID of the last set of data from the previous data batch. By default, the latest information is given.
+     * @param int $value
      * @return self
      */
     public function setLastId($value)
@@ -175,7 +193,8 @@ class GetSpotHFLedgerReqBuilder
     }
 
     /**
-     * @param int $value Default100, Max200
+     * Default100, Max200
+     * @param int $value
      * @return self
      */
     public function setLimit($value)
@@ -185,7 +204,8 @@ class GetSpotHFLedgerReqBuilder
     }
 
     /**
-     * @param int $value Start time (milliseconds)
+     * Start time (milliseconds)
+     * @param int $value
      * @return self
      */
     public function setStartAt($value)
@@ -195,7 +215,8 @@ class GetSpotHFLedgerReqBuilder
     }
 
     /**
-     * @param int $value End time (milliseconds)
+     * End time (milliseconds)
+     * @param int $value
      * @return self
      */
     public function setEndAt($value)

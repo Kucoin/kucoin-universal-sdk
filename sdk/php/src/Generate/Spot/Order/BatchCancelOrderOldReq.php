@@ -30,6 +30,9 @@ class BatchCancelOrderOldReq implements Request
     public $symbol;
     /**
      * The type of trading :TRADE(Spot Trading), MARGIN_TRADE(Cross Margin Trading), MARGIN_ISOLATED_TRADE(Isolated Margin Trading), and the default is TRADE to cancel the spot trading orders.
+     * - 'TRADE' : Spot Trading
+     * - 'MARGIN_TRADE' : Cross Margin Trading
+     * - 'MARGIN_ISOLATED_TRADE' : Isolated Margin Trading
      * @var string|null $tradeType
      * @Type("string")
      * @SerializedName("tradeType")
@@ -100,7 +103,8 @@ class BatchCancelOrderOldReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value symbol
+     * symbol
+     * @param string $value
      * @return self
      */
     public function setSymbol($value)
@@ -110,7 +114,11 @@ class BatchCancelOrderOldReqBuilder
     }
 
     /**
-     * @param string $value The type of trading :TRADE(Spot Trading), MARGIN_TRADE(Cross Margin Trading), MARGIN_ISOLATED_TRADE(Isolated Margin Trading), and the default is TRADE to cancel the spot trading orders.
+     * The type of trading :TRADE(Spot Trading), MARGIN_TRADE(Cross Margin Trading), MARGIN_ISOLATED_TRADE(Isolated Margin Trading), and the default is TRADE to cancel the spot trading orders.
+     * - 'TRADE' : Spot Trading
+     * - 'MARGIN_TRADE' : Cross Margin Trading
+     * - 'MARGIN_ISOLATED_TRADE' : Isolated Margin Trading
+     * @param string $value
      * @return self
      */
     public function setTradeType($value)

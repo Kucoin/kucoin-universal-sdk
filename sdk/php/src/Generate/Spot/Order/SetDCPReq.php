@@ -96,7 +96,8 @@ class SetDCPReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param int $value Auto cancel order trigger setting time, the unit is second. Range: timeout=-1 (meaning unset) or 5 <= timeout <= 86400. For example, timeout=5 means that the order will be automatically canceled if no user request is received for more than 5 seconds. When this parameter is changed, the previous setting will be overwritten.
+     * Auto cancel order trigger setting time, the unit is second. Range: timeout=-1 (meaning unset) or 5 <= timeout <= 86400. For example, timeout=5 means that the order will be automatically canceled if no user request is received for more than 5 seconds. When this parameter is changed, the previous setting will be overwritten.
+     * @param int $value
      * @return self
      */
     public function setTimeout($value)
@@ -106,7 +107,8 @@ class SetDCPReqBuilder
     }
 
     /**
-     * @param string $value List of trading pairs. When this parameter is not empty, separate it with commas and support up to 50 trading pairs. Empty means all trading pairs. When this parameter is changed, the previous setting will be overwritten.
+     * List of trading pairs. When this parameter is not empty, separate it with commas and support up to 50 trading pairs. Empty means all trading pairs. When this parameter is changed, the previous setting will be overwritten.
+     * @param string $value
      * @return self
      */
     public function setSymbols($value)

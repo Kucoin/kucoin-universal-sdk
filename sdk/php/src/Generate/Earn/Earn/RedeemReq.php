@@ -37,6 +37,8 @@ class RedeemReq implements Request
     public $amount;
     /**
      * Account type: MAIN (funding account), TRADE (spot trading account). This parameter is valid only when orderId=ETH2
+     * - 'MAIN' :
+     * - 'TRADE' :
      * @var string|null $fromAccountType
      * @Type("string")
      * @SerializedName("fromAccountType")
@@ -110,7 +112,8 @@ class RedeemReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Holding ID
+     * Holding ID
+     * @param string $value
      * @return self
      */
     public function setOrderId($value)
@@ -120,7 +123,8 @@ class RedeemReqBuilder
     }
 
     /**
-     * @param string $value Redemption amount
+     * Redemption amount
+     * @param string $value
      * @return self
      */
     public function setAmount($value)
@@ -130,7 +134,10 @@ class RedeemReqBuilder
     }
 
     /**
-     * @param string $value Account type: MAIN (funding account), TRADE (spot trading account). This parameter is valid only when orderId=ETH2
+     * Account type: MAIN (funding account), TRADE (spot trading account). This parameter is valid only when orderId=ETH2
+     * - 'MAIN' :
+     * - 'TRADE' :
+     * @param string $value
      * @return self
      */
     public function setFromAccountType($value)
@@ -140,7 +147,8 @@ class RedeemReqBuilder
     }
 
     /**
-     * @param string $value Confirmation field for early redemption penalty: 1 (confirm early redemption, and the current holding will be fully redeemed). This parameter is valid only for fixed-term products
+     * Confirmation field for early redemption penalty: 1 (confirm early redemption, and the current holding will be fully redeemed). This parameter is valid only for fixed-term products
+     * @param string $value
      * @return self
      */
     public function setConfirmPunishRedeem($value)

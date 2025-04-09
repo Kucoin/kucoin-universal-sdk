@@ -44,6 +44,9 @@ class AddSubAccountApiReq implements Request
     public $ipWhitelist;
     /**
      * Permission group list (only General, Spot and Futures permissions can be set, such as \"General, Trade\").
+     * - 'general' :
+     * - 'spot' :
+     * - 'futures' :
      * @var string[] $permissions
      * @Type("string[]")
      * @SerializedName("permissions")
@@ -121,7 +124,8 @@ class AddSubAccountApiReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Sub-account UID
+     * Sub-account UID
+     * @param string $value
      * @return self
      */
     public function setUid($value)
@@ -131,7 +135,8 @@ class AddSubAccountApiReqBuilder
     }
 
     /**
-     * @param string $value API passphrase
+     * API passphrase
+     * @param string $value
      * @return self
      */
     public function setPassphrase($value)
@@ -141,7 +146,8 @@ class AddSubAccountApiReqBuilder
     }
 
     /**
-     * @param string[] $value IP whitelist list, supports up to 20 IPs
+     * IP whitelist list, supports up to 20 IPs
+     * @param string[] $value
      * @return self
      */
     public function setIpWhitelist($value)
@@ -151,7 +157,11 @@ class AddSubAccountApiReqBuilder
     }
 
     /**
-     * @param string[] $value Permission group list (only General, Spot and Futures permissions can be set, such as \"General, Trade\").
+     * Permission group list (only General, Spot and Futures permissions can be set, such as \"General, Trade\").
+     * - 'general' :
+     * - 'spot' :
+     * - 'futures' :
+     * @param string[] $value
      * @return self
      */
     public function setPermissions($value)
@@ -161,7 +171,8 @@ class AddSubAccountApiReqBuilder
     }
 
     /**
-     * @param string $value apikey remarks (length 4~32)
+     * apikey remarks (length 4~32)
+     * @param string $value
      * @return self
      */
     public function setLabel($value)

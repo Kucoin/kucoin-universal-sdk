@@ -96,7 +96,8 @@ class GetMarkPriceDetailReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value symbol
+     * symbol
+     * @param string $value
      * @return self
      */
     public function setSymbol($value)

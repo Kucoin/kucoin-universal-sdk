@@ -58,6 +58,9 @@ class GetBorrowHistoryItems implements Request
     public $actualSize;
     /**
      * PENDING: Processing, SUCCESS: Successful, FAILED: Failed
+     * - 'PENDING' :
+     * - 'SUCCESS' :
+     * - 'FAILED' :
      * @var string $status
      * @Type("string")
      * @SerializedName("status")

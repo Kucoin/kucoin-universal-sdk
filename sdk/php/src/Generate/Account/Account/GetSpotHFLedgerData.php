@@ -79,6 +79,8 @@ class GetSpotHFLedgerData implements Request
     public $bizType;
     /**
      * Direction of transfer (out or in)
+     * - 'in' :
+     * - 'out' :
      * @var string $direction
      * @Type("string")
      * @SerializedName("direction")

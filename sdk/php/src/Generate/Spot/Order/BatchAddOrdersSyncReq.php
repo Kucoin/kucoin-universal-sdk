@@ -93,7 +93,8 @@ class BatchAddOrdersSyncReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param BatchAddOrdersSyncOrderList[] $value Order List
+     * Order List
+     * @param BatchAddOrdersSyncOrderList[] $value
      * @return self
      */
     public function setOrderList($value)

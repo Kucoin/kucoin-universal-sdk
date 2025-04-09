@@ -103,7 +103,8 @@ class CancelOrderByClientOidSyncReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value symbol
+     * symbol
+     * @param string $value
      * @return self
      */
     public function setSymbol($value)
@@ -113,7 +114,8 @@ class CancelOrderByClientOidSyncReqBuilder
     }
 
     /**
-     * @param string $value Client Order Id，unique identifier created by the user
+     * Client Order Id，unique identifier created by the user
+     * @param string $value
      * @return self
      */
     public function setClientOid($value)

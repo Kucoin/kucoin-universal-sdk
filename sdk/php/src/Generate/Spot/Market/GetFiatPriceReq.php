@@ -96,7 +96,8 @@ class GetFiatPriceReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Ticker symbol of a base currency, e.g. USD, EUR. Default is USD
+     * Ticker symbol of a base currency, e.g. USD, EUR. Default is USD
+     * @param string $value
      * @return self
      */
     public function setBase($value)
@@ -106,7 +107,8 @@ class GetFiatPriceReqBuilder
     }
 
     /**
-     * @param string $value Comma-separated cryptocurrencies to be converted into fiat, e.g.: BTC,ETH, etc. Default to return the fiat price of all currencies.
+     * Comma-separated cryptocurrencies to be converted into fiat, e.g.: BTC,ETH, etc. Default to return the fiat price of all currencies.
+     * @param string $value
      * @return self
      */
     public function setCurrencies($value)

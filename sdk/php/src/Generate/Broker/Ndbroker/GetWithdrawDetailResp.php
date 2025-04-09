@@ -98,6 +98,11 @@ class GetWithdrawDetailResp implements Response
     public $currency;
     /**
      * Status (PROCESSING, WALLET_PROCESSING, REVIEW, SUCCESS, FAILURE)
+     * - 'PROCESSING' :
+     * - 'WALLET_PROCESSING' :
+     * - 'REVIEW' :
+     * - 'SUCCESS' :
+     * - 'FAILURE' :
      * @var string $status
      * @Type("string")
      * @SerializedName("status")

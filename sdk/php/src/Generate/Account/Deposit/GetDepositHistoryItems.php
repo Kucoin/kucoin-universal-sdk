@@ -37,6 +37,9 @@ class GetDepositHistoryItems implements Request
     public $chain;
     /**
      * Status
+     * - 'PROCESSING' :
+     * - 'SUCCESS' :
+     * - 'FAILURE' :
      * @var string|null $status
      * @Type("string")
      * @SerializedName("status")

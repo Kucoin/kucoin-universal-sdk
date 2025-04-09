@@ -37,6 +37,8 @@ class GetAllSymbolsData implements Request
     public $rootSymbol;
     /**
      * Type of contract
+     * - 'FFWCSX' : Standardized swap contracts, standard financial futures on swaps, expiration swap funding rates
+     * - 'FFICSX' : Futures Contract
      * @var string $type
      * @Type("string")
      * @SerializedName("type")
@@ -219,6 +221,7 @@ class GetAllSymbolsData implements Request
     public $isInverse;
     /**
      * Marking method
+     * - 'FairPrice' : FairPrice
      * @var string $markMethod
      * @Type("string")
      * @SerializedName("markMethod")
@@ -226,6 +229,7 @@ class GetAllSymbolsData implements Request
     public $markMethod;
     /**
      * Fair price marking method; the Futures contract is null
+     * - 'FundingRate' : FundingRate
      * @var string $fairMethod
      * @Type("string")
      * @SerializedName("fairMethod")
@@ -268,6 +272,13 @@ class GetAllSymbolsData implements Request
     public $settlementSymbol;
     /**
      * Contract status
+     * - 'Init' : Initial
+     * - 'Open' : Online
+     * - 'BeingSettled' : Settling
+     * - 'Settled' : Settled
+     * - 'Paused' : Suspended
+     * - 'Closed' : Offline
+     * - 'CancelOnly' : Orders can only be canceled
      * @var string $status
      * @Type("string")
      * @SerializedName("status")

@@ -51,6 +51,14 @@ class FlexTransferReq implements Request
     public $fromUserId;
     /**
      * Account type: MAIN, TRADE, CONTRACT, MARGIN, ISOLATED, MARGIN_V2, ISOLATED_V2
+     * - 'MAIN' : Funding account
+     * - 'TRADE' : Spot account
+     * - 'CONTRACT' : Futures account
+     * - 'MARGIN' : Cross margin account
+     * - 'ISOLATED' : Isolated margin account
+     * - 'MARGIN_V2' : Cross margin account
+     * - 'ISOLATED_V2' : Isolated margin account
+     * - 'OPTION' : Option account
      * @var string $fromAccountType
      * @Type("string")
      * @SerializedName("fromAccountType")
@@ -65,6 +73,9 @@ class FlexTransferReq implements Request
     public $fromAccountTag;
     /**
      * Transfer type: INTERNAL (Transfer within account), PARENT_TO_SUB (Transfer from master-account to sub-account), SUB_TO_PARENT (Transfer from sub-account to master-account)
+     * - 'INTERNAL' :
+     * - 'PARENT_TO_SUB' :
+     * - 'SUB_TO_PARENT' :
      * @var string $type
      * @Type("string")
      * @SerializedName("type")
@@ -79,6 +90,14 @@ class FlexTransferReq implements Request
     public $toUserId;
     /**
      * Account type: MAIN, TRADE, CONTRACT, MARGIN, ISOLATED, MARGIN_V2, ISOLATED_V2
+     * - 'MAIN' : Funding account
+     * - 'TRADE' : Spot account
+     * - 'CONTRACT' : Futures account
+     * - 'MARGIN' : Cross margin account
+     * - 'ISOLATED' : Isolated margin account
+     * - 'MARGIN_V2' : Cross margin account
+     * - 'ISOLATED_V2' : Isolated margin account
+     * - 'OPTION' : Option account
      * @var string $toAccountType
      * @Type("string")
      * @SerializedName("toAccountType")
@@ -152,7 +171,8 @@ class FlexTransferReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Unique order ID created by users to identify their orders, e.g. UUID, with a maximum length of 128 bits
+     * Unique order ID created by users to identify their orders, e.g. UUID, with a maximum length of 128 bits
+     * @param string $value
      * @return self
      */
     public function setClientOid($value)
@@ -162,7 +182,8 @@ class FlexTransferReqBuilder
     }
 
     /**
-     * @param string $value currency
+     * currency
+     * @param string $value
      * @return self
      */
     public function setCurrency($value)
@@ -172,7 +193,8 @@ class FlexTransferReqBuilder
     }
 
     /**
-     * @param string $value Transfer amount: The amount is a positive integer multiple of the currency precision.
+     * Transfer amount: The amount is a positive integer multiple of the currency precision.
+     * @param string $value
      * @return self
      */
     public function setAmount($value)
@@ -182,7 +204,8 @@ class FlexTransferReqBuilder
     }
 
     /**
-     * @param string $value Transfer out UserId: This is required when transferring from sub-account to master-account. It is optional for internal transfers.
+     * Transfer out UserId: This is required when transferring from sub-account to master-account. It is optional for internal transfers.
+     * @param string $value
      * @return self
      */
     public function setFromUserId($value)
@@ -192,7 +215,16 @@ class FlexTransferReqBuilder
     }
 
     /**
-     * @param string $value Account type: MAIN, TRADE, CONTRACT, MARGIN, ISOLATED, MARGIN_V2, ISOLATED_V2
+     * Account type: MAIN, TRADE, CONTRACT, MARGIN, ISOLATED, MARGIN_V2, ISOLATED_V2
+     * - 'MAIN' : Funding account
+     * - 'TRADE' : Spot account
+     * - 'CONTRACT' : Futures account
+     * - 'MARGIN' : Cross margin account
+     * - 'ISOLATED' : Isolated margin account
+     * - 'MARGIN_V2' : Cross margin account
+     * - 'ISOLATED_V2' : Isolated margin account
+     * - 'OPTION' : Option account
+     * @param string $value
      * @return self
      */
     public function setFromAccountType($value)
@@ -202,7 +234,8 @@ class FlexTransferReqBuilder
     }
 
     /**
-     * @param string $value Symbol: Required when the account type is ISOLATED or ISOLATED_V2, for example: BTC-USDT
+     * Symbol: Required when the account type is ISOLATED or ISOLATED_V2, for example: BTC-USDT
+     * @param string $value
      * @return self
      */
     public function setFromAccountTag($value)
@@ -212,7 +245,11 @@ class FlexTransferReqBuilder
     }
 
     /**
-     * @param string $value Transfer type: INTERNAL (Transfer within account), PARENT_TO_SUB (Transfer from master-account to sub-account), SUB_TO_PARENT (Transfer from sub-account to master-account)
+     * Transfer type: INTERNAL (Transfer within account), PARENT_TO_SUB (Transfer from master-account to sub-account), SUB_TO_PARENT (Transfer from sub-account to master-account)
+     * - 'INTERNAL' :
+     * - 'PARENT_TO_SUB' :
+     * - 'SUB_TO_PARENT' :
+     * @param string $value
      * @return self
      */
     public function setType($value)
@@ -222,7 +259,8 @@ class FlexTransferReqBuilder
     }
 
     /**
-     * @param string $value Transfer in UserId: This is required when transferring master-account to sub-account. It is optional for internal transfers.
+     * Transfer in UserId: This is required when transferring master-account to sub-account. It is optional for internal transfers.
+     * @param string $value
      * @return self
      */
     public function setToUserId($value)
@@ -232,7 +270,16 @@ class FlexTransferReqBuilder
     }
 
     /**
-     * @param string $value Account type: MAIN, TRADE, CONTRACT, MARGIN, ISOLATED, MARGIN_V2, ISOLATED_V2
+     * Account type: MAIN, TRADE, CONTRACT, MARGIN, ISOLATED, MARGIN_V2, ISOLATED_V2
+     * - 'MAIN' : Funding account
+     * - 'TRADE' : Spot account
+     * - 'CONTRACT' : Futures account
+     * - 'MARGIN' : Cross margin account
+     * - 'ISOLATED' : Isolated margin account
+     * - 'MARGIN_V2' : Cross margin account
+     * - 'ISOLATED_V2' : Isolated margin account
+     * - 'OPTION' : Option account
+     * @param string $value
      * @return self
      */
     public function setToAccountType($value)
@@ -242,7 +289,8 @@ class FlexTransferReqBuilder
     }
 
     /**
-     * @param string $value Symbol: Required when the account type is ISOLATED or ISOLATED_V2, for example: BTC-USDT
+     * Symbol: Required when the account type is ISOLATED or ISOLATED_V2, for example: BTC-USDT
+     * @param string $value
      * @return self
      */
     public function setToAccountTag($value)

@@ -30,6 +30,8 @@ class GetClosedOrdersReq implements Request
     public $symbol;
     /**
      * Transaction type: MARGIN_TRADE - cross margin trade, MARGIN_ISOLATED_TRADE - isolated margin trade
+     * - 'MARGIN_TRADE' :
+     * - 'MARGIN_ISOLATED_TRADE' :
      * @var string|null $tradeType
      * @Type("string")
      * @SerializedName("tradeType")
@@ -37,6 +39,8 @@ class GetClosedOrdersReq implements Request
     public $tradeType;
     /**
      * Specify if the order is to 'buy' or 'sell'.
+     * - 'buy' :
+     * - 'sell' :
      * @var string|null $side
      * @Type("string")
      * @SerializedName("side")
@@ -44,6 +48,8 @@ class GetClosedOrdersReq implements Request
     public $side;
     /**
      * Specify if the order is a 'limit' order or 'market' order.
+     * - 'limit' :
+     * - 'market' :
      * @var string|null $type
      * @Type("string")
      * @SerializedName("type")
@@ -142,7 +148,8 @@ class GetClosedOrdersReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value symbol
+     * symbol
+     * @param string $value
      * @return self
      */
     public function setSymbol($value)
@@ -152,7 +159,10 @@ class GetClosedOrdersReqBuilder
     }
 
     /**
-     * @param string $value Transaction type: MARGIN_TRADE - cross margin trade, MARGIN_ISOLATED_TRADE - isolated margin trade
+     * Transaction type: MARGIN_TRADE - cross margin trade, MARGIN_ISOLATED_TRADE - isolated margin trade
+     * - 'MARGIN_TRADE' :
+     * - 'MARGIN_ISOLATED_TRADE' :
+     * @param string $value
      * @return self
      */
     public function setTradeType($value)
@@ -162,7 +172,10 @@ class GetClosedOrdersReqBuilder
     }
 
     /**
-     * @param string $value Specify if the order is to 'buy' or 'sell'.
+     * Specify if the order is to 'buy' or 'sell'.
+     * - 'buy' :
+     * - 'sell' :
+     * @param string $value
      * @return self
      */
     public function setSide($value)
@@ -172,7 +185,10 @@ class GetClosedOrdersReqBuilder
     }
 
     /**
-     * @param string $value Specify if the order is a 'limit' order or 'market' order.
+     * Specify if the order is a 'limit' order or 'market' order.
+     * - 'limit' :
+     * - 'market' :
+     * @param string $value
      * @return self
      */
     public function setType($value)
@@ -182,7 +198,8 @@ class GetClosedOrdersReqBuilder
     }
 
     /**
-     * @param int $value The ID of the last set of data from the previous data batch. By default, the latest information is given. lastId is used to filter data and paginate. If lastId is not entered, the default is a maximum of 100 returned data items. The return results include lastId, which can be used as a query parameter to look up new data from the next page.
+     * The ID of the last set of data from the previous data batch. By default, the latest information is given. lastId is used to filter data and paginate. If lastId is not entered, the default is a maximum of 100 returned data items. The return results include lastId, which can be used as a query parameter to look up new data from the next page.
+     * @param int $value
      * @return self
      */
     public function setLastId($value)
@@ -192,7 +209,8 @@ class GetClosedOrdersReqBuilder
     }
 
     /**
-     * @param int $value Default20, Max100
+     * Default20, Max100
+     * @param int $value
      * @return self
      */
     public function setLimit($value)
@@ -202,7 +220,8 @@ class GetClosedOrdersReqBuilder
     }
 
     /**
-     * @param int $value Start time (milliseconds)
+     * Start time (milliseconds)
+     * @param int $value
      * @return self
      */
     public function setStartAt($value)
@@ -212,7 +231,8 @@ class GetClosedOrdersReqBuilder
     }
 
     /**
-     * @param int $value End time (milliseconds)
+     * End time (milliseconds)
+     * @param int $value
      * @return self
      */
     public function setEndAt($value)

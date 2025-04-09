@@ -103,7 +103,8 @@ class PurchaseReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Currency
+     * Currency
+     * @param string $value
      * @return self
      */
     public function setCurrency($value)
@@ -113,7 +114,8 @@ class PurchaseReqBuilder
     }
 
     /**
-     * @param string $value Purchase amount
+     * Purchase amount
+     * @param string $value
      * @return self
      */
     public function setSize($value)
@@ -123,7 +125,8 @@ class PurchaseReqBuilder
     }
 
     /**
-     * @param string $value Purchase interest rate
+     * Purchase interest rate
+     * @param string $value
      * @return self
      */
     public function setInterestRate($value)

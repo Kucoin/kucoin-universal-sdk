@@ -93,7 +93,8 @@ class GetSpotActualFeeReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Trading pair (optional; you can inquire fee rates of 10 trading pairs each time at most)
+     * Trading pair (optional; you can inquire fee rates of 10 trading pairs each time at most)
+     * @param string $value
      * @return self
      */
     public function setSymbols($value)

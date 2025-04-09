@@ -37,6 +37,8 @@ class FuturesAccountTransferInReq implements Request
     public $amount;
     /**
      * Payment account type, including MAIN, TRADE
+     * - 'MAIN' :
+     * - 'TRADE' :
      * @var string $payAccountType
      * @Type("string")
      * @SerializedName("payAccountType")
@@ -107,7 +109,8 @@ class FuturesAccountTransferInReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Currency, including XBT, USDT...
+     * Currency, including XBT, USDT...
+     * @param string $value
      * @return self
      */
     public function setCurrency($value)
@@ -117,7 +120,8 @@ class FuturesAccountTransferInReqBuilder
     }
 
     /**
-     * @param float $value Amount to be transferred in
+     * Amount to be transferred in
+     * @param float $value
      * @return self
      */
     public function setAmount($value)
@@ -127,7 +131,10 @@ class FuturesAccountTransferInReqBuilder
     }
 
     /**
-     * @param string $value Payment account type, including MAIN, TRADE
+     * Payment account type, including MAIN, TRADE
+     * - 'MAIN' :
+     * - 'TRADE' :
+     * @param string $value
      * @return self
      */
     public function setPayAccountType($value)

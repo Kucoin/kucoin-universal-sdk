@@ -92,7 +92,8 @@ class GetSymbolReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Path Parameter. Symbol of the contract
+     * Path Parameter. Symbol of the contract
+     * @param string $value
      * @return self
      */
     public function setSymbol($value)

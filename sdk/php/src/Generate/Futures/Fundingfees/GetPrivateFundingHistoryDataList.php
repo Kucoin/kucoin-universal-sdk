@@ -93,6 +93,8 @@ class GetPrivateFundingHistoryDataList implements Request
     public $context;
     /**
      * Margin mode: ISOLATED (isolated), CROSS (cross margin).
+     * - 'ISOLATED' : isolated margin
+     * - 'CROSS' : cross margin
      * @var string $marginMode
      * @Type("string")
      * @SerializedName("marginMode")

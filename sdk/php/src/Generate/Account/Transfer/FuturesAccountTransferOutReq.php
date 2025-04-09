@@ -37,6 +37,8 @@ class FuturesAccountTransferOutReq implements Request
     public $amount;
     /**
      * Receive account type, including MAIN, TRADE
+     * - 'MAIN' :
+     * - 'TRADE' :
      * @var string $recAccountType
      * @Type("string")
      * @SerializedName("recAccountType")
@@ -107,7 +109,8 @@ class FuturesAccountTransferOutReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Currency, including XBT, USDT...
+     * Currency, including XBT, USDT...
+     * @param string $value
      * @return self
      */
     public function setCurrency($value)
@@ -117,7 +120,8 @@ class FuturesAccountTransferOutReqBuilder
     }
 
     /**
-     * @param float $value Amount to be transferred out; cannot exceed 1000000000
+     * Amount to be transferred out; cannot exceed 1000000000
+     * @param float $value
      * @return self
      */
     public function setAmount($value)
@@ -127,7 +131,10 @@ class FuturesAccountTransferOutReqBuilder
     }
 
     /**
-     * @param string $value Receive account type, including MAIN, TRADE
+     * Receive account type, including MAIN, TRADE
+     * - 'MAIN' :
+     * - 'TRADE' :
+     * @param string $value
      * @return self
      */
     public function setRecAccountType($value)

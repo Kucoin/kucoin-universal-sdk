@@ -99,7 +99,8 @@ class GetCurrencyReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Path parameter, Currency
+     * Path parameter, Currency
+     * @param string $value
      * @return self
      */
     public function setCurrency($value)
@@ -109,7 +110,8 @@ class GetCurrencyReqBuilder
     }
 
     /**
-     * @param string $value Support for querying the chain of currency, e.g. the available values for USDT are OMNI, ERC20, TRC20. This only applies to multi-chain currencies; no need for single-chain currencies.
+     * Support for querying the chain of currency, e.g. the available values for USDT are OMNI, ERC20, TRC20. This only applies to multi-chain currencies; no need for single-chain currencies.
+     * @param string $value
      * @return self
      */
     public function setChain($value)

@@ -93,7 +93,8 @@ class AddSubAccountFuturesPermissionReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Sub account UID
+     * Sub account UID
+     * @param string $value
      * @return self
      */
     public function setUid($value)

@@ -65,6 +65,9 @@ class GetRepayHistoryItems implements Request
     public $interest;
     /**
      * PENDING: Processing, SUCCESS: Successful, FAILED: Failed
+     * - 'PENDING' :
+     * - 'SUCCESS' :
+     * - 'FAILED' :
      * @var string $status
      * @Type("string")
      * @SerializedName("status")

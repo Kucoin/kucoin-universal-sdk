@@ -100,7 +100,8 @@ class CancelOrderByClientOidReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)
+     * Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)
+     * @param string $value
      * @return self
      */
     public function setSymbol($value)
@@ -110,7 +111,8 @@ class CancelOrderByClientOidReqBuilder
     }
 
     /**
-     * @param string $value The user self-defined order ID.
+     * The user self-defined order ID.
+     * @param string $value
      * @return self
      */
     public function setClientOid($value)

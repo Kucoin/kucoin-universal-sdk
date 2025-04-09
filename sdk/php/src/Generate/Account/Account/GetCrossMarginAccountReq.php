@@ -23,6 +23,9 @@ class GetCrossMarginAccountReq implements Request
     }
     /**
      * quote currency, currently only supports USDT, KCS, BTC, USDT as default
+     * - 'USDT' :
+     * - 'KCS' :
+     * - 'BTC' :
      * @var string|null $quoteCurrency
      * @Type("string")
      * @SerializedName("quoteCurrency")
@@ -30,6 +33,9 @@ class GetCrossMarginAccountReq implements Request
     public $quoteCurrency = "USDT";
     /**
      * Query account type (default MARGIN), MARGIN - only query low frequency cross margin account, MARGIN_V2-only query high frequency cross margin account, ALL - consistent aggregate query with the web side
+     * - 'MARGIN' :
+     * - 'MARGIN_V2' :
+     * - 'ALL' :
      * @var string|null $queryType
      * @Type("string")
      * @SerializedName("queryType")
@@ -100,7 +106,11 @@ class GetCrossMarginAccountReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value quote currency, currently only supports USDT, KCS, BTC, USDT as default
+     * quote currency, currently only supports USDT, KCS, BTC, USDT as default
+     * - 'USDT' :
+     * - 'KCS' :
+     * - 'BTC' :
+     * @param string $value
      * @return self
      */
     public function setQuoteCurrency($value)
@@ -110,7 +120,11 @@ class GetCrossMarginAccountReqBuilder
     }
 
     /**
-     * @param string $value Query account type (default MARGIN), MARGIN - only query low frequency cross margin account, MARGIN_V2-only query high frequency cross margin account, ALL - consistent aggregate query with the web side
+     * Query account type (default MARGIN), MARGIN - only query low frequency cross margin account, MARGIN_V2-only query high frequency cross margin account, ALL - consistent aggregate query with the web side
+     * - 'MARGIN' :
+     * - 'MARGIN_V2' :
+     * - 'ALL' :
+     * @param string $value
      * @return self
      */
     public function setQueryType($value)

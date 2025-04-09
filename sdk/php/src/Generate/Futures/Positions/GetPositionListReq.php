@@ -93,7 +93,8 @@ class GetPositionListReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Currency code, Please refer to [rootSymbol](https://www.kucoin.com/docs-new/api-221752070) , such as USDT,XBT. Query all positions when empty
+     * Currency code, Please refer to [rootSymbol](https://www.kucoin.com/docs-new/api-221752070) , such as USDT,XBT. Query all positions when empty
+     * @param string $value
      * @return self
      */
     public function setCurrency($value)

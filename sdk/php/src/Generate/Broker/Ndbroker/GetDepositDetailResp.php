@@ -98,6 +98,9 @@ class GetDepositDetailResp implements Response
     public $currency;
     /**
      * Status (PROCESSING, SUCCESS, FAILURE)
+     * - 'SUCCESS' :
+     * - 'FAILURE' :
+     * - 'PROCESSING' :
      * @var string $status
      * @Type("string")
      * @SerializedName("status")

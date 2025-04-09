@@ -65,6 +65,9 @@ class GetWithdrawalHistoryOldItems implements Request
     public $isInner;
     /**
      * Status
+     * - 'PROCESSING' :
+     * - 'SUCCESS' :
+     * - 'FAILURE' :
      * @var string|null $status
      * @Type("string")
      * @SerializedName("status")

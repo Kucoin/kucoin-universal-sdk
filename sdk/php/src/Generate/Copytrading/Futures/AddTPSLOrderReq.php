@@ -30,6 +30,8 @@ class AddTPSLOrderReq implements Request
     public $clientOid;
     /**
      * Specify if the order is to 'buy' or 'sell'.
+     * - 'buy' :
+     * - 'sell' :
      * @var string $side
      * @Type("string")
      * @SerializedName("side")
@@ -51,6 +53,8 @@ class AddTPSLOrderReq implements Request
     public $leverage;
     /**
      * Specify if the order is a 'limit' order or 'market' order
+     * - 'limit' : limit order
+     * - 'market' : market order
      * @var string $type
      * @Type("string")
      * @SerializedName("type")
@@ -58,6 +62,8 @@ class AddTPSLOrderReq implements Request
     public $type = "limit";
     /**
      * Either 'TP' or 'MP'
+     * - 'TP' : TP for trade price, The last trade price is the last price at which an order was filled. This price can be found in the latest match message.
+     * - 'MP' : MP for mark price. The mark price can be obtained through relevant OPEN API for index services.
      * @var string|null $stopPriceType
      * @Type("string")
      * @SerializedName("stopPriceType")
@@ -79,6 +85,7 @@ class AddTPSLOrderReq implements Request
     public $closeOrder = false;
     /**
      * Margin mode: ISOLATED, default: ISOLATED
+     * - 'ISOLATED' :
      * @var string|null $marginMode
      * @Type("string")
      * @SerializedName("marginMode")
@@ -100,6 +107,8 @@ class AddTPSLOrderReq implements Request
     public $size;
     /**
      * Optional for type is 'limit' order, [Time in force](https://www.kucoin.com/docs-new/doc-338146) is a special strategy used during trading, default is GTC
+     * - 'GTC' : Order remains open on the order book until canceled. This is the default type if the field is left empty.
+     * - 'IOC' : Being matched or not, the remaining size of the order will be instantly canceled instead of entering the order book.
      * @var string|null $timeInForce
      * @Type("string")
      * @SerializedName("timeInForce")
@@ -208,7 +217,8 @@ class AddTPSLOrderReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Unique order ID created by users to identify their orders. The maximum length cannot exceed 40, e.g. UUID only allows numbers, characters, underline(_), and separator (-).
+     * Unique order ID created by users to identify their orders. The maximum length cannot exceed 40, e.g. UUID only allows numbers, characters, underline(_), and separator (-).
+     * @param string $value
      * @return self
      */
     public function setClientOid($value)
@@ -218,7 +228,10 @@ class AddTPSLOrderReqBuilder
     }
 
     /**
-     * @param string $value Specify if the order is to 'buy' or 'sell'.
+     * Specify if the order is to 'buy' or 'sell'.
+     * - 'buy' :
+     * - 'sell' :
+     * @param string $value
      * @return self
      */
     public function setSide($value)
@@ -228,7 +241,8 @@ class AddTPSLOrderReqBuilder
     }
 
     /**
-     * @param string $value Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)
+     * Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)
+     * @param string $value
      * @return self
      */
     public function setSymbol($value)
@@ -238,7 +252,8 @@ class AddTPSLOrderReqBuilder
     }
 
     /**
-     * @param int $value Used to calculate the margin to be frozen for the order. If you are to close the position, this parameter is not required.
+     * Used to calculate the margin to be frozen for the order. If you are to close the position, this parameter is not required.
+     * @param int $value
      * @return self
      */
     public function setLeverage($value)
@@ -248,7 +263,10 @@ class AddTPSLOrderReqBuilder
     }
 
     /**
-     * @param string $value Specify if the order is a 'limit' order or 'market' order
+     * Specify if the order is a 'limit' order or 'market' order
+     * - 'limit' : limit order
+     * - 'market' : market order
+     * @param string $value
      * @return self
      */
     public function setType($value)
@@ -258,7 +276,10 @@ class AddTPSLOrderReqBuilder
     }
 
     /**
-     * @param string $value Either 'TP' or 'MP'
+     * Either 'TP' or 'MP'
+     * - 'TP' : TP for trade price, The last trade price is the last price at which an order was filled. This price can be found in the latest match message.
+     * - 'MP' : MP for mark price. The mark price can be obtained through relevant OPEN API for index services.
+     * @param string $value
      * @return self
      */
     public function setStopPriceType($value)
@@ -268,7 +289,8 @@ class AddTPSLOrderReqBuilder
     }
 
     /**
-     * @param bool $value A mark to reduce the position size only. Set to false by default. Need to set the position size when reduceOnly is true. If set to true, only the orders reducing the position size will be executed. If the reduce-only order size exceeds the position size, the extra size will be canceled.
+     * A mark to reduce the position size only. Set to false by default. Need to set the position size when reduceOnly is true. If set to true, only the orders reducing the position size will be executed. If the reduce-only order size exceeds the position size, the extra size will be canceled.
+     * @param bool $value
      * @return self
      */
     public function setReduceOnly($value)
@@ -278,7 +300,8 @@ class AddTPSLOrderReqBuilder
     }
 
     /**
-     * @param bool $value A mark to close the position. Set to false by default. If closeOrder is set to true, the system will close the position and the position size will become 0. Side, Size and Leverage fields can be left empty and the system will determine the side and size automatically.
+     * A mark to close the position. Set to false by default. If closeOrder is set to true, the system will close the position and the position size will become 0. Side, Size and Leverage fields can be left empty and the system will determine the side and size automatically.
+     * @param bool $value
      * @return self
      */
     public function setCloseOrder($value)
@@ -288,7 +311,9 @@ class AddTPSLOrderReqBuilder
     }
 
     /**
-     * @param string $value Margin mode: ISOLATED, default: ISOLATED
+     * Margin mode: ISOLATED, default: ISOLATED
+     * - 'ISOLATED' :
+     * @param string $value
      * @return self
      */
     public function setMarginMode($value)
@@ -298,7 +323,8 @@ class AddTPSLOrderReqBuilder
     }
 
     /**
-     * @param string $value Required for type is 'limit' order, indicating the operating price
+     * Required for type is 'limit' order, indicating the operating price
+     * @param string $value
      * @return self
      */
     public function setPrice($value)
@@ -308,7 +334,8 @@ class AddTPSLOrderReqBuilder
     }
 
     /**
-     * @param int $value Order size (lot), must be a positive integer. The quantity unit of coin-swap contracts is size (lot), and other units are not supported.
+     * Order size (lot), must be a positive integer. The quantity unit of coin-swap contracts is size (lot), and other units are not supported.
+     * @param int $value
      * @return self
      */
     public function setSize($value)
@@ -318,7 +345,10 @@ class AddTPSLOrderReqBuilder
     }
 
     /**
-     * @param string $value Optional for type is 'limit' order, [Time in force](https://www.kucoin.com/docs-new/doc-338146) is a special strategy used during trading, default is GTC
+     * Optional for type is 'limit' order, [Time in force](https://www.kucoin.com/docs-new/doc-338146) is a special strategy used during trading, default is GTC
+     * - 'GTC' : Order remains open on the order book until canceled. This is the default type if the field is left empty.
+     * - 'IOC' : Being matched or not, the remaining size of the order will be instantly canceled instead of entering the order book.
+     * @param string $value
      * @return self
      */
     public function setTimeInForce($value)
@@ -328,7 +358,8 @@ class AddTPSLOrderReqBuilder
     }
 
     /**
-     * @param bool $value Optional for type is 'limit' order, post only flag, invalid when timeInForce is IOC. When postOnly is true, choosing hidden or iceberg is not allowed. The post-only flag ensures that the trader always pays the maker fee and provides liquidity to the order book. If any part of the order is going to pay taker fees, the order will be fully rejected.
+     * Optional for type is 'limit' order, post only flag, invalid when timeInForce is IOC. When postOnly is true, choosing hidden or iceberg is not allowed. The post-only flag ensures that the trader always pays the maker fee and provides liquidity to the order book. If any part of the order is going to pay taker fees, the order will be fully rejected.
+     * @param bool $value
      * @return self
      */
     public function setPostOnly($value)
@@ -338,7 +369,8 @@ class AddTPSLOrderReqBuilder
     }
 
     /**
-     * @param bool $value Optional for type is 'limit' order, orders not displaying in order book. When hidden is chosen, choosing postOnly is not allowed.
+     * Optional for type is 'limit' order, orders not displaying in order book. When hidden is chosen, choosing postOnly is not allowed.
+     * @param bool $value
      * @return self
      */
     public function setHidden($value)
@@ -348,7 +380,8 @@ class AddTPSLOrderReqBuilder
     }
 
     /**
-     * @param bool $value Optional for type is 'limit' order, Only visible portion of the order is displayed in the order book. When iceberg is chosen, choosing postOnly is not allowed.
+     * Optional for type is 'limit' order, Only visible portion of the order is displayed in the order book. When iceberg is chosen, choosing postOnly is not allowed.
+     * @param bool $value
      * @return self
      */
     public function setIceberg($value)
@@ -358,7 +391,8 @@ class AddTPSLOrderReqBuilder
     }
 
     /**
-     * @param string $value Optional for type is 'limit' order, the maximum visible size of an iceberg order. Please place order in size (lots). The units of qty (base currency) and valueQty (value) are not supported. Need to be defined if iceberg is specified.
+     * Optional for type is 'limit' order, the maximum visible size of an iceberg order. Please place order in size (lots). The units of qty (base currency) and valueQty (value) are not supported. Need to be defined if iceberg is specified.
+     * @param string $value
      * @return self
      */
     public function setVisibleSize($value)
@@ -368,7 +402,8 @@ class AddTPSLOrderReqBuilder
     }
 
     /**
-     * @param string $value Take profit price
+     * Take profit price
+     * @param string $value
      * @return self
      */
     public function setTriggerStopUpPrice($value)
@@ -378,7 +413,8 @@ class AddTPSLOrderReqBuilder
     }
 
     /**
-     * @param string $value Stop loss price
+     * Stop loss price
+     * @param string $value
      * @return self
      */
     public function setTriggerStopDownPrice($value)

@@ -93,7 +93,8 @@ class GetOrderByClientOidReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value The user self-defined order ID.
+     * The user self-defined order ID.
+     * @param string $value
      * @return self
      */
     public function setClientOid($value)

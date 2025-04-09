@@ -30,6 +30,8 @@ class GetClosedOrdersReq implements Request
     public $symbol;
     /**
      * specify if the order is to 'buy' or 'sell'
+     * - 'buy' :
+     * - 'sell' :
      * @var string|null $side
      * @Type("string")
      * @SerializedName("side")
@@ -37,6 +39,8 @@ class GetClosedOrdersReq implements Request
     public $side;
     /**
      * specify if the order is an 'limit' order or 'market' order.
+     * - 'limit' :
+     * - 'market' :
      * @var string|null $type
      * @Type("string")
      * @SerializedName("type")
@@ -135,7 +139,8 @@ class GetClosedOrdersReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value symbol
+     * symbol
+     * @param string $value
      * @return self
      */
     public function setSymbol($value)
@@ -145,7 +150,10 @@ class GetClosedOrdersReqBuilder
     }
 
     /**
-     * @param string $value specify if the order is to 'buy' or 'sell'
+     * specify if the order is to 'buy' or 'sell'
+     * - 'buy' :
+     * - 'sell' :
+     * @param string $value
      * @return self
      */
     public function setSide($value)
@@ -155,7 +163,10 @@ class GetClosedOrdersReqBuilder
     }
 
     /**
-     * @param string $value specify if the order is an 'limit' order or 'market' order.
+     * specify if the order is an 'limit' order or 'market' order.
+     * - 'limit' :
+     * - 'market' :
+     * @param string $value
      * @return self
      */
     public function setType($value)
@@ -165,7 +176,8 @@ class GetClosedOrdersReqBuilder
     }
 
     /**
-     * @param int $value The id of the last set of data from the previous batch of data. By default, the latest information is given. lastId is used to filter data and paginate. If lastId is not entered, the default is a maximum of 100 returned data items. The return results include lastId，which can be used as a query parameter to look up new data from the next page.
+     * The id of the last set of data from the previous batch of data. By default, the latest information is given. lastId is used to filter data and paginate. If lastId is not entered, the default is a maximum of 100 returned data items. The return results include lastId，which can be used as a query parameter to look up new data from the next page.
+     * @param int $value
      * @return self
      */
     public function setLastId($value)
@@ -175,7 +187,8 @@ class GetClosedOrdersReqBuilder
     }
 
     /**
-     * @param int $value Default20，Max100
+     * Default20，Max100
+     * @param int $value
      * @return self
      */
     public function setLimit($value)
@@ -185,7 +198,8 @@ class GetClosedOrdersReqBuilder
     }
 
     /**
-     * @param int $value Start time (milisecond)
+     * Start time (milisecond)
+     * @param int $value
      * @return self
      */
     public function setStartAt($value)
@@ -195,7 +209,8 @@ class GetClosedOrdersReqBuilder
     }
 
     /**
-     * @param int $value End time (milisecond)
+     * End time (milisecond)
+     * @param int $value
      * @return self
      */
     public function setEndAt($value)

@@ -30,6 +30,9 @@ class GetSpotAccountListReq implements Request
     public $currency;
     /**
      * Account type
+     * - 'main' : Funding account
+     * - 'trade' : Spot account
+     * - 'option' : Option account
      * @var string|null $type
      * @Type("string")
      * @SerializedName("type")
@@ -100,7 +103,8 @@ class GetSpotAccountListReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value currency
+     * currency
+     * @param string $value
      * @return self
      */
     public function setCurrency($value)
@@ -110,7 +114,11 @@ class GetSpotAccountListReqBuilder
     }
 
     /**
-     * @param string $value Account type
+     * Account type
+     * - 'main' : Funding account
+     * - 'trade' : Spot account
+     * - 'option' : Option account
+     * @param string $value
      * @return self
      */
     public function setType($value)

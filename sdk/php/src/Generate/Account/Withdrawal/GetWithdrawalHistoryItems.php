@@ -44,6 +44,11 @@ class GetWithdrawalHistoryItems implements Request
     public $chain;
     /**
      * Status. Available value: REVIEW, PROCESSING, WALLET_PROCESSING, SUCCESS and FAILURE
+     * - 'REVIEW' :
+     * - 'PROCESSING' :
+     * - 'WALLET_PROCESSING' :
+     * - 'FAILURE' :
+     * - 'SUCCESS' :
      * @var string|null $status
      * @Type("string")
      * @SerializedName("status")

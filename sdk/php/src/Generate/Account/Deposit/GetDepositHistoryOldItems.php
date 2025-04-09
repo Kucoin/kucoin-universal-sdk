@@ -58,6 +58,9 @@ class GetDepositHistoryOldItems implements Request
     public $isInner;
     /**
      *
+     * - 'PROCESSING' :
+     * - 'SUCCESS' :
+     * - 'FAILURE' :
      * @var string|null $status
      * @Type("string")
      * @SerializedName("status")

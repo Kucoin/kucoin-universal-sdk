@@ -93,7 +93,8 @@ class GetCrossMarginSymbolsReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value If not provided, all cross margin symbol will be queried. If provided, only the specified symbol will be queried.
+     * If not provided, all cross margin symbol will be queried. If provided, only the specified symbol will be queried.
+     * @param string $value
      * @return self
      */
     public function setSymbol($value)

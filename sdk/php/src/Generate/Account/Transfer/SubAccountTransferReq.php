@@ -44,6 +44,8 @@ class SubAccountTransferReq implements Request
     public $amount;
     /**
      * OUT — the master user to sub user IN — the sub user to the master user
+     * - 'IN' :
+     * - 'OUT' :
      * @var string $direction
      * @Type("string")
      * @SerializedName("direction")
@@ -51,6 +53,11 @@ class SubAccountTransferReq implements Request
     public $direction;
     /**
      * Account type: MAIN, TRADE, CONTRACT, MARGIN, ISOLATED
+     * - 'MAIN' : Funding account
+     * - 'TRADE' : Spot account
+     * - 'MARGIN' : Margin account
+     * - 'CONTRACT' : Futures account
+     * - 'OPTION' : Option account
      * @var string|null $accountType
      * @Type("string")
      * @SerializedName("accountType")
@@ -58,6 +65,10 @@ class SubAccountTransferReq implements Request
     public $accountType = "MAIN";
     /**
      * Sub-account type: MAIN, TRADE, CONTRACT, MARGIN, ISOLATED
+     * - 'MAIN' :
+     * - 'TRADE' :
+     * - 'MARGIN' :
+     * - 'CONTRACT' :
      * @var string|null $subAccountType
      * @Type("string")
      * @SerializedName("subAccountType")
@@ -149,7 +160,8 @@ class SubAccountTransferReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Unique order ID created by users to identify their orders, e.g. UUID, with a maximum length of 128 bits
+     * Unique order ID created by users to identify their orders, e.g. UUID, with a maximum length of 128 bits
+     * @param string $value
      * @return self
      */
     public function setClientOid($value)
@@ -159,7 +171,8 @@ class SubAccountTransferReqBuilder
     }
 
     /**
-     * @param string $value currency
+     * currency
+     * @param string $value
      * @return self
      */
     public function setCurrency($value)
@@ -169,7 +182,8 @@ class SubAccountTransferReqBuilder
     }
 
     /**
-     * @param string $value Transfer amount: The amount is a positive integer multiple of the currency precision.
+     * Transfer amount: The amount is a positive integer multiple of the currency precision.
+     * @param string $value
      * @return self
      */
     public function setAmount($value)
@@ -179,7 +193,10 @@ class SubAccountTransferReqBuilder
     }
 
     /**
-     * @param string $value OUT — the master user to sub user IN — the sub user to the master user
+     * OUT — the master user to sub user IN — the sub user to the master user
+     * - 'IN' :
+     * - 'OUT' :
+     * @param string $value
      * @return self
      */
     public function setDirection($value)
@@ -189,7 +206,13 @@ class SubAccountTransferReqBuilder
     }
 
     /**
-     * @param string $value Account type: MAIN, TRADE, CONTRACT, MARGIN, ISOLATED
+     * Account type: MAIN, TRADE, CONTRACT, MARGIN, ISOLATED
+     * - 'MAIN' : Funding account
+     * - 'TRADE' : Spot account
+     * - 'MARGIN' : Margin account
+     * - 'CONTRACT' : Futures account
+     * - 'OPTION' : Option account
+     * @param string $value
      * @return self
      */
     public function setAccountType($value)
@@ -199,7 +222,12 @@ class SubAccountTransferReqBuilder
     }
 
     /**
-     * @param string $value Sub-account type: MAIN, TRADE, CONTRACT, MARGIN, ISOLATED
+     * Sub-account type: MAIN, TRADE, CONTRACT, MARGIN, ISOLATED
+     * - 'MAIN' :
+     * - 'TRADE' :
+     * - 'MARGIN' :
+     * - 'CONTRACT' :
+     * @param string $value
      * @return self
      */
     public function setSubAccountType($value)
@@ -209,7 +237,8 @@ class SubAccountTransferReqBuilder
     }
 
     /**
-     * @param string $value the user ID of a sub-account.
+     * the user ID of a sub-account.
+     * @param string $value
      * @return self
      */
     public function setSubUserId($value)
@@ -219,7 +248,8 @@ class SubAccountTransferReqBuilder
     }
 
     /**
-     * @param string $value Need to be defined if accountType=ISOLATED.
+     * Need to be defined if accountType=ISOLATED.
+     * @param string $value
      * @return self
      */
     public function setTag($value)
@@ -229,7 +259,8 @@ class SubAccountTransferReqBuilder
     }
 
     /**
-     * @param string $value Need to be defined if subAccountType=ISOLATED.
+     * Need to be defined if subAccountType=ISOLATED.
+     * @param string $value
      * @return self
      */
     public function setSubTag($value)

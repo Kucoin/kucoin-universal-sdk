@@ -96,7 +96,8 @@ class CancelOrderByClientOidOldReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Client Order Id，unique identifier created by the user
+     * Client Order Id，unique identifier created by the user
+     * @param string $value
      * @return self
      */
     public function setClientOid($value)

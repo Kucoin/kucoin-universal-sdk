@@ -128,6 +128,8 @@ class GetPositionsHistoryItems implements Request
     public $closePrice;
     /**
      * Margin Mode: CROSS，ISOLATED
+     * - 'CROSS' : cross margin
+     * - 'ISOLATED' : isolated margin
      * @var string $marginMode
      * @Type("string")
      * @SerializedName("marginMode")

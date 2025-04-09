@@ -51,6 +51,9 @@ class GetSubAccountAPIData implements Request
     public $apiVersion;
     /**
      * [Permissions](https://www.kucoin.com/docs-new/doc-338144) group list
+     * - 'General' :
+     * - 'Spot' :
+     * - 'Futures' :
      * @var string[] $permissions
      * @Type("string[]")
      * @SerializedName("permissions")

@@ -93,7 +93,8 @@ class GetFuturesActualFeeReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value The unique identity of the trading pair; will not change even if the trading pair is renamed
+     * The unique identity of the trading pair; will not change even if the trading pair is renamed
+     * @param string $value
      * @return self
      */
     public function setSymbol($value)

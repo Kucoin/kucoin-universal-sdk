@@ -49,6 +49,8 @@ class CancelOrderByClientOidSyncResp implements Response
     public $canceledSize;
     /**
      * Order Status. open：order is active; done：order has been completed
+     * - 'open' : order is active
+     * - 'done' : order has been completed
      * @var string $status
      * @Type("string")
      * @SerializedName("status")

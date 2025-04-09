@@ -37,6 +37,7 @@ class BatchAddOrdersOrderList implements Request
     public $symbol;
     /**
      * Specify if the order is a 'limit' order or 'market' order.
+     * - 'limit' :
      * @var string $type
      * @Type("string")
      * @SerializedName("type")
@@ -44,6 +45,10 @@ class BatchAddOrdersOrderList implements Request
     public $type;
     /**
      * [Time in force](https://www.kucoin.com/docs-new/doc-338146) is a special strategy used during trading
+     * - 'GTC' :
+     * - 'GTT' :
+     * - 'IOC' :
+     * - 'FOK' :
      * @var string|null $timeInForce
      * @Type("string")
      * @SerializedName("timeInForce")
@@ -51,6 +56,8 @@ class BatchAddOrdersOrderList implements Request
     public $timeInForce = "GTC";
     /**
      * Specify if the order is to 'buy' or 'sell'.
+     * - 'buy' :
+     * - 'sell' :
      * @var string $side
      * @Type("string")
      * @SerializedName("side")
@@ -72,6 +79,10 @@ class BatchAddOrdersOrderList implements Request
     public $size;
     /**
      * [Self Trade Prevention](https://www.kucoin.com/docs-new/doc-338146) is divided into four strategies: CN, CO, CB , and DC
+     * - 'DC' :
+     * - 'CO' :
+     * - 'CN' :
+     * - 'CB' :
      * @var string|null $stp
      * @Type("string")
      * @SerializedName("stp")
@@ -212,7 +223,8 @@ class BatchAddOrdersOrderListBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Client Order ID: The ClientOid field is a unique ID created by the user (we recommend using a UUID), and can only contain numbers, letters, underscores (_), and hyphens (-). This field is returned when order information is obtained. You can use clientOid to tag your orders. ClientOid is different from the order ID created by the service provider. Please do not initiate requests using the same clientOid. The maximum length for the ClientOid is 40 characters.
+     * Client Order ID: The ClientOid field is a unique ID created by the user (we recommend using a UUID), and can only contain numbers, letters, underscores (_), and hyphens (-). This field is returned when order information is obtained. You can use clientOid to tag your orders. ClientOid is different from the order ID created by the service provider. Please do not initiate requests using the same clientOid. The maximum length for the ClientOid is 40 characters.
+     * @param string $value
      * @return self
      */
     public function setClientOid($value)
@@ -222,7 +234,8 @@ class BatchAddOrdersOrderListBuilder
     }
 
     /**
-     * @param string $value symbol
+     * symbol
+     * @param string $value
      * @return self
      */
     public function setSymbol($value)
@@ -232,7 +245,9 @@ class BatchAddOrdersOrderListBuilder
     }
 
     /**
-     * @param string $value Specify if the order is a 'limit' order or 'market' order.
+     * Specify if the order is a 'limit' order or 'market' order.
+     * - 'limit' :
+     * @param string $value
      * @return self
      */
     public function setType($value)
@@ -242,7 +257,12 @@ class BatchAddOrdersOrderListBuilder
     }
 
     /**
-     * @param string $value [Time in force](https://www.kucoin.com/docs-new/doc-338146) is a special strategy used during trading
+     * [Time in force](https://www.kucoin.com/docs-new/doc-338146) is a special strategy used during trading
+     * - 'GTC' :
+     * - 'GTT' :
+     * - 'IOC' :
+     * - 'FOK' :
+     * @param string $value
      * @return self
      */
     public function setTimeInForce($value)
@@ -252,7 +272,10 @@ class BatchAddOrdersOrderListBuilder
     }
 
     /**
-     * @param string $value Specify if the order is to 'buy' or 'sell'.
+     * Specify if the order is to 'buy' or 'sell'.
+     * - 'buy' :
+     * - 'sell' :
+     * @param string $value
      * @return self
      */
     public function setSide($value)
@@ -262,7 +285,8 @@ class BatchAddOrdersOrderListBuilder
     }
 
     /**
-     * @param string $value Specify price for order
+     * Specify price for order
+     * @param string $value
      * @return self
      */
     public function setPrice($value)
@@ -272,7 +296,8 @@ class BatchAddOrdersOrderListBuilder
     }
 
     /**
-     * @param string $value Specify quantity for order.  When **type** is limited, select one out of two: size or funds. Size refers to the amount of trading targets (the asset name written in front) for the trading pair. The Size must be based on the baseIncrement of the trading pair. The baseIncrement represents the precision for the trading pair. The size of an order must be a positive-integer multiple of baseIncrement and must be between baseMinSize and baseMaxSize.  When **type** is market, select one out of two: size or funds
+     * Specify quantity for order.  When **type** is limited, select one out of two: size or funds. Size refers to the amount of trading targets (the asset name written in front) for the trading pair. The Size must be based on the baseIncrement of the trading pair. The baseIncrement represents the precision for the trading pair. The size of an order must be a positive-integer multiple of baseIncrement and must be between baseMinSize and baseMaxSize.  When **type** is market, select one out of two: size or funds
+     * @param string $value
      * @return self
      */
     public function setSize($value)
@@ -282,7 +307,12 @@ class BatchAddOrdersOrderListBuilder
     }
 
     /**
-     * @param string $value [Self Trade Prevention](https://www.kucoin.com/docs-new/doc-338146) is divided into four strategies: CN, CO, CB , and DC
+     * [Self Trade Prevention](https://www.kucoin.com/docs-new/doc-338146) is divided into four strategies: CN, CO, CB , and DC
+     * - 'DC' :
+     * - 'CO' :
+     * - 'CN' :
+     * - 'CB' :
+     * @param string $value
      * @return self
      */
     public function setStp($value)
@@ -292,7 +322,8 @@ class BatchAddOrdersOrderListBuilder
     }
 
     /**
-     * @param int $value Cancel after n seconds, the order timing strategy is GTT, -1 means it will not be cancelled automatically, the default value is -1
+     * Cancel after n seconds, the order timing strategy is GTT, -1 means it will not be cancelled automatically, the default value is -1
+     * @param int $value
      * @return self
      */
     public function setCancelAfter($value)
@@ -302,7 +333,8 @@ class BatchAddOrdersOrderListBuilder
     }
 
     /**
-     * @param bool $value passive order labels, this is disabled when the order timing strategy is IOC or FOK
+     * passive order labels, this is disabled when the order timing strategy is IOC or FOK
+     * @param bool $value
      * @return self
      */
     public function setPostOnly($value)
@@ -312,7 +344,8 @@ class BatchAddOrdersOrderListBuilder
     }
 
     /**
-     * @param bool $value [Hidden order](https://www.kucoin.com/docs-new/doc-338146) or not (not shown in order book)
+     * [Hidden order](https://www.kucoin.com/docs-new/doc-338146) or not (not shown in order book)
+     * @param bool $value
      * @return self
      */
     public function setHidden($value)
@@ -322,7 +355,8 @@ class BatchAddOrdersOrderListBuilder
     }
 
     /**
-     * @param bool $value Whether or not only visible portions of orders are shown in [Iceberg orders](https://www.kucoin.com/docs-new/doc-338146)
+     * Whether or not only visible portions of orders are shown in [Iceberg orders](https://www.kucoin.com/docs-new/doc-338146)
+     * @param bool $value
      * @return self
      */
     public function setIceberg($value)
@@ -332,7 +366,8 @@ class BatchAddOrdersOrderListBuilder
     }
 
     /**
-     * @param string $value Maximum visible quantity in iceberg orders
+     * Maximum visible quantity in iceberg orders
+     * @param string $value
      * @return self
      */
     public function setVisibleSize($value)
@@ -342,7 +377,8 @@ class BatchAddOrdersOrderListBuilder
     }
 
     /**
-     * @param string $value Order tag, length cannot exceed 20 characters (ASCII)
+     * Order tag, length cannot exceed 20 characters (ASCII)
+     * @param string $value
      * @return self
      */
     public function setTags($value)
@@ -352,7 +388,8 @@ class BatchAddOrdersOrderListBuilder
     }
 
     /**
-     * @param string $value Order placement remarks, length cannot exceed 20 characters (ASCII)
+     * Order placement remarks, length cannot exceed 20 characters (ASCII)
+     * @param string $value
      * @return self
      */
     public function setRemark($value)
@@ -362,7 +399,8 @@ class BatchAddOrdersOrderListBuilder
     }
 
     /**
-     * @param string $value When **type** is market, select one out of two: size or funds
+     * When **type** is market, select one out of two: size or funds
+     * @param string $value
      * @return self
      */
     public function setFunds($value)
@@ -372,7 +410,8 @@ class BatchAddOrdersOrderListBuilder
     }
 
     /**
-     * @param int $value Equal to KC-API-TIMESTAMP. Needs to be defined if iceberg is specified.
+     * Equal to KC-API-TIMESTAMP. Needs to be defined if iceberg is specified.
+     * @param int $value
      * @return self
      */
     public function setClientTimestamp($value)
@@ -382,7 +421,8 @@ class BatchAddOrdersOrderListBuilder
     }
 
     /**
-     * @param int $value The order will fail if it times out after the specified duration in milliseconds. Specifically, if clientTimestamp + allowMaxTimeWindow (in milliseconds) is less than the time the server receives the message, the order will fail.
+     * The order will fail if it times out after the specified duration in milliseconds. Specifically, if clientTimestamp + allowMaxTimeWindow (in milliseconds) is less than the time the server receives the message, the order will fail.
+     * @param int $value
      * @return self
      */
     public function setAllowMaxTimeWindow($value)

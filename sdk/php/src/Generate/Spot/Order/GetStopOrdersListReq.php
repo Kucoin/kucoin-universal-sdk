@@ -37,6 +37,8 @@ class GetStopOrdersListReq implements Request
     public $side;
     /**
      * limit, market
+     * - 'limit' : limit order
+     * - 'market' : market order
      * @var string|null $type
      * @Type("string")
      * @SerializedName("type")
@@ -156,7 +158,8 @@ class GetStopOrdersListReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Only list orders for a specific symbol
+     * Only list orders for a specific symbol
+     * @param string $value
      * @return self
      */
     public function setSymbol($value)
@@ -166,7 +169,8 @@ class GetStopOrdersListReqBuilder
     }
 
     /**
-     * @param string $value buy or sell
+     * buy or sell
+     * @param string $value
      * @return self
      */
     public function setSide($value)
@@ -176,7 +180,10 @@ class GetStopOrdersListReqBuilder
     }
 
     /**
-     * @param string $value limit, market
+     * limit, market
+     * - 'limit' : limit order
+     * - 'market' : market order
+     * @param string $value
      * @return self
      */
     public function setType($value)
@@ -186,7 +193,8 @@ class GetStopOrdersListReqBuilder
     }
 
     /**
-     * @param string $value The type of trading : TRADE（Spot）, MARGIN_TRADE (Cross Margin), MARGIN_ISOLATED_TRADE (Isolated Margin). Default is TRADE
+     * The type of trading : TRADE（Spot）, MARGIN_TRADE (Cross Margin), MARGIN_ISOLATED_TRADE (Isolated Margin). Default is TRADE
+     * @param string $value
      * @return self
      */
     public function setTradeType($value)
@@ -196,7 +204,8 @@ class GetStopOrdersListReqBuilder
     }
 
     /**
-     * @param int $value Start time (milisecond)
+     * Start time (milisecond)
+     * @param int $value
      * @return self
      */
     public function setStartAt($value)
@@ -206,7 +215,8 @@ class GetStopOrdersListReqBuilder
     }
 
     /**
-     * @param int $value End time (milisecond)
+     * End time (milisecond)
+     * @param int $value
      * @return self
      */
     public function setEndAt($value)
@@ -216,7 +226,8 @@ class GetStopOrdersListReqBuilder
     }
 
     /**
-     * @param int $value Current page
+     * Current page
+     * @param int $value
      * @return self
      */
     public function setCurrentPage($value)
@@ -226,7 +237,8 @@ class GetStopOrdersListReqBuilder
     }
 
     /**
-     * @param string $value Comma seperated order ID list
+     * Comma seperated order ID list
+     * @param string $value
      * @return self
      */
     public function setOrderIds($value)
@@ -236,7 +248,8 @@ class GetStopOrdersListReqBuilder
     }
 
     /**
-     * @param int $value Page size
+     * Page size
+     * @param int $value
      * @return self
      */
     public function setPageSize($value)
@@ -246,7 +259,8 @@ class GetStopOrdersListReqBuilder
     }
 
     /**
-     * @param string $value Order type: stop: stop loss order, oco: oco order
+     * Order type: stop: stop loss order, oco: oco order
+     * @param string $value
      * @return self
      */
     public function setStop($value)

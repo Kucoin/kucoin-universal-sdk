@@ -100,7 +100,8 @@ class GetSubAccountApiListReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value API-Key
+     * API-Key
+     * @param string $value
      * @return self
      */
     public function setApiKey($value)
@@ -110,7 +111,8 @@ class GetSubAccountApiListReqBuilder
     }
 
     /**
-     * @param string $value Sub-account name.
+     * Sub-account name.
+     * @param string $value
      * @return self
      */
     public function setSubName($value)

@@ -23,6 +23,8 @@ class GetPurchaseOrdersReq implements Request
     }
     /**
      * DONE-completed; PENDING-settling
+     * - 'DONE' : completed
+     * - 'PENDING' : settling
      * @var string|null $status
      * @Type("string")
      * @SerializedName("status")
@@ -121,7 +123,10 @@ class GetPurchaseOrdersReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value DONE-completed; PENDING-settling
+     * DONE-completed; PENDING-settling
+     * - 'DONE' : completed
+     * - 'PENDING' : settling
+     * @param string $value
      * @return self
      */
     public function setStatus($value)
@@ -131,7 +136,8 @@ class GetPurchaseOrdersReqBuilder
     }
 
     /**
-     * @param string $value Currency
+     * Currency
+     * @param string $value
      * @return self
      */
     public function setCurrency($value)
@@ -141,7 +147,8 @@ class GetPurchaseOrdersReqBuilder
     }
 
     /**
-     * @param string $value Purchase order ID
+     * Purchase order ID
+     * @param string $value
      * @return self
      */
     public function setPurchaseOrderNo($value)
@@ -151,7 +158,8 @@ class GetPurchaseOrdersReqBuilder
     }
 
     /**
-     * @param int $value Current page; default is 1
+     * Current page; default is 1
+     * @param int $value
      * @return self
      */
     public function setCurrentPage($value)
@@ -161,7 +169,8 @@ class GetPurchaseOrdersReqBuilder
     }
 
     /**
-     * @param int $value Page size; 1<=pageSize<=50; default is 50
+     * Page size; 1<=pageSize<=50; default is 50
+     * @param int $value
      * @return self
      */
     public function setPageSize($value)

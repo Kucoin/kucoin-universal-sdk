@@ -86,6 +86,9 @@ class GetDepositListData implements Request
     public $walletTxId;
     /**
      * Status. Available value: PROCESSING, SUCCESS, FAILURE
+     * - 'PROCESSING' :
+     * - 'SUCCESS' :
+     * - 'FAILURE' :
      * @var string $status
      * @Type("string")
      * @SerializedName("status")

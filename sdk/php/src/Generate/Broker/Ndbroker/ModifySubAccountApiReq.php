@@ -37,6 +37,9 @@ class ModifySubAccountApiReq implements Request
     public $ipWhitelist;
     /**
      * [Permissions](https://www.kucoin.com/docs-new/doc-338144) group list (only General, Spot and Futures permissions can be set, such as \"General, Trade\").
+     * - 'general' :
+     * - 'spot' :
+     * - 'futures' :
      * @var string[] $permissions
      * @Type("string[]")
      * @SerializedName("permissions")
@@ -121,7 +124,8 @@ class ModifySubAccountApiReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Sub-account UID
+     * Sub-account UID
+     * @param string $value
      * @return self
      */
     public function setUid($value)
@@ -131,7 +135,8 @@ class ModifySubAccountApiReqBuilder
     }
 
     /**
-     * @param string[] $value IP whitelist list, supports up to 20 IPs
+     * IP whitelist list, supports up to 20 IPs
+     * @param string[] $value
      * @return self
      */
     public function setIpWhitelist($value)
@@ -141,7 +146,11 @@ class ModifySubAccountApiReqBuilder
     }
 
     /**
-     * @param string[] $value [Permissions](https://www.kucoin.com/docs-new/doc-338144) group list (only General, Spot and Futures permissions can be set, such as \"General, Trade\").
+     * [Permissions](https://www.kucoin.com/docs-new/doc-338144) group list (only General, Spot and Futures permissions can be set, such as \"General, Trade\").
+     * - 'general' :
+     * - 'spot' :
+     * - 'futures' :
+     * @param string[] $value
      * @return self
      */
     public function setPermissions($value)
@@ -151,7 +160,8 @@ class ModifySubAccountApiReqBuilder
     }
 
     /**
-     * @param string $value apikey remarks (length 4~32)
+     * apikey remarks (length 4~32)
+     * @param string $value
      * @return self
      */
     public function setLabel($value)
@@ -161,7 +171,8 @@ class ModifySubAccountApiReqBuilder
     }
 
     /**
-     * @param string $value Sub-account apiKey
+     * Sub-account apiKey
+     * @param string $value
      * @return self
      */
     public function setApiKey($value)

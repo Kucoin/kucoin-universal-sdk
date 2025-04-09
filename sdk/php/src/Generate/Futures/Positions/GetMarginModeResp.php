@@ -21,6 +21,8 @@ class GetMarginModeResp implements Response
     public $symbol;
     /**
      * Margin mode: ISOLATED (isolated), CROSS (cross margin).
+     * - 'ISOLATED' : isolated margin
+     * - 'CROSS' : cross margin
      * @var string $marginMode
      * @Type("string")
      * @SerializedName("marginMode")

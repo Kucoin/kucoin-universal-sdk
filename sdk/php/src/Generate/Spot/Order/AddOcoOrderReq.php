@@ -30,6 +30,8 @@ class AddOcoOrderReq implements Request
     public $clientOid;
     /**
      * specify if the order is to 'buy' or 'sell'
+     * - 'buy' :
+     * - 'sell' :
      * @var string $side
      * @Type("string")
      * @SerializedName("side")
@@ -79,6 +81,7 @@ class AddOcoOrderReq implements Request
     public $limitPrice;
     /**
      * Transaction Type, currently only supports TRADE (spot transactions), the default is TRADE
+     * - 'TRADE' : Spot Trading
      * @var string|null $tradeType
      * @Type("string")
      * @SerializedName("tradeType")
@@ -145,7 +148,8 @@ class AddOcoOrderReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Client Order Id，The ClientOid field is a unique ID created by the user（we recommend using a UUID）, and can only contain numbers, letters, underscores （_）, and hyphens （-）. This field is returned when order information is obtained. You can use clientOid to tag your orders. ClientOid is different from the order ID created by the service provider. Please do not initiate requests using the same clientOid. The maximum length for the ClientOid is 40 characters.  Please remember the orderId created by the service provider, it used to check for updates in order status.
+     * Client Order Id，The ClientOid field is a unique ID created by the user（we recommend using a UUID）, and can only contain numbers, letters, underscores （_）, and hyphens （-）. This field is returned when order information is obtained. You can use clientOid to tag your orders. ClientOid is different from the order ID created by the service provider. Please do not initiate requests using the same clientOid. The maximum length for the ClientOid is 40 characters.  Please remember the orderId created by the service provider, it used to check for updates in order status.
+     * @param string $value
      * @return self
      */
     public function setClientOid($value)
@@ -155,7 +159,10 @@ class AddOcoOrderReqBuilder
     }
 
     /**
-     * @param string $value specify if the order is to 'buy' or 'sell'
+     * specify if the order is to 'buy' or 'sell'
+     * - 'buy' :
+     * - 'sell' :
+     * @param string $value
      * @return self
      */
     public function setSide($value)
@@ -165,7 +172,8 @@ class AddOcoOrderReqBuilder
     }
 
     /**
-     * @param string $value symbol
+     * symbol
+     * @param string $value
      * @return self
      */
     public function setSymbol($value)
@@ -175,7 +183,8 @@ class AddOcoOrderReqBuilder
     }
 
     /**
-     * @param string $value Order placement remarks, length cannot exceed 20 characters (ASCII)
+     * Order placement remarks, length cannot exceed 20 characters (ASCII)
+     * @param string $value
      * @return self
      */
     public function setRemark($value)
@@ -185,7 +194,8 @@ class AddOcoOrderReqBuilder
     }
 
     /**
-     * @param string $value Specify price for order
+     * Specify price for order
+     * @param string $value
      * @return self
      */
     public function setPrice($value)
@@ -195,7 +205,8 @@ class AddOcoOrderReqBuilder
     }
 
     /**
-     * @param string $value Specify quantity for order
+     * Specify quantity for order
+     * @param string $value
      * @return self
      */
     public function setSize($value)
@@ -205,7 +216,8 @@ class AddOcoOrderReqBuilder
     }
 
     /**
-     * @param string $value trigger price.
+     * trigger price.
+     * @param string $value
      * @return self
      */
     public function setStopPrice($value)
@@ -215,7 +227,8 @@ class AddOcoOrderReqBuilder
     }
 
     /**
-     * @param string $value The limit order price after take-profit and stop-loss are triggered.
+     * The limit order price after take-profit and stop-loss are triggered.
+     * @param string $value
      * @return self
      */
     public function setLimitPrice($value)
@@ -225,7 +238,9 @@ class AddOcoOrderReqBuilder
     }
 
     /**
-     * @param string $value Transaction Type, currently only supports TRADE (spot transactions), the default is TRADE
+     * Transaction Type, currently only supports TRADE (spot transactions), the default is TRADE
+     * - 'TRADE' : Spot Trading
+     * @param string $value
      * @return self
      */
     public function setTradeType($value)

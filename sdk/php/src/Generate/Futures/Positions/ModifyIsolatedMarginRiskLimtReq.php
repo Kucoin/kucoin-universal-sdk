@@ -100,7 +100,8 @@ class ModifyIsolatedMarginRiskLimtReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)
+     * Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)
+     * @param string $value
      * @return self
      */
     public function setSymbol($value)
@@ -110,7 +111,8 @@ class ModifyIsolatedMarginRiskLimtReqBuilder
     }
 
     /**
-     * @param int $value Level
+     * Level
+     * @param int $value
      * @return self
      */
     public function setLevel($value)

@@ -93,7 +93,8 @@ class GetFuturesSubAccountListV2ReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Currency, Default XBT
+     * Currency, Default XBT
+     * @param string $value
      * @return self
      */
     public function setCurrency($value)

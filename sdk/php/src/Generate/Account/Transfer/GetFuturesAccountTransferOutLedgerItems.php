@@ -51,6 +51,9 @@ class GetFuturesAccountTransferOutLedgerItems implements Request
     public $recSystem;
     /**
      * Status PROCESSING, SUCCESS, FAILURE
+     * - 'PROCESSING' :
+     * - 'SUCCESS' :
+     * - 'FAILURE' :
      * @var string|null $status
      * @Type("string")
      * @SerializedName("status")

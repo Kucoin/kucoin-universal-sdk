@@ -28,6 +28,8 @@ class GetOrderByOrderIdResp implements Response
     public $symbol;
     /**
      * Order type, market order or limit order
+     * - 'market' : Market Order
+     * - 'limit' : Limit Order
      * @var string $type
      * @Type("string")
      * @SerializedName("type")
@@ -35,6 +37,8 @@ class GetOrderByOrderIdResp implements Response
     public $type;
     /**
      * Transaction side
+     * - 'buy' : buy
+     * - 'sell' : sell
      * @var string $side
      * @Type("string")
      * @SerializedName("side")
@@ -77,6 +81,10 @@ class GetOrderByOrderIdResp implements Response
     public $dealSize;
     /**
      * [Self Trade Prevention](https://www.kucoin.com/docs-new/doc-338146) is divided into these strategies: CN, CO, CB. Not supported DC at the moment.
+     * - '' : Null means not stp order
+     * - 'CN' : Cancel new, Cancel the new order
+     * - 'CO' : Cancel old, Cancel the old order
+     * - 'CB' : Cancel both, Cancel both sides
      * @var string $stp
      * @Type("string")
      * @SerializedName("stp")
@@ -91,6 +99,10 @@ class GetOrderByOrderIdResp implements Response
     public $stop;
     /**
      * Trigger price type of stop orders
+     * - '' :
+     * - 'TP' : TP for trade price, The last trade price is the last price at which an order was filled. This price can be found in the latest match message.
+     * - 'MP' : MP for mark price, The mark price can be obtained through relevant OPEN API for index services
+     * - 'IP' : IP for index price, The index price can be obtained through relevant OPEN API for index services
      * @var string $stopPriceType
      * @Type("string")
      * @SerializedName("stopPriceType")
@@ -238,6 +250,8 @@ class GetOrderByOrderIdResp implements Response
     public $settleCurrency;
     /**
      * Margin mode: ISOLATED (isolated), CROSS (cross margin).
+     * - 'CROSS' : Cross margin
+     * - 'ISOLATED' : Isolated margin
      * @var string $marginMode
      * @Type("string")
      * @SerializedName("marginMode")
@@ -266,6 +280,8 @@ class GetOrderByOrderIdResp implements Response
     public $filledValue;
     /**
      * order status: “open” or “done”
+     * - 'open' : open order
+     * - 'done' : done order
      * @var string $status
      * @Type("string")
      * @SerializedName("status")

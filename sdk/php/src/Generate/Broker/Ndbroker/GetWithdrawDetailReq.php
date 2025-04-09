@@ -93,7 +93,8 @@ class GetWithdrawDetailReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Withdrawal ID
+     * Withdrawal ID
+     * @param string $value
      * @return self
      */
     public function setWithdrawalId($value)

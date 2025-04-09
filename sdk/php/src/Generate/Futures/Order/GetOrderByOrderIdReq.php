@@ -96,6 +96,7 @@ class GetOrderByOrderIdReqBuilder
         $this->obj = $obj;
     }
     /**
+     *
      * @param string $value
      * @return self
      */

@@ -37,6 +37,8 @@ class GetAllTickersData implements Request
     public $symbol;
     /**
      * Trade direction
+     * - 'buy' :
+     * - 'sell' :
      * @var string $side
      * @Type("string")
      * @SerializedName("side")

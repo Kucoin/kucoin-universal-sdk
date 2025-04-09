@@ -103,7 +103,8 @@ class GetPartOrderBookReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value symbol
+     * symbol
+     * @param string $value
      * @return self
      */
     public function setSymbol($value)
@@ -113,7 +114,8 @@ class GetPartOrderBookReqBuilder
     }
 
     /**
-     * @param string $value Get the depth layer, optional value: 20, 100
+     * Get the depth layer, optional value: 20, 100
+     * @param string $value
      * @return self
      */
     public function setSize($value)

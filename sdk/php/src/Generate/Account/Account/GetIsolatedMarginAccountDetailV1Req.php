@@ -96,6 +96,7 @@ class GetIsolatedMarginAccountDetailV1ReqBuilder
         $this->obj = $obj;
     }
     /**
+     *
      * @param string $value
      * @return self
      */

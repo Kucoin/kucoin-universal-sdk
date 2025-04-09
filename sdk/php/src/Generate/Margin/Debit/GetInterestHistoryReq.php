@@ -135,7 +135,8 @@ class GetInterestHistoryReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value currency
+     * currency
+     * @param string $value
      * @return self
      */
     public function setCurrency($value)
@@ -145,7 +146,8 @@ class GetInterestHistoryReqBuilder
     }
 
     /**
-     * @param bool $value true-isolated, false-cross; default is false
+     * true-isolated, false-cross; default is false
+     * @param bool $value
      * @return self
      */
     public function setIsIsolated($value)
@@ -155,7 +157,8 @@ class GetInterestHistoryReqBuilder
     }
 
     /**
-     * @param string $value symbol, mandatory for isolated margin account
+     * symbol, mandatory for isolated margin account
+     * @param string $value
      * @return self
      */
     public function setSymbol($value)
@@ -165,7 +168,8 @@ class GetInterestHistoryReqBuilder
     }
 
     /**
-     * @param int $value The start and end times are not restricted. If the start time is empty or less than 1680278400000, the default value is set to 1680278400000 (April 1, 2023, 00:00:00)
+     * The start and end times are not restricted. If the start time is empty or less than 1680278400000, the default value is set to 1680278400000 (April 1, 2023, 00:00:00)
+     * @param int $value
      * @return self
      */
     public function setStartTime($value)
@@ -175,7 +179,8 @@ class GetInterestHistoryReqBuilder
     }
 
     /**
-     * @param int $value End time
+     * End time
+     * @param int $value
      * @return self
      */
     public function setEndTime($value)
@@ -185,7 +190,8 @@ class GetInterestHistoryReqBuilder
     }
 
     /**
-     * @param int $value Current query page, with a starting value of 1. Default:1
+     * Current query page, with a starting value of 1. Default:1
+     * @param int $value
      * @return self
      */
     public function setCurrentPage($value)
@@ -195,7 +201,8 @@ class GetInterestHistoryReqBuilder
     }
 
     /**
-     * @param int $value Number of results per page. Default is 50, minimum is 10, maximum is 500
+     * Number of results per page. Default is 50, minimum is 10, maximum is 500
+     * @param int $value
      * @return self
      */
     public function setPageSize($value)

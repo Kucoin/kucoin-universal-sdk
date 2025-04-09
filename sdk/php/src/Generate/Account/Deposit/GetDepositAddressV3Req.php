@@ -107,7 +107,8 @@ class GetDepositAddressV3ReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value currency
+     * currency
+     * @param string $value
      * @return self
      */
     public function setCurrency($value)
@@ -117,7 +118,8 @@ class GetDepositAddressV3ReqBuilder
     }
 
     /**
-     * @param string $value Deposit amount. This parameter is only used when applying for invoices on the Lightning Network. This parameter is invalid if it is not passed through the Lightning Network.
+     * Deposit amount. This parameter is only used when applying for invoices on the Lightning Network. This parameter is invalid if it is not passed through the Lightning Network.
+     * @param string $value
      * @return self
      */
     public function setAmount($value)
@@ -127,7 +129,8 @@ class GetDepositAddressV3ReqBuilder
     }
 
     /**
-     * @param string $value The chain Id of currency.
+     * The chain Id of currency.
+     * @param string $value
      * @return self
      */
     public function setChain($value)

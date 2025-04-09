@@ -2,7 +2,6 @@
 
 namespace KuCoin\UniversalSDK\Internal\Rest;
 
-use Exception;
 use KuCoin\UniversalSDK\Api\KucoinRestService;
 use KuCoin\UniversalSDK\Generate\Service\AccountService;
 use KuCoin\UniversalSDK\Generate\Service\AccountServiceImpl;
@@ -25,6 +24,7 @@ use KuCoin\UniversalSDK\Generate\Service\VIPLendingServiceImpl;
 use KuCoin\UniversalSDK\Generate\Version;
 use KuCoin\UniversalSDK\Internal\Infra\DefaultTransport;
 use KuCoin\UniversalSDK\Model\ClientOption;
+use RuntimeException;
 
 class DefaultKucoinRestAPIImpl implements KucoinRestService
 {
@@ -41,7 +41,7 @@ class DefaultKucoinRestAPIImpl implements KucoinRestService
     public function __construct(ClientOption $option)
     {
         if ($option->transportOption == null) {
-            throw new Exception("no transport option provided");
+            throw new RuntimeException("no transport option provided");
         }
         $transport = new DefaultTransport($option, Version::SDK_VERSION);
         $this->accountService = new AccountServiceImpl($transport);

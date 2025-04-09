@@ -30,6 +30,8 @@ class CancelAllOrdersBySymbolReq implements Request
     public $symbol;
     /**
      * Transaction type: MARGIN_TRADE - cross margin trade, MARGIN_ISOLATED_TRADE - isolated margin trade
+     * - 'MARGIN_TRADE' :
+     * - 'MARGIN_ISOLATED_TRADE' :
      * @var string|null $tradeType
      * @Type("string")
      * @SerializedName("tradeType")
@@ -100,7 +102,8 @@ class CancelAllOrdersBySymbolReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value symbol
+     * symbol
+     * @param string $value
      * @return self
      */
     public function setSymbol($value)
@@ -110,7 +113,10 @@ class CancelAllOrdersBySymbolReqBuilder
     }
 
     /**
-     * @param string $value Transaction type: MARGIN_TRADE - cross margin trade, MARGIN_ISOLATED_TRADE - isolated margin trade
+     * Transaction type: MARGIN_TRADE - cross margin trade, MARGIN_ISOLATED_TRADE - isolated margin trade
+     * - 'MARGIN_TRADE' :
+     * - 'MARGIN_ISOLATED_TRADE' :
+     * @param string $value
      * @return self
      */
     public function setTradeType($value)

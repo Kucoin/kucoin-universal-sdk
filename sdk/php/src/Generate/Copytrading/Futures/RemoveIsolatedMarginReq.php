@@ -100,7 +100,8 @@ class RemoveIsolatedMarginReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Symbol of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)
+     * Symbol of the contract, Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)
+     * @param string $value
      * @return self
      */
     public function setSymbol($value)
@@ -110,7 +111,8 @@ class RemoveIsolatedMarginReqBuilder
     }
 
     /**
-     * @param float $value The size of the position that can be deposited. If it is USDT-margin, it represents the amount of USDT. If it is coin-margin, this value represents the number of coins
+     * The size of the position that can be deposited. If it is USDT-margin, it represents the amount of USDT. If it is coin-margin, this value represents the number of coins
+     * @param float $value
      * @return self
      */
     public function setWithdrawAmount($value)

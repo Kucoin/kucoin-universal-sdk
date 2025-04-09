@@ -21,6 +21,9 @@ class GetServiceStatusResp implements Response
     public $msg;
     /**
      * Status of service: open: normal transaction; close: Stop Trading/Maintenance; cancelonly: can only cancel the order but not place order
+     * - 'open' : normal transaction
+     * - 'close' : Stop Trading/Maintenance
+     * - 'cancelonly' : can only cancel the order but not place order
      * @var string $status
      * @Type("string")
      * @SerializedName("status")

@@ -128,7 +128,8 @@ class GetOcoOrderListReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value symbol
+     * symbol
+     * @param string $value
      * @return self
      */
     public function setSymbol($value)
@@ -138,7 +139,8 @@ class GetOcoOrderListReqBuilder
     }
 
     /**
-     * @param int $value Start time (milliseconds)
+     * Start time (milliseconds)
+     * @param int $value
      * @return self
      */
     public function setStartAt($value)
@@ -148,7 +150,8 @@ class GetOcoOrderListReqBuilder
     }
 
     /**
-     * @param int $value End time (milliseconds)
+     * End time (milliseconds)
+     * @param int $value
      * @return self
      */
     public function setEndAt($value)
@@ -158,7 +161,8 @@ class GetOcoOrderListReqBuilder
     }
 
     /**
-     * @param string $value Specify orderId collection, up to 500 orders
+     * Specify orderId collection, up to 500 orders
+     * @param string $value
      * @return self
      */
     public function setOrderIds($value)
@@ -168,7 +172,8 @@ class GetOcoOrderListReqBuilder
     }
 
     /**
-     * @param int $value Size per page, minimum value 10, maximum value 500
+     * Size per page, minimum value 10, maximum value 500
+     * @param int $value
      * @return self
      */
     public function setPageSize($value)
@@ -178,7 +183,8 @@ class GetOcoOrderListReqBuilder
     }
 
     /**
-     * @param int $value Page number, minimum value 1
+     * Page number, minimum value 1
+     * @param int $value
      * @return self
      */
     public function setCurrentPage($value)

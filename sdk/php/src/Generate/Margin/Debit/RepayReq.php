@@ -117,7 +117,8 @@ class RepayReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value currency
+     * currency
+     * @param string $value
      * @return self
      */
     public function setCurrency($value)
@@ -127,7 +128,8 @@ class RepayReqBuilder
     }
 
     /**
-     * @param float $value Borrow amount
+     * Borrow amount
+     * @param float $value
      * @return self
      */
     public function setSize($value)
@@ -137,7 +139,8 @@ class RepayReqBuilder
     }
 
     /**
-     * @param string $value symbol, mandatory for isolated margin account
+     * symbol, mandatory for isolated margin account
+     * @param string $value
      * @return self
      */
     public function setSymbol($value)
@@ -147,7 +150,8 @@ class RepayReqBuilder
     }
 
     /**
-     * @param bool $value true-isolated, false-cross; default is false
+     * true-isolated, false-cross; default is false
+     * @param bool $value
      * @return self
      */
     public function setIsIsolated($value)
@@ -157,7 +161,8 @@ class RepayReqBuilder
     }
 
     /**
-     * @param bool $value true: high frequency borrowing, false: low frequency borrowing; default false
+     * true: high frequency borrowing, false: low frequency borrowing; default false
+     * @param bool $value
      * @return self
      */
     public function setIsHf($value)

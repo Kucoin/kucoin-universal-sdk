@@ -89,7 +89,8 @@ class GetETFInfoReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value ETF Currency: If empty, query all currencies
+     * ETF Currency: If empty, query all currencies
+     * @param string $value
      * @return self
      */
     public function setCurrency($value)

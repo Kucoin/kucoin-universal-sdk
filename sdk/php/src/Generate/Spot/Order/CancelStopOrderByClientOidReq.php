@@ -100,7 +100,8 @@ class CancelStopOrderByClientOidReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value symbol
+     * symbol
+     * @param string $value
      * @return self
      */
     public function setSymbol($value)
@@ -110,7 +111,8 @@ class CancelStopOrderByClientOidReqBuilder
     }
 
     /**
-     * @param string $value Unique order id created by users to identify their orders
+     * Unique order id created by users to identify their orders
+     * @param string $value
      * @return self
      */
     public function setClientOid($value)

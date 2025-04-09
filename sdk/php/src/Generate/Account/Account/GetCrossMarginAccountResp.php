@@ -35,6 +35,11 @@ class GetCrossMarginAccountResp implements Response
     public $debtRatio;
     /**
      * Position status; EFFECTIVE-effective, BANKRUPTCY-bankruptcy liquidation, LIQUIDATION-closing, REPAY-repayment, BORROW-borrowing
+     * - 'EFFECTIVE' : Effective
+     * - 'BANKRUPTCY' : Bankruptcy liquidation
+     * - 'LIQUIDATION' : Closing
+     * - 'REPAY' : Repayment
+     * - 'BORROW' : Borrowing
      * @var string $status
      * @Type("string")
      * @SerializedName("status")

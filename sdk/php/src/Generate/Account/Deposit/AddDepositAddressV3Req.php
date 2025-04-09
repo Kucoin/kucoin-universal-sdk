@@ -37,6 +37,8 @@ class AddDepositAddressV3Req implements Request
     public $chain = "eth";
     /**
      * Deposit account type: MAIN (funding account), TRADE (spot trading account); the default is MAIN
+     * - 'main' : Funding account
+     * - 'trade' : Spot account
      * @var string|null $to
      * @Type("string")
      * @SerializedName("to")
@@ -114,7 +116,8 @@ class AddDepositAddressV3ReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value currency
+     * currency
+     * @param string $value
      * @return self
      */
     public function setCurrency($value)
@@ -124,7 +127,8 @@ class AddDepositAddressV3ReqBuilder
     }
 
     /**
-     * @param string $value The currency chainId, e.g. the available values for USDT are OMNI, ERC20, and TRC20; default is ERC20. The available values for BTC are Native, Segwit, TRC20; the parameters are bech32, btc, trx; default is Native.
+     * The currency chainId, e.g. the available values for USDT are OMNI, ERC20, and TRC20; default is ERC20. The available values for BTC are Native, Segwit, TRC20; the parameters are bech32, btc, trx; default is Native.
+     * @param string $value
      * @return self
      */
     public function setChain($value)
@@ -134,7 +138,10 @@ class AddDepositAddressV3ReqBuilder
     }
 
     /**
-     * @param string $value Deposit account type: MAIN (funding account), TRADE (spot trading account); the default is MAIN
+     * Deposit account type: MAIN (funding account), TRADE (spot trading account); the default is MAIN
+     * - 'main' : Funding account
+     * - 'trade' : Spot account
+     * @param string $value
      * @return self
      */
     public function setTo($value)
@@ -144,7 +151,8 @@ class AddDepositAddressV3ReqBuilder
     }
 
     /**
-     * @param string $value Deposit amount. This parameter is only used when applying for invoices on the Lightning Network. This parameter is invalid if it is not passed through the Lightning Network.
+     * Deposit amount. This parameter is only used when applying for invoices on the Lightning Network. This parameter is invalid if it is not passed through the Lightning Network.
+     * @param string $value
      * @return self
      */
     public function setAmount($value)

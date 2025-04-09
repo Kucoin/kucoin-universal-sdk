@@ -28,6 +28,8 @@ class RedeemResp implements Response
     public $deliverTime;
     /**
      * Redemption status: SUCCESS (successful), PENDING (redemption pending)
+     * - 'SUCCESS' :
+     * - 'PENDING' :
      * @var string $status
      * @Type("string")
      * @SerializedName("status")

@@ -30,6 +30,9 @@ class GetIsolatedMarginAccountReq implements Request
     public $symbol;
     /**
      * quote currency, currently only supports USDT, KCS, BTC, USDT as default
+     * - 'USDT' :
+     * - 'KCS' :
+     * - 'BTC' :
      * @var string|null $quoteCurrency
      * @Type("string")
      * @SerializedName("quoteCurrency")
@@ -37,6 +40,9 @@ class GetIsolatedMarginAccountReq implements Request
     public $quoteCurrency = "USDT";
     /**
      * Query account type (default ISOLATED), ISOLATED- - only query low frequency isolated margin account, ISOLATED_V2-only query high frequency isolated margin account, ALL - consistent aggregate query with the web side
+     * - 'ISOLATED' :
+     * - 'ISOLATED_V2' :
+     * - 'ALL' :
      * @var string|null $queryType
      * @Type("string")
      * @SerializedName("queryType")
@@ -107,7 +113,8 @@ class GetIsolatedMarginAccountReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value For isolated trading pairs, query all without passing
+     * For isolated trading pairs, query all without passing
+     * @param string $value
      * @return self
      */
     public function setSymbol($value)
@@ -117,7 +124,11 @@ class GetIsolatedMarginAccountReqBuilder
     }
 
     /**
-     * @param string $value quote currency, currently only supports USDT, KCS, BTC, USDT as default
+     * quote currency, currently only supports USDT, KCS, BTC, USDT as default
+     * - 'USDT' :
+     * - 'KCS' :
+     * - 'BTC' :
+     * @param string $value
      * @return self
      */
     public function setQuoteCurrency($value)
@@ -127,7 +138,11 @@ class GetIsolatedMarginAccountReqBuilder
     }
 
     /**
-     * @param string $value Query account type (default ISOLATED), ISOLATED- - only query low frequency isolated margin account, ISOLATED_V2-only query high frequency isolated margin account, ALL - consistent aggregate query with the web side
+     * Query account type (default ISOLATED), ISOLATED- - only query low frequency isolated margin account, ISOLATED_V2-only query high frequency isolated margin account, ALL - consistent aggregate query with the web side
+     * - 'ISOLATED' :
+     * - 'ISOLATED_V2' :
+     * - 'ALL' :
+     * @param string $value
      * @return self
      */
     public function setQueryType($value)

@@ -93,7 +93,8 @@ class GetTransferHistoryReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Transfer Order ID
+     * Transfer Order ID
+     * @param string $value
      * @return self
      */
     public function setOrderId($value)

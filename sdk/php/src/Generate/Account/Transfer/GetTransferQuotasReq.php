@@ -30,6 +30,13 @@ class GetTransferQuotasReq implements Request
     public $currency;
     /**
      * The account type:MAIN, TRADE, MARGIN, ISOLATED, MARGIN_V2, ISOLATED_V2
+     * - 'MAIN' : Funding account
+     * - 'TRADE' : Spot account
+     * - 'MARGIN' : Spot cross margin account
+     * - 'ISOLATED' : Spot isolated margin account
+     * - 'OPTION' : Option account
+     * - 'MARGIN_V2' : Spot cross margin HF account
+     * - 'ISOLATED_V2' : Spot isolated margin HF account
      * @var string|null $type
      * @Type("string")
      * @SerializedName("type")
@@ -107,7 +114,8 @@ class GetTransferQuotasReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value currency
+     * currency
+     * @param string $value
      * @return self
      */
     public function setCurrency($value)
@@ -117,7 +125,15 @@ class GetTransferQuotasReqBuilder
     }
 
     /**
-     * @param string $value The account type:MAIN, TRADE, MARGIN, ISOLATED, MARGIN_V2, ISOLATED_V2
+     * The account type:MAIN, TRADE, MARGIN, ISOLATED, MARGIN_V2, ISOLATED_V2
+     * - 'MAIN' : Funding account
+     * - 'TRADE' : Spot account
+     * - 'MARGIN' : Spot cross margin account
+     * - 'ISOLATED' : Spot isolated margin account
+     * - 'OPTION' : Option account
+     * - 'MARGIN_V2' : Spot cross margin HF account
+     * - 'ISOLATED_V2' : Spot isolated margin HF account
+     * @param string $value
      * @return self
      */
     public function setType($value)
@@ -127,7 +143,8 @@ class GetTransferQuotasReqBuilder
     }
 
     /**
-     * @param string $value Trading pair required when the account type is ISOLATED; other types do not pass, e.g.: BTC-USDT
+     * Trading pair required when the account type is ISOLATED; other types do not pass, e.g.: BTC-USDT
+     * @param string $value
      * @return self
      */
     public function setTag($value)

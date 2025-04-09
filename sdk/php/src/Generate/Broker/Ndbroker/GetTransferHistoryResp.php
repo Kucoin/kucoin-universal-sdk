@@ -42,6 +42,11 @@ class GetTransferHistoryResp implements Response
     public $fromUid;
     /**
      * From Account Type: Account Type: MAIN, TRADE, CONTRACT, MARGIN, ISOLATED
+     * - 'MAIN' :
+     * - 'TRADE' :
+     * - 'CONTRACT' :
+     * - 'MARGIN' :
+     * - 'ISOLATED' :
      * @var string $fromAccountType
      * @Type("string")
      * @SerializedName("fromAccountType")
@@ -63,6 +68,11 @@ class GetTransferHistoryResp implements Response
     public $toUid;
     /**
      * Account Type: Account Type: MAIN, TRADE, CONTRACT, MARGIN, ISOLATED
+     * - 'MAIN' :
+     * - 'TRADE' :
+     * - 'CONTRACT' :
+     * - 'MARGIN' :
+     * - 'ISOLATED' :
      * @var string $toAccountType
      * @Type("string")
      * @SerializedName("toAccountType")
@@ -77,6 +87,9 @@ class GetTransferHistoryResp implements Response
     public $toAccountTag;
     /**
      * Status: PROCESSING (processing), SUCCESS (successful), FAILURE (failed)
+     * - 'PROCESSING' :
+     * - 'SUCCESS' :
+     * - 'FAILURE' :
      * @var string $status
      * @Type("string")
      * @SerializedName("status")

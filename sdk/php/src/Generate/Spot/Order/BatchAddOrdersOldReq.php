@@ -100,6 +100,7 @@ class BatchAddOrdersOldReqBuilder
         $this->obj = $obj;
     }
     /**
+     *
      * @param BatchAddOrdersOldOrderList[] $value
      * @return self
      */
@@ -110,6 +111,7 @@ class BatchAddOrdersOldReqBuilder
     }
 
     /**
+     *
      * @param string $value
      * @return self
      */

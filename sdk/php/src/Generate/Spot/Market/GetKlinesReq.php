@@ -30,6 +30,20 @@ class GetKlinesReq implements Request
     public $symbol;
     /**
      * Type of candlestick patterns: 1min, 3min, 5min, 15min, 30min, 1hour, 2hour, 4hour, 6hour, 8hour, 12hour, 1day, 1week, 1month
+     * - '1min' : 1min
+     * - '3min' : 3min
+     * - '5min' : 5min
+     * - '15min' : 15min
+     * - '30min' : 30min
+     * - '1hour' : 1hour
+     * - '2hour' : 2hour
+     * - '4hour' : 4hour
+     * - '6hour' : 6hour
+     * - '8hour' : 8hour
+     * - '12hour' : 12hour
+     * - '1day' : 1day
+     * - '1week' : 1week
+     * - '1month' : 1month
      * @var string|null $type
      * @Type("string")
      * @SerializedName("type")
@@ -110,7 +124,8 @@ class GetKlinesReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value symbol
+     * symbol
+     * @param string $value
      * @return self
      */
     public function setSymbol($value)
@@ -120,7 +135,22 @@ class GetKlinesReqBuilder
     }
 
     /**
-     * @param string $value Type of candlestick patterns: 1min, 3min, 5min, 15min, 30min, 1hour, 2hour, 4hour, 6hour, 8hour, 12hour, 1day, 1week, 1month
+     * Type of candlestick patterns: 1min, 3min, 5min, 15min, 30min, 1hour, 2hour, 4hour, 6hour, 8hour, 12hour, 1day, 1week, 1month
+     * - '1min' : 1min
+     * - '3min' : 3min
+     * - '5min' : 5min
+     * - '15min' : 15min
+     * - '30min' : 30min
+     * - '1hour' : 1hour
+     * - '2hour' : 2hour
+     * - '4hour' : 4hour
+     * - '6hour' : 6hour
+     * - '8hour' : 8hour
+     * - '12hour' : 12hour
+     * - '1day' : 1day
+     * - '1week' : 1week
+     * - '1month' : 1month
+     * @param string $value
      * @return self
      */
     public function setType($value)
@@ -130,7 +160,8 @@ class GetKlinesReqBuilder
     }
 
     /**
-     * @param int $value Start time (second), default is 0
+     * Start time (second), default is 0
+     * @param int $value
      * @return self
      */
     public function setStartAt($value)
@@ -140,7 +171,8 @@ class GetKlinesReqBuilder
     }
 
     /**
-     * @param int $value End time (second), default is 0
+     * End time (second), default is 0
+     * @param int $value
      * @return self
      */
     public function setEndAt($value)

@@ -100,7 +100,8 @@ class GetDepositDetailReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Currency
+     * Currency
+     * @param string $value
      * @return self
      */
     public function setCurrency($value)
@@ -110,7 +111,8 @@ class GetDepositDetailReqBuilder
     }
 
     /**
-     * @param string $value Hash Value
+     * Hash Value
+     * @param string $value
      * @return self
      */
     public function setHash($value)

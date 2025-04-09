@@ -72,6 +72,8 @@ class GetPurchaseOrdersItems implements Request
     public $applyTime;
     /**
      * Status: DONE-completed; PENDING-settling
+     * - 'DONE' :
+     * - 'PENDING' :
      * @var string $status
      * @Type("string")
      * @SerializedName("status")

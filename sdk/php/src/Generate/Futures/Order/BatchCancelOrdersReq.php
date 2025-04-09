@@ -100,7 +100,8 @@ class BatchCancelOrdersReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string[] $value the list of orderId
+     * the list of orderId
+     * @param string[] $value
      * @return self
      */
     public function setOrderIdsList($value)
@@ -110,7 +111,8 @@ class BatchCancelOrdersReqBuilder
     }
 
     /**
-     * @param BatchCancelOrdersClientOidsList[] $value the list of client orderId
+     * the list of client orderId
+     * @param BatchCancelOrdersClientOidsList[] $value
      * @return self
      */
     public function setClientOidsList($value)

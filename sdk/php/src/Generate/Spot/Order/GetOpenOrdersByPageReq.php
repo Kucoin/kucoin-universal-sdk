@@ -107,7 +107,8 @@ class GetOpenOrdersByPageReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Symbol
+     * Symbol
+     * @param string $value
      * @return self
      */
     public function setSymbol($value)
@@ -117,7 +118,8 @@ class GetOpenOrdersByPageReqBuilder
     }
 
     /**
-     * @param int $value Current page
+     * Current page
+     * @param int $value
      * @return self
      */
     public function setPageNum($value)
@@ -127,7 +129,8 @@ class GetOpenOrdersByPageReqBuilder
     }
 
     /**
-     * @param int $value Size per page
+     * Size per page
+     * @param int $value
      * @return self
      */
     public function setPageSize($value)

@@ -23,6 +23,9 @@ class GetIsolatedMarginAccountListV1Req implements Request
     }
     /**
      * quote currency, currently only supports USDT, KCS, BTC, USDT as default
+     * - 'USDT' :
+     * - 'KCS' :
+     * - 'BTC' :
      * @var string|null $balanceCurrency
      * @Type("string")
      * @SerializedName("balanceCurrency")
@@ -93,7 +96,11 @@ class GetIsolatedMarginAccountListV1ReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value quote currency, currently only supports USDT, KCS, BTC, USDT as default
+     * quote currency, currently only supports USDT, KCS, BTC, USDT as default
+     * - 'USDT' :
+     * - 'KCS' :
+     * - 'BTC' :
+     * @param string $value
      * @return self
      */
     public function setBalanceCurrency($value)

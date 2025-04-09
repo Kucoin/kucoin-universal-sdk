@@ -37,6 +37,8 @@ class PurchaseReq implements Request
     public $amount;
     /**
      * MAIN (funding account), TRADE (spot trading account)
+     * - 'MAIN' :
+     * - 'TRADE' :
      * @var string $accountType
      * @Type("string")
      * @SerializedName("accountType")
@@ -103,7 +105,8 @@ class PurchaseReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Product ID
+     * Product ID
+     * @param string $value
      * @return self
      */
     public function setProductId($value)
@@ -113,7 +116,8 @@ class PurchaseReqBuilder
     }
 
     /**
-     * @param string $value Subscription amount
+     * Subscription amount
+     * @param string $value
      * @return self
      */
     public function setAmount($value)
@@ -123,7 +127,10 @@ class PurchaseReqBuilder
     }
 
     /**
-     * @param string $value MAIN (funding account), TRADE (spot trading account)
+     * MAIN (funding account), TRADE (spot trading account)
+     * - 'MAIN' :
+     * - 'TRADE' :
+     * @param string $value
      * @return self
      */
     public function setAccountType($value)

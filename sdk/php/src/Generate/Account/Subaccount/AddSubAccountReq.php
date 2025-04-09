@@ -44,6 +44,9 @@ class AddSubAccountReq implements Request
     public $subName;
     /**
      * Permission (types include Spot, Futures, Margin permissions, which can be used alone or in combination).
+     * - 'Spot' : Spot Account
+     * - 'Futures' : Futures Account
+     * - 'Margin' : Margin Account
      * @var string $access
      * @Type("string")
      * @SerializedName("access")
@@ -110,7 +113,8 @@ class AddSubAccountReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Password (7–24 characters, must contain letters and numbers, cannot only contain numbers or include special characters)
+     * Password (7–24 characters, must contain letters and numbers, cannot only contain numbers or include special characters)
+     * @param string $value
      * @return self
      */
     public function setPassword($value)
@@ -120,7 +124,8 @@ class AddSubAccountReqBuilder
     }
 
     /**
-     * @param string $value Remarks (1–24 characters)
+     * Remarks (1–24 characters)
+     * @param string $value
      * @return self
      */
     public function setRemarks($value)
@@ -130,7 +135,8 @@ class AddSubAccountReqBuilder
     }
 
     /**
-     * @param string $value Sub-account name (must contain 7–32 characters, at least one number and one letter. Cannot contain any spaces.)
+     * Sub-account name (must contain 7–32 characters, at least one number and one letter. Cannot contain any spaces.)
+     * @param string $value
      * @return self
      */
     public function setSubName($value)
@@ -140,7 +146,11 @@ class AddSubAccountReqBuilder
     }
 
     /**
-     * @param string $value Permission (types include Spot, Futures, Margin permissions, which can be used alone or in combination).
+     * Permission (types include Spot, Futures, Margin permissions, which can be used alone or in combination).
+     * - 'Spot' : Spot Account
+     * - 'Futures' : Futures Account
+     * - 'Margin' : Margin Account
+     * @param string $value
      * @return self
      */
     public function setAccess($value)

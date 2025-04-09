@@ -93,7 +93,8 @@ class CancelOrderByIdReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Order ID
+     * Order ID
+     * @param string $value
      * @return self
      */
     public function setOrderId($value)

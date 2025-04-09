@@ -58,6 +58,8 @@ class GetTradeHistoryItems implements Request
     public $counterOrderId;
     /**
      * Buy or sell
+     * - 'buy' :
+     * - 'sell' :
      * @var string $side
      * @Type("string")
      * @SerializedName("side")
@@ -65,6 +67,8 @@ class GetTradeHistoryItems implements Request
     public $side;
     /**
      * Liquidity type: taker or maker
+     * - 'taker' :
+     * - 'maker' :
      * @var string $liquidity
      * @Type("string")
      * @SerializedName("liquidity")
@@ -149,6 +153,8 @@ class GetTradeHistoryItems implements Request
     public $taxRate;
     /**
      * Specify if the order is a 'limit' order or 'market' order.
+     * - 'limit' :
+     * - 'market' :
      * @var string $type
      * @Type("string")
      * @SerializedName("type")

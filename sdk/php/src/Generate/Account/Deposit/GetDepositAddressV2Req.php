@@ -100,7 +100,8 @@ class GetDepositAddressV2ReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value currency
+     * currency
+     * @param string $value
      * @return self
      */
     public function setCurrency($value)
@@ -110,7 +111,8 @@ class GetDepositAddressV2ReqBuilder
     }
 
     /**
-     * @param string $value Chain ID of currency
+     * Chain ID of currency
+     * @param string $value
      * @return self
      */
     public function setChain($value)

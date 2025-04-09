@@ -28,6 +28,8 @@ class GetTickerResp implements Response
     public $symbol;
     /**
      * Filled side; the trade side indicates the taker order side. A taker order is the order that was matched with orders opened on the order book.
+     * - 'buy' : buy
+     * - 'sell' : sell
      * @var string $side
      * @Type("string")
      * @SerializedName("side")

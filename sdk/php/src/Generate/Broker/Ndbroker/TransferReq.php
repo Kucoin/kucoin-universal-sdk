@@ -37,6 +37,8 @@ class TransferReq implements Request
     public $amount;
     /**
      * Fund transfer direction: OUT (Broker account is transferred to Broker sub-account), IN (Broker sub-account is transferred to Broker account)
+     * - 'OUT' :
+     * - 'IN' :
      * @var string $direction
      * @Type("string")
      * @SerializedName("direction")
@@ -44,6 +46,8 @@ class TransferReq implements Request
     public $direction;
     /**
      * Broker account types: MAIN (Funding account), TRADE (Spot trading account)
+     * - 'MAIN' :
+     * - 'TRADE' :
      * @var string $accountType
      * @Type("string")
      * @SerializedName("accountType")
@@ -58,6 +62,8 @@ class TransferReq implements Request
     public $specialUid;
     /**
      * Broker sub-account types: MAIN (Funding account), TRADE (Spot trading account)
+     * - 'MAIN' :
+     * - 'TRADE' :
      * @var string $specialAccountType
      * @Type("string")
      * @SerializedName("specialAccountType")
@@ -131,7 +137,8 @@ class TransferReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Currency
+     * Currency
+     * @param string $value
      * @return self
      */
     public function setCurrency($value)
@@ -141,7 +148,8 @@ class TransferReqBuilder
     }
 
     /**
-     * @param string $value Transfer Amount (must be a positive integer in the currency's precision)
+     * Transfer Amount (must be a positive integer in the currency's precision)
+     * @param string $value
      * @return self
      */
     public function setAmount($value)
@@ -151,7 +159,10 @@ class TransferReqBuilder
     }
 
     /**
-     * @param string $value Fund transfer direction: OUT (Broker account is transferred to Broker sub-account), IN (Broker sub-account is transferred to Broker account)
+     * Fund transfer direction: OUT (Broker account is transferred to Broker sub-account), IN (Broker sub-account is transferred to Broker account)
+     * - 'OUT' :
+     * - 'IN' :
+     * @param string $value
      * @return self
      */
     public function setDirection($value)
@@ -161,7 +172,10 @@ class TransferReqBuilder
     }
 
     /**
-     * @param string $value Broker account types: MAIN (Funding account), TRADE (Spot trading account)
+     * Broker account types: MAIN (Funding account), TRADE (Spot trading account)
+     * - 'MAIN' :
+     * - 'TRADE' :
+     * @param string $value
      * @return self
      */
     public function setAccountType($value)
@@ -171,7 +185,8 @@ class TransferReqBuilder
     }
 
     /**
-     * @param string $value Broker sub-account UID, must be the Broker sub-account created by the current Broker user.
+     * Broker sub-account UID, must be the Broker sub-account created by the current Broker user.
+     * @param string $value
      * @return self
      */
     public function setSpecialUid($value)
@@ -181,7 +196,10 @@ class TransferReqBuilder
     }
 
     /**
-     * @param string $value Broker sub-account types: MAIN (Funding account), TRADE (Spot trading account)
+     * Broker sub-account types: MAIN (Funding account), TRADE (Spot trading account)
+     * - 'MAIN' :
+     * - 'TRADE' :
+     * @param string $value
      * @return self
      */
     public function setSpecialAccountType($value)
@@ -191,7 +209,8 @@ class TransferReqBuilder
     }
 
     /**
-     * @param string $value Client Order ID, the unique identifier created by the client. It is recommended to use UUID. The maximum length is 128 bits.
+     * Client Order ID, the unique identifier created by the client. It is recommended to use UUID. The maximum length is 128 bits.
+     * @param string $value
      * @return self
      */
     public function setClientOid($value)

@@ -30,6 +30,8 @@ class GetMarginHFLedgerReq implements Request
     public $currency;
     /**
      * direction: in, out
+     * - 'in' :
+     * - 'out' :
      * @var string|null $direction
      * @Type("string")
      * @SerializedName("direction")
@@ -135,7 +137,8 @@ class GetMarginHFLedgerReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Currency optional; more than one can be selected; separate using commas; select no more than 10 currencies; the default will be to query for all currencies if left empty
+     * Currency optional; more than one can be selected; separate using commas; select no more than 10 currencies; the default will be to query for all currencies if left empty
+     * @param string $value
      * @return self
      */
     public function setCurrency($value)
@@ -145,7 +148,10 @@ class GetMarginHFLedgerReqBuilder
     }
 
     /**
-     * @param string $value direction: in, out
+     * direction: in, out
+     * - 'in' :
+     * - 'out' :
+     * @param string $value
      * @return self
      */
     public function setDirection($value)
@@ -155,7 +161,8 @@ class GetMarginHFLedgerReqBuilder
     }
 
     /**
-     * @param string $value Transaction type: TRANSFER- transfer funds, MARGIN_EXCHANGE-cross margin trade, ISOLATED_EXCHANGE-isolated margin trade, LIQUIDATION-liquidation, ASSERT_RETURN-forced liquidation asset return
+     * Transaction type: TRANSFER- transfer funds, MARGIN_EXCHANGE-cross margin trade, ISOLATED_EXCHANGE-isolated margin trade, LIQUIDATION-liquidation, ASSERT_RETURN-forced liquidation asset return
+     * @param string $value
      * @return self
      */
     public function setBizType($value)
@@ -165,7 +172,8 @@ class GetMarginHFLedgerReqBuilder
     }
 
     /**
-     * @param int $value The ID of the last set of data from the previous data batch. By default, the latest information is given.
+     * The ID of the last set of data from the previous data batch. By default, the latest information is given.
+     * @param int $value
      * @return self
      */
     public function setLastId($value)
@@ -175,7 +183,8 @@ class GetMarginHFLedgerReqBuilder
     }
 
     /**
-     * @param int $value Default100, Max200
+     * Default100, Max200
+     * @param int $value
      * @return self
      */
     public function setLimit($value)
@@ -185,7 +194,8 @@ class GetMarginHFLedgerReqBuilder
     }
 
     /**
-     * @param int $value Start time (milliseconds)
+     * Start time (milliseconds)
+     * @param int $value
      * @return self
      */
     public function setStartAt($value)
@@ -195,7 +205,8 @@ class GetMarginHFLedgerReqBuilder
     }
 
     /**
-     * @param int $value End time (milliseconds)
+     * End time (milliseconds)
+     * @param int $value
      * @return self
      */
     public function setEndAt($value)

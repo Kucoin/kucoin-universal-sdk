@@ -219,6 +219,8 @@ class GetPositionListData implements Request
     public $isInverse;
     /**
      * Margin Mode: CROSS，ISOLATED
+     * - 'CROSS' : cross margin
+     * - 'ISOLATED' : isolated margin
      * @var string $marginMode
      * @Type("string")
      * @SerializedName("marginMode")
@@ -226,6 +228,7 @@ class GetPositionListData implements Request
     public $marginMode;
     /**
      * Position Side
+     * - 'BOTH' : One-way position
      * @var string $positionSide
      * @Type("string")
      * @SerializedName("positionSide")

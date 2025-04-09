@@ -100,7 +100,8 @@ class ModifyAutoDepositStatusReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Symbol of the contract
+     * Symbol of the contract
+     * @param string $value
      * @return self
      */
     public function setSymbol($value)
@@ -110,7 +111,8 @@ class ModifyAutoDepositStatusReqBuilder
     }
 
     /**
-     * @param bool $value Status
+     * Status
+     * @param bool $value
      * @return self
      */
     public function setStatus($value)

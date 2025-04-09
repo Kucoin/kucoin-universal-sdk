@@ -92,7 +92,8 @@ class GetSymbolReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Path parameter, Symbol
+     * Path parameter, Symbol
+     * @param string $value
      * @return self
      */
     public function setSymbol($value)

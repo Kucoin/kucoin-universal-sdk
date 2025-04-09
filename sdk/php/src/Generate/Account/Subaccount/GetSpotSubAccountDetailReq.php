@@ -117,7 +117,8 @@ class GetSpotSubAccountDetailReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value the userID of a sub-account.
+     * the userID of a sub-account.
+     * @param string $value
      * @return self
      */
     public function setSubUserId($value)
@@ -127,7 +128,8 @@ class GetSpotSubAccountDetailReqBuilder
     }
 
     /**
-     * @param bool $value False: Do not display currencies with 0 assets; True: display all currencies
+     * False: Do not display currencies with 0 assets; True: display all currencies
+     * @param bool $value
      * @return self
      */
     public function setIncludeBaseAmount($value)
@@ -137,7 +139,8 @@ class GetSpotSubAccountDetailReqBuilder
     }
 
     /**
-     * @param string $value Specify the currency used to convert assets
+     * Specify the currency used to convert assets
+     * @param string $value
      * @return self
      */
     public function setBaseCurrency($value)
@@ -147,7 +150,8 @@ class GetSpotSubAccountDetailReqBuilder
     }
 
     /**
-     * @param string $value The currency balance specified must be greater than or equal to the amount
+     * The currency balance specified must be greater than or equal to the amount
+     * @param string $value
      * @return self
      */
     public function setBaseAmount($value)

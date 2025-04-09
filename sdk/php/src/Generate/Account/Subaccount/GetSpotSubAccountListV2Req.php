@@ -100,7 +100,8 @@ class GetSpotSubAccountListV2ReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param int $value Current request page. Default is 1
+     * Current request page. Default is 1
+     * @param int $value
      * @return self
      */
     public function setCurrentPage($value)
@@ -110,7 +111,8 @@ class GetSpotSubAccountListV2ReqBuilder
     }
 
     /**
-     * @param int $value Number of results per request. Minimum is 10, maximum is 100, default is 10.
+     * Number of results per request. Minimum is 10, maximum is 100, default is 10.
+     * @param int $value
      * @return self
      */
     public function setPageSize($value)

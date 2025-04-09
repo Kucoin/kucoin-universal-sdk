@@ -37,6 +37,8 @@ class GetTradeHistoryReq implements Request
     public $symbol;
     /**
      * Order side
+     * - 'buy' : buy
+     * - 'sell' : sell
      * @var string|null $side
      * @Type("string")
      * @SerializedName("side")
@@ -44,6 +46,10 @@ class GetTradeHistoryReq implements Request
     public $side;
     /**
      * Order Type
+     * - 'limit' : Limit order
+     * - 'market' : Market order
+     * - 'limit_stop' : Stop limit order
+     * - 'market_stop' : Stop Market order
      * @var string|null $type
      * @Type("string")
      * @SerializedName("type")
@@ -149,7 +155,8 @@ class GetTradeHistoryReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value List fills for a specific order only (if you specify orderId, other parameters can be ignored)
+     * List fills for a specific order only (if you specify orderId, other parameters can be ignored)
+     * @param string $value
      * @return self
      */
     public function setOrderId($value)
@@ -159,7 +166,8 @@ class GetTradeHistoryReqBuilder
     }
 
     /**
-     * @param string $value Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)
+     * Symbol of the contract. Please refer to [Get Symbol endpoint: symbol](https://www.kucoin.com/docs-new/api-3470220)
+     * @param string $value
      * @return self
      */
     public function setSymbol($value)
@@ -169,7 +177,10 @@ class GetTradeHistoryReqBuilder
     }
 
     /**
-     * @param string $value Order side
+     * Order side
+     * - 'buy' : buy
+     * - 'sell' : sell
+     * @param string $value
      * @return self
      */
     public function setSide($value)
@@ -179,7 +190,12 @@ class GetTradeHistoryReqBuilder
     }
 
     /**
-     * @param string $value Order Type
+     * Order Type
+     * - 'limit' : Limit order
+     * - 'market' : Market order
+     * - 'limit_stop' : Stop limit order
+     * - 'market_stop' : Stop Market order
+     * @param string $value
      * @return self
      */
     public function setType($value)
@@ -189,7 +205,8 @@ class GetTradeHistoryReqBuilder
     }
 
     /**
-     * @param string $value Transaction type: trade, adl, liquid, settlement. Supports querying multiple types at the same time, separated by commas. Query all types when empty
+     * Transaction type: trade, adl, liquid, settlement. Supports querying multiple types at the same time, separated by commas. Query all types when empty
+     * @param string $value
      * @return self
      */
     public function setTradeTypes($value)
@@ -199,7 +216,8 @@ class GetTradeHistoryReqBuilder
     }
 
     /**
-     * @param int $value Start time (milliseconds)
+     * Start time (milliseconds)
+     * @param int $value
      * @return self
      */
     public function setStartAt($value)
@@ -209,7 +227,8 @@ class GetTradeHistoryReqBuilder
     }
 
     /**
-     * @param int $value End time (milliseconds)
+     * End time (milliseconds)
+     * @param int $value
      * @return self
      */
     public function setEndAt($value)
@@ -219,7 +238,8 @@ class GetTradeHistoryReqBuilder
     }
 
     /**
-     * @param int $value Current request page. The default currentPage is 1
+     * Current request page. The default currentPage is 1
+     * @param int $value
      * @return self
      */
     public function setCurrentPage($value)
@@ -229,7 +249,8 @@ class GetTradeHistoryReqBuilder
     }
 
     /**
-     * @param int $value pageSize, The default pageSize is 50; the maximum cannot exceed 1000
+     * pageSize, The default pageSize is 50; the maximum cannot exceed 1000
+     * @param int $value
      * @return self
      */
     public function setPageSize($value)

@@ -23,11 +23,13 @@ class GetBasicFeeReq implements Request
     }
     /**
      * Currency type: 0-crypto currency, 1-fiat currency. Default is 0-crypto currency
+     * - 0 : cryptocurrency
+     * - 1 : fiat currency
      * @var int|null $currencyType
      * @Type("int")
      * @SerializedName("currencyType")
      */
-    public $currencyType = self::CURRENCY_TYPE_0;
+    public $currencyType = self::CURRENCY_TYPE__0;
 
     private function __construct() {}
 
@@ -89,7 +91,10 @@ class GetBasicFeeReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param int $value Currency type: 0-crypto currency, 1-fiat currency. Default is 0-crypto currency
+     * Currency type: 0-crypto currency, 1-fiat currency. Default is 0-crypto currency
+     * - 0 : cryptocurrency
+     * - 1 : fiat currency
+     * @param int $value
      * @return self
      */
     public function setCurrencyType($value)

@@ -37,6 +37,8 @@ class AddDepositAddressV1Req implements Request
     public $chain = "eth";
     /**
      * Deposit account type: main (funding account), trade (spot trading account); the default is main
+     * - 'main' : Funding account
+     * - 'trade' : Spot account
      * @var string|null $to
      * @Type("string")
      * @SerializedName("to")
@@ -107,7 +109,8 @@ class AddDepositAddressV1ReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value currency
+     * currency
+     * @param string $value
      * @return self
      */
     public function setCurrency($value)
@@ -117,7 +120,8 @@ class AddDepositAddressV1ReqBuilder
     }
 
     /**
-     * @param string $value The chainId of currency, e.g. the available values for USDT are OMNI, ERC20, and TRC20; default is ERC20. The available values for BTC are Native, Segwit, TRC20; the parameters are bech32, btc, trx; default is Native. This only applies to multi-chain currencies; no need for single-chain currencies.
+     * The chainId of currency, e.g. the available values for USDT are OMNI, ERC20, and TRC20; default is ERC20. The available values for BTC are Native, Segwit, TRC20; the parameters are bech32, btc, trx; default is Native. This only applies to multi-chain currencies; no need for single-chain currencies.
+     * @param string $value
      * @return self
      */
     public function setChain($value)
@@ -127,7 +131,10 @@ class AddDepositAddressV1ReqBuilder
     }
 
     /**
-     * @param string $value Deposit account type: main (funding account), trade (spot trading account); the default is main
+     * Deposit account type: main (funding account), trade (spot trading account); the default is main
+     * - 'main' : Funding account
+     * - 'trade' : Spot account
+     * @param string $value
      * @return self
      */
     public function setTo($value)

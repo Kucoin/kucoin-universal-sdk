@@ -44,6 +44,8 @@ class GetClosedOrdersItems implements Request
     public $opType;
     /**
      * Specify if the order is an 'limit' order or 'market' order.
+     * - 'limit' :
+     * - 'market' :
      * @var string $type
      * @Type("string")
      * @SerializedName("type")
@@ -51,6 +53,8 @@ class GetClosedOrdersItems implements Request
     public $type;
     /**
      * Buy or sell
+     * - 'buy' :
+     * - 'sell' :
      * @var string $side
      * @Type("string")
      * @SerializedName("side")
@@ -107,6 +111,10 @@ class GetClosedOrdersItems implements Request
     public $feeCurrency;
     /**
      * [Self Trade Prevention](https://www.kucoin.com/docs-new/api-5176570)
+     * - 'DC' :
+     * - 'CO' :
+     * - 'CN' :
+     * - 'CB' :
      * @var string|null $stp
      * @Type("string")
      * @SerializedName("stp")
@@ -114,6 +122,10 @@ class GetClosedOrdersItems implements Request
     public $stp;
     /**
      * Time in force
+     * - 'GTC' :
+     * - 'GTT' :
+     * - 'IOC' :
+     * - 'FOK' :
      * @var string $timeInForce
      * @Type("string")
      * @SerializedName("timeInForce")

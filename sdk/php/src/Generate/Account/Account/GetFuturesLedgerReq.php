@@ -135,7 +135,8 @@ class GetFuturesLedgerReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Currency of transaction history, XBT or USDT
+     * Currency of transaction history, XBT or USDT
+     * @param string $value
      * @return self
      */
     public function setCurrency($value)
@@ -145,7 +146,8 @@ class GetFuturesLedgerReqBuilder
     }
 
     /**
-     * @param string $value Type RealizedPNL-Realized profit and loss, Deposit-Deposit, Withdrawal-withdraw, Transferin-Transfer in, TransferOut-Transfer out
+     * Type RealizedPNL-Realized profit and loss, Deposit-Deposit, Withdrawal-withdraw, Transferin-Transfer in, TransferOut-Transfer out
+     * @param string $value
      * @return self
      */
     public function setType($value)
@@ -155,7 +157,8 @@ class GetFuturesLedgerReqBuilder
     }
 
     /**
-     * @param int $value Start offset. Generally, only the attributes of the last returned result of the previous request are used, and the first page is returned by default
+     * Start offset. Generally, only the attributes of the last returned result of the previous request are used, and the first page is returned by default
+     * @param int $value
      * @return self
      */
     public function setOffset($value)
@@ -165,7 +168,8 @@ class GetFuturesLedgerReqBuilder
     }
 
     /**
-     * @param bool $value This parameter functions to judge whether the lookup is forward or not. True means “yes” and False means “no”. This parameter is set as true by default.
+     * This parameter functions to judge whether the lookup is forward or not. True means “yes” and False means “no”. This parameter is set as true by default.
+     * @param bool $value
      * @return self
      */
     public function setForward($value)
@@ -175,7 +179,8 @@ class GetFuturesLedgerReqBuilder
     }
 
     /**
-     * @param int $value Displayed size per page. The default size is 50
+     * Displayed size per page. The default size is 50
+     * @param int $value
      * @return self
      */
     public function setMaxCount($value)
@@ -185,7 +190,8 @@ class GetFuturesLedgerReqBuilder
     }
 
     /**
-     * @param int $value Start time (milliseconds)
+     * Start time (milliseconds)
+     * @param int $value
      * @return self
      */
     public function setStartAt($value)
@@ -195,7 +201,8 @@ class GetFuturesLedgerReqBuilder
     }
 
     /**
-     * @param int $value End time (milliseconds)
+     * End time (milliseconds)
+     * @param int $value
      * @return self
      */
     public function setEndAt($value)

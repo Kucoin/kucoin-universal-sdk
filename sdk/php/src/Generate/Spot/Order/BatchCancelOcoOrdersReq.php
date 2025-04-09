@@ -100,7 +100,8 @@ class BatchCancelOcoOrdersReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value Specify the order ID; there can be multiple orders, separated by commas. If not passed, all OCO orders will be canceled by default.
+     * Specify the order ID; there can be multiple orders, separated by commas. If not passed, all OCO orders will be canceled by default.
+     * @param string $value
      * @return self
      */
     public function setOrderIds($value)
@@ -110,7 +111,8 @@ class BatchCancelOcoOrdersReqBuilder
     }
 
     /**
-     * @param string $value Trading pair. If not passed, the OCO orders of all symbols will be canceled by default.
+     * Trading pair. If not passed, the OCO orders of all symbols will be canceled by default.
+     * @param string $value
      * @return self
      */
     public function setSymbol($value)

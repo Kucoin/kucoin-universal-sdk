@@ -107,7 +107,8 @@ class DeleteSubAccountApiReqBuilder
         $this->obj = $obj;
     }
     /**
-     * @param string $value API-Key
+     * API-Key
+     * @param string $value
      * @return self
      */
     public function setApiKey($value)
@@ -117,7 +118,8 @@ class DeleteSubAccountApiReqBuilder
     }
 
     /**
-     * @param string $value Sub-account name.
+     * Sub-account name.
+     * @param string $value
      * @return self
      */
     public function setSubName($value)
@@ -127,7 +129,8 @@ class DeleteSubAccountApiReqBuilder
     }
 
     /**
-     * @param string $value Password (password of the API key)
+     * Password (password of the API key)
+     * @param string $value
      * @return self
      */
     public function setPassphrase($value)

@@ -21,6 +21,13 @@ class GetIsolatedMarginAccountDetailV1Resp implements Response
     public $symbol;
     /**
      * Position status: Existing liabilities-DEBT, No liabilities-CLEAR, Bankrupcy (after position enters a negative balance)-BANKRUPTCY, Existing borrowings-IN_BORROW, Existing repayments-IN_REPAY, Under liquidation-IN_LIQUIDATION, Under auto-renewal assets-IN_AUTO_RENEW .
+     * - 'DEBT' :
+     * - 'CLEAR' :
+     * - 'BANKRUPTCY' :
+     * - 'IN_BORROW' :
+     * - 'IN_REPAY' :
+     * - 'IN_LIQUIDATION' :
+     * - 'IN_AUTO_RENEW' :
      * @var string $status
      * @Type("string")
      * @SerializedName("status")
