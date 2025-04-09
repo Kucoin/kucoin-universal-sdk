@@ -7,9 +7,9 @@ use JMS\Serializer\Annotation\Exclude;
 use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\Type;
 use JMS\Serializer\Serializer;
-use KuCoin\UniversalSDK\Internal\Interfaces\Request;
+use KuCoin\UniversalSDK\Internal\Interfaces\Serializable;
 
-class GetSpotIndexPriceDataList implements Request
+class GetSpotIndexPriceDataList implements Serializable
 {
     /**
      * @var string[] $pathVarMapping
@@ -52,7 +52,7 @@ class GetSpotIndexPriceDataList implements Request
     /**
      * Component List
      * @var GetSpotIndexPriceDataListDecomposionList[] $decomposionList
-     * @Type("GetSpotIndexPriceDataListDecomposionList[]")
+     * @Type("array<GetSpotIndexPriceDataListDecomposionList>")
      * @SerializedName("decomposionList")
      */
     public $decomposionList;

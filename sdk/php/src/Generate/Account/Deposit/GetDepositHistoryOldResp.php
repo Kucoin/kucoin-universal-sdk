@@ -43,7 +43,7 @@ class GetDepositHistoryOldResp implements Response
     /**
      *
      * @var GetDepositHistoryOldItems[] $items
-     * @Type("GetDepositHistoryOldItems[]")
+     * @Type("array<GetDepositHistoryOldItems>")
      * @SerializedName("items")
      */
     public $items;

@@ -15,7 +15,7 @@ class GetIsolatedMarginSymbolsResp implements Response
     /**
      *
      * @var GetIsolatedMarginSymbolsData[] $data
-     * @Type("GetIsolatedMarginSymbolsData[]")
+     * @Type("array<GetIsolatedMarginSymbolsData>")
      * @SerializedName("data")
      */
     public $data;

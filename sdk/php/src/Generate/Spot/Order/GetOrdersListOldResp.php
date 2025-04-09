@@ -43,7 +43,7 @@ class GetOrdersListOldResp implements Response
     /**
      *
      * @var GetOrdersListOldItems[] $items
-     * @Type("GetOrdersListOldItems[]")
+     * @Type("array<GetOrdersListOldItems>")
      * @SerializedName("items")
      */
     public $items;

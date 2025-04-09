@@ -19,7 +19,7 @@ class KlinesEvent implements Response
     /**
      * Start time, open price, close price, high price, low price, Transaction volume(This value is incorrect, please do not use it, we will fix it in subsequent versions), Transaction amount
      * @var string[] $candles
-     * @Type("string[]")
+     * @Type("array<string>")
      * @SerializedName("candles")
      */
     public $candles;

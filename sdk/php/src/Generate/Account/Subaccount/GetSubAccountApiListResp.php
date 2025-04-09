@@ -15,7 +15,7 @@ class GetSubAccountApiListResp implements Response
     /**
      *
      * @var GetSubAccountApiListData[] $data
-     * @Type("GetSubAccountApiListData[]")
+     * @Type("array<GetSubAccountApiListData>")
      * @SerializedName("data")
      */
     public $data;

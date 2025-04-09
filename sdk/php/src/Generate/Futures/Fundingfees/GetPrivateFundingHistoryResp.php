@@ -15,7 +15,7 @@ class GetPrivateFundingHistoryResp implements Response
     /**
      *
      * @var GetPrivateFundingHistoryDataList[] $dataList
-     * @Type("GetPrivateFundingHistoryDataList[]")
+     * @Type("array<GetPrivateFundingHistoryDataList>")
      * @SerializedName("dataList")
      */
     public $dataList;

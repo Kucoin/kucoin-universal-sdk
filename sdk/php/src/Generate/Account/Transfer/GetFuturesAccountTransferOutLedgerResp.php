@@ -43,7 +43,7 @@ class GetFuturesAccountTransferOutLedgerResp implements Response
     /**
      *
      * @var GetFuturesAccountTransferOutLedgerItems[] $items
-     * @Type("GetFuturesAccountTransferOutLedgerItems[]")
+     * @Type("array<GetFuturesAccountTransferOutLedgerItems>")
      * @SerializedName("items")
      */
     public $items;

@@ -48,7 +48,7 @@ class GetCrossMarginAccountResp implements Response
     /**
      * Margin account list
      * @var GetCrossMarginAccountAccounts[] $accounts
-     * @Type("GetCrossMarginAccountAccounts[]")
+     * @Type("array<GetCrossMarginAccountAccounts>")
      * @SerializedName("accounts")
      */
     public $accounts;

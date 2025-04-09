@@ -15,7 +15,7 @@ class GetDiscountRateConfigsResp implements Response
     /**
      *
      * @var GetDiscountRateConfigsData[] $data
-     * @Type("GetDiscountRateConfigsData[]")
+     * @Type("array<GetDiscountRateConfigsData>")
      * @SerializedName("data")
      */
     public $data;

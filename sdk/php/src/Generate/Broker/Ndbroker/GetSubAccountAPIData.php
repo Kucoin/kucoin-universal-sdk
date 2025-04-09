@@ -7,9 +7,9 @@ use JMS\Serializer\Annotation\Exclude;
 use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\Type;
 use JMS\Serializer\Serializer;
-use KuCoin\UniversalSDK\Internal\Interfaces\Request;
+use KuCoin\UniversalSDK\Internal\Interfaces\Serializable;
 
-class GetSubAccountAPIData implements Request
+class GetSubAccountAPIData implements Serializable
 {
     /**
      * @var string[] $pathVarMapping
@@ -55,14 +55,14 @@ class GetSubAccountAPIData implements Request
      * - 'Spot' :
      * - 'Futures' :
      * @var string[] $permissions
-     * @Type("string[]")
+     * @Type("array<string>")
      * @SerializedName("permissions")
      */
     public $permissions;
     /**
      * IP whitelist list
      * @var string[] $ipWhitelist
-     * @Type("string[]")
+     * @Type("array<string>")
      * @SerializedName("ipWhitelist")
      */
     public $ipWhitelist;

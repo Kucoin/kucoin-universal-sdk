@@ -15,7 +15,7 @@ class GetPositionListResp implements Response
     /**
      *
      * @var GetPositionListData[] $data
-     * @Type("GetPositionListData[]")
+     * @Type("array<GetPositionListData>")
      * @SerializedName("data")
      */
     public $data;

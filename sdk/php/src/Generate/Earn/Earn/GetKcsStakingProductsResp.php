@@ -15,7 +15,7 @@ class GetKcsStakingProductsResp implements Response
     /**
      *
      * @var GetKcsStakingProductsData[] $data
-     * @Type("GetKcsStakingProductsData[]")
+     * @Type("array<GetKcsStakingProductsData>")
      * @SerializedName("data")
      */
     public $data;

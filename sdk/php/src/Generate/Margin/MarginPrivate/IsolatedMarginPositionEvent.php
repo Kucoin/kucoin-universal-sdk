@@ -40,7 +40,7 @@ class IsolatedMarginPositionEvent implements Response
     /**
      *
      * @var array<string,IsolatedMarginPositionChangeAssetsValue> $changeAssets
-     * @Type("array<string,IsolatedMarginPositionChangeAssetsValue>")
+     * @Type("array<string, IsolatedMarginPositionChangeAssetsValue>")
      * @SerializedName("changeAssets")
      */
     public $changeAssets;

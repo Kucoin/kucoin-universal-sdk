@@ -15,7 +15,7 @@ class GetPublicFundingHistoryResp implements Response
     /**
      *
      * @var GetPublicFundingHistoryData[] $data
-     * @Type("GetPublicFundingHistoryData[]")
+     * @Type("array<GetPublicFundingHistoryData>")
      * @SerializedName("data")
      */
     public $data;

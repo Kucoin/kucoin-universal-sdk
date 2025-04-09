@@ -156,7 +156,7 @@ class SymbolSnapshotData implements Serializable
     /**
      *
      * @var string[] $markets
-     * @Type("string[]")
+     * @Type("array<string>")
      * @SerializedName("markets")
      */
     public $markets;
@@ -184,7 +184,7 @@ class SymbolSnapshotData implements Serializable
     /**
      *
      * @var string[] $siteTypes
-     * @Type("string[]")
+     * @Type("array<string>")
      * @SerializedName("siteTypes")
      */
     public $siteTypes;

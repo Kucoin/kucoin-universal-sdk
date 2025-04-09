@@ -8,7 +8,7 @@ import org.openapitools.codegen.config.CodegenConfigurator;
 public class SdkGeneratorTest {
 
     private static final String SDK_NAME = "php-sdk";
-    private static final String SPEC_NAME = "../../spec/rest/api/openapi-futures-order.json";
+    private static final String SPEC_NAME = "../../spec/rest/api/openapi-futures-market.json";
     private static final String SPEC_ENTRY_NAME = "../../spec/rest/entry/openapi-spot.json";
     private static final String WS_SPEC_NAME = "../../spec/ws/openapi-spot-public.json";
     private static final String OUTPUT_DIR = "./out";

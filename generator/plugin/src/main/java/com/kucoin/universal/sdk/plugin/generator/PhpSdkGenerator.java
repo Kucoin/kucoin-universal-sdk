@@ -209,8 +209,66 @@ public class PhpSdkGenerator extends AbstractPhpCodegen implements NameService {
             prop.vendorExtensions.put("x-enums", enums);
         }
 
+        String annoType = getTypeAnnotationString(prop);
+        prop.vendorExtensions.put("annotationType", annoType);
+
         return prop;
     }
+
+
+    private String getTypeAnnotationString(CodegenProperty prop) {
+        if (prop == null) {
+            return "mixed";
+        }
+
+        if (prop.isArray) {
+            if (prop.items != null) {
+                return String.format("array<%s>", getTypeAnnotationString(prop.items));
+            } else {
+                return "array";
+            }
+        }
+
+        if (prop.isMap) {
+            if (prop.items != null) {
+                return String.format("array<string, %s>", getTypeAnnotationString(prop.items));
+            } else {
+                return "array<string, mixed>";
+            }
+        }
+
+        if (prop.isPrimitiveType) {
+            return normalizePrimitiveType(prop.dataType);
+        }
+
+        if (prop.isModel) {
+            return prop.complexType;
+        }
+
+        return "mixed";
+    }
+
+    private String normalizePrimitiveType(String dataType) {
+        switch (dataType) {
+            case "integer":
+            case "int":
+                return "int";
+            case "number":
+            case "double":
+            case "float":
+                return "float";
+            case "boolean":
+            case "bool":
+                return "bool";
+            case "string":
+            case "DateTime":
+            case "date":
+                return "string";
+            default:
+                return dataType != null ? dataType : "mixed";
+        }
+    }
+
 
     @Override
     public String getTypeDeclaration(Schema p) {
@@ -334,39 +392,7 @@ public class PhpSdkGenerator extends AbstractPhpCodegen implements NameService {
         if (models != null) {
             for (ModelMap model : models) {
                 CodegenModel codegenModel = model.getModel();
-
-//                if (codegenModel != null) {
-//
-//                    imports.computeIfAbsent("class-transformer", NodeSdkGenerator.ImportModel::new).
-//                            component.addAll(Arrays.asList("plainToClassFromExist", "instanceToPlain"));
-//
-//                    if (codegenModel.getVendorExtensions().containsKey("x-response-model")) {
-//                        imports.computeIfAbsent("class-transformer", NodeSdkGenerator.ImportModel::new).component.add("Exclude");
-//                    }
-//
-//                    for (CodegenProperty var : codegenModel.getVars()) {
-//
-//                        String innerType = getInnerModelType(var);
-//
-//                        if (innerType != null) {
-//                            String modelName = "./" + toModelFilename(innerType);
-//                            imports.computeIfAbsent(modelName, NodeSdkGenerator.ImportModel::new).component.add(innerType);
-//                            imports.computeIfAbsent("class-transformer", NodeSdkGenerator.ImportModel::new).component.add("Type");
-//                            var.vendorExtensions.put("x-typed", String.format("@Type(() => %s)", innerType));
-//                        }
-//
-//                        if (var.getBaseName() != null && !var.getName().equals(var.getBaseName())) {
-//                            var.vendorExtensions.put("x-use-base-name", true);
-//                            imports.computeIfAbsent("class-transformer", NodeSdkGenerator.ImportModel::new).component.add("Expose");
-//                        }
-//
-//                        if (var.getVendorExtensions().containsKey("x-tag-path")) {
-//                            imports.computeIfAbsent("reflect-metadata", NodeSdkGenerator.ImportModel::new);
-//                        }
-//                    }
-//
                 codegenModel.getVendorExtensions().put("x-imports", imports);
-//                }
             }
         }
         return objs;

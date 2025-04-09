@@ -40,14 +40,14 @@ class CrossMarginPositionEvent implements Response
     /**
      * Asset list (interest included)
      * @var array<string,CrossMarginPositionAssetListValue> $assetList
-     * @Type("array<string,CrossMarginPositionAssetListValue>")
+     * @Type("array<string, CrossMarginPositionAssetListValue>")
      * @SerializedName("assetList")
      */
     public $assetList;
     /**
      * Debt list (interest included)
      * @var array<string,string> $debtList
-     * @Type("array<string,string>")
+     * @Type("array<string, string>")
      * @SerializedName("debtList")
      */
     public $debtList;

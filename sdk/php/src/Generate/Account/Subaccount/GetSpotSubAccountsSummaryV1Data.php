@@ -7,9 +7,9 @@ use JMS\Serializer\Annotation\Exclude;
 use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\Type;
 use JMS\Serializer\Serializer;
-use KuCoin\UniversalSDK\Internal\Interfaces\Request;
+use KuCoin\UniversalSDK\Internal\Interfaces\Serializable;
 
-class GetSpotSubAccountsSummaryV1Data implements Request
+class GetSpotSubAccountsSummaryV1Data implements Serializable
 {
     /**
      * @var string[] $pathVarMapping

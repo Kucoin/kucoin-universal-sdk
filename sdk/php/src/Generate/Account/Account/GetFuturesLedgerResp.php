@@ -15,7 +15,7 @@ class GetFuturesLedgerResp implements Response
     /**
      *
      * @var GetFuturesLedgerDataList[] $dataList
-     * @Type("GetFuturesLedgerDataList[]")
+     * @Type("array<GetFuturesLedgerDataList>")
      * @SerializedName("dataList")
      */
     public $dataList;

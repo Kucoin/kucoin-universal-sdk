@@ -15,7 +15,7 @@ class GetMarginHFLedgerResp implements Response
     /**
      *
      * @var GetMarginHFLedgerData[] $data
-     * @Type("GetMarginHFLedgerData[]")
+     * @Type("array<GetMarginHFLedgerData>")
      * @SerializedName("data")
      */
     public $data;

@@ -43,7 +43,7 @@ class GetStopOrderListResp implements Response
     /**
      *
      * @var GetStopOrderListItems[] $items
-     * @Type("GetStopOrderListItems[]")
+     * @Type("array<GetStopOrderListItems>")
      * @SerializedName("items")
      */
     public $items;

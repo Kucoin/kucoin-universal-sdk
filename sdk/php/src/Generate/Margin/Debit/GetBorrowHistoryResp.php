@@ -50,7 +50,7 @@ class GetBorrowHistoryResp implements Response
     /**
      *
      * @var GetBorrowHistoryItems[] $items
-     * @Type("GetBorrowHistoryItems[]")
+     * @Type("array<GetBorrowHistoryItems>")
      * @SerializedName("items")
      */
     public $items;

@@ -43,7 +43,7 @@ class GetPurchaseOrdersResp implements Response
     /**
      *
      * @var GetPurchaseOrdersItems[] $items
-     * @Type("GetPurchaseOrdersItems[]")
+     * @Type("array<GetPurchaseOrdersItems>")
      * @SerializedName("items")
      */
     public $items;

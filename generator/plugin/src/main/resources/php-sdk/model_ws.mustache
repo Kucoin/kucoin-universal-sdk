@@ -22,7 +22,7 @@ class {{classname}} implements Serializable{
     /**
     * {{#description}}{{{.}}}{{/description}}
     * @var {{{dataType}}}{{^required}}|null{{/required}} ${{name}}
-    * @Type("{{{dataType}}}")
+    * @Type("{{{vendorExtensions.annotationType}}}")
     * @SerializedName("{{baseName}}")
     */
     public ${{name}}{{#defaultValue}} = {{{.}}}{{/defaultValue}};

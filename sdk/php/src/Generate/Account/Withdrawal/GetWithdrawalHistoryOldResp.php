@@ -43,7 +43,7 @@ class GetWithdrawalHistoryOldResp implements Response
     /**
      *
      * @var GetWithdrawalHistoryOldItems[] $items
-     * @Type("GetWithdrawalHistoryOldItems[]")
+     * @Type("array<GetWithdrawalHistoryOldItems>")
      * @SerializedName("items")
      */
     public $items;

@@ -7,9 +7,9 @@ use JMS\Serializer\Annotation\Exclude;
 use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\Type;
 use JMS\Serializer\Serializer;
-use KuCoin\UniversalSDK\Internal\Interfaces\Request;
+use KuCoin\UniversalSDK\Internal\Interfaces\Serializable;
 
-class BatchAddOrdersOldReq implements Request
+class BatchAddOrdersOldReq implements Serializable
 {
     /**
      * @var string[] $pathVarMapping
@@ -24,7 +24,7 @@ class BatchAddOrdersOldReq implements Request
     /**
      *
      * @var BatchAddOrdersOldOrderList[]|null $orderList
-     * @Type("BatchAddOrdersOldOrderList[]")
+     * @Type("array<BatchAddOrdersOldOrderList>")
      * @SerializedName("orderList")
      */
     public $orderList;

@@ -7,9 +7,9 @@ use JMS\Serializer\Annotation\Exclude;
 use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\Type;
 use JMS\Serializer\Serializer;
-use KuCoin\UniversalSDK\Internal\Interfaces\Request;
+use KuCoin\UniversalSDK\Internal\Interfaces\Serializable;
 
-class GetSpotSubAccountsSummaryV2Items implements Request
+class GetSpotSubAccountsSummaryV2Items implements Serializable
 {
     /**
      * @var string[] $pathVarMapping
@@ -86,14 +86,14 @@ class GetSpotSubAccountsSummaryV2Items implements Request
     /**
      * Sub-account Permissions
      * @var string[] $tradeTypes
-     * @Type("string[]")
+     * @Type("array<string>")
      * @SerializedName("tradeTypes")
      */
     public $tradeTypes;
     /**
      * Sub-account active permissions: If you do not have the corresponding permissions, you must log in to the sub-account and go to the corresponding web page to activate.
      * @var string[] $openedTradeTypes
-     * @Type("string[]")
+     * @Type("array<string>")
      * @SerializedName("openedTradeTypes")
      */
     public $openedTradeTypes;

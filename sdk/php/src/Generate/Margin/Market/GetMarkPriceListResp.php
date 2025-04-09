@@ -15,7 +15,7 @@ class GetMarkPriceListResp implements Response
     /**
      *
      * @var GetMarkPriceListData[] $data
-     * @Type("GetMarkPriceListData[]")
+     * @Type("array<GetMarkPriceListData>")
      * @SerializedName("data")
      */
     public $data;

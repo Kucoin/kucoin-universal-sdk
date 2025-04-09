@@ -15,7 +15,7 @@ class GetETFInfoResp implements Response
     /**
      *
      * @var GetETFInfoData[] $data
-     * @Type("GetETFInfoData[]")
+     * @Type("array<GetETFInfoData>")
      * @SerializedName("data")
      */
     public $data;

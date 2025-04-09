@@ -22,7 +22,7 @@ class GetPrivateTokenResp implements Response
     /**
      *
      * @var GetPrivateTokenInstanceServers[] $instanceServers
-     * @Type("GetPrivateTokenInstanceServers[]")
+     * @Type("array<GetPrivateTokenInstanceServers>")
      * @SerializedName("instanceServers")
      */
     public $instanceServers;

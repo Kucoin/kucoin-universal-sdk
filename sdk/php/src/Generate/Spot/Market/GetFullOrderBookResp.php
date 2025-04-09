@@ -29,14 +29,14 @@ class GetFullOrderBookResp implements Response
     /**
      * bids, from high to low
      * @var string[][] $bids
-     * @Type("string[][]")
+     * @Type("array<array<string>>")
      * @SerializedName("bids")
      */
     public $bids;
     /**
      * asks, from low to high
      * @var string[][] $asks
-     * @Type("string[][]")
+     * @Type("array<array<string>>")
      * @SerializedName("asks")
      */
     public $asks;

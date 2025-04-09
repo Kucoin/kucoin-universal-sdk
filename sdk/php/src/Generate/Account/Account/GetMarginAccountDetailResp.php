@@ -22,7 +22,7 @@ class GetMarginAccountDetailResp implements Response
     /**
      * Margin account list
      * @var GetMarginAccountDetailAccounts[] $accounts
-     * @Type("GetMarginAccountDetailAccounts[]")
+     * @Type("array<GetMarginAccountDetailAccounts>")
      * @SerializedName("accounts")
      */
     public $accounts;

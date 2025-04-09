@@ -22,7 +22,7 @@ class GetClosedOrdersResp implements Response
     /**
      *
      * @var GetClosedOrdersItems[] $items
-     * @Type("GetClosedOrdersItems[]")
+     * @Type("array<GetClosedOrdersItems>")
      * @SerializedName("items")
      */
     public $items;

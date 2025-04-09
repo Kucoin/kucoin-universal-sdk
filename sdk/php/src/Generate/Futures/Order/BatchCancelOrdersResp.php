@@ -15,7 +15,7 @@ class BatchCancelOrdersResp implements Response
     /**
      *
      * @var BatchCancelOrdersData[] $data
-     * @Type("BatchCancelOrdersData[]")
+     * @Type("array<BatchCancelOrdersData>")
      * @SerializedName("data")
      */
     public $data;

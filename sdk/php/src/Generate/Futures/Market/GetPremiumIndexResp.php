@@ -15,7 +15,7 @@ class GetPremiumIndexResp implements Response
     /**
      *
      * @var GetPremiumIndexDataList[] $dataList
-     * @Type("GetPremiumIndexDataList[]")
+     * @Type("array<GetPremiumIndexDataList>")
      * @SerializedName("dataList")
      */
     public $dataList;

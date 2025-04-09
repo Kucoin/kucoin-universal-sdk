@@ -15,7 +15,7 @@ class GetPromotionProductsResp implements Response
     /**
      *
      * @var GetPromotionProductsData[] $data
-     * @Type("GetPromotionProductsData[]")
+     * @Type("array<GetPromotionProductsData>")
      * @SerializedName("data")
      */
     public $data;

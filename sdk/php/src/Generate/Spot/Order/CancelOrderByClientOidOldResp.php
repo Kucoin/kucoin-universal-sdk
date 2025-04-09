@@ -29,7 +29,7 @@ class CancelOrderByClientOidOldResp implements Response
     /**
      *
      * @var string[] $cancelledOcoOrderIds
-     * @Type("string[]")
+     * @Type("array<string>")
      * @SerializedName("cancelledOcoOrderIds")
      */
     public $cancelledOcoOrderIds;

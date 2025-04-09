@@ -22,7 +22,7 @@ class GetAnnouncementsResp implements Response
     /**
      *
      * @var GetAnnouncementsItems[] $items
-     * @Type("GetAnnouncementsItems[]")
+     * @Type("array<GetAnnouncementsItems>")
      * @SerializedName("items")
      */
     public $items;

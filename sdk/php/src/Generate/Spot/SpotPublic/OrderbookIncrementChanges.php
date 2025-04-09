@@ -9,14 +9,14 @@ class OrderbookIncrementChanges implements Serializable
     /**
      * price,size,sequence
      * @var string[][] $asks
-     * @Type("string[][]")
+     * @Type("array<array<string>>")
      * @SerializedName("asks")
      */
     public $asks;
     /**
      *
      * @var string[][] $bids
-     * @Type("string[][]")
+     * @Type("array<array<string>>")
      * @SerializedName("bids")
      */
     public $bids;

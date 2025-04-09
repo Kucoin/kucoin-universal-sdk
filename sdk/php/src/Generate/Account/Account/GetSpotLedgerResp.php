@@ -43,7 +43,7 @@ class GetSpotLedgerResp implements Response
     /**
      *
      * @var GetSpotLedgerItems[] $items
-     * @Type("GetSpotLedgerItems[]")
+     * @Type("array<GetSpotLedgerItems>")
      * @SerializedName("items")
      */
     public $items;

@@ -22,7 +22,7 @@ class GetCrossMarginSymbolsResp implements Response
     /**
      *
      * @var GetCrossMarginSymbolsItems[] $items
-     * @Type("GetCrossMarginSymbolsItems[]")
+     * @Type("array<GetCrossMarginSymbolsItems>")
      * @SerializedName("items")
      */
     public $items;

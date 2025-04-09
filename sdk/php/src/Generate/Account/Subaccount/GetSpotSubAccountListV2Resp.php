@@ -43,7 +43,7 @@ class GetSpotSubAccountListV2Resp implements Response
     /**
      *
      * @var GetSpotSubAccountListV2Items[] $items
-     * @Type("GetSpotSubAccountListV2Items[]")
+     * @Type("array<GetSpotSubAccountListV2Items>")
      * @SerializedName("items")
      */
     public $items;

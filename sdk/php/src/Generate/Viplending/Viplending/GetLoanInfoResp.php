@@ -22,7 +22,7 @@ class GetLoanInfoResp implements Response
     /**
      * Loan Orders
      * @var GetLoanInfoOrders[] $orders
-     * @Type("GetLoanInfoOrders[]")
+     * @Type("array<GetLoanInfoOrders>")
      * @SerializedName("orders")
      */
     public $orders;
@@ -50,7 +50,7 @@ class GetLoanInfoResp implements Response
     /**
      *
      * @var GetLoanInfoMargins[] $margins
-     * @Type("GetLoanInfoMargins[]")
+     * @Type("array<GetLoanInfoMargins>")
      * @SerializedName("margins")
      */
     public $margins;

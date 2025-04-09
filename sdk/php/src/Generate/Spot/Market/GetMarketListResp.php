@@ -15,7 +15,7 @@ class GetMarketListResp implements Response
     /**
      *
      * @var string[] $data
-     * @Type("string[]")
+     * @Type("array<string>")
      * @SerializedName("data")
      */
     public $data;

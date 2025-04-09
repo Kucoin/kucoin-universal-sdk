@@ -15,7 +15,7 @@ class GetMarginConfigResp implements Response
     /**
      * Available currencies for margin trade
      * @var string[] $currencyList
-     * @Type("string[]")
+     * @Type("array<string>")
      * @SerializedName("currencyList")
      */
     public $currencyList;

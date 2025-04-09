@@ -7,9 +7,9 @@ use JMS\Serializer\Annotation\Exclude;
 use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\Type;
 use JMS\Serializer\Serializer;
-use KuCoin\UniversalSDK\Internal\Interfaces\Request;
+use KuCoin\UniversalSDK\Internal\Interfaces\Serializable;
 
-class GetFuturesAccountTransferOutLedgerReq implements Request
+class GetFuturesAccountTransferOutLedgerReq implements Serializable
 {
     /**
      * @var string[] $pathVarMapping
@@ -42,7 +42,7 @@ class GetFuturesAccountTransferOutLedgerReq implements Request
     /**
      * Status List PROCESSING, SUCCESS, FAILURE
      * @var string[]|null $tag
-     * @Type("string[]")
+     * @Type("array<string>")
      * @SerializedName("tag")
      */
     public $tag;

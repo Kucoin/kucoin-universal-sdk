@@ -7,9 +7,9 @@ use JMS\Serializer\Annotation\Exclude;
 use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\Type;
 use JMS\Serializer\Serializer;
-use KuCoin\UniversalSDK\Internal\Interfaces\Request;
+use KuCoin\UniversalSDK\Internal\Interfaces\Serializable;
 
-class BatchCancelOrdersReq implements Request
+class BatchCancelOrdersReq implements Serializable
 {
     /**
      * @var string[] $pathVarMapping
@@ -24,14 +24,14 @@ class BatchCancelOrdersReq implements Request
     /**
      * the list of orderId
      * @var string[] $orderIdsList
-     * @Type("string[]")
+     * @Type("array<string>")
      * @SerializedName("orderIdsList")
      */
     public $orderIdsList;
     /**
      * the list of client orderId
      * @var BatchCancelOrdersClientOidsList[] $clientOidsList
-     * @Type("BatchCancelOrdersClientOidsList[]")
+     * @Type("array<BatchCancelOrdersClientOidsList>")
      * @SerializedName("clientOidsList")
      */
     public $clientOidsList;

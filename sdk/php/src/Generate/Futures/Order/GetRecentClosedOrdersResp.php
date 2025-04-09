@@ -15,7 +15,7 @@ class GetRecentClosedOrdersResp implements Response
     /**
      *
      * @var GetRecentClosedOrdersData[] $data
-     * @Type("GetRecentClosedOrdersData[]")
+     * @Type("array<GetRecentClosedOrdersData>")
      * @SerializedName("data")
      */
     public $data;

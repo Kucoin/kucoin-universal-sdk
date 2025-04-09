@@ -15,7 +15,7 @@ class GetMarginRiskLimitResp implements Response
     /**
      *
      * @var GetMarginRiskLimitData[] $data
-     * @Type("GetMarginRiskLimitData[]")
+     * @Type("array<GetMarginRiskLimitData>")
      * @SerializedName("data")
      */
     public $data;

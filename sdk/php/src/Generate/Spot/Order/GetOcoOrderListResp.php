@@ -43,7 +43,7 @@ class GetOcoOrderListResp implements Response
     /**
      *
      * @var GetOcoOrderListItems[] $items
-     * @Type("GetOcoOrderListItems[]")
+     * @Type("array<GetOcoOrderListItems>")
      * @SerializedName("items")
      */
     public $items;

@@ -15,7 +15,7 @@ class CancelOcoOrderByOrderIdResp implements Response
     /**
      * List of two order IDs related to the canceled OCO order
      * @var string[] $cancelledOrderIds
-     * @Type("string[]")
+     * @Type("array<string>")
      * @SerializedName("cancelledOrderIds")
      */
     public $cancelledOrderIds;

@@ -50,7 +50,7 @@ class GetRepayHistoryResp implements Response
     /**
      *
      * @var GetRepayHistoryItems[] $items
-     * @Type("GetRepayHistoryItems[]")
+     * @Type("array<GetRepayHistoryItems>")
      * @SerializedName("items")
      */
     public $items;

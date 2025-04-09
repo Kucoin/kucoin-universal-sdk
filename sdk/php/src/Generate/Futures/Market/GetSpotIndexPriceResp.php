@@ -15,7 +15,7 @@ class GetSpotIndexPriceResp implements Response
     /**
      *
      * @var GetSpotIndexPriceDataList[] $dataList
-     * @Type("GetSpotIndexPriceDataList[]")
+     * @Type("array<GetSpotIndexPriceDataList>")
      * @SerializedName("dataList")
      */
     public $dataList;

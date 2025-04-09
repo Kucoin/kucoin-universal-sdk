@@ -15,7 +15,7 @@ class GetSpotHFLedgerResp implements Response
     /**
      *
      * @var GetSpotHFLedgerData[] $data
-     * @Type("GetSpotHFLedgerData[]")
+     * @Type("array<GetSpotHFLedgerData>")
      * @SerializedName("data")
      */
     public $data;

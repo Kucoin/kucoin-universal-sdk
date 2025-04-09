@@ -15,7 +15,7 @@ class GetOpenOrdersResp implements Response
     /**
      *
      * @var GetOpenOrdersData[] $data
-     * @Type("GetOpenOrdersData[]")
+     * @Type("array<GetOpenOrdersData>")
      * @SerializedName("data")
      */
     public $data;

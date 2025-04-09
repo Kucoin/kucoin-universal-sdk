@@ -15,7 +15,7 @@ class GetRecentOrdersListOldResp implements Response
     /**
      *
      * @var GetRecentOrdersListOldData[] $data
-     * @Type("GetRecentOrdersListOldData[]")
+     * @Type("array<GetRecentOrdersListOldData>")
      * @SerializedName("data")
      */
     public $data;

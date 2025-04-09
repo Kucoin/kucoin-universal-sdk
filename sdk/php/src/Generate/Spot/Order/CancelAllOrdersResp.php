@@ -15,14 +15,14 @@ class CancelAllOrdersResp implements Response
     /**
      * The Symbols Successfully cancelled
      * @var string[] $succeedSymbols
-     * @Type("string[]")
+     * @Type("array<string>")
      * @SerializedName("succeedSymbols")
      */
     public $succeedSymbols;
     /**
      * The Symbols Failed to cancel
      * @var CancelAllOrdersFailedSymbols[] $failedSymbols
-     * @Type("CancelAllOrdersFailedSymbols[]")
+     * @Type("array<CancelAllOrdersFailedSymbols>")
      * @SerializedName("failedSymbols")
      */
     public $failedSymbols;

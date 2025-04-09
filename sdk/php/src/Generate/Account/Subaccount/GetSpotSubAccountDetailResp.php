@@ -29,28 +29,28 @@ class GetSpotSubAccountDetailResp implements Response
     /**
      * Funding Account
      * @var GetSpotSubAccountDetailMainAccounts[] $mainAccounts
-     * @Type("GetSpotSubAccountDetailMainAccounts[]")
+     * @Type("array<GetSpotSubAccountDetailMainAccounts>")
      * @SerializedName("mainAccounts")
      */
     public $mainAccounts;
     /**
      * Spot Account
      * @var GetSpotSubAccountDetailTradeAccounts[] $tradeAccounts
-     * @Type("GetSpotSubAccountDetailTradeAccounts[]")
+     * @Type("array<GetSpotSubAccountDetailTradeAccounts>")
      * @SerializedName("tradeAccounts")
      */
     public $tradeAccounts;
     /**
      * Margin Account
      * @var GetSpotSubAccountDetailMarginAccounts[] $marginAccounts
-     * @Type("GetSpotSubAccountDetailMarginAccounts[]")
+     * @Type("array<GetSpotSubAccountDetailMarginAccounts>")
      * @SerializedName("marginAccounts")
      */
     public $marginAccounts;
     /**
      * This param is deprecated and only valid for some old users
      * @var string[] $tradeHFAccounts
-     * @Type("string[]")
+     * @Type("array<string>")
      * @SerializedName("tradeHFAccounts")
      */
     public $tradeHFAccounts;

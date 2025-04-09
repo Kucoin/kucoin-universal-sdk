@@ -15,7 +15,7 @@ class GetDepositListResp implements Response
     /**
      *
      * @var GetDepositListData[] $data
-     * @Type("GetDepositListData[]")
+     * @Type("array<GetDepositListData>")
      * @SerializedName("data")
      */
     public $data;

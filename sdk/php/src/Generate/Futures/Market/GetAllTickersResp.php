@@ -15,7 +15,7 @@ class GetAllTickersResp implements Response
     /**
      *
      * @var GetAllTickersData[] $data
-     * @Type("GetAllTickersData[]")
+     * @Type("array<GetAllTickersData>")
      * @SerializedName("data")
      */
     public $data;

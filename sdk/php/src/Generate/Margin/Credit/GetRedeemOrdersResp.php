@@ -43,7 +43,7 @@ class GetRedeemOrdersResp implements Response
     /**
      *
      * @var GetRedeemOrdersItems[] $items
-     * @Type("GetRedeemOrdersItems[]")
+     * @Type("array<GetRedeemOrdersItems>")
      * @SerializedName("items")
      */
     public $items;

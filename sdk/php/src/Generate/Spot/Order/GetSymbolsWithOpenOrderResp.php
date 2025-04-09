@@ -15,7 +15,7 @@ class GetSymbolsWithOpenOrderResp implements Response
     /**
      * The symbol that has active orders
      * @var string[] $symbols
-     * @Type("string[]")
+     * @Type("array<string>")
      * @SerializedName("symbols")
      */
     public $symbols;

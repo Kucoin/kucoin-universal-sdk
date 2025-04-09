@@ -15,7 +15,7 @@ class CancelAllOrdersV1Resp implements Response
     /**
      * Unique ID of the canceled order
      * @var string[] $cancelledOrderIds
-     * @Type("string[]")
+     * @Type("array<string>")
      * @SerializedName("cancelledOrderIds")
      */
     public $cancelledOrderIds;

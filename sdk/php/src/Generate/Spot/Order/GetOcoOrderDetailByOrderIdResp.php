@@ -50,7 +50,7 @@ class GetOcoOrderDetailByOrderIdResp implements Response
     /**
      *
      * @var GetOcoOrderDetailByOrderIdOrders[] $orders
-     * @Type("GetOcoOrderDetailByOrderIdOrders[]")
+     * @Type("array<GetOcoOrderDetailByOrderIdOrders>")
      * @SerializedName("orders")
      */
     public $orders;

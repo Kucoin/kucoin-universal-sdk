@@ -43,7 +43,7 @@ class GetOrderListResp implements Response
     /**
      *
      * @var GetOrderListItems[] $items
-     * @Type("GetOrderListItems[]")
+     * @Type("array<GetOrderListItems>")
      * @SerializedName("items")
      */
     public $items;

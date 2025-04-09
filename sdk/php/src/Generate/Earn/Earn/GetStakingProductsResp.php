@@ -15,7 +15,7 @@ class GetStakingProductsResp implements Response
     /**
      *
      * @var GetStakingProductsData[] $data
-     * @Type("GetStakingProductsData[]")
+     * @Type("array<GetStakingProductsData>")
      * @SerializedName("data")
      */
     public $data;

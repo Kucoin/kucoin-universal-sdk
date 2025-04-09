@@ -22,7 +22,7 @@ class GetFuturesSubAccountListV2Resp implements Response
     /**
      * Account List
      * @var GetFuturesSubAccountListV2Accounts[] $accounts
-     * @Type("GetFuturesSubAccountListV2Accounts[]")
+     * @Type("array<GetFuturesSubAccountListV2Accounts>")
      * @SerializedName("accounts")
      */
     public $accounts;

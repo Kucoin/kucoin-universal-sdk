@@ -15,7 +15,7 @@ class CancelOrderByIdResp implements Response
     /**
      * The orderId that is to be canceled
      * @var string[] $cancelledOrderIds
-     * @Type("string[]")
+     * @Type("array<string>")
      * @SerializedName("cancelledOrderIds")
      */
     public $cancelledOrderIds;

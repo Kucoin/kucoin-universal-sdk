@@ -22,7 +22,7 @@ class GetAllTickersResp implements Response
     /**
      *
      * @var GetAllTickersTicker[] $ticker
-     * @Type("GetAllTickersTicker[]")
+     * @Type("array<GetAllTickersTicker>")
      * @SerializedName("ticker")
      */
     public $ticker;

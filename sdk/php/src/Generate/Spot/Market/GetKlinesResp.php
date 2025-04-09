@@ -15,7 +15,7 @@ class GetKlinesResp implements Response
     /**
      *
      * @var string[][] $data
-     * @Type("string[][]")
+     * @Type("array<array<string>>")
      * @SerializedName("data")
      */
     public $data;

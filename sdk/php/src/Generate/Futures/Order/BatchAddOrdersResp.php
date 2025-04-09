@@ -15,7 +15,7 @@ class BatchAddOrdersResp implements Response
     /**
      *
      * @var BatchAddOrdersData[] $data
-     * @Type("BatchAddOrdersData[]")
+     * @Type("array<BatchAddOrdersData>")
      * @SerializedName("data")
      */
     public $data;

@@ -15,7 +15,7 @@ class GetETHStakingProductsResp implements Response
     /**
      *
      * @var GetETHStakingProductsData[] $data
-     * @Type("GetETHStakingProductsData[]")
+     * @Type("array<GetETHStakingProductsData>")
      * @SerializedName("data")
      */
     public $data;

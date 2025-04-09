@@ -43,14 +43,14 @@ class ModifySubAccountApiResp implements Response
     /**
      * [Permissions](https://www.kucoin.com/docs-new/doc-338144) group list
      * @var string[] $permissions
-     * @Type("string[]")
+     * @Type("array<string>")
      * @SerializedName("permissions")
      */
     public $permissions;
     /**
      * IP whitelist list
      * @var string[] $ipWhitelist
-     * @Type("string[]")
+     * @Type("array<string>")
      * @SerializedName("ipWhitelist")
      */
     public $ipWhitelist;

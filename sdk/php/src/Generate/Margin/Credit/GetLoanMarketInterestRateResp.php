@@ -15,7 +15,7 @@ class GetLoanMarketInterestRateResp implements Response
     /**
      *
      * @var GetLoanMarketInterestRateData[] $data
-     * @Type("GetLoanMarketInterestRateData[]")
+     * @Type("array<GetLoanMarketInterestRateData>")
      * @SerializedName("data")
      */
     public $data;

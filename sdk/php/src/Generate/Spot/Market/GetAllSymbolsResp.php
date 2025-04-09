@@ -15,7 +15,7 @@ class GetAllSymbolsResp implements Response
     /**
      *
      * @var GetAllSymbolsData[] $data
-     * @Type("GetAllSymbolsData[]")
+     * @Type("array<GetAllSymbolsData>")
      * @SerializedName("data")
      */
     public $data;

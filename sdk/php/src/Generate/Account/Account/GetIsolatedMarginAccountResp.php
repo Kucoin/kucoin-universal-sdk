@@ -36,7 +36,7 @@ class GetIsolatedMarginAccountResp implements Response
     /**
      *
      * @var GetIsolatedMarginAccountAssets[] $assets
-     * @Type("GetIsolatedMarginAccountAssets[]")
+     * @Type("array<GetIsolatedMarginAccountAssets>")
      * @SerializedName("assets")
      */
     public $assets;

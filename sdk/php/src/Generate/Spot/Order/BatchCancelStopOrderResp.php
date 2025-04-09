@@ -15,7 +15,7 @@ class BatchCancelStopOrderResp implements Response
     /**
      * order id array
      * @var string[] $cancelledOrderIds
-     * @Type("string[]")
+     * @Type("array<string>")
      * @SerializedName("cancelledOrderIds")
      */
     public $cancelledOrderIds;

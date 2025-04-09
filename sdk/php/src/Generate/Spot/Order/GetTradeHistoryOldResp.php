@@ -43,7 +43,7 @@ class GetTradeHistoryOldResp implements Response
     /**
      *
      * @var GetTradeHistoryOldItems[] $items
-     * @Type("GetTradeHistoryOldItems[]")
+     * @Type("array<GetTradeHistoryOldItems>")
      * @SerializedName("items")
      */
     public $items;

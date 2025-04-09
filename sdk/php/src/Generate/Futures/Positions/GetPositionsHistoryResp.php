@@ -43,7 +43,7 @@ class GetPositionsHistoryResp implements Response
     /**
      *
      * @var GetPositionsHistoryItems[] $items
-     * @Type("GetPositionsHistoryItems[]")
+     * @Type("array<GetPositionsHistoryItems>")
      * @SerializedName("items")
      */
     public $items;

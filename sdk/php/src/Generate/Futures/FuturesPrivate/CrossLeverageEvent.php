@@ -12,7 +12,7 @@ class CrossLeverageEvent implements Response
     /**
      *
      * @var array<string,CrossLeverageDataValue> $data
-     * @Type("array<string,CrossLeverageDataValue>")
+     * @Type("array<string, CrossLeverageDataValue>")
      * @SerializedName("data")
      */
     public $data;

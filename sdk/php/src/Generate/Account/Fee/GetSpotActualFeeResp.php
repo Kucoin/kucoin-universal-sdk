@@ -15,7 +15,7 @@ class GetSpotActualFeeResp implements Response
     /**
      *
      * @var GetSpotActualFeeData[] $data
-     * @Type("GetSpotActualFeeData[]")
+     * @Type("array<GetSpotActualFeeData>")
      * @SerializedName("data")
      */
     public $data;

@@ -15,7 +15,7 @@ class GetInterestRateIndexResp implements Response
     /**
      *
      * @var GetInterestRateIndexDataList[] $dataList
-     * @Type("GetInterestRateIndexDataList[]")
+     * @Type("array<GetInterestRateIndexDataList>")
      * @SerializedName("dataList")
      */
     public $dataList;

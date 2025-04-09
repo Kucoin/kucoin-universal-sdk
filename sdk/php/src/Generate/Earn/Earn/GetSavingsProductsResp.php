@@ -15,7 +15,7 @@ class GetSavingsProductsResp implements Response
     /**
      *
      * @var GetSavingsProductsData[] $data
-     * @Type("GetSavingsProductsData[]")
+     * @Type("array<GetSavingsProductsData>")
      * @SerializedName("data")
      */
     public $data;

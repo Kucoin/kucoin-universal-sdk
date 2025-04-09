@@ -15,7 +15,7 @@ class GetRecentTradeHistoryResp implements Response
     /**
      *
      * @var GetRecentTradeHistoryData[] $data
-     * @Type("GetRecentTradeHistoryData[]")
+     * @Type("array<GetRecentTradeHistoryData>")
      * @SerializedName("data")
      */
     public $data;

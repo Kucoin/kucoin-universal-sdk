@@ -15,7 +15,7 @@ class BatchAddOrdersOldResp implements Response
     /**
      *
      * @var BatchAddOrdersOldData[] $data
-     * @Type("BatchAddOrdersOldData[]")
+     * @Type("array<BatchAddOrdersOldData>")
      * @SerializedName("data")
      */
     public $data;

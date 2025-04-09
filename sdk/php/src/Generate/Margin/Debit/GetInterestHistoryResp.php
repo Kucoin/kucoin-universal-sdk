@@ -50,7 +50,7 @@ class GetInterestHistoryResp implements Response
     /**
      *
      * @var GetInterestHistoryItems[] $items
-     * @Type("GetInterestHistoryItems[]")
+     * @Type("array<GetInterestHistoryItems>")
      * @SerializedName("items")
      */
     public $items;

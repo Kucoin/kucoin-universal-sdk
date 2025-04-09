@@ -355,7 +355,7 @@ class GetSymbolResp implements Response
     /**
      * The contract index price source exchange
      * @var string[] $sourceExchanges
-     * @Type("string[]")
+     * @Type("array<string>")
      * @SerializedName("sourceExchanges")
      */
     public $sourceExchanges;

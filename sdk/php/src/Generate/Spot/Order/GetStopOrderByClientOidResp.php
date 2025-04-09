@@ -15,7 +15,7 @@ class GetStopOrderByClientOidResp implements Response
     /**
      * the return code
      * @var GetStopOrderByClientOidData[] $data
-     * @Type("GetStopOrderByClientOidData[]")
+     * @Type("array<GetStopOrderByClientOidData>")
      * @SerializedName("data")
      */
     public $data;

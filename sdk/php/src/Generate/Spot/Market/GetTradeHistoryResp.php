@@ -15,7 +15,7 @@ class GetTradeHistoryResp implements Response
     /**
      *
      * @var GetTradeHistoryData[] $data
-     * @Type("GetTradeHistoryData[]")
+     * @Type("array<GetTradeHistoryData>")
      * @SerializedName("data")
      */
     public $data;

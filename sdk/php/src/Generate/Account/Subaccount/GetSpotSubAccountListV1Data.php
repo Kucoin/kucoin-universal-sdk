@@ -7,9 +7,9 @@ use JMS\Serializer\Annotation\Exclude;
 use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\Type;
 use JMS\Serializer\Serializer;
-use KuCoin\UniversalSDK\Internal\Interfaces\Request;
+use KuCoin\UniversalSDK\Internal\Interfaces\Serializable;
 
-class GetSpotSubAccountListV1Data implements Request
+class GetSpotSubAccountListV1Data implements Serializable
 {
     /**
      * @var string[] $pathVarMapping
@@ -38,28 +38,28 @@ class GetSpotSubAccountListV1Data implements Request
     /**
      * Funding Account
      * @var GetSpotSubAccountListV1DataMainAccounts[] $mainAccounts
-     * @Type("GetSpotSubAccountListV1DataMainAccounts[]")
+     * @Type("array<GetSpotSubAccountListV1DataMainAccounts>")
      * @SerializedName("mainAccounts")
      */
     public $mainAccounts;
     /**
      * Spot Account
      * @var GetSpotSubAccountListV1DataTradeAccounts[] $tradeAccounts
-     * @Type("GetSpotSubAccountListV1DataTradeAccounts[]")
+     * @Type("array<GetSpotSubAccountListV1DataTradeAccounts>")
      * @SerializedName("tradeAccounts")
      */
     public $tradeAccounts;
     /**
      * Margin Account
      * @var GetSpotSubAccountListV1DataMarginAccounts[] $marginAccounts
-     * @Type("GetSpotSubAccountListV1DataMarginAccounts[]")
+     * @Type("array<GetSpotSubAccountListV1DataMarginAccounts>")
      * @SerializedName("marginAccounts")
      */
     public $marginAccounts;
     /**
      * This param is deprecated and only valid for some old users
      * @var string[] $tradeHFAccounts
-     * @Type("string[]")
+     * @Type("array<string>")
      * @SerializedName("tradeHFAccounts")
      */
     public $tradeHFAccounts;

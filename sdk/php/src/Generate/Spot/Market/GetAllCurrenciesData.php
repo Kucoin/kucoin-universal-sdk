@@ -7,9 +7,9 @@ use JMS\Serializer\Annotation\Exclude;
 use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\Type;
 use JMS\Serializer\Serializer;
-use KuCoin\UniversalSDK\Internal\Interfaces\Request;
+use KuCoin\UniversalSDK\Internal\Interfaces\Serializable;
 
-class GetAllCurrenciesData implements Request
+class GetAllCurrenciesData implements Serializable
 {
     /**
      * @var string[] $pathVarMapping
@@ -80,7 +80,7 @@ class GetAllCurrenciesData implements Request
     /**
      * Chain list
      * @var GetAllCurrenciesDataChains[] $chains
-     * @Type("GetAllCurrenciesDataChains[]")
+     * @Type("array<GetAllCurrenciesDataChains>")
      * @SerializedName("chains")
      */
     public $chains;

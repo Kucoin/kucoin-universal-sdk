@@ -22,7 +22,7 @@ class GetPublicTokenResp implements Response
     /**
      *
      * @var GetPublicTokenInstanceServers[] $instanceServers
-     * @Type("GetPublicTokenInstanceServers[]")
+     * @Type("array<GetPublicTokenInstanceServers>")
      * @SerializedName("instanceServers")
      */
     public $instanceServers;

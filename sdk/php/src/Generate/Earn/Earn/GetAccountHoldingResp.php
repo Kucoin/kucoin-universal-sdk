@@ -22,7 +22,7 @@ class GetAccountHoldingResp implements Response
     /**
      *
      * @var GetAccountHoldingItems[] $items
-     * @Type("GetAccountHoldingItems[]")
+     * @Type("array<GetAccountHoldingItems>")
      * @SerializedName("items")
      */
     public $items;

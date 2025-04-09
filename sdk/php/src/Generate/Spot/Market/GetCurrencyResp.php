@@ -71,7 +71,7 @@ class GetCurrencyResp implements Response
     /**
      * Chain list
      * @var GetCurrencyChains[] $chains
-     * @Type("GetCurrencyChains[]")
+     * @Type("array<GetCurrencyChains>")
      * @SerializedName("chains")
      */
     public $chains;

@@ -12,14 +12,14 @@ class OrderbookLevel1Event implements Response
     /**
      * price, size
      * @var string[] $asks
-     * @Type("string[]")
+     * @Type("array<string>")
      * @SerializedName("asks")
      */
     public $asks;
     /**
      *
      * @var string[] $bids
-     * @Type("string[]")
+     * @Type("array<string>")
      * @SerializedName("bids")
      */
     public $bids;

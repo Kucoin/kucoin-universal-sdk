@@ -15,7 +15,7 @@ class GetAllCurrenciesResp implements Response
     /**
      *
      * @var GetAllCurrenciesData[] $data
-     * @Type("GetAllCurrenciesData[]")
+     * @Type("array<GetAllCurrenciesData>")
      * @SerializedName("data")
      */
     public $data;

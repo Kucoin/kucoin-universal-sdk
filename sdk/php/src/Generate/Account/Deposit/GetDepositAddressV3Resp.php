@@ -15,7 +15,7 @@ class GetDepositAddressV3Resp implements Response
     /**
      *
      * @var GetDepositAddressV3Data[] $data
-     * @Type("GetDepositAddressV3Data[]")
+     * @Type("array<GetDepositAddressV3Data>")
      * @SerializedName("data")
      */
     public $data;

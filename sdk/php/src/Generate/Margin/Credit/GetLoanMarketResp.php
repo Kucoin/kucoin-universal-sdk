@@ -15,7 +15,7 @@ class GetLoanMarketResp implements Response
     /**
      *
      * @var GetLoanMarketData[] $data
-     * @Type("GetLoanMarketData[]")
+     * @Type("array<GetLoanMarketData>")
      * @SerializedName("data")
      */
     public $data;

@@ -15,7 +15,7 @@ class BatchAddOrdersSyncResp implements Response
     /**
      *
      * @var BatchAddOrdersSyncData[] $data
-     * @Type("BatchAddOrdersSyncData[]")
+     * @Type("array<BatchAddOrdersSyncData>")
      * @SerializedName("data")
      */
     public $data;

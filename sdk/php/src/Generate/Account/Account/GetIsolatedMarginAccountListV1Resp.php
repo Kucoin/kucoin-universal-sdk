@@ -29,7 +29,7 @@ class GetIsolatedMarginAccountListV1Resp implements Response
     /**
      * Account list
      * @var GetIsolatedMarginAccountListV1Assets[] $assets
-     * @Type("GetIsolatedMarginAccountListV1Assets[]")
+     * @Type("array<GetIsolatedMarginAccountListV1Assets>")
      * @SerializedName("assets")
      */
     public $assets;

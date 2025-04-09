@@ -15,7 +15,7 @@ class GetSpotSubAccountListV1Resp implements Response
     /**
      *
      * @var GetSpotSubAccountListV1Data[] $data
-     * @Type("GetSpotSubAccountListV1Data[]")
+     * @Type("array<GetSpotSubAccountListV1Data>")
      * @SerializedName("data")
      */
     public $data;

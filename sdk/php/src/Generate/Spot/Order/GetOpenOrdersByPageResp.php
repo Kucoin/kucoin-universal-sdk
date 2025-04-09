@@ -43,7 +43,7 @@ class GetOpenOrdersByPageResp implements Response
     /**
      *
      * @var GetOpenOrdersByPageItems[] $items
-     * @Type("GetOpenOrdersByPageItems[]")
+     * @Type("array<GetOpenOrdersByPageItems>")
      * @SerializedName("items")
      */
     public $items;

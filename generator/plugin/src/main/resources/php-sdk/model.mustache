@@ -14,9 +14,9 @@ use KuCoin\UniversalSDK\Model\RestResponse;
 class {{classname}} implements Response {
 {{/vendorExtensions.x-response-model}}
 {{^vendorExtensions.x-response-model}}
-use KuCoin\UniversalSDK\Internal\Interfaces\Request;
+use KuCoin\UniversalSDK\Internal\Interfaces\Serializable;
 
-class {{classname}} implements Request {
+class {{classname}} implements Serializable {
     /**
      * @var string[] $pathVarMapping
      * @Exclude()
@@ -43,7 +43,7 @@ class {{classname}} implements Request {
         {{/vendorExtensions.x-enums}}
     {{/isEnum}}
     * @var {{{dataType}}}{{^required}}|null{{/required}} ${{name}}
-    * @Type("{{{dataType}}}")
+    * @Type("{{{vendorExtensions.annotationType}}}")
     * @SerializedName("{{baseName}}")
     {{#vendorExtensions.x-tag-path}}
     * @Exclude()

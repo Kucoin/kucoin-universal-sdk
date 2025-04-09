@@ -15,7 +15,7 @@ class GetSpotAccountListResp implements Response
     /**
      *
      * @var GetSpotAccountListData[] $data
-     * @Type("GetSpotAccountListData[]")
+     * @Type("array<GetSpotAccountListData>")
      * @SerializedName("data")
      */
     public $data;

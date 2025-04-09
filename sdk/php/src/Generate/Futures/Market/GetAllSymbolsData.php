@@ -7,9 +7,9 @@ use JMS\Serializer\Annotation\Exclude;
 use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\Type;
 use JMS\Serializer\Serializer;
-use KuCoin\UniversalSDK\Internal\Interfaces\Request;
+use KuCoin\UniversalSDK\Internal\Interfaces\Serializable;
 
-class GetAllSymbolsData implements Request
+class GetAllSymbolsData implements Serializable
 {
     /**
      * @var string[] $pathVarMapping
@@ -364,7 +364,7 @@ class GetAllSymbolsData implements Request
     /**
      * The contract index price source exchange
      * @var string[] $sourceExchanges
-     * @Type("string[]")
+     * @Type("array<string>")
      * @SerializedName("sourceExchanges")
      */
     public $sourceExchanges;

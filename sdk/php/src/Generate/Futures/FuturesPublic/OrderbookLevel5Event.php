@@ -12,7 +12,7 @@ class OrderbookLevel5Event implements Response
     /**
      *
      * @var mixed[][] $bids
-     * @Type("mixed[][]")
+     * @Type("array<array<mixed>>")
      * @SerializedName("bids")
      */
     public $bids;
@@ -40,7 +40,7 @@ class OrderbookLevel5Event implements Response
     /**
      *
      * @var mixed[][] $asks
-     * @Type("mixed[][]")
+     * @Type("array<array<mixed>>")
      * @SerializedName("asks")
      */
     public $asks;

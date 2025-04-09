@@ -43,7 +43,7 @@ class GetSubAccountResp implements Response
     /**
      *
      * @var GetSubAccountItems[] $items
-     * @Type("GetSubAccountItems[]")
+     * @Type("array<GetSubAccountItems>")
      * @SerializedName("items")
      */
     public $items;

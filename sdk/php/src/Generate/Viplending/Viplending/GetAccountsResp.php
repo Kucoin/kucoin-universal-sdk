@@ -15,7 +15,7 @@ class GetAccountsResp implements Response
     /**
      *
      * @var GetAccountsData[] $data
-     * @Type("GetAccountsData[]")
+     * @Type("array<GetAccountsData>")
      * @SerializedName("data")
      */
     public $data;
