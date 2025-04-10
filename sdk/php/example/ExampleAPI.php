@@ -15,8 +15,7 @@ use KuCoin\UniversalSDK\Model\TransportOptionBuilder;
 
 include '../vendor/autoload.php';
 
-
-function rest_example()
+function restExample()
 {
     date_default_timezone_set('UTC');
     error_reporting(E_ALL);
@@ -52,12 +51,12 @@ function rest_example()
     $client = new DefaultClient($clientOption);
     $kucoinRestService = $client->restService();
 
-    account_service_example($kucoinRestService->getAccountService());
-    spot_service_example($kucoinRestService->getSpotService());
-    futures_service_example($kucoinRestService->getFuturesService());
+    accountServiceExample($kucoinRestService->getAccountService());
+    spotServiceExample($kucoinRestService->getSpotService());
+    futuresServiceExample($kucoinRestService->getFuturesService());
 }
 
-function account_service_example(AccountService $accountService)
+function accountServiceExample(AccountService $accountService)
 {
     $accountApi = $accountService->getAccountApi();
     $accountInfoResp = $accountApi->getAccountInfo();
@@ -75,7 +74,7 @@ function account_service_example(AccountService $accountService)
     }
 }
 
-function spot_service_example(SpotService $spotService)
+function spotServiceExample(SpotService $spotService)
 {
     $orderApi = $spotService->getOrderApi();
 
@@ -107,7 +106,7 @@ function spot_service_example(SpotService $spotService)
     error_log("Cancel order success, id: {$cancelOrderResp->orderId}");
 }
 
-function futures_service_example(FuturesService $futuresService)
+function futuresServiceExample(FuturesService $futuresService)
 {
     $marketApi = $futuresService->getMarketApi();
 
@@ -145,5 +144,5 @@ function futures_service_example(FuturesService $futuresService)
 }
 
 if (php_sapi_name() === 'cli') {
-    rest_example();
+    restExample();
 }

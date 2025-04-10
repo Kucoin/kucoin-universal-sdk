@@ -215,7 +215,7 @@ class DefaultTransport implements Transport
         $commonResponse->rateLimit = $rateLimit;
         $commonResponse->checkError();
 
-        $data =$this->serializer->serialize($commonResponse->data, 'json');
+        $data = $commonResponse->data == null ? '' : $this->serializer->serialize($commonResponse->data, 'json');
         /**@var Response $responseObj */
         $responseObj = $responseClass::jsonDeserialize($data, $this->serializer);
         $responseObj->setCommonResponse($commonResponse);
