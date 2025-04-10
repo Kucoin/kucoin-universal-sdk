@@ -82,6 +82,9 @@ class GetSpotSubAccountListV2Items implements Serializable
      */
     public static function jsonDeserialize($json, $serializer)
     {
+        if ($json == null) {
+            return new self();
+        }
         return $serializer->deserialize(
             $json,
             GetSpotSubAccountListV2Items::class,

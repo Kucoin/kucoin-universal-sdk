@@ -49,6 +49,9 @@ class GetBasicFeeReq implements Serializable
      */
     public static function jsonDeserialize($json, $serializer)
     {
+        if ($json == null) {
+            return new self();
+        }
         return $serializer->deserialize($json, GetBasicFeeReq::class, "json");
     }
     /**

@@ -71,6 +71,9 @@ class AddOrderV1Resp implements Response
      */
     public static function jsonDeserialize($json, $serializer)
     {
+        if ($json == null) {
+            return new self();
+        }
         return $serializer->deserialize($json, AddOrderV1Resp::class, "json");
     }
 }

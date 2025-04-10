@@ -54,6 +54,9 @@ class BatchAddOrdersOldReq implements Serializable
      */
     public static function jsonDeserialize($json, $serializer)
     {
+        if ($json == null) {
+            return new self();
+        }
         return $serializer->deserialize(
             $json,
             BatchAddOrdersOldReq::class,

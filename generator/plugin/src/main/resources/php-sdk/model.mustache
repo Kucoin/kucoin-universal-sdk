@@ -83,6 +83,9 @@ class {{classname}} implements Serializable {
     * @return self
     */
     public static function jsonDeserialize($json , $serializer) {
+        if ($json == null) {
+            return new self();
+        }
     {{#vars}}
         $data = $serializer->deserialize($json, '{{{vendorExtensions.annotationType}}}', 'json');
         $obj = new self();
@@ -106,6 +109,9 @@ class {{classname}} implements Serializable {
     * @return self
     */
     public static function jsonDeserialize($json ,$serializer) {
+        if ($json == null) {
+            return new self();
+        }
         $item = $serializer->deserialize($json, 'array<{{modelPackage}}\{{#vars}}{{complexType}}{{/vars}}>', 'json');
         return self::create(["items"=> $item]);
     }
@@ -126,6 +132,9 @@ class {{classname}} implements Serializable {
     * @return self
     */
     public static function jsonDeserialize($json, $serializer) {
+        if ($json == null) {
+            return new self();
+        }
         return $serializer->deserialize($json, {{classname}}::class, 'json');
     }
 {{/vendorExtensions.x-request-raw-array}}

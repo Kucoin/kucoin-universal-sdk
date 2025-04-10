@@ -57,6 +57,9 @@ class ModifyOrderResp implements Response
      */
     public static function jsonDeserialize($json, $serializer)
     {
+        if ($json == null) {
+            return new self();
+        }
         return $serializer->deserialize($json, ModifyOrderResp::class, "json");
     }
 }

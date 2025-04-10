@@ -87,6 +87,9 @@ class CancelOrderByOrderIdSyncResp implements Response
      */
     public static function jsonDeserialize($json, $serializer)
     {
+        if ($json == null) {
+            return new self();
+        }
         return $serializer->deserialize(
             $json,
             CancelOrderByOrderIdSyncResp::class,

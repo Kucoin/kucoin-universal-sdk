@@ -47,6 +47,9 @@ class BatchAddOrdersReq implements Serializable
      */
     public static function jsonDeserialize($json, $serializer)
     {
+        if ($json == null) {
+            return new self();
+        }
         $item = $serializer->deserialize(
             $json,
             "array<KuCoin\UniversalSDK\Generate\Futures\Order\BatchAddOrdersItem>",

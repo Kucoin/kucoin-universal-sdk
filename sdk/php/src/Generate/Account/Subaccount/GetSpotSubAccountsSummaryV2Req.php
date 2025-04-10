@@ -54,6 +54,9 @@ class GetSpotSubAccountsSummaryV2Req implements Serializable
      */
     public static function jsonDeserialize($json, $serializer)
     {
+        if ($json == null) {
+            return new self();
+        }
         return $serializer->deserialize(
             $json,
             GetSpotSubAccountsSummaryV2Req::class,

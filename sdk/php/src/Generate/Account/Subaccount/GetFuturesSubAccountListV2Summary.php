@@ -96,6 +96,9 @@ class GetFuturesSubAccountListV2Summary implements Serializable
      */
     public static function jsonDeserialize($json, $serializer)
     {
+        if ($json == null) {
+            return new self();
+        }
         return $serializer->deserialize(
             $json,
             GetFuturesSubAccountListV2Summary::class,

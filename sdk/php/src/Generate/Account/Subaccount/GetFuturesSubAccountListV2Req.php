@@ -47,6 +47,9 @@ class GetFuturesSubAccountListV2Req implements Serializable
      */
     public static function jsonDeserialize($json, $serializer)
     {
+        if ($json == null) {
+            return new self();
+        }
         return $serializer->deserialize(
             $json,
             GetFuturesSubAccountListV2Req::class,

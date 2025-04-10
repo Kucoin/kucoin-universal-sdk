@@ -50,6 +50,9 @@ class GetMarketListResp implements Response
      */
     public static function jsonDeserialize($json, $serializer)
     {
+        if ($json == null) {
+            return new self();
+        }
         $data = $serializer->deserialize($json, "array<string>", "json");
         $obj = new self();
         $obj->data = $data;

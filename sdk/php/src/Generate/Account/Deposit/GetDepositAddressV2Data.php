@@ -91,6 +91,9 @@ class GetDepositAddressV2Data implements Serializable
      */
     public static function jsonDeserialize($json, $serializer)
     {
+        if ($json == null) {
+            return new self();
+        }
         return $serializer->deserialize(
             $json,
             GetDepositAddressV2Data::class,

@@ -50,6 +50,9 @@ class GetSubAccountApiListResp implements Response
      */
     public static function jsonDeserialize($json, $serializer)
     {
+        if ($json == null) {
+            return new self();
+        }
         $data = $serializer->deserialize(
             $json,
             "array<KuCoin\UniversalSDK\Generate\Account\Subaccount\GetSubAccountApiListData>",

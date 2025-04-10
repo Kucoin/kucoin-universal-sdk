@@ -56,6 +56,9 @@ class GetOpenOrdersReq implements Serializable
      */
     public static function jsonDeserialize($json, $serializer)
     {
+        if ($json == null) {
+            return new self();
+        }
         return $serializer->deserialize($json, GetOpenOrdersReq::class, "json");
     }
     /**

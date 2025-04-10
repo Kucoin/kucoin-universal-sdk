@@ -107,6 +107,9 @@ class WithdrawalV3Req implements Serializable
      */
     public static function jsonDeserialize($json, $serializer)
     {
+        if ($json == null) {
+            return new self();
+        }
         return $serializer->deserialize($json, WithdrawalV3Req::class, "json");
     }
     /**

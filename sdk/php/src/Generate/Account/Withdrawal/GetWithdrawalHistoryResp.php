@@ -78,6 +78,9 @@ class GetWithdrawalHistoryResp implements Response
      */
     public static function jsonDeserialize($json, $serializer)
     {
+        if ($json == null) {
+            return new self();
+        }
         return $serializer->deserialize(
             $json,
             GetWithdrawalHistoryResp::class,
