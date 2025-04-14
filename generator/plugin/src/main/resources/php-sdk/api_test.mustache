@@ -1,0 +1,86 @@
+<?php
+namespace {{package}};
+
+use JMS\Serializer\Serializer;
+use JMS\Serializer\SerializerBuilder;
+use KuCoin\UniversalSDK\Internal\Utils\JsonSerializedHandler;
+use KuCoin\UniversalSDK\Model\RestResponse;
+use PHPUnit\Framework\TestCase;
+use ReflectionClass;
+
+class {{classname}}Test extends TestCase {
+    /**
+    * @var Serializer $serializer
+    */
+    private $serializer;
+
+    protected function setUp(): void
+    {
+        $this->serializer = SerializerBuilder::create()->addDefaultHandlers()
+            ->configureHandlers(function ($handlerRegistry) {
+                $handlerRegistry->registerSubscribingHandler(new JsonSerializedHandler());
+            })->build();
+    }
+
+    function hasAnyNoneNull($object) :bool {
+        $refClass = new ReflectionClass($object);
+        $props = $refClass->getProperties();
+
+        $excludeSize = 0;
+        $totalSize = sizeof($props);
+        foreach ($props as $prop) {
+            $doc = $prop->getDocComment();
+
+            if ($doc !== false && strpos($doc, '@Exclude') !== false) {
+                $excludeSize++;
+                continue;
+            }
+
+            $prop->setAccessible(true);
+
+            $value = $prop->getValue($object);
+            if ($value !== null) {
+                return true;
+            }
+        }
+        return $excludeSize === $totalSize;
+    }
+
+{{#operations}}
+    {{#operation}}
+    /**
+    * {{vendorExtensions.x-meta.method}} Request
+    * {{summary}}
+    * {{path}}
+    */
+    public function test{{vendorExtensions.x-meta.methodServiceFmt}}Request()
+    {
+    {{#hasParams}}
+        $data = "{{{vendorExtensions.x-request-example}}}";
+        $req =  {{vendorExtensions.x-meta.methodServiceFmt}}Req::jsonDeserialize($data,  $this->serializer);
+        $this->assertTrue($this->hasAnyNoneNull($req));
+        echo $req->jsonSerialize($this->serializer);
+    {{/hasParams}}
+    {{^hasParams}}
+        $this->assertTrue(true);
+    {{/hasParams}}
+    }
+
+    /**
+    * {{vendorExtensions.x-meta.method}} Response
+    * {{summary}}
+    * {{path}}
+    */
+    public function test{{vendorExtensions.x-meta.methodServiceFmt}}Response()
+    {
+        $data = "{{{vendorExtensions.x-response-example}}}";
+        $commonResp = RestResponse::jsonDeserialize($data, $this->serializer);
+        $respData = $this->serializer->serialize($commonResp->data, 'json');
+        $resp =  {{vendorExtensions.x-meta.methodServiceFmt}}Resp::jsonDeserialize($respData,  $this->serializer);
+        $this->assertTrue($this->hasAnyNoneNull($resp));
+        echo $resp->jsonSerialize($this->serializer);
+    }
+    {{/operation}}
+{{/operations}}
+
+}
