@@ -105,6 +105,8 @@ public class PhpSdkGenerator extends AbstractPhpCodegen implements NameService {
                 break;
             }
             case WS_TEST: {
+                additionalProperties.put("WS_MODE", "true");
+                apiTemplateFiles.put("api_ws_test.mustache", "Test.php");
                 break;
             }
             default:
@@ -331,17 +333,13 @@ public class PhpSdkGenerator extends AbstractPhpCodegen implements NameService {
             case API:
             case ENTRY:
             case TEST_TEMPLATE:
-
             case TEST: {
                 apiName = apiName + "Api";
                 break;
             }
-            case WS: {
-                apiName = apiName + "Ws";
-                break;
-            }
+            case WS:
             case WS_TEST: {
-                apiName = apiName + "Ws" + ".test";
+                apiName = apiName + "Ws";
                 break;
             }
         }
@@ -419,8 +417,8 @@ public class PhpSdkGenerator extends AbstractPhpCodegen implements NameService {
                                 kv.put("methodUppercase", camelize(formatMethodName(k)));
                                 kv.put("target_service", formatService(k + "API"));
                                 entryValue.add(kv);
-                                imports.add(String.format("use KuCoin\\UniversalSDK\\Generate\\%s\\%s\\%s;" , v.getService() , v.getSubService() , formatService(k + "API" )));
-                                imports.add(String.format("use KuCoin\\UniversalSDK\\Generate\\%s\\%s\\%sImpl;" , v.getService() , v.getSubService() , formatService(k + "API" )));
+                                imports.add(String.format("use KuCoin\\UniversalSDK\\Generate\\%s\\%s\\%s;", v.getService(), v.getSubService(), formatService(k + "API")));
+                                imports.add(String.format("use KuCoin\\UniversalSDK\\Generate\\%s\\%s\\%sImpl;", v.getService(), v.getSubService(), formatService(k + "API")));
                             }
                         });
                         Map<String, Object> apiEntryInfo = new HashMap<>();
