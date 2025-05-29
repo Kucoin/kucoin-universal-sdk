@@ -3,8 +3,8 @@
 
 namespace KuCoin\UniversalSDK\Generate\Service;
 
-use KuCoin\UniversalSDK\Generate\VIPLending\VIPLending\VIPLendingAPI;
-use KuCoin\UniversalSDK\Generate\VIPLending\VIPLending\VIPLendingAPIImpl;
+use KuCoin\UniversalSDK\Generate\VIPLending\Viplending\VIPLendingApi;
+use KuCoin\UniversalSDK\Generate\VIPLending\Viplending\VIPLendingApiImpl;
 
 class VIPLendingServiceImpl implements VIPLendingService
 {
@@ -14,10 +14,10 @@ class VIPLendingServiceImpl implements VIPLendingService
     public function __construct($transport)
     {
         $this->transport = $transport;
-        $this->vIPLending = new VIPLendingAPIImpl($transport);
+        $this->vIPLending = new VIPLendingApiImpl($transport);
     }
 
-    public function getVIPLendingApi(): VIPLendingAPI
+    public function getVIPLendingApi(): VIPLendingApi
     {
         return $this->vIPLending;
     }

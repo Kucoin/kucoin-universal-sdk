@@ -3,10 +3,10 @@
 
 namespace KuCoin\UniversalSDK\Generate\Service;
 
-use KuCoin\UniversalSDK\Generate\Spot\Market\MarketAPI;
-use KuCoin\UniversalSDK\Generate\Spot\Order\OrderAPI;
-use KuCoin\UniversalSDK\Generate\Spot\Market\MarketAPIImpl;
-use KuCoin\UniversalSDK\Generate\Spot\Order\OrderAPIImpl;
+use KuCoin\UniversalSDK\Generate\Spot\Market\MarketApi;
+use KuCoin\UniversalSDK\Generate\Spot\Order\OrderApi;
+use KuCoin\UniversalSDK\Generate\Spot\Market\MarketApiImpl;
+use KuCoin\UniversalSDK\Generate\Spot\Order\OrderApiImpl;
 
 class SpotServiceImpl implements SpotService
 {
@@ -17,16 +17,16 @@ class SpotServiceImpl implements SpotService
     public function __construct($transport)
     {
         $this->transport = $transport;
-        $this->order = new OrderAPIImpl($transport);
-        $this->market = new MarketAPIImpl($transport);
+        $this->order = new OrderApiImpl($transport);
+        $this->market = new MarketApiImpl($transport);
     }
 
-    public function getOrderApi(): OrderAPI
+    public function getOrderApi(): OrderApi
     {
         return $this->order;
     }
 
-    public function getMarketApi(): MarketAPI
+    public function getMarketApi(): MarketApi
     {
         return $this->market;
     }

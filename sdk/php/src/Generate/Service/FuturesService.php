@@ -3,18 +3,18 @@
 
 namespace KuCoin\UniversalSDK\Generate\Service;
 
-use KuCoin\UniversalSDK\Generate\Futures\FundingFees\FundingFeesAPI;
-use KuCoin\UniversalSDK\Generate\Futures\Market\MarketAPI;
-use KuCoin\UniversalSDK\Generate\Futures\Order\OrderAPI;
-use KuCoin\UniversalSDK\Generate\Futures\Positions\PositionsAPI;
+use KuCoin\UniversalSDK\Generate\Futures\Fundingfees\FundingFeesApi;
+use KuCoin\UniversalSDK\Generate\Futures\Market\MarketApi;
+use KuCoin\UniversalSDK\Generate\Futures\Order\OrderApi;
+use KuCoin\UniversalSDK\Generate\Futures\Positions\PositionsApi;
 
 interface FuturesService
 {
-    public function getOrderApi(): OrderAPI;
+    public function getOrderApi(): OrderApi;
 
-    public function getPositionsApi(): PositionsAPI;
+    public function getPositionsApi(): PositionsApi;
 
-    public function getFundingFeesApi(): FundingFeesAPI;
+    public function getFundingFeesApi(): FundingFeesApi;
 
-    public function getMarketApi(): MarketAPI;
+    public function getMarketApi(): MarketApi;
 }

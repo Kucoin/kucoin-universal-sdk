@@ -3,9 +3,9 @@
 
 namespace KuCoin\UniversalSDK\Generate\Service;
 
-use KuCoin\UniversalSDK\Generate\CopyTrading\Futures\FuturesAPI;
+use KuCoin\UniversalSDK\Generate\CopyTrading\Futures\FuturesApi;
 
 interface CopyTradingService
 {
-    public function getFuturesApi(): FuturesAPI;
+    public function getFuturesApi(): FuturesApi;
 }

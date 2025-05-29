@@ -3,16 +3,16 @@
 
 namespace KuCoin\UniversalSDK\Generate\Service;
 
-use KuCoin\UniversalSDK\Generate\Margin\Credit\CreditAPI;
-use KuCoin\UniversalSDK\Generate\Margin\Debit\DebitAPI;
-use KuCoin\UniversalSDK\Generate\Margin\Market\MarketAPI;
-use KuCoin\UniversalSDK\Generate\Margin\Order\OrderAPI;
-use KuCoin\UniversalSDK\Generate\Margin\RiskLimit\RiskLimitAPI;
-use KuCoin\UniversalSDK\Generate\Margin\Credit\CreditAPIImpl;
-use KuCoin\UniversalSDK\Generate\Margin\Debit\DebitAPIImpl;
-use KuCoin\UniversalSDK\Generate\Margin\Market\MarketAPIImpl;
-use KuCoin\UniversalSDK\Generate\Margin\Order\OrderAPIImpl;
-use KuCoin\UniversalSDK\Generate\Margin\RiskLimit\RiskLimitAPIImpl;
+use KuCoin\UniversalSDK\Generate\Margin\Credit\CreditApi;
+use KuCoin\UniversalSDK\Generate\Margin\Debit\DebitApi;
+use KuCoin\UniversalSDK\Generate\Margin\Market\MarketApi;
+use KuCoin\UniversalSDK\Generate\Margin\Order\OrderApi;
+use KuCoin\UniversalSDK\Generate\Margin\Risklimit\RiskLimitApi;
+use KuCoin\UniversalSDK\Generate\Margin\Credit\CreditApiImpl;
+use KuCoin\UniversalSDK\Generate\Margin\Debit\DebitApiImpl;
+use KuCoin\UniversalSDK\Generate\Margin\Market\MarketApiImpl;
+use KuCoin\UniversalSDK\Generate\Margin\Order\OrderApiImpl;
+use KuCoin\UniversalSDK\Generate\Margin\Risklimit\RiskLimitApiImpl;
 
 class MarginServiceImpl implements MarginService
 {
@@ -26,34 +26,34 @@ class MarginServiceImpl implements MarginService
     public function __construct($transport)
     {
         $this->transport = $transport;
-        $this->order = new OrderAPIImpl($transport);
-        $this->debit = new DebitAPIImpl($transport);
-        $this->credit = new CreditAPIImpl($transport);
-        $this->market = new MarketAPIImpl($transport);
-        $this->riskLimit = new RiskLimitAPIImpl($transport);
+        $this->order = new OrderApiImpl($transport);
+        $this->debit = new DebitApiImpl($transport);
+        $this->credit = new CreditApiImpl($transport);
+        $this->market = new MarketApiImpl($transport);
+        $this->riskLimit = new RiskLimitApiImpl($transport);
     }
 
-    public function getOrderApi(): OrderAPI
+    public function getOrderApi(): OrderApi
     {
         return $this->order;
     }
 
-    public function getDebitApi(): DebitAPI
+    public function getDebitApi(): DebitApi
     {
         return $this->debit;
     }
 
-    public function getCreditApi(): CreditAPI
+    public function getCreditApi(): CreditApi
     {
         return $this->credit;
     }
 
-    public function getMarketApi(): MarketAPI
+    public function getMarketApi(): MarketApi
     {
         return $this->market;
     }
 
-    public function getRiskLimitApi(): RiskLimitAPI
+    public function getRiskLimitApi(): RiskLimitApi
     {
         return $this->riskLimit;
     }

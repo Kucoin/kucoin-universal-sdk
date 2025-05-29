@@ -3,21 +3,21 @@
 
 namespace KuCoin\UniversalSDK\Generate\Service;
 
-use KuCoin\UniversalSDK\Generate\Margin\Credit\CreditAPI;
-use KuCoin\UniversalSDK\Generate\Margin\Debit\DebitAPI;
-use KuCoin\UniversalSDK\Generate\Margin\Market\MarketAPI;
-use KuCoin\UniversalSDK\Generate\Margin\Order\OrderAPI;
-use KuCoin\UniversalSDK\Generate\Margin\RiskLimit\RiskLimitAPI;
+use KuCoin\UniversalSDK\Generate\Margin\Credit\CreditApi;
+use KuCoin\UniversalSDK\Generate\Margin\Debit\DebitApi;
+use KuCoin\UniversalSDK\Generate\Margin\Market\MarketApi;
+use KuCoin\UniversalSDK\Generate\Margin\Order\OrderApi;
+use KuCoin\UniversalSDK\Generate\Margin\Risklimit\RiskLimitApi;
 
 interface MarginService
 {
-    public function getOrderApi(): OrderAPI;
+    public function getOrderApi(): OrderApi;
 
-    public function getDebitApi(): DebitAPI;
+    public function getDebitApi(): DebitApi;
 
-    public function getCreditApi(): CreditAPI;
+    public function getCreditApi(): CreditApi;
 
-    public function getMarketApi(): MarketAPI;
+    public function getMarketApi(): MarketApi;
 
-    public function getRiskLimitApi(): RiskLimitAPI;
+    public function getRiskLimitApi(): RiskLimitApi;
 }

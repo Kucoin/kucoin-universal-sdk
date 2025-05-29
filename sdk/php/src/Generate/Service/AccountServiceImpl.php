@@ -3,18 +3,18 @@
 
 namespace KuCoin\UniversalSDK\Generate\Service;
 
-use KuCoin\UniversalSDK\Generate\Account\Account\AccountAPI;
-use KuCoin\UniversalSDK\Generate\Account\Deposit\DepositAPI;
-use KuCoin\UniversalSDK\Generate\Account\Fee\FeeAPI;
-use KuCoin\UniversalSDK\Generate\Account\SubAccount\SubAccountAPI;
-use KuCoin\UniversalSDK\Generate\Account\Transfer\TransferAPI;
-use KuCoin\UniversalSDK\Generate\Account\Withdrawal\WithdrawalAPI;
-use KuCoin\UniversalSDK\Generate\Account\Account\AccountAPIImpl;
-use KuCoin\UniversalSDK\Generate\Account\Deposit\DepositAPIImpl;
-use KuCoin\UniversalSDK\Generate\Account\Fee\FeeAPIImpl;
-use KuCoin\UniversalSDK\Generate\Account\SubAccount\SubAccountAPIImpl;
-use KuCoin\UniversalSDK\Generate\Account\Transfer\TransferAPIImpl;
-use KuCoin\UniversalSDK\Generate\Account\Withdrawal\WithdrawalAPIImpl;
+use KuCoin\UniversalSDK\Generate\Account\Account\AccountApi;
+use KuCoin\UniversalSDK\Generate\Account\Deposit\DepositApi;
+use KuCoin\UniversalSDK\Generate\Account\Fee\FeeApi;
+use KuCoin\UniversalSDK\Generate\Account\Subaccount\SubAccountApi;
+use KuCoin\UniversalSDK\Generate\Account\Transfer\TransferApi;
+use KuCoin\UniversalSDK\Generate\Account\Withdrawal\WithdrawalApi;
+use KuCoin\UniversalSDK\Generate\Account\Account\AccountApiImpl;
+use KuCoin\UniversalSDK\Generate\Account\Deposit\DepositApiImpl;
+use KuCoin\UniversalSDK\Generate\Account\Fee\FeeApiImpl;
+use KuCoin\UniversalSDK\Generate\Account\Subaccount\SubAccountApiImpl;
+use KuCoin\UniversalSDK\Generate\Account\Transfer\TransferApiImpl;
+use KuCoin\UniversalSDK\Generate\Account\Withdrawal\WithdrawalApiImpl;
 
 class AccountServiceImpl implements AccountService
 {
@@ -29,40 +29,40 @@ class AccountServiceImpl implements AccountService
     public function __construct($transport)
     {
         $this->transport = $transport;
-        $this->account = new AccountAPIImpl($transport);
-        $this->deposit = new DepositAPIImpl($transport);
-        $this->withdrawal = new WithdrawalAPIImpl($transport);
-        $this->fee = new FeeAPIImpl($transport);
-        $this->subAccount = new SubAccountAPIImpl($transport);
-        $this->transfer = new TransferAPIImpl($transport);
+        $this->account = new AccountApiImpl($transport);
+        $this->deposit = new DepositApiImpl($transport);
+        $this->withdrawal = new WithdrawalApiImpl($transport);
+        $this->fee = new FeeApiImpl($transport);
+        $this->subAccount = new SubAccountApiImpl($transport);
+        $this->transfer = new TransferApiImpl($transport);
     }
 
-    public function getAccountApi(): AccountAPI
+    public function getAccountApi(): AccountApi
     {
         return $this->account;
     }
 
-    public function getDepositApi(): DepositAPI
+    public function getDepositApi(): DepositApi
     {
         return $this->deposit;
     }
 
-    public function getWithdrawalApi(): WithdrawalAPI
+    public function getWithdrawalApi(): WithdrawalApi
     {
         return $this->withdrawal;
     }
 
-    public function getFeeApi(): FeeAPI
+    public function getFeeApi(): FeeApi
     {
         return $this->fee;
     }
 
-    public function getSubAccountApi(): SubAccountAPI
+    public function getSubAccountApi(): SubAccountApi
     {
         return $this->subAccount;
     }
 
-    public function getTransferApi(): TransferAPI
+    public function getTransferApi(): TransferApi
     {
         return $this->transfer;
     }

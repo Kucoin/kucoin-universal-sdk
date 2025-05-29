@@ -3,8 +3,8 @@
 
 namespace KuCoin\UniversalSDK\Generate\Service;
 
-use KuCoin\UniversalSDK\Generate\Affiliate\Affiliate\AffiliateAPI;
-use KuCoin\UniversalSDK\Generate\Affiliate\Affiliate\AffiliateAPIImpl;
+use KuCoin\UniversalSDK\Generate\Affiliate\Affiliate\AffiliateApi;
+use KuCoin\UniversalSDK\Generate\Affiliate\Affiliate\AffiliateApiImpl;
 
 class AffiliateServiceImpl implements AffiliateService
 {
@@ -14,10 +14,10 @@ class AffiliateServiceImpl implements AffiliateService
     public function __construct($transport)
     {
         $this->transport = $transport;
-        $this->affiliate = new AffiliateAPIImpl($transport);
+        $this->affiliate = new AffiliateApiImpl($transport);
     }
 
-    public function getAffiliateApi(): AffiliateAPI
+    public function getAffiliateApi(): AffiliateApi
     {
         return $this->affiliate;
     }

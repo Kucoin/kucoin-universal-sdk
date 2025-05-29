@@ -3,9 +3,9 @@
 
 namespace KuCoin\UniversalSDK\Generate\Service;
 
-use KuCoin\UniversalSDK\Generate\Affiliate\Affiliate\AffiliateAPI;
+use KuCoin\UniversalSDK\Generate\Affiliate\Affiliate\AffiliateApi;
 
 interface AffiliateService
 {
-    public function getAffiliateApi(): AffiliateAPI;
+    public function getAffiliateApi(): AffiliateApi;
 }

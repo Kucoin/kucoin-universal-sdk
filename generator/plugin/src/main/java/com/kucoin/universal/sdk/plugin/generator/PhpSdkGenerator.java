@@ -434,10 +434,11 @@ public class PhpSdkGenerator extends AbstractPhpCodegen implements NameService {
                                 Map<String, String> kv = new HashMap<>();
                                 kv.put("method", formatMethodName(k));
                                 kv.put("methodUppercase", camelize(formatMethodName(k)));
-                                kv.put("target_service", formatService(k + "API"));
+                                kv.put("target_service", formatService(k + "Api"));
                                 entryValue.add(kv);
-                                imports.add(String.format("use KuCoin\\UniversalSDK\\Generate\\%s\\%s\\%s;", v.getService(), v.getSubService(), formatService(k + "API")));
-                                implImports.add(String.format("use KuCoin\\UniversalSDK\\Generate\\%s\\%s\\%sImpl;", v.getService(), v.getSubService(), formatService(k + "API")));
+                                String servicePath = camelize(v.getSubService().toLowerCase(), CamelizeOption.UPPERCASE_FIRST_CHAR);
+                                imports.add(String.format("use KuCoin\\UniversalSDK\\Generate\\%s\\%s\\%s;", v.getService(), servicePath, formatService(k + "Api")));
+                                implImports.add(String.format("use KuCoin\\UniversalSDK\\Generate\\%s\\%s\\%sImpl;", v.getService(), servicePath, formatService(k + "Api")));
                             }
                         });
                         Map<String, Object> apiEntryInfo = new HashMap<>();

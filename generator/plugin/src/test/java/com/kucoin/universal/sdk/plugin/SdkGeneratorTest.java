@@ -8,8 +8,8 @@ import org.openapitools.codegen.config.CodegenConfigurator;
 public class SdkGeneratorTest {
 
     private static final String SDK_NAME = "php-sdk";
-    private static final String SPEC_NAME = "../../spec/rest/api/openapi-account-fee.json";
-    private static final String SPEC_ENTRY_NAME = "../../spec/rest/entry/openapi-spot.json";
+    private static final String SPEC_NAME = "../../spec/rest/api/openapi-account-subaccount.json";
+    private static final String SPEC_ENTRY_NAME = "../../spec/rest/entry/openapi-account.json";
     private static final String WS_SPEC_NAME = "../../spec/ws/openapi-margin-private.json";
     private static final String OUTPUT_DIR = "./out";
     private static final String CSV_PATH = "../../spec";

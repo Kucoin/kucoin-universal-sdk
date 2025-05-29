@@ -3,14 +3,14 @@
 
 namespace KuCoin\UniversalSDK\Generate\Service;
 
-use KuCoin\UniversalSDK\Generate\Futures\FundingFees\FundingFeesAPI;
-use KuCoin\UniversalSDK\Generate\Futures\Market\MarketAPI;
-use KuCoin\UniversalSDK\Generate\Futures\Order\OrderAPI;
-use KuCoin\UniversalSDK\Generate\Futures\Positions\PositionsAPI;
-use KuCoin\UniversalSDK\Generate\Futures\FundingFees\FundingFeesAPIImpl;
-use KuCoin\UniversalSDK\Generate\Futures\Market\MarketAPIImpl;
-use KuCoin\UniversalSDK\Generate\Futures\Order\OrderAPIImpl;
-use KuCoin\UniversalSDK\Generate\Futures\Positions\PositionsAPIImpl;
+use KuCoin\UniversalSDK\Generate\Futures\Fundingfees\FundingFeesApi;
+use KuCoin\UniversalSDK\Generate\Futures\Market\MarketApi;
+use KuCoin\UniversalSDK\Generate\Futures\Order\OrderApi;
+use KuCoin\UniversalSDK\Generate\Futures\Positions\PositionsApi;
+use KuCoin\UniversalSDK\Generate\Futures\Fundingfees\FundingFeesApiImpl;
+use KuCoin\UniversalSDK\Generate\Futures\Market\MarketApiImpl;
+use KuCoin\UniversalSDK\Generate\Futures\Order\OrderApiImpl;
+use KuCoin\UniversalSDK\Generate\Futures\Positions\PositionsApiImpl;
 
 class FuturesServiceImpl implements FuturesService
 {
@@ -23,28 +23,28 @@ class FuturesServiceImpl implements FuturesService
     public function __construct($transport)
     {
         $this->transport = $transport;
-        $this->order = new OrderAPIImpl($transport);
-        $this->positions = new PositionsAPIImpl($transport);
-        $this->fundingFees = new FundingFeesAPIImpl($transport);
-        $this->market = new MarketAPIImpl($transport);
+        $this->order = new OrderApiImpl($transport);
+        $this->positions = new PositionsApiImpl($transport);
+        $this->fundingFees = new FundingFeesApiImpl($transport);
+        $this->market = new MarketApiImpl($transport);
     }
 
-    public function getOrderApi(): OrderAPI
+    public function getOrderApi(): OrderApi
     {
         return $this->order;
     }
 
-    public function getPositionsApi(): PositionsAPI
+    public function getPositionsApi(): PositionsApi
     {
         return $this->positions;
     }
 
-    public function getFundingFeesApi(): FundingFeesAPI
+    public function getFundingFeesApi(): FundingFeesApi
     {
         return $this->fundingFees;
     }
 
-    public function getMarketApi(): MarketAPI
+    public function getMarketApi(): MarketApi
     {
         return $this->market;
     }

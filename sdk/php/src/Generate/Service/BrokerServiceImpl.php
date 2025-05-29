@@ -3,10 +3,10 @@
 
 namespace KuCoin\UniversalSDK\Generate\Service;
 
-use KuCoin\UniversalSDK\Generate\Broker\APIBroker\APIBrokerAPI;
-use KuCoin\UniversalSDK\Generate\Broker\NDBroker\NDBrokerAPI;
-use KuCoin\UniversalSDK\Generate\Broker\APIBroker\APIBrokerAPIImpl;
-use KuCoin\UniversalSDK\Generate\Broker\NDBroker\NDBrokerAPIImpl;
+use KuCoin\UniversalSDK\Generate\Broker\Apibroker\APIBrokerApi;
+use KuCoin\UniversalSDK\Generate\Broker\Ndbroker\NDBrokerApi;
+use KuCoin\UniversalSDK\Generate\Broker\Apibroker\APIBrokerApiImpl;
+use KuCoin\UniversalSDK\Generate\Broker\Ndbroker\NDBrokerApiImpl;
 
 class BrokerServiceImpl implements BrokerService
 {
@@ -17,16 +17,16 @@ class BrokerServiceImpl implements BrokerService
     public function __construct($transport)
     {
         $this->transport = $transport;
-        $this->aPIBroker = new APIBrokerAPIImpl($transport);
-        $this->nDBroker = new NDBrokerAPIImpl($transport);
+        $this->aPIBroker = new APIBrokerApiImpl($transport);
+        $this->nDBroker = new NDBrokerApiImpl($transport);
     }
 
-    public function getAPIBrokerApi(): APIBrokerAPI
+    public function getAPIBrokerApi(): APIBrokerApi
     {
         return $this->aPIBroker;
     }
 
-    public function getNDBrokerApi(): NDBrokerAPI
+    public function getNDBrokerApi(): NDBrokerApi
     {
         return $this->nDBroker;
     }

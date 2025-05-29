@@ -3,12 +3,12 @@
 
 namespace KuCoin\UniversalSDK\Generate\Service;
 
-use KuCoin\UniversalSDK\Generate\Broker\APIBroker\APIBrokerAPI;
-use KuCoin\UniversalSDK\Generate\Broker\NDBroker\NDBrokerAPI;
+use KuCoin\UniversalSDK\Generate\Broker\Apibroker\APIBrokerApi;
+use KuCoin\UniversalSDK\Generate\Broker\Ndbroker\NDBrokerApi;
 
 interface BrokerService
 {
-    public function getAPIBrokerApi(): APIBrokerAPI;
+    public function getAPIBrokerApi(): APIBrokerApi;
 
-    public function getNDBrokerApi(): NDBrokerAPI;
+    public function getNDBrokerApi(): NDBrokerApi;
 }

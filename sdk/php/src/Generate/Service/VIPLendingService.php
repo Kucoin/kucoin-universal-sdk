@@ -3,9 +3,9 @@
 
 namespace KuCoin\UniversalSDK\Generate\Service;
 
-use KuCoin\UniversalSDK\Generate\VIPLending\VIPLending\VIPLendingAPI;
+use KuCoin\UniversalSDK\Generate\VIPLending\Viplending\VIPLendingApi;
 
 interface VIPLendingService
 {
-    public function getVIPLendingApi(): VIPLendingAPI;
+    public function getVIPLendingApi(): VIPLendingApi;
 }

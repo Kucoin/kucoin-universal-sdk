@@ -3,8 +3,8 @@
 
 namespace KuCoin\UniversalSDK\Generate\Service;
 
-use KuCoin\UniversalSDK\Generate\CopyTrading\Futures\FuturesAPI;
-use KuCoin\UniversalSDK\Generate\CopyTrading\Futures\FuturesAPIImpl;
+use KuCoin\UniversalSDK\Generate\CopyTrading\Futures\FuturesApi;
+use KuCoin\UniversalSDK\Generate\CopyTrading\Futures\FuturesApiImpl;
 
 class CopyTradingServiceImpl implements CopyTradingService
 {
@@ -14,10 +14,10 @@ class CopyTradingServiceImpl implements CopyTradingService
     public function __construct($transport)
     {
         $this->transport = $transport;
-        $this->futures = new FuturesAPIImpl($transport);
+        $this->futures = new FuturesApiImpl($transport);
     }
 
-    public function getFuturesApi(): FuturesAPI
+    public function getFuturesApi(): FuturesApi
     {
         return $this->futures;
     }

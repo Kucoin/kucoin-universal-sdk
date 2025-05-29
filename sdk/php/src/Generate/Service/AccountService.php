@@ -3,24 +3,24 @@
 
 namespace KuCoin\UniversalSDK\Generate\Service;
 
-use KuCoin\UniversalSDK\Generate\Account\Account\AccountAPI;
-use KuCoin\UniversalSDK\Generate\Account\Deposit\DepositAPI;
-use KuCoin\UniversalSDK\Generate\Account\Fee\FeeAPI;
-use KuCoin\UniversalSDK\Generate\Account\SubAccount\SubAccountAPI;
-use KuCoin\UniversalSDK\Generate\Account\Transfer\TransferAPI;
-use KuCoin\UniversalSDK\Generate\Account\Withdrawal\WithdrawalAPI;
+use KuCoin\UniversalSDK\Generate\Account\Account\AccountApi;
+use KuCoin\UniversalSDK\Generate\Account\Deposit\DepositApi;
+use KuCoin\UniversalSDK\Generate\Account\Fee\FeeApi;
+use KuCoin\UniversalSDK\Generate\Account\Subaccount\SubAccountApi;
+use KuCoin\UniversalSDK\Generate\Account\Transfer\TransferApi;
+use KuCoin\UniversalSDK\Generate\Account\Withdrawal\WithdrawalApi;
 
 interface AccountService
 {
-    public function getAccountApi(): AccountAPI;
+    public function getAccountApi(): AccountApi;
 
-    public function getDepositApi(): DepositAPI;
+    public function getDepositApi(): DepositApi;
 
-    public function getWithdrawalApi(): WithdrawalAPI;
+    public function getWithdrawalApi(): WithdrawalApi;
 
-    public function getFeeApi(): FeeAPI;
+    public function getFeeApi(): FeeApi;
 
-    public function getSubAccountApi(): SubAccountAPI;
+    public function getSubAccountApi(): SubAccountApi;
 
-    public function getTransferApi(): TransferAPI;
+    public function getTransferApi(): TransferApi;
 }

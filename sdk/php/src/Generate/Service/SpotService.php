@@ -3,12 +3,12 @@
 
 namespace KuCoin\UniversalSDK\Generate\Service;
 
-use KuCoin\UniversalSDK\Generate\Spot\Market\MarketAPI;
-use KuCoin\UniversalSDK\Generate\Spot\Order\OrderAPI;
+use KuCoin\UniversalSDK\Generate\Spot\Market\MarketApi;
+use KuCoin\UniversalSDK\Generate\Spot\Order\OrderApi;
 
 interface SpotService
 {
-    public function getOrderApi(): OrderAPI;
+    public function getOrderApi(): OrderApi;
 
-    public function getMarketApi(): MarketAPI;
+    public function getMarketApi(): MarketApi;
 }

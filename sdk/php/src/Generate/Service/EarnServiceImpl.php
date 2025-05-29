@@ -3,8 +3,8 @@
 
 namespace KuCoin\UniversalSDK\Generate\Service;
 
-use KuCoin\UniversalSDK\Generate\Earn\Earn\EarnAPI;
-use KuCoin\UniversalSDK\Generate\Earn\Earn\EarnAPIImpl;
+use KuCoin\UniversalSDK\Generate\Earn\Earn\EarnApi;
+use KuCoin\UniversalSDK\Generate\Earn\Earn\EarnApiImpl;
 
 class EarnServiceImpl implements EarnService
 {
@@ -14,10 +14,10 @@ class EarnServiceImpl implements EarnService
     public function __construct($transport)
     {
         $this->transport = $transport;
-        $this->earn = new EarnAPIImpl($transport);
+        $this->earn = new EarnApiImpl($transport);
     }
 
-    public function getEarnApi(): EarnAPI
+    public function getEarnApi(): EarnApi
     {
         return $this->earn;
     }
