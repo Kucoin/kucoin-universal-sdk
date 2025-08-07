@@ -14,6 +14,7 @@ public final class Constants {
   public static final String GLOBAL_API_ENDPOINT = "https://api.kucoin.com";
   public static final String GLOBAL_FUTURES_API_ENDPOINT = "https://api-futures.kucoin.com";
   public static final String GLOBAL_BROKER_API_ENDPOINT = "https://api-broker.kucoin.com";
+  public static final String GLOBAL_UNIFIED_WS_API_ENDPOINT = "wss://wsapi.kucoin.com";
 
   // ==== Domain Types ====
   public static final String DOMAIN_TYPE_SPOT = "spot";

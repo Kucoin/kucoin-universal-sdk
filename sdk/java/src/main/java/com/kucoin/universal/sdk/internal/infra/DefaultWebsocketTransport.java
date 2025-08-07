@@ -1,29 +1,24 @@
 package com.kucoin.universal.sdk.internal.infra;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.kucoin.universal.sdk.internal.interfaces.WebsocketTransport;
-import com.kucoin.universal.sdk.internal.interfaces.WebsocketTransportListener;
-import com.kucoin.universal.sdk.internal.interfaces.WsToken;
-import com.kucoin.universal.sdk.internal.interfaces.WsTokenProvider;
-import com.kucoin.universal.sdk.model.Constants;
-import com.kucoin.universal.sdk.model.WebSocketClientOption;
-import com.kucoin.universal.sdk.model.WebSocketEvent;
-import com.kucoin.universal.sdk.model.WsMessage;
+import com.kucoin.universal.sdk.internal.interfaces.*;
+import com.kucoin.universal.sdk.model.*;
 import java.net.URI;
 import java.time.Duration;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /** OkHttp-based WebSocket transport with */
 @Slf4j
 public final class DefaultWebsocketTransport implements WebsocketTransport {
 
-  private final WsTokenProvider tokenProvider;
+  private final WebsocketMetaProvider metaProvider;
   private final WebSocketClientOption opt;
   private final WebsocketTransportListener listener;
 
@@ -42,14 +37,13 @@ public final class DefaultWebsocketTransport implements WebsocketTransport {
             return t;
           });
   private volatile WebSocket socket;
-  private volatile WsToken token;
 
   public DefaultWebsocketTransport(
-      WsTokenProvider tokenProvider,
+      WebsocketMetaProvider metaProvider,
       WebSocketClientOption option,
       WebsocketTransportListener listener) {
 
-    this.tokenProvider = tokenProvider;
+    this.metaProvider = metaProvider;
     this.opt = option;
     this.listener = listener;
     this.http =
@@ -58,13 +52,6 @@ public final class DefaultWebsocketTransport implements WebsocketTransport {
             .connectTimeout(option.getDialTimeout())
             .writeTimeout(option.getWriteTimeout())
             .build();
-  }
-
-  private static WsToken pick(List<WsToken> list) {
-    if (list == null || list.isEmpty()) {
-      throw new IllegalArgumentException("empty token list");
-    }
-    return list.get(ThreadLocalRandom.current().nextInt(list.size()));
   }
 
   private static <T> CompletableFuture<T> failed(Throwable ex) {
@@ -86,19 +73,19 @@ public final class DefaultWebsocketTransport implements WebsocketTransport {
     http.connectionPool().evictAll();
     http.dispatcher().executorService().shutdown();
     scheduler.shutdownNow();
-    tokenProvider.close();
+    metaProvider.close();
     log.info("websocket closed");
     listener.onEvent(WebSocketEvent.CLIENT_SHUTDOWN, "");
   }
 
   @Override
-  public CompletableFuture<Void> write(WsMessage m, Duration timeout) {
+  public CompletableFuture<Void> write(String id, Object m, Duration timeout) {
     if (!connected.get()) {
       return failed(new IllegalStateException("not connected"));
     }
 
     CompletableFuture<Void> fut = new CompletableFuture<>();
-    ackMap.put(m.getId(), fut);
+    ackMap.put(id, fut);
 
     try {
       boolean queued = socket.send(mapper.writeValueAsString(m));
@@ -106,13 +93,13 @@ public final class DefaultWebsocketTransport implements WebsocketTransport {
         throw new IllegalStateException("enqueue message failed");
       }
     } catch (Exception e) {
-      ackMap.remove(m.getId());
+      ackMap.remove(id);
       return failed(e);
     }
 
     scheduler.schedule(
         () -> {
-          if (ackMap.remove(m.getId()) != null) {
+          if (ackMap.remove(id) != null) {
             fut.completeExceptionally(new TimeoutException("ack timeout"));
           }
         },
@@ -124,18 +111,12 @@ public final class DefaultWebsocketTransport implements WebsocketTransport {
 
   private void dial() {
     try {
-      token = pick(tokenProvider.getToken());
-
-      URI uri =
-          URI.create(
-              token.getEndpoint()
-                  + "?connectId="
-                  + System.nanoTime()
-                  + "&token="
-                  + token.getToken());
+      URI uri = URI.create(metaProvider.buildUri());
 
       Request req = new Request.Builder().url(uri.toString()).build();
-      CountDownLatch welcome = new CountDownLatch(1);
+
+      WebSocketBootstrap webSocketBootstrap =
+          new WebSocketBootstrap(metaProvider.handshakes(), this::handle);
 
       socket =
           http.newWebSocket(
@@ -143,7 +124,7 @@ public final class DefaultWebsocketTransport implements WebsocketTransport {
               new WebSocketListener() {
                 @Override
                 public void onMessage(WebSocket w, String txt) {
-                  handle(txt, welcome);
+                  webSocketBootstrap.onMessage(w, txt);
                 }
 
                 @Override
@@ -157,9 +138,9 @@ public final class DefaultWebsocketTransport implements WebsocketTransport {
                 }
               });
 
-      if (!welcome.await(opt.getDialTimeout().toMillis(), TimeUnit.MILLISECONDS)) {
-        throw new IllegalStateException("welcome not received");
-      }
+      webSocketBootstrap
+          .getReadyFuture()
+          .get(opt.getDialTimeout().toMillis(), TimeUnit.MILLISECONDS);
 
       connected.set(true);
       listener.onEvent(WebSocketEvent.CONNECTED, "");
@@ -170,18 +151,24 @@ public final class DefaultWebsocketTransport implements WebsocketTransport {
     }
   }
 
-  private void handle(String json, CountDownLatch welcome) {
+  private void handle(String text) {
     try {
-      WsMessage m = mapper.readValue(json, WsMessage.class);
-      switch (m.getType()) {
+      WsParsedMessage parsedMessage = this.metaProvider.parseMessage(text);
+      switch (parsedMessage.getType()) {
         case Constants.WS_MESSAGE_TYPE_WELCOME:
           {
-            welcome.countDown();
+            log.info("receive welcome message: {}", parsedMessage.getMessage());
             break;
           }
         case Constants.WS_MESSAGE_TYPE_MESSAGE:
           {
-            listener.onMessage(m);
+            listener.onMessage(parsedMessage.getMessage());
+            if (parsedMessage.isAck()) {
+              CompletableFuture<Void> f = ackMap.remove(parsedMessage.getId());
+              if (f != null) {
+                f.complete(null);
+              }
+            }
             break;
           }
 
@@ -189,12 +176,13 @@ public final class DefaultWebsocketTransport implements WebsocketTransport {
         case Constants.WS_MESSAGE_TYPE_ACK:
         case Constants.WS_MESSAGE_TYPE_ERROR:
           {
-            CompletableFuture<Void> f = ackMap.remove(m.getId());
+            CompletableFuture<Void> f = ackMap.remove(parsedMessage.getId());
             if (f == null) {
               break;
             }
-            if (m.getType().equalsIgnoreCase(Constants.WS_MESSAGE_TYPE_ERROR)) {
-              f.completeExceptionally(new RuntimeException(String.valueOf(m.getData())));
+            if (parsedMessage.getType().equalsIgnoreCase(Constants.WS_MESSAGE_TYPE_ERROR)) {
+              f.completeExceptionally(
+                  new RuntimeException(String.valueOf(parsedMessage.getMessage())));
             } else {
               f.complete(null);
             }
@@ -202,7 +190,7 @@ public final class DefaultWebsocketTransport implements WebsocketTransport {
           }
         default:
           {
-            log.warn("unknown ws type {}", m.getType());
+            log.warn("unknown ws type {}", parsedMessage.getType());
           }
       }
     } catch (Exception e) {
@@ -211,21 +199,22 @@ public final class DefaultWebsocketTransport implements WebsocketTransport {
   }
 
   private void schedulePing() {
-    long interval = token.getPingInterval();
-    long timeout = token.getPingTimeout();
+    long interval = metaProvider.pingInterval();
+    long timeout = metaProvider.pingTimeout();
     scheduler.scheduleAtFixedRate(
         () -> {
           if (!connected.get()) {
             return;
           }
-          WsMessage ping = new WsMessage();
-          ping.setId(String.valueOf(System.nanoTime()));
-          ping.setType(Constants.WS_MESSAGE_TYPE_PING);
-          write(ping, Duration.ofMillis(timeout))
+          Map.Entry<String, Object> ping = metaProvider.pingMessage();
+          write(ping.getKey(), ping.getValue(), Duration.ofMillis(timeout))
+              .thenRun(
+                  () -> {
+                    log.debug("ping success");
+                  })
               .exceptionally(
                   ex -> {
                     log.error("Schedule ping error", ex);
-                    listener.onEvent(WebSocketEvent.ERROR_RECEIVED, ex.getMessage());
                     return null;
                   });
         },
@@ -235,10 +224,10 @@ public final class DefaultWebsocketTransport implements WebsocketTransport {
   }
 
   private void tryReconnect(String reason) {
-    log.error("Websocket disconnected due to {}, Reconnection...", reason);
     if (shutting.get()) {
       return;
     }
+    log.error("Websocket disconnected due to {}, Reconnection...", reason);
 
     if (!opt.isReconnect()) {
       log.warn("Reconnect failed: auto-reconnect is disabled");

@@ -14,6 +14,9 @@ import com.kucoin.universal.sdk.generate.spot.spotprivate.SpotPrivateWs;
 import com.kucoin.universal.sdk.generate.spot.spotprivate.SpotPrivateWsImpl;
 import com.kucoin.universal.sdk.generate.spot.spotpublic.SpotPublicWs;
 import com.kucoin.universal.sdk.generate.spot.spotpublic.SpotPublicWsImpl;
+import com.kucoin.universal.sdk.generate.unified.unifiedws.UnifiedPrivateWs;
+import com.kucoin.universal.sdk.generate.unified.unifiedws.UnifiedPrivateWsImpl;
+import com.kucoin.universal.sdk.internal.infra.DefaultWebSocketUnifiedService;
 import com.kucoin.universal.sdk.internal.infra.DefaultWsService;
 import com.kucoin.universal.sdk.model.ClientOption;
 import com.kucoin.universal.sdk.model.Constants;
@@ -106,5 +109,18 @@ public final class DefaultKucoinWsImpl implements KucoinWSService {
         new DefaultWsService(
             clientOption, Constants.DOMAIN_TYPE_FUTURES, true, Version.SDK_VERSION);
     return new FuturesPrivateWsImpl(wsService);
+  }
+
+  /**
+   * Returns the interface to interact with the unified private WebSocket API of KuCoin, allowing
+   * for spot, margin, and futures trading operations through a single, secure WebSocket connection.
+   *
+   * @return UnifiedPrivateWs The unified private WebSocket service interface.
+   */
+  @Override
+  public UnifiedPrivateWs newUnifiedPrivateWS() {
+    DefaultWebSocketUnifiedService wsService =
+        new DefaultWebSocketUnifiedService(clientOption, Version.SDK_VERSION);
+    return new UnifiedPrivateWsImpl(wsService);
   }
 }

@@ -6,6 +6,7 @@ import com.kucoin.universal.sdk.generate.margin.marginprivate.MarginPrivateWs;
 import com.kucoin.universal.sdk.generate.margin.marginpublic.MarginPublicWs;
 import com.kucoin.universal.sdk.generate.spot.spotprivate.SpotPrivateWs;
 import com.kucoin.universal.sdk.generate.spot.spotpublic.SpotPublicWs;
+import com.kucoin.universal.sdk.generate.unified.unifiedws.UnifiedPrivateWs;
 
 /** KucoinWSService provides WebSocket interfaces for Spot, Margin, and Futures trading. */
 public interface KucoinWSService {
@@ -56,4 +57,12 @@ public interface KucoinWSService {
    * @return FuturesPrivateWs
    */
   FuturesPrivateWs newFuturesPrivateWS();
+
+  /**
+   * Returns the interface to interact with the unified private WebSocket API of KuCoin, allowing
+   * for spot, margin, and futures trading operations through a single, secure WebSocket connection.
+   *
+   * @return UnifiedPrivateWs The unified private WebSocket service interface.
+   */
+  UnifiedPrivateWs newUnifiedPrivateWS();
 }

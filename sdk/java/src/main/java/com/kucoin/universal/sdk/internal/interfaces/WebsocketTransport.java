@@ -1,6 +1,5 @@
 package com.kucoin.universal.sdk.internal.interfaces;
 
-import com.kucoin.universal.sdk.model.WsMessage;
 import java.time.Duration;
 import java.util.concurrent.CompletableFuture;
 
@@ -13,5 +12,5 @@ public interface WebsocketTransport {
   void stop();
 
   /** Enqueues a message for sending. */
-  CompletableFuture<Void> write(WsMessage msg, Duration timeout);
+  CompletableFuture<Void> write(String id, Object msg, Duration timeout);
 }

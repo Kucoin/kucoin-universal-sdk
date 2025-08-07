@@ -27,6 +27,7 @@ public class ClientOption {
   private final String spotEndpoint;
   private final String futuresEndpoint;
   private final String brokerEndpoint;
+  private final String unifiedWsEndpoint;
 
   /* ---------- transport tuning ---------- */
   private final TransportOption transportOption;

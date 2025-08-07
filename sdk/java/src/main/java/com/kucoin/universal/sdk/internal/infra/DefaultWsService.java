@@ -1,5 +1,6 @@
 package com.kucoin.universal.sdk.internal.infra;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kucoin.universal.sdk.internal.interfaces.*;
 import com.kucoin.universal.sdk.model.*;
@@ -8,7 +9,8 @@ import java.util.UUID;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public final class DefaultWsService implements WebSocketService, WebsocketTransportListener {
+public final class DefaultWsService
+    implements WebSocketService, WebsocketTransportListener<WsMessage> {
   private final ObjectMapper mapper = new ObjectMapper();
   private final WebsocketTransport client;
   private final WebSocketClientOption option;
@@ -25,8 +27,10 @@ public final class DefaultWsService implements WebSocketService, WebsocketTransp
 
     WsTokenProvider tokenProvider =
         new DefaultWsTokenProvider(tokenTransport, domain, privateChannel);
-
-    this.client = new DefaultWebsocketTransport(tokenProvider, option, this);
+    mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+    this.client =
+        new DefaultWebsocketTransport(
+            new DefaultWebsocketMetaProvider(tokenProvider, mapper), option, this);
   }
 
   @Override
@@ -59,7 +63,7 @@ public final class DefaultWsService implements WebSocketService, WebsocketTransp
       msg.setPrivateChannel(privateChannel);
       msg.setResponse(true);
 
-      client.write(msg, option.getWriteTimeout()).join();
+      client.write(msg.getId(), msg, option.getWriteTimeout()).join();
       return id;
     } catch (Exception e) {
       cm.remove(id);
@@ -90,7 +94,7 @@ public final class DefaultWsService implements WebSocketService, WebsocketTransp
       msg.setPrivateChannel(privateChannel);
       msg.setResponse(true);
 
-      client.write(msg, option.getWriteTimeout()).join();
+      client.write(msg.getId(), msg, option.getWriteTimeout()).join();
       cm.remove(id);
     } catch (Exception e) {
       exception = e;

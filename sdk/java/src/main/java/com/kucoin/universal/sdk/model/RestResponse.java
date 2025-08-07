@@ -20,7 +20,7 @@ public class RestResponse<T> {
   private String message;
 
   @JsonProperty("rateLimit")
-  private RestRateLimit rateLimit;
+  private RateLimit rateLimit;
 
   public void checkError() throws RestError {
     if (!code.equalsIgnoreCase(Constants.RESULT_CODE_SUCCESS)) {

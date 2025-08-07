@@ -438,4 +438,9 @@ public class PublicTest {
         .thenAccept(id -> api.unSubscribe(id))
         .join();
   }
+
+    @Test
+    public void testDoNothing() throws Exception {
+        Thread.sleep(30_000);
+    }
 }

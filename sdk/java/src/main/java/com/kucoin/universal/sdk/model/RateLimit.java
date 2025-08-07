@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Data
-public class RestRateLimit {
+public class RateLimit {
 
   @JsonProperty("limit")
   private final int limit;
@@ -17,7 +17,7 @@ public class RestRateLimit {
   private final int reset;
 
   @JsonCreator
-  public RestRateLimit(
+  public RateLimit(
       @JsonProperty("limit") int limit,
       @JsonProperty("remaining") int remaining,
       @JsonProperty("reset") int reset) {

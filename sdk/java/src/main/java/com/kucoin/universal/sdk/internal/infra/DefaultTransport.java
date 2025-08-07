@@ -246,7 +246,7 @@ public final class DefaultTransport implements Transport {
 
     RestResponse<T> common = mapper.readValue(json, type);
     common.setRateLimit(
-        new RestRateLimit(
+        new RateLimit(
             headerInt(resp, "gw-ratelimit-limit"),
             headerInt(resp, "gw-ratelimit-remaining"),
             headerInt(resp, "gw-ratelimit-reset")));

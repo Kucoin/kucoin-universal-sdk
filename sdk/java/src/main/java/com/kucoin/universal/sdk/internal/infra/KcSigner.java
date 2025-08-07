@@ -49,7 +49,7 @@ public final class KcSigner {
   }
 
   /** Base64-encoded HMAC-SHA256. */
-  private static String sign(String plain, String key) {
+  public static String sign(String plain, String key) {
     try {
       Mac mac = Mac.getInstance(HMAC_SHA256);
       mac.init(new SecretKeySpec(key.getBytes(StandardCharsets.UTF_8), HMAC_SHA256));
