@@ -1,0 +1,170 @@
+template_data = {
+  "openapi": "3.0.1",
+  "info": {
+    "title": "unified",
+    "description": "unified_ws",
+    "version": "1.0.0"
+  },
+  "tags": [],
+  "paths": {
+    "/UnifiedTrading": {
+      "post": {
+        "summary": "Unified Websocket Trading API",
+        "deprecated": "false",
+        "description": "Place spot, margin, or futures orders via a secure WebSocket connection. Supports real-time submission with instant server response.",
+        "tags": [],
+        "parameters": [],
+        "x-sdk-service": "Unified",
+        "x-sdk-sub-service": "unified_private",
+        "x-sdk-private": True,
+        "x-sdk-method-name": "UnifiedTrading",
+        "x-push_frequency": "real time",
+        "x-api-doc": "https://www.kucoin.com/docs-new/3470133w0",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "description": "User-defined ID (not orderid) is used to uniquely represent a request. The server will also return this ID when returning."
+                  },
+                  "op": {
+                    "type": "string",
+                    "description": "Command options\nThe \"op\" parameter is one of the following enum values.\n- spot.order\n- margin.order\n- futures.order\n- spot.cancel\n- margin.cancel\n- futures.cancel\n- futures.multi_cancel\n- futures.multi_order\n- spot.sync_order\n- spot.modify\n- spot.sync_cancel"
+                  },
+                  "args": {
+                    "type": "object",
+                    "properties": {},
+                    "additionalProperties": {
+                      "type": "object",
+                      "properties": {},
+                    },
+                    "description": "Business parameters, same as RestAPI",
+                  }
+                },
+                "required": [
+                  "id",
+                  "op",
+                  "args"
+                ],
+              },
+              "example": {
+                "id": "request-001",
+                "op": "futures.order",
+                "args": {
+                  "price": "43187.00",
+                  "quantity": 0.1,
+                  "side": "BUY",
+                  "symbol": "BTCUSDT",
+                  "timeInForce": "GTC",
+                  "timestamp": 1702555533821,
+                  "type": "LIMIT"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "User-defined ID (not orderid) is used to uniquely represent a request."
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {},
+                      "additionalProperties": True,
+                    },
+                    "op": {
+                      "type": "string",
+                      "description": "Command options"
+                    },
+                    "code": {
+                      "type": "string",
+                      "description": "Gateway error code, 200000 means ok"
+                    },
+                    "msg": {
+                      "type": "string",
+                      "description": "Error message"
+                    },
+                    "inTime": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "Gateway in time(ms)"
+                    },
+                    "outTime": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "Gateway out time(ms)"
+                    },
+                    "userRateLimit": {
+                      "type": "object",
+                      "properties": {
+                        "limit": {
+                          "type": "integer"
+                        },
+                        "reset": {
+                          "type": "integer"
+                        },
+                        "remaining": {
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "limit",
+                        "reset",
+                        "remaining"
+                      ],
+                      "description": "Rate Limit info: https://www.kucoin.com/docs-new/rate-limit",
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "op",
+                    "data",
+                    "msg",
+                    "inTime",
+                    "outTime",
+                    "userRateLimit",
+                    "code"
+                  ],
+                },
+                "example": {
+                  "id": "request-001",
+                  "data": {
+                    "orderId": "189227113527341368"
+                  },
+                  "code": "200000",
+                  "op": "futures.order",
+                  "inTime": 1695190491421,
+                  "outTime": 1695190491420,
+                  "rateLimit": {
+                    "limit": 1600,
+                    "reset": 15244,
+                    "remaining": 1528
+                  }
+                }
+              }
+            },
+            "headers": {},
+          }
+        },
+        "security": [],
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "securitySchemes": {}
+  },
+  "servers": [],
+  "security": []
+}

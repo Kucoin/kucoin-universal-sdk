@@ -23,7 +23,8 @@ public class ModeSwitch {
         ENTRY,
         WS,
         WS_TEST,
-        WS_TEST_TEMPLATE
+        WS_TEST_TEMPLATE,
+        WS_UNIFIED
     }
 
     private final ModeEnum mode;
@@ -41,6 +42,8 @@ public class ModeSwitch {
     private boolean wsTest;
 
     private boolean wsTestTemplate;
+
+    private boolean wsUnified;
 
     public ModeSwitch(Map<String, Object> properties) {
         String modeStr = (String) properties.get(MODE_KEY);
@@ -75,6 +78,10 @@ public class ModeSwitch {
             }
             case WS_TEST_TEMPLATE: {
                 wsTestTemplate = true;
+                break;
+            }
+            case WS_UNIFIED: {
+                wsUnified = true;
                 break;
             }
             default:

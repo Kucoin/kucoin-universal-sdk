@@ -117,6 +117,11 @@ public class JavaSdkGenerator extends AbstractJavaCodegen implements NameService
                 apiTemplateFiles.put("ws_test_template.mustache", ".template");
                 break;
             }
+            case WS_UNIFIED: {
+                apiTemplateFiles.put("api_ws_unified.mustache", ".java");
+                apiTemplateFiles.put("api_ws_unified_impl.mustache", "Impl.java");
+                break;
+            }
             default:
                 throw new RuntimeException("unsupported mode");
         }
@@ -245,7 +250,7 @@ public class JavaSdkGenerator extends AbstractJavaCodegen implements NameService
     @Override
     public String toApiName(String name) {
         name = KeywordsUtil.getKeyword(name);
-        return camelize(name + "_" + (modeSwitch.isWs() || modeSwitch.isWsTest() ? "Ws" : "Api"));
+        return camelize(name + "_" + (modeSwitch.isWs() || modeSwitch.isWsTest() || modeSwitch.isWsUnified()? "Ws" : "Api"));
     }
 
     @Override
@@ -279,7 +284,8 @@ public class JavaSdkGenerator extends AbstractJavaCodegen implements NameService
             }
             case WS:
             case WS_TEST:
-            case WS_TEST_TEMPLATE: {
+            case WS_TEST_TEMPLATE:
+            case WS_UNIFIED: {
                 apiName = apiName + "Ws";
                 break;
             }

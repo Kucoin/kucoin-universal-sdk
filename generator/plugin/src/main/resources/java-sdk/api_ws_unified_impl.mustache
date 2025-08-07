@@ -1,0 +1,36 @@
+{{>partial_header}}
+package {{package}};
+
+import com.kucoin.universal.sdk.internal.interfaces.WebSocketUnifiedService;
+import com.kucoin.universal.sdk.model.UnifiedWsArgs;
+import com.kucoin.universal.sdk.model.UnifiedWsMessage;
+
+import java.util.concurrent.CompletableFuture;
+
+public class {{classname}}Impl implements {{classname}} {
+    private final WebSocketUnifiedService wsService;
+
+    public {{classname}}Impl(WebSocketUnifiedService wsService) {
+        this.wsService = wsService;
+    }
+
+{{#operations}}
+    {{#operation}}
+
+    @Override
+    public CompletableFuture<UnifiedWsMessage> {{vendorExtensions.x-meta.method}}(UnifiedWsArgs args) {
+        return wsService.call(args);
+    }
+
+    {{/operation}}
+{{/operations}}
+
+
+    public void start(){
+        this.wsService.start();
+    }
+
+    public void stop(){
+        this.wsService.stop();
+    }
+}

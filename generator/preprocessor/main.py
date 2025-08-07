@@ -2,6 +2,7 @@ import csv
 
 from api_meta import ApiMetaUtil
 from meta_tools import MetaTools
+from unified_ws_api_template import template_data
 from ws_meta import WsMetaUtil
 
 specRoot = "../../spec/"
@@ -74,9 +75,14 @@ def gen_ws():
             WsMetaUtil.write(f"{specRoot}/ws/openapi-{service_name.lower()}-{openapi[0]}.json", openapi[1])
     print("generate ws meta complete!")
 
+def gen_ws_unified():
+    WsMetaUtil.write(f"{specRoot}/ws-unified/openapi-unified-private.json", template_data)
+    print("generate ws unified meta complete!")
+
 
 if __name__ == '__main__':
     clean_meta()
     gen_api()
     gen_ws()
+    gen_ws_unified()
 
