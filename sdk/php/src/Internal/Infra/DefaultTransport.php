@@ -15,7 +15,7 @@ use KuCoin\UniversalSDK\Model\Constants;
 use KuCoin\UniversalSDK\Model\HttpRequest;
 use KuCoin\UniversalSDK\Model\HttpResponse;
 use KuCoin\UniversalSDK\Model\RestError;
-use KuCoin\UniversalSDK\Model\RestRateLimit;
+use KuCoin\UniversalSDK\Model\RateLimit;
 use KuCoin\UniversalSDK\Model\RestResponse;
 use KuCoin\UniversalSDK\Model\TransportOption;
 use ReflectionClass;
@@ -229,7 +229,7 @@ class DefaultTransport implements Transport
         $commonResponse = RestResponse::jsonDeserialize($body, $this->serializer);
 
         $headers = $response->headers;
-        $rateLimit = new RestRateLimit(
+        $rateLimit = new RateLimit(
             isset($headers['gw-ratelimit-limit'][0]) ? (int)$headers['gw-ratelimit-limit'][0] : -1,
             isset($headers['gw-ratelimit-remaining'][0]) ? (int)$headers['gw-ratelimit-remaining'][0] : -1,
             isset($headers['gw-ratelimit-reset'][0]) ? (int)$headers['gw-ratelimit-reset'][0] : -1

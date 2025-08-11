@@ -15,7 +15,10 @@ use KuCoin\UniversalSDK\Generate\Spot\SpotPrivate\SpotPrivateWs;
 use KuCoin\UniversalSDK\Generate\Spot\SpotPrivate\SpotPrivateWsImpl;
 use KuCoin\UniversalSDK\Generate\Spot\SpotPublic\SpotPublicWs;
 use KuCoin\UniversalSDK\Generate\Spot\SpotPublic\SpotPublicWsImpl;
+use KuCoin\UniversalSDK\Generate\Unified\UnifiedWs\UnifiedPrivateWs;
+use KuCoin\UniversalSDK\Generate\Unified\UnifiedWs\UnifiedPrivateWsImpl;
 use KuCoin\UniversalSDK\Generate\Version;
+use KuCoin\UniversalSDK\Internal\Infra\DefaultWebSocketUnifiedService;
 use KuCoin\UniversalSDK\Internal\Infra\DefaultWsService;
 use KuCoin\UniversalSDK\Model\ClientOption;
 use KuCoin\UniversalSDK\Model\Constants;
@@ -128,5 +131,16 @@ class DefaultKucoinWsImpl implements KucoinWSService
             Version::SDK_VERSION);
 
         return new FuturesPrivateWsImpl($wsService);
+    }
+
+    public function newUnifiedPrivateWS(): UnifiedPrivateWs
+    {
+        $wsService = new DefaultWebSocketUnifiedService(
+            $this->clientOption,
+            $this->loop,
+            Version::SDK_VERSION
+        );
+
+        return new UnifiedPrivateWsImpl($wsService);
     }
 }

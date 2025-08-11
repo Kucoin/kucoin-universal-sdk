@@ -11,6 +11,7 @@ class Constants
     const GLOBAL_API_ENDPOINT = 'https://api.kucoin.com';
     const GLOBAL_FUTURES_API_ENDPOINT = 'https://api-futures.kucoin.com';
     const GLOBAL_BROKER_API_ENDPOINT = 'https://api-broker.kucoin.com';
+    const GLOBAL_UNIFIED_WS_API_ENDPOINT = 'wss://wsapi.kucoin.com';
 
     // ==== Domain Types ====
     const DOMAIN_TYPE_SPOT = 'spot';

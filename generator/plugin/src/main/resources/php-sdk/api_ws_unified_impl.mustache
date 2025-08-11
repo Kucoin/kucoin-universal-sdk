@@ -1,0 +1,55 @@
+<?php
+{{>partial_header}}
+namespace {{package}};
+
+use KuCoin\UniversalSDK\Internal\Interfaces\WebSocketUnifiedService;
+use KuCoin\UniversalSDK\Model\UnifiedWsArgs;
+use React\Promise\PromiseInterface;
+
+/**
+ * Implementation of the UnifiedPrivateWs interface.
+ */
+class {{classname}}Impl implements {{classname}} {
+    /**
+    * @var WebSocketUnifiedService
+    */
+    private $wsService;
+
+    /**
+     * @param WebSocketUnifiedService $wsService
+     */
+    public function __construct(WebSocketUnifiedService $wsService)
+    {
+        $this->wsService = $wsService;
+    }
+
+{{#operations}}
+    {{#operation}}
+
+    /**
+    * {@inheritdoc}
+    */
+    public function {{vendorExtensions.x-meta.method}}(UnifiedWsArgs $args): PromiseInterface {
+        return $this->wsService->call($args);
+    }
+
+    {{/operation}}
+{{/operations}}
+
+
+    /**
+     * {@inheritdoc}
+     */
+    public function start(): void
+    {
+        $this->wsService->start();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function stop(): void
+    {
+        $this->wsService->stop();
+    }
+}

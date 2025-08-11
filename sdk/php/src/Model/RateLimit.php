@@ -1,28 +1,36 @@
 <?php
 
 namespace KuCoin\UniversalSDK\Model;
+use JMS\Serializer\Annotation\Type;
+use JMS\Serializer\Annotation\SerializedName;
 
 /**
- * Class RestRateLimit
- * Represents the rate limiting information for a REST API.
+ * Class RateLimit
+ * Represents the rate limiting information for API requests.
  */
-class RestRateLimit
+class RateLimit
 {
     /**
      * Total resource pool quota
      * @var int
+     * @Type("int")
+     * @SerializedName("limit")
      */
     public $limit;
 
     /**
      * Remaining resource pool quota
      * @var int
+     * @Type("int")
+     * @SerializedName("remaining")
      */
     public $remaining;
 
     /**
      * Resource pool quota reset countdown (in milliseconds)
      * @var int
+     * @Type("int")
+     * @SerializedName("reset")
      */
     public $reset;
 

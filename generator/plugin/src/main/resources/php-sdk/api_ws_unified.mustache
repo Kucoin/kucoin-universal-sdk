@@ -1,0 +1,44 @@
+<?php
+{{>partial_header}}
+namespace {{package}};
+
+use KuCoin\UniversalSDK\Model\UnifiedWsArgs;
+use KuCoin\UniversalSDK\Model\UnifiedWsMessage;
+use React\Promise\PromiseInterface;
+
+/**
+ * Interface for the unified private WebSocket API of KuCoin.
+ */
+interface {{classname}} {
+{{#operations}}
+    {{#operation}}
+    /**
+    * {{summary}}
+    *
+    * {{notes}}
+    *
+    * @return PromiseInterface<UnifiedWsMessage> A promise that resolves with the response message
+    * @see {{vendorExtensions.x-api-doc}}
+    */
+    public function {{vendorExtensions.x-meta.method}}(UnifiedWsArgs $args): PromiseInterface;
+
+    {{/operation}}
+{{/operations}}
+
+    /**
+    * Initiates the WebSocket service
+    *
+    * This method must be called before invoking any APIs.
+    */
+    public function start(): void;
+
+    /**
+    * Stops the WebSocket service.
+    *
+    * This method is used to terminate the WebSocket connection and stop all ongoing
+    * calls. It should be called when no further communication is needed with
+    * the server, or when the application is being shut down to ensure a clean
+    * disconnection and release of resources.
+    */
+    public function stop(): void;
+}

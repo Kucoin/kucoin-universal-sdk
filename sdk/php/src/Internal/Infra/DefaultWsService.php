@@ -61,6 +61,7 @@ class DefaultWsService implements WebSocketService
             $option->spotEndpoint,
             $option->futuresEndpoint,
             $option->brokerEndpoint,
+            $option->unifiedWsEndpoint,
             $option->brokerName,
             $option->brokerPartner,
             $option->brokerKey,
@@ -78,9 +79,13 @@ class DefaultWsService implements WebSocketService
                 $handlerRegistry->registerSubscribingHandler(new JsonSerializedHandler());
             })->build();
 
+        $tokenProvider = new DefaultWsTokenProvider($this->tokenTransport, $domainType, $privateChannel);
+        $metaProvider = new DefaultWsMetaProvider($tokenProvider, $this->wsOption, $this->serializer);
+        
         $this->client = new DefaultWebSocketClient(
-            new DefaultWsTokenProvider($this->tokenTransport, $domainType, $privateChannel),
-            $this->wsOption, $loop
+            $metaProvider,
+            $this->wsOption,
+            $loop,
         );
 
         $this->client->on("event", function ($event, $msg) {
@@ -116,7 +121,7 @@ class DefaultWsService implements WebSocketService
 
     public function stop(): PromiseInterface
     {
-        return $this->client->stop()->then(function () {
+        return $this->client->stop()->finally(function () {
             $this->tokenTransport->close();
             $deferred = new Deferred();
             $deferred->resolve(null);
@@ -147,7 +152,7 @@ class DefaultWsService implements WebSocketService
 
         Logger::info("Subscribing", ['id' => $subId, 'topic' => $subEvent->topic]);
 
-        $this->client->write($subEvent, $this->wsOption->writeTimeout)->then(function () use ($deferred, $subId) {
+        $this->client->write($subId, $subEvent, $this->wsOption->writeTimeout)->then(function () use ($deferred, $subId) {
             Logger::info("Subscribed successfully", ['id' => $subId]);
             $deferred->resolve($subId);
         }, function ($err) use ($deferred, $callbackManager, $subId, $prefix) {
@@ -175,7 +180,7 @@ class DefaultWsService implements WebSocketService
 
         Logger::info("Unsubscribing", ['id' => $id]);
 
-        $this->client->write($unsubEvent, $this->wsOption->writeTimeout)->then(function () use ($callbackManager, $id, $deferred) {
+        $this->client->write($unsubEvent->id, $unsubEvent, $this->wsOption->writeTimeout)->then(function () use ($callbackManager, $id, $deferred) {
             $callbackManager->remove($id);
             Logger::info("Unsubscribed successfully", ['id' => $id]);
             $deferred->resolve(null);

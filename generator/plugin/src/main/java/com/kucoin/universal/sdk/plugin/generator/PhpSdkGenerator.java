@@ -107,6 +107,11 @@ public class PhpSdkGenerator extends AbstractPhpCodegen implements NameService {
                 additionalProperties.put("WS_MODE", "true");
                 break;
             }
+            case WS_UNIFIED: {
+                apiTemplateFiles.put("api_ws_unified.mustache", ".php");
+                apiTemplateFiles.put("api_ws_unified_impl.mustache", "Impl.php");
+                break;
+            }
             case WS_TEST: {
                 additionalProperties.put("WS_MODE", "true");
                 apiTemplateFiles.put("api_ws_test.mustache", "Test.php");
@@ -323,7 +328,7 @@ public class PhpSdkGenerator extends AbstractPhpCodegen implements NameService {
 
     @Override
     public String toApiName(String name) {
-        return camelize(name + "_" + (modeSwitch.isWs() || modeSwitch.isWsTest() ? "Ws" : "Api"));
+        return camelize(name + "_" + (modeSwitch.isWs() || modeSwitch.isWsTest() || modeSwitch.isWsUnified() ? "Ws" : "Api"));
     }
 
     @Override
@@ -356,7 +361,8 @@ public class PhpSdkGenerator extends AbstractPhpCodegen implements NameService {
             }
             case WS:
             case WS_TEST:
-            case WS_TEST_TEMPLATE: {
+            case WS_TEST_TEMPLATE:
+            case WS_UNIFIED:{
                 apiName = apiName + "Ws";
                 break;
             }

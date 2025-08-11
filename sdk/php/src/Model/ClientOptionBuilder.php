@@ -16,6 +16,7 @@ class ClientOptionBuilder
     private $brokerName;
     private $brokerPartner;
     private $brokerKey;
+    private $unifiedWsEndpoint;
     private $transportOption;
     private $websocketClientOption;
 
@@ -126,6 +127,18 @@ class ClientOptionBuilder
         $this->brokerKey = $brokerKey;
         return $this;
     }
+    
+    /**
+     * Set the unified WebSocket API endpoint.
+     *
+     * @param string $unifiedWsEndpoint
+     * @return self
+     */
+    public function setUnifiedWsEndpoint(string $unifiedWsEndpoint): self
+    {
+        $this->unifiedWsEndpoint = $unifiedWsEndpoint;
+        return $this;
+    }
 
     /**
      * Set transport option configuration for HTTP client.
@@ -165,6 +178,7 @@ class ClientOptionBuilder
             $this->spotEndpoint,
             $this->futuresEndpoint,
             $this->brokerEndpoint,
+            $this->unifiedWsEndpoint,
             $this->brokerName,
             $this->brokerPartner,
             $this->brokerKey,

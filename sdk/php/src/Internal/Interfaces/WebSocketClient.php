@@ -3,7 +3,6 @@
 namespace KuCoin\UniversalSDK\Internal\Interfaces;
 
 use Evenement\EventEmitterInterface;
-use KuCoin\UniversalSDK\Model\WsMessage;
 use React\Promise\PromiseInterface;
 
 
@@ -28,6 +27,6 @@ interface WebSocketClient extends EventEmitterInterface
     /**
      * Writes a message to the WebSocket connection.
      */
-    public function write(WsMessage $message, int $timeout): PromiseInterface;
+    public function write(string $id, $message, int $timeout): PromiseInterface;
 
 }

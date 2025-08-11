@@ -38,9 +38,9 @@ class RestResponse
     public $message;
 
     /**
-     * RestRateLimit info
-     * @var RestRateLimit $rateLimit
-     * @Type("RestRateLimit")
+     * RateLimit info
+     * @var RateLimit $rateLimit
+     * @Type("RateLimit")
      * @SerializedName("rateLimit")
      */
     public $rateLimit;

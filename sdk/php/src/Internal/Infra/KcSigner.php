@@ -58,7 +58,7 @@ class KcSigner
      * @param string $key
      * @return string
      */
-    private function sign($plain, $key)
+    public function sign($plain, $key)
     {
         return base64_encode(hash_hmac('sha256', $plain, $key, true));
     }

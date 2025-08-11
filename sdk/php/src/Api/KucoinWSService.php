@@ -8,6 +8,7 @@ use KuCoin\UniversalSDK\Generate\Margin\MarginPrivate\MarginPrivateWs;
 use KuCoin\UniversalSDK\Generate\Margin\MarginPublic\MarginPublicWs;
 use KuCoin\UniversalSDK\Generate\Spot\SpotPrivate\SpotPrivateWs;
 use KuCoin\UniversalSDK\Generate\Spot\SpotPublic\SpotPublicWs;
+use KuCoin\UniversalSDK\Generate\Unified\UnifiedWs\UnifiedPrivateWs;
 use React\EventLoop\LoopInterface;
 
 /**
@@ -74,4 +75,12 @@ interface KucoinWSService
      * @return FuturesPrivateWS
      */
     public function newFuturesPrivateWS(): FuturesPrivateWS;
+
+    /**
+     * Returns the interface to interact with the unified private WebSocket API of KuCoin, allowing
+     * for spot, margin, and futures trading operations through a single, secure WebSocket connection.
+     *
+     * @return UnifiedPrivateWs
+     */
+    public function newUnifiedPrivateWS(): UnifiedPrivateWs;
 }

@@ -60,6 +60,12 @@ class ClientOption
      * @var string
      */
     public $brokerEndpoint;
+    
+    /**
+     * Unified WebSocket API endpoint for the client.
+     * @var string
+     */
+    public $unifiedWsEndpoint;
 
     /**
      * Configuration for HTTP transport.
@@ -80,6 +86,7 @@ class ClientOption
         $spotEndpoint,
         $futuresEndpoint,
         $brokerEndpoint,
+        $unifiedWsEndpoint,
         $brokerName,
         $brokerPartner,
         $brokerKey,
@@ -93,6 +100,7 @@ class ClientOption
         $this->spotEndpoint = $spotEndpoint;
         $this->futuresEndpoint = $futuresEndpoint;
         $this->brokerEndpoint = $brokerEndpoint;
+        $this->unifiedWsEndpoint = $unifiedWsEndpoint;
         $this->brokerName = $brokerName;
         $this->brokerPartner = $brokerPartner;
         $this->brokerKey = $brokerKey;

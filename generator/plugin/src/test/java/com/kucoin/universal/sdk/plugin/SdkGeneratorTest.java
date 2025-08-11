@@ -7,12 +7,12 @@ import org.openapitools.codegen.config.CodegenConfigurator;
 
 public class SdkGeneratorTest {
 
-    private static final String SDK_NAME = "java-sdk";
+    private static final String SDK_NAME = "php-sdk";
     private static final String SPEC_NAME = "../../spec/rest/api/openapi-spot-market.json";
     private static final String SPEC_ENTRY_NAME = "../../spec/rest/entry/openapi-broker.json";
     private static final String WS_SPEC_NAME = "../../spec/ws/openapi-futures-private.json";
     private static final String WS_UNIFIED_SPEC_NAME = "../../spec/ws-unified/openapi-unified-private.json";
-    private static final String OUTPUT_DIR = "../../sdk/java/src/main/java/com/kucoin/universal/sdk/generate";
+    private static final String OUTPUT_DIR = "../../sdk/php/src/Generate";
     private static final String CSV_PATH = "../../spec";
 
     @Test
