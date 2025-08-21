@@ -21,6 +21,8 @@ import {
 } from '@generate/futures/futuresprivate/api_futures_private';
 import { DefaultWsService } from '../infra/default_ws_service';
 import { SdkVersion } from '@generate/version';
+import { UnifiedPrivateWS, UnifiedPrivateWSImpl } from '@generate/unified/unifiedws/api_unified_private';
+import { DefaultWebSocketUnifiedService } from '@internal/infra/default_ws_unified_service';
 
 export class KucoinDefaultWsImpl implements KucoinWSService {
     private readonly options: ClientOption;
@@ -57,5 +59,10 @@ export class KucoinDefaultWsImpl implements KucoinWSService {
     newFuturesPrivateWS(): FuturesPrivateWS {
         const wsService = new DefaultWsService(this.options, DomainType.Futures, true, SdkVersion);
         return new FuturesPrivateWSImpl(wsService);
+    }
+
+    newUnifiedPrivateWS(): UnifiedPrivateWS {
+        const wsService = new DefaultWebSocketUnifiedService(this.options, SdkVersion);
+        return new UnifiedPrivateWSImpl(wsService);
     }
 }

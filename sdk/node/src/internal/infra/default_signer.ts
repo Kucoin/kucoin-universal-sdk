@@ -25,7 +25,7 @@ export class KcSigner {
         this.apiSecret = apiSecret;
         this.apiPassphrase =
             apiPassphrase && apiSecret
-                ? this.sign(Buffer.from(apiPassphrase), Buffer.from(apiSecret))
+                ? KcSigner.sign(Buffer.from(apiPassphrase), Buffer.from(apiSecret))
                 : apiPassphrase;
         this.brokerName = brokerName;
         this.brokerPartner = brokerPartner;
@@ -41,7 +41,14 @@ export class KcSigner {
     /**
      * Sign the input data with the given key using HMAC-SHA256
      */
-    private sign(plain: Buffer, key: Buffer): string {
+    public static signString(plain: String, key: String): string {
+        return KcSigner.sign(Buffer.from(plain), Buffer.from(key));
+    }
+
+    /**
+     * Sign the input data with the given key using HMAC-SHA256
+     */
+    public static sign(plain: Buffer, key: Buffer): string {
         const hmac = crypto.createHmac('sha256', key);
         hmac.update(plain);
         const digest = hmac.digest();
@@ -55,7 +62,7 @@ export class KcSigner {
     public headers(plain: string): Record<string, string> {
         const timestamp = Date.now().toString();
         const signatureInput = timestamp + plain;
-        const signature = this.sign(Buffer.from(signatureInput), Buffer.from(this.apiSecret));
+        const signature = KcSigner.sign(Buffer.from(signatureInput), Buffer.from(this.apiSecret));
 
         const headers = {
             'KC-API-KEY': this.apiKey,
@@ -79,10 +86,10 @@ export class KcSigner {
 
         const timestamp = Date.now().toString();
         const signatureInput = timestamp + plain;
-        const signature = this.sign(Buffer.from(signatureInput), Buffer.from(this.apiSecret));
+        const signature = KcSigner.sign(Buffer.from(signatureInput), Buffer.from(this.apiSecret));
 
         const partnerInput = timestamp + this.brokerPartner + this.apiKey;
-        const partnerSignature = this.sign(Buffer.from(partnerInput), Buffer.from(this.apiSecret));
+        const partnerSignature = KcSigner.sign(Buffer.from(partnerInput), Buffer.from(this.apiSecret));
 
         const headers = {
             'KC-API-KEY': this.apiKey,

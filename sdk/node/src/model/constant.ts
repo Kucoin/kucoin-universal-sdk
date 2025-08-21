@@ -4,6 +4,7 @@
 export const GlobalApiEndpoint = 'https://api.kucoin.com';
 export const GlobalFuturesApiEndpoint = 'https://api-futures.kucoin.com';
 export const GlobalBrokerApiEndpoint = 'https://api-broker.kucoin.com';
+export const GlobalUnifiedWsApiEndpoint = 'wss://wsapi.kucoin.com';
 
 /**
  * Domain types

@@ -2,6 +2,30 @@
 import { WsMessage } from '@model/common';
 import { WebSocketEvent } from '@src/model';
 
+// WebsocketHandshake defines methods for handling WebSocket handshakes.
+export interface WebsocketHandshake {
+    invoke(socket: any, text: string): Promise<void> | void;
+}
+
+// WsParsedMessage defines the structure of a parsed WebSocket message.
+export interface WsParsedMessage {
+    type?: string;
+    id?: string;
+    message: any;
+    ack: boolean;
+}
+
+// WebsocketMetaProvider defines methods for managing WebSocket metadata.
+export interface WebsocketMetaProvider {
+    handshakes(): WebsocketHandshake[];
+    parseMessage(text: string): WsParsedMessage;
+    buildUri(): Promise<string>;
+    pingInterval(): number;
+    pingTimeout(): number;
+    pingMessage(): [string, any];
+    close(): Promise<void>;
+}
+
 export interface WsToken {
     token: string;
     pingInterval: number;
@@ -69,7 +93,7 @@ export interface WebSocketService {
 }
 
 export interface WebsocketTransportEvents {
-    message: (data: WsMessage) => void;
+    message: (data: any) => void;
     event: (event: WebSocketEvent, msg: string) => void;
     reconnected: () => void;
 }
@@ -90,11 +114,12 @@ export interface WebsocketTransport {
 
     /**
      * Writes a message to the WebSocket connection.
+     * @param id The message id.
      * @param message The message to send.
      * @param timeout The timeout in milliseconds
      * @returns A channel (promise) that resolves when the message is sent or rejects with an error.
      */
-    write(message: WsMessage, timeout: number): Promise<void>;
+    write(id: string, message: any, timeout: number): Promise<void>;
 
     /**
      * Subscribes to WebSocket events.

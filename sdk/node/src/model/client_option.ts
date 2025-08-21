@@ -42,6 +42,10 @@ export interface ClientOption {
      */
     brokerEndpoint?: string;
     /**
+     * Unified private WebSocket API endpoint
+     */
+    unifiedWsEndpoint?: string;
+    /**
      * TransportOption is an optional configuration for HTTP network transport
      */
     transportOption?: TransportOption;
@@ -68,6 +72,7 @@ export class ClientOptionBuilder {
             spotEndpoint: '',
             futuresEndpoint: '',
             brokerEndpoint: '',
+            unifiedWsEndpoint: '',
         };
     }
 
@@ -140,6 +145,14 @@ export class ClientOptionBuilder {
      */
     setBrokerEndpoint(endpoint: string): ClientOptionBuilder {
         this.clientOption.brokerEndpoint = endpoint;
+        return this;
+    }
+
+    /**
+     * setUnifiedWsEndpoint sets the unified private WebSocket API endpoint
+     */
+    setUnifiedWsEndpoint(endpoint: string): ClientOptionBuilder {
+        this.clientOption.unifiedWsEndpoint = endpoint;
         return this;
     }
 

@@ -4,8 +4,8 @@ import { DomainType, MessageType } from '@model/constant';
 
 import { DefaultTransport } from './default_transport';
 import { TopicManager } from './default_ws_callback';
-import { WebSocketClient } from './default_ws_client';
 import { DefaultWsTokenProvider } from './default_ws_token_provider';
+import { WebSocketClient } from './default_ws_client';
 import { WebSocketClientOption, WebSocketEvent } from '@src/model';
 
 import { SubInfo } from '@internal/util/sub';
@@ -13,6 +13,7 @@ import { WsMessage } from '@model/common';
 import { randomUUID } from 'crypto';
 import { EventEmitter } from 'events';
 import { logger } from '@src/common';
+import { DefaultWebsocketMetaProvider } from '@internal/infra/default_ws_meta_provider';
 
 /**
  * DefaultWsService implements the WebSocket service interface for handling real-time data communication.
@@ -50,7 +51,9 @@ export class DefaultWsService implements WebSocketService {
             }
         });
         this.client = new WebSocketClient(
-            new DefaultWsTokenProvider(this.tokenTransport, domain, privateChannel),
+            new DefaultWebsocketMetaProvider(
+                new DefaultWsTokenProvider(this.tokenTransport, domain, privateChannel),
+            ),
             this.wsOption,
         );
         this.client.on('event', (event: WebSocketEvent, msg: string) => {
@@ -96,7 +99,7 @@ export class DefaultWsService implements WebSocketService {
         subEvent.response = true;
 
         return this.client
-            .write(subEvent, this.wsOption.writeTimeout)
+            .write(subEvent.id, subEvent, this.wsOption.writeTimeout)
             .then(() => {
                 logger.info(`subscribed id: ${subId}`);
                 return subId;
@@ -124,7 +127,7 @@ export class DefaultWsService implements WebSocketService {
             subEvent.response = true;
 
             this.client
-                .write(subEvent, this.wsOption.writeTimeout)
+                .write(subEvent.id, subEvent, this.wsOption.writeTimeout)
                 .then(() => {
                     callbackManager.remove(id);
                     logger.info(`unsubscribe id: ${id}`);
