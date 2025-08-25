@@ -72,6 +72,17 @@ define generate-ws
 		 { echo "$(RED)WS Task $(service) for $(lang) failed$(NC)"; exit 1; }
 endef
 
+define generate-unified
+	@echo "$(GREEN)lang: $(2), generate websocket unified for $(service)...$(NC)"
+	docker run --rm -v "$$PWD:/local" $(IMAGE_NAME):$(IMAGE_TAG) generate \
+	     -i /local/spec/ws-unified/$(service).json \
+	     -g $(2)-sdk \
+	     -o $(3) \
+		 --skip-validate-spec \
+	     --additional-properties=GEN_MODE=ws_unified,API_VERSION=$(VERSION),API_DATE=$(DATE) > logs/$(service)-$(lang)-ws-unified.log 2>&1 || \
+		 { echo "$(RED)WS Task $(service) for $(lang) failed$(NC)"; exit 1; }
+endef
+
 define generate-ws-test
 	@echo "$(GREEN)lang: $(2), generate websocket test for $(service)...$(NC)"
 	docker run --rm -v "$$PWD:/local" $(IMAGE_NAME):$(IMAGE_TAG) generate \
@@ -87,13 +98,14 @@ endef
 REST_FILES := $(wildcard ./spec/rest/api/*.json)
 ENTRY_FILES := $(wildcard ./spec/rest/entry/*.json)
 WS_FILES := $(wildcard ./spec/ws/*.json)
+WS_UNIFIED_FILES := $(wildcard ./spec/ws-unified/*.json)
 
-.PHONY: generate $(REST_FILES) $(ENTRY_FILES) $(WS_FILES) generate-postman force
+.PHONY: generate $(REST_FILES) $(ENTRY_FILES) $(WS_FILES) $(WS_UNIFIED_FILES) generate-postman force
 
 generate-postman:
 	$(call generate-postman-func)
 
-generate: $(patsubst ./spec/rest/api/%.json,generate-rest-%, $(REST_FILES)) $(patsubst ./spec/ws/%.json,generate-ws-%, $(WS_FILES)) $(patsubst ./spec/rest/entry/%.json,generate-entry-%, $(ENTRY_FILES)) 
+generate: $(patsubst ./spec/rest/api/%.json,generate-rest-%, $(REST_FILES)) $(patsubst ./spec/ws/%.json,generate-ws-%, $(WS_FILES)) $(patsubst ./spec/ws-unified/%.json,generate-ws-unified-%, $(WS_UNIFIED_FILES)) $(patsubst ./spec/rest/entry/%.json,generate-entry-%, $(ENTRY_FILES)) 
 
 generate-rest-%: ./spec/rest/api/%.json | force
 	$(eval service=$*)
@@ -112,6 +124,11 @@ generate-ws-%: ./spec/ws/%.json | force
 	@echo "$(GREEN)Generating WebSocket for $(service)...$(NC)"
 	$(call generate-ws,$<,$(lang),/local/sdk/$(lang)$(subdir))
 	$(call generate-ws-test,$<,$(lang),/local/sdk/$(lang)$(subdir))
+
+generate-ws-unified-%: ./spec/ws-unified/%.json | force
+	$(eval service=$*)
+	@echo "$(GREEN)Generating WebSocket Unified for $(service)...$(NC)"
+	$(call generate-unified,$<,$(lang),/local/sdk/$(lang)$(subdir))
 
 force:
 	@true

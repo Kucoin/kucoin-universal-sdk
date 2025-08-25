@@ -47,3 +47,7 @@ reconnect-test: build
 	  --name nodejs-reconnect-test --network isolated_net \
 	  nodejs-sdk-image:latest \
 	  bash /app/reconnect_test.sh
+
+.PHONY: format
+format:
+	@echo "pass"

@@ -3,20 +3,40 @@
 import { UnifiedWsArgs, UnifiedWsMessage } from '@model/unified_ws';
 import { DefaultWebSocketUnifiedService } from '@internal/infra/default_ws_unified_service';
 
+/**
+ * Interface for the unified private WebSocket API of KuCoin.
+ */
 export interface UnifiedPrivateWS {
     /**
      * Unified Websocket Trading API
-     * Place spot, margin, or futures orders via a secure WebSocket connection.
+     *
+     * Place spot, margin, or futures orders via a secure WebSocket connection. Supports real-time submission with instant server response.
+     *
      * @see https://www.kucoin.com/docs-new/3470133w0
      */
     unifiedTrading(args: UnifiedWsArgs): Promise<UnifiedWsMessage>;
 
-    /** Start websocket */
-    start(): Promise<void> | void;
-    /** Stop websocket */
-    stop(): Promise<void> | void;
+    /**
+     * Initiates the WebSocket service
+     *
+     * This method must be called before invoking any APIs.
+     */
+    start(): Promise<void>;
+
+    /**
+     * Stops the WebSocket service.
+     *
+     * This method is used to terminate the WebSocket connection and stop all ongoing
+     * calls. It should be called when no further communication is needed with
+     * the server, or when the application is being shut down to ensure a clean
+     * disconnection and release of resources.
+     */
+    stop(): Promise<void>;
 }
 
+/**
+ * Implementation of the UnifiedPrivateWs interface.
+ */
 export class UnifiedPrivateWSImpl implements UnifiedPrivateWS {
     private wsService: DefaultWebSocketUnifiedService;
 
@@ -28,11 +48,11 @@ export class UnifiedPrivateWSImpl implements UnifiedPrivateWS {
         return this.wsService.call(args);
     }
 
-    start(): Promise<void> | void {
+    start(): Promise<void> {
         return this.wsService.start();
     }
 
-    stop(): Promise<void> | void {
+    stop(): Promise<void> {
         return this.wsService.stop();
     }
 }

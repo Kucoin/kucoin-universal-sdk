@@ -125,6 +125,13 @@ public class NodeSdkGenerator extends AbstractTypeScriptClientCodegen implements
                 supportingFiles.add(new SupportingFile("module_exports_template.mustache", String.format("./%s/%s/export.template", service, formatPackage(subService))));
                 break;
             }
+            case WS_UNIFIED: {
+                apiTemplateFiles.put("api_ws_unified.mustache", ".ts");
+                additionalProperties.put("WS_MODE", "true");
+                supportingFiles.add(new SupportingFile("module_unified_exported.mustache", String.format("./%s/index.ts", service)));
+                supportingFiles.add(new SupportingFile("module_unified.mustache", String.format("./%s/%s/index.ts", service, formatPackage(subService))));
+                break;
+            }
             case WS_TEST: {
                 apiTemplateFiles.put("api_ws_test.mustache", ".ts");
                 break;
@@ -256,7 +263,7 @@ public class NodeSdkGenerator extends AbstractTypeScriptClientCodegen implements
 
     @Override
     public String toApiName(String name) {
-        return camelize(name + "_" + (modeSwitch.isWs() ? "WS" : "API"));
+        return camelize(name + "_" + (modeSwitch.isWs() || modeSwitch.isWsUnified() ? "WS" : "API"));
     }
 
     @Override
@@ -282,6 +289,7 @@ public class NodeSdkGenerator extends AbstractTypeScriptClientCodegen implements
         String apiName = name.replaceAll("-", "_");
         switch (modeSwitch.getMode()) {
             case WS:
+            case WS_UNIFIED:
             case API:
             case ENTRY:
             case TEST_TEMPLATE: {
@@ -402,7 +410,8 @@ public class NodeSdkGenerator extends AbstractTypeScriptClientCodegen implements
     private void generateValueExport(Meta meta, Set<String> export) {
         switch (modeSwitch.getMode()) {
             case API:
-            case WS: {
+            case WS:
+            case WS_UNIFIED: {
                 operationService.getServiceMeta().forEach((k, v) -> {
                     if (v.getService().equalsIgnoreCase(meta.getService())) {
                         export.add(String.format("export * from \"./%s\"", toApiFilename(sanitizeName(k))));
@@ -654,6 +663,7 @@ public class NodeSdkGenerator extends AbstractTypeScriptClientCodegen implements
         Set<String> serviceExports = new TreeSet<>();
         Set<String> generatedExports = new TreeSet<>();
 
+
         String apiCsvFile = csvPath + "/apis.csv";
 
         Set<String> services = new TreeSet<>();
@@ -668,14 +678,15 @@ public class NodeSdkGenerator extends AbstractTypeScriptClientCodegen implements
             throw new RuntimeException("read csv fail", e);
         }
 
+        services.add("unified");
         services.forEach(s -> {
-            serviceExports.add(String.format("export * from \"./%s_api\"", s));
+            serviceExports.add(String.format("export * from './%s_api'", s));
 
             Map<String,String> specialKeywords = Map.of("copytrading", "CopyTrading", "viplending", "VIPLending");
             String service = formatService(specialKeywords.getOrDefault(s, s));
 
-            serviceExports.add(String.format("export type {%s} from \"./%s_api\"", service+"Service", s));
-            generatedExports.add(String.format("export * from \"./%s\"", s));
+            serviceExports.add(String.format("export type {%s} from './%s_api'", service+"Service", s));
+            generatedExports.add(String.format("export * from './%s';", s));
         });
 
         generatedExports.add("export * from \"./service\"");

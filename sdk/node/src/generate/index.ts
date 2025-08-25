@@ -1,3 +1,4 @@
+export * from './service';
 export * from './account';
 export * from './affiliate';
 export * from './broker';
@@ -5,6 +6,6 @@ export * from './copytrading';
 export * from './earn';
 export * from './futures';
 export * from './margin';
-export * from './service';
 export * from './spot';
+export * from './unified';
 export * from './viplending';
