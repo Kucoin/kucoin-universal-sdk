@@ -678,7 +678,6 @@ public class NodeSdkGenerator extends AbstractTypeScriptClientCodegen implements
             throw new RuntimeException("read csv fail", e);
         }
 
-        services.add("unified");
         services.forEach(s -> {
             serviceExports.add(String.format("export * from './%s_api'", s));
 

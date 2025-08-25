@@ -6,14 +6,15 @@ import {
     WebsocketMetaProvider,
     WsParsedMessage,
     WsToken,
+    WsTokenProvider,
 } from '@internal/interfaces/websocket';
 import { logger } from '@src/common';
 
 export class DefaultWebsocketMetaProvider implements WebsocketMetaProvider {
-    private tokenProvider: DefaultWsTokenProvider;
+    private tokenProvider: WsTokenProvider;
     private token: WsToken | null = null;
 
-    constructor(tokenProvider: DefaultWsTokenProvider) {
+    constructor(tokenProvider: WsTokenProvider) {
         this.tokenProvider = tokenProvider;
     }
 

@@ -168,7 +168,6 @@ This section provides details about the configurable parameters for both HTTP an
 | `reconnectAttempts`     | `number`                  | Maximum number of reconnection attempts; `-1` for unlimited attempts.                           | -1            |
 | `reconnectInterval`     | `number`                  | Interval between reconnection attempts in milliseconds.                                         | 5000 (5 seconds) |
 | `dialTimeout`           | `number`                  | Timeout duration for establishing a WebSocket connection in milliseconds.                      | 10000 (10 seconds) |
-| `readMessageBuffer`     | `number`                  | Buffer size for reading messages in the queue.                                                 | 1024          |
 | `writeTimeout`          | `number`                  | Timeout for sending messages in milliseconds.                                                  | 30000 (30 seconds) |
 | `eventCallback`         | `Optional<WebSocketCallback>` | A callback function to handle WebSocket events.                                                 | None          |
 

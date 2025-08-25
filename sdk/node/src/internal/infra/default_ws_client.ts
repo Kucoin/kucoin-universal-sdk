@@ -88,7 +88,7 @@ export class WebSocketClient extends EventEmitter implements WebsocketTransport 
                     reject: reject,
                 });
 
-                this.socket!.send(ms);
+                this.socket!.send(JSON.stringify(ms, null));
             } catch (error) {
                 logger.error('Failed to send message:', error);
                 this.ackEvents.delete(id);
@@ -154,7 +154,7 @@ export class WebSocketClient extends EventEmitter implements WebsocketTransport 
 
             const webSocketBootstrap = new WebSocketBootstrap(
                 this.metaProvider.handshakes(),
-                this.onMessage,
+                (msg: string) => this.onMessage(msg),
             );
 
             this.socket.on('message', (message) => {
@@ -168,8 +168,10 @@ export class WebSocketClient extends EventEmitter implements WebsocketTransport 
                 this.reconnect(code, reason.toString());
             });
 
-            // TODO
-            return webSocketBootstrap.getReadyPromise();
+            const timeout = new Promise<never>((_, reject) => {
+                setTimeout(() => reject(new Error("Timeout")), this.options.dialTimeout);
+            });
+            return Promise.race([webSocketBootstrap.getReadyPromise(), timeout]);
         });
     }
 
