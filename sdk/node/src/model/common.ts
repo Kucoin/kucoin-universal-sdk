@@ -3,7 +3,7 @@ import { plainToInstance } from 'class-transformer';
 /**
  * RestRateLimit represents the rate limiting information for a REST API.
  */
-export interface RestRateLimit {
+export interface RateLimit {
     /**
      * Total resource pool quota
      */
@@ -25,7 +25,7 @@ export class RestResponse {
     /**
      * Optional rate limit information
      */
-    rateLimit?: RestRateLimit;
+    rateLimit?: RateLimit;
     /**
      * Response code
      */

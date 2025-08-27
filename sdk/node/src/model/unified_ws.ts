@@ -1,3 +1,5 @@
+import { RateLimit } from '@model/common';
+
 export interface UnifiedWsArgs {
     /** user-defined id */
     id?: string;
@@ -5,12 +7,6 @@ export interface UnifiedWsArgs {
     op: string;
     /** business params */
     args: Record<string, any>;
-}
-
-export interface RateLimit {
-    limit: number;
-    remaining: number;
-    reset: number;
 }
 
 export interface UnifiedWsMessage {

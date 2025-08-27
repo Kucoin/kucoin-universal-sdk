@@ -1,7 +1,7 @@
 import { Transport } from '@internal/interfaces/transport';
 import { Response, Serializable, StaticDeserializable } from '@internal/interfaces/serializable';
 import { ClientOption } from '@model/client_option';
-import { RestError, RestRateLimit, RestResponse } from '@model/common';
+import { RestError, RateLimit, RestResponse } from '@model/common';
 import { DomainType } from '@model/constant';
 import { DEFAULT_TRANSPORT_OPTION, TransportOption } from '@model/transport_option';
 import { KcSigner } from './default_signer';
@@ -269,7 +269,7 @@ export class DefaultTransport implements Transport {
         return config;
     }
 
-    private processLimit(headers: any): RestRateLimit {
+    private processLimit(headers: any): RateLimit {
         const limit = parseInt(headers['gw-ratelimit-limit'] || '-1', 10);
         const remaining = parseInt(headers['gw-ratelimit-remaining'] || '-1', 10);
         const reset = parseInt(headers['gw-ratelimit-reset'] || '-1', 10);
