@@ -78,6 +78,7 @@ header = auth({
     key: key, passphrase: passphrase, secret: secret, brokerName: brokerName, partner: partner, brokerKey: brokerKey
 }, method, url, body)
 
+pm.request.headers.clear();
 for (const [headerName, headerValue] of Object.entries(header)) {
     pm.request.headers.add({ key: headerName, value: headerValue })
 }
