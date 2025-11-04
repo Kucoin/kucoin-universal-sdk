@@ -63,17 +63,16 @@ final class CallbackManager {
 
           for (String topic : topics) {
             int idx = topic.indexOf(':');
-            if (idx == -1) { // no arg => treat as "all"
-              continue;
-            }
-            String arg = topic.substring(idx + 1);
-            if (!"all".equals(arg)) {
-              args.add(arg);
+            if (idx != -1) {
+              String arg = topic.substring(idx + 1);
+              if (!"all".equals(arg)) {
+                args.add(arg);
+              }
             }
             // pick callback from any topic (they’re identical for this id)
-            if (cb == null) {
-              Callback holder = topicCbs.get(topic);
-              if (holder != null) cb = holder.callback;
+            Callback holder = topicCbs.get(topic);
+            if (holder != null) {
+              cb = holder.callback;
             }
           }
 

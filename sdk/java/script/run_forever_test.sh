@@ -4,7 +4,7 @@ set -e
 
 if [[ "${USE_LOCAL,,}" == "true" ]]; then
   cd /src
-  mvn clean install -DskipTests
+  mvn clean install -DskipTests -Dgpg.skip=true
   echo "Local jars installed."
 else
   echo "USE_LOCAL is not true, skipping local jar installation."

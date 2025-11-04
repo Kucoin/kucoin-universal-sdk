@@ -5,6 +5,8 @@ import com.kucoin.universal.sdk.api.KucoinClient;
 import com.kucoin.universal.sdk.generate.spot.market.GetAllSymbolsData;
 import com.kucoin.universal.sdk.generate.spot.market.GetAllSymbolsReq;
 import com.kucoin.universal.sdk.generate.spot.market.GetAllSymbolsResp;
+import com.kucoin.universal.sdk.generate.spot.spotprivate.OrderV2Event;
+import com.kucoin.universal.sdk.generate.spot.spotprivate.SpotPrivateWs;
 import com.kucoin.universal.sdk.generate.spot.spotpublic.AllTickersEvent;
 import com.kucoin.universal.sdk.generate.spot.spotpublic.SpotPublicWs;
 import com.kucoin.universal.sdk.generate.spot.spotpublic.TradeEvent;
@@ -183,5 +185,46 @@ public class ReliabilityTest {
 
     Thread.sleep(1000 * 12000);
     spotPublicWs.stop();
+  }
+
+  @Test
+  public void testReconnect3() throws Exception {
+    String key = System.getenv("API_KEY");
+    String secret = System.getenv("API_SECRET");
+    String passphrase = System.getenv("API_PASSPHRASE");
+
+    AtomicInteger atomicInteger = new AtomicInteger();
+
+    ClientOption clientOpt =
+        ClientOption.builder()
+            .key(key)
+            .secret(secret)
+            .passphrase(passphrase)
+            .spotEndpoint(Constants.GLOBAL_API_ENDPOINT)
+            .futuresEndpoint(Constants.GLOBAL_FUTURES_API_ENDPOINT)
+            .brokerEndpoint(Constants.GLOBAL_BROKER_API_ENDPOINT)
+            .transportOption(TransportOption.defaults())
+            .websocketClientOption(
+                WebSocketClientOption.builder()
+                    .eventCallback(
+                        ((event, message) -> {
+                          atomicInteger.incrementAndGet();
+                          log.info("Event: {}, {}", event, message);
+                        }))
+                    .build())
+            .build();
+
+    KucoinClient kucoinClient = new DefaultKucoinClient(clientOpt);
+
+    SpotPrivateWs spotPrivateWs = kucoinClient.getWsService().newSpotPrivateWS();
+    spotPrivateWs.start();
+
+    spotPrivateWs.orderV2(
+        (String topic, String subject, OrderV2Event data) -> {
+          log.info("OrderV2: {}, {}, {}", topic, subject, data);
+        });
+
+    Thread.sleep(1000 * 12000);
+    spotPrivateWs.stop();
   }
 }

@@ -7,6 +7,7 @@ import com.kucoin.universal.sdk.api.KucoinWSService;
 import com.kucoin.universal.sdk.generate.futures.futurespublic.FuturesPublicWs;
 import com.kucoin.universal.sdk.generate.spot.market.GetAllSymbolsData;
 import com.kucoin.universal.sdk.generate.spot.market.GetAllSymbolsReq;
+import com.kucoin.universal.sdk.generate.spot.spotprivate.SpotPrivateWs;
 import com.kucoin.universal.sdk.generate.spot.spotpublic.SpotPublicWs;
 import com.kucoin.universal.sdk.model.ClientOption;
 import com.kucoin.universal.sdk.model.Constants;
@@ -54,6 +55,7 @@ public class RunReconnectTest {
             .collect(Collectors.toList());
 
     spotWsExample(wsSvc.newSpotPublicWS(), symbols);
+    privateWsExample(wsSvc.newSpotPrivateWS());
     futuresWsExample(wsSvc.newFuturesPublicWS());
 
     log.info("Total subscribe: 53");
@@ -76,6 +78,11 @@ public class RunReconnectTest {
     }
     ws.ticker(new String[] {"BTC-USDT", "ETH-USDT"}, RunReconnectTest::noop);
   }
+
+   public static void privateWsExample(SpotPrivateWs ws) {
+       ws.start();
+       ws.orderV2(RunReconnectTest::noop);
+   }
 
   public static void futuresWsExample(FuturesPublicWs ws) {
     ws.start();
