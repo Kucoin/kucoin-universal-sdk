@@ -3,6 +3,7 @@ package com.kucoin.universal.sdk.test.e2e.ws.spot;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kucoin.universal.sdk.api.DefaultKucoinClient;
 import com.kucoin.universal.sdk.api.KucoinClient;
+import com.kucoin.universal.sdk.generate.spot.spotprivate.OrderV2Event;
 import com.kucoin.universal.sdk.generate.spot.spotprivate.SpotPrivateWs;
 import com.kucoin.universal.sdk.model.ClientOption;
 import com.kucoin.universal.sdk.model.Constants;
@@ -123,26 +124,13 @@ public class PrivateTest {
   }
 
   @Test
-  public void testOrderV2() {
+  public void testOrderV2() throws InterruptedException {
     CountDownLatch gotEvent = new CountDownLatch(1);
-    CompletableFuture.supplyAsync(
-            () ->
-                api.orderV2(
-                    (__, ___, event) -> {
-                      log.info("event: {}", event.toString());
-                      gotEvent.countDown();
-                    }))
-        .thenApply(
-            id -> {
-              try {
-                gotEvent.await();
-              } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-              }
-              return id;
-            })
-        .thenAccept(id -> api.unSubscribe(id))
-        .join();
+    api.orderV2(
+        (String topic, String subject, OrderV2Event data) -> {
+          log.info("event: {}", data.toString());
+        });
+    Thread.sleep(1000000000);
   }
 
   @Test
