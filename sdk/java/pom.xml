@@ -6,7 +6,7 @@
 
     <groupId>com.kucoin</groupId>
     <artifactId>kucoin-universal-sdk</artifactId>
-    <version>0.1.0-alpha</version>
+    <version>0.1.1-alpha</version>
 
     <name>kucoin-universal-sdk</name>
     <url>https://www.kucoin.com</url>
