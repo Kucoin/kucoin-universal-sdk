@@ -25,6 +25,8 @@ type TransportOption struct {
 	TLSHandshakeTimeout time.Duration                         // specifies the maximum amount of time to wait for a TLS handshake. Zero means no timeout. default:10s
 	IdleConnTimeout     time.Duration                         // Maximum amount of time an idle(keep-alive) connection will remain idle before closing itself. Zero means no limit. default:90s
 	Proxy               func(*http.Request) (*url.URL, error) // HTTP proxy function
+	SnitchProxyURL      string                                // SnitchProxyURL is the application-level proxy endpoint that receives SDK requests
+	SnitchConfig        map[string]any                        // SnitchConfig holds proxy-specific request config shared across requests
 	MaxRetries          int                                   // Maximum number of retry attempts; default: 3
 	RetryDelay          time.Duration                         // Delay duration between retries; default: 2s
 	Interceptors        []Interceptor                         // Http interceptor.
@@ -41,6 +43,8 @@ func NewTransportOption() *TransportOption {
 		TLSHandshakeTimeout: 10 * time.Second,
 		IdleConnTimeout:     90 * time.Second,
 		Proxy:               nil,
+		SnitchProxyURL:      "",
+		SnitchConfig:        nil,
 		MaxRetries:          3,
 		RetryDelay:          2 * time.Second,
 		Interceptors:        nil,

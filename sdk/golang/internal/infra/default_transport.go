@@ -35,6 +35,12 @@ func NewDefaultTransport(clientOption *types.ClientOption, sdkVersion string) *D
 	if option == nil {
 		option = types.NewTransportOption()
 	}
+	if option.SnitchProxyURL == "" {
+		option.SnitchProxyURL = clientOption.SnitchProxyURL
+	}
+	if len(option.SnitchConfig) == 0 && len(clientOption.SnitchConfig) > 0 {
+		option.SnitchConfig = clientOption.SnitchConfig
+	}
 
 	if clientOption.Key == "" || clientOption.Secret == "" || clientOption.Passphrase == "" {
 		logger.GetLogger().Warnf("no secret information provided, only the public channel API is accessible")
@@ -247,12 +253,28 @@ func (t *DefaultTransport) processRequest(ctx context.Context, broker bool, endp
 	}
 
 	fullPath := fmt.Sprintf("%s%s", endpoint, path)
-	req, err := http.NewRequestWithContext(ctx, method, fullPath, bytes.NewBuffer(reqBody))
+	requestURL := fullPath
+	if t.transportOption.SnitchProxyURL != "" {
+		requestURL = t.transportOption.SnitchProxyURL
+	}
+
+	req, err := http.NewRequestWithContext(ctx, method, requestURL, bytes.NewBuffer(reqBody))
 	if err != nil {
 		return nil, fmt.Errorf("failed to create request: %w", err)
 	}
 
 	t.processHeaders(method, broker, rawPath, reqBody, req)
+	if t.transportOption.SnitchProxyURL != "" {
+		req.Header.Set("X-Proxy-To", fullPath)
+
+		if len(t.transportOption.SnitchConfig) > 0 {
+			configJSON, err := json.Marshal(t.transportOption.SnitchConfig)
+			if err != nil {
+				return nil, fmt.Errorf("failed to marshal snitch proxy config: %w", err)
+			}
+			req.Header.Set("X-Proxy-Config", string(configJSON))
+		}
+	}
 	return req, nil
 }
 
@@ -319,7 +341,6 @@ func (t *DefaultTransport) processResponse(resp *http.Response, responseObj inte
 
 func (t *DefaultTransport) Call(ctx context.Context, domain string, broker bool, method string, path string,
 	requestObj interface{}, responseObj interfaces.Response, requestJson bool) error {
-
 	endpoint := t.clientOption.SpotEndpoint
 
 	domain = strings.ToLower(domain)

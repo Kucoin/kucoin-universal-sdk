@@ -21,8 +21,8 @@ type KuCoinDefaultRestImpl struct {
 }
 
 func NewKuCoinDefaultRestImpl(op *types.ClientOption) *KuCoinDefaultRestImpl {
-	if op == nil || op.TransportOption == nil {
-		logger.GetLogger().Warnf("no transport option provided")
+	if op == nil {
+		logger.GetLogger().Warnf("no client option provided")
 		return nil
 	}
 

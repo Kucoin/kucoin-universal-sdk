@@ -122,18 +122,22 @@ func RealTimeKlineExample() {
 		WithKey(key).
 		WithSecret(secret).
 		WithPassphrase(passphrase).
+		WithSnitchProxyURL(os.Getenv("SNITCH_PROXY_URL")).
 		WithSpotEndpoint(types.GlobalApiEndpoint).
 		WithFuturesEndpoint(types.GlobalFuturesApiEndpoint).
 		WithBrokerEndpoint(types.GlobalBrokerApiEndpoint).
 		WithWebSocketClientOption(wsOption).
 		Build()
-	client := api.NewClient(option)
+	client, err := api.NewClient(option)
+	if err != nil {
+		panic(err)
+	}
 
 	// Get the websocket service
 	wsService := client.WsService()
 
 	spotPublicWs := wsService.NewSpotPublicWS()
-	err := spotPublicWs.Start()
+	err = spotPublicWs.Start()
 	if err != nil {
 		panic(err)
 	}

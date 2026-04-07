@@ -6,6 +6,9 @@ type ClientOption struct {
 	Key        string // Key is the authentication key for the client
 	Secret     string // Secret is the authentication secret for the client
 	Passphrase string // Passphrase  is the authentication passphrase for the client
+	// Snitch proxy
+	SnitchProxyURL string         // SnitchProxyURL is the snitch proxy endpoint that all REST requests must use
+	SnitchConfig   map[string]any // SnitchConfig holds proxy-specific request config shared across requests
 	// Broker related secret
 	BrokerName    string // BrokerName The name of the broker
 	BrokerPartner string // BrokerPartner The partner associated with the broker
@@ -46,6 +49,18 @@ func (b *ClientOptionBuilder) WithSecret(secret string) *ClientOptionBuilder {
 // WithPassphrase sets the authentication passphrase
 func (b *ClientOptionBuilder) WithPassphrase(passphrase string) *ClientOptionBuilder {
 	b.clientOption.Passphrase = passphrase
+	return b
+}
+
+// WithSnitchProxyURL sets the snitch proxy endpoint.
+func (b *ClientOptionBuilder) WithSnitchProxyURL(proxyURL string) *ClientOptionBuilder {
+	b.clientOption.SnitchProxyURL = proxyURL
+	return b
+}
+
+// WithSnitchConfig sets proxy-specific request config shared across requests.
+func (b *ClientOptionBuilder) WithSnitchConfig(config map[string]any) *ClientOptionBuilder {
+	b.clientOption.SnitchConfig = config
 	return b
 }
 

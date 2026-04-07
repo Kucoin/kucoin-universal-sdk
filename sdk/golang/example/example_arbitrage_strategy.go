@@ -464,6 +464,7 @@ func ArbitrageStrategyExample() {
 		WithKey(key).
 		WithSecret(secret).
 		WithPassphrase(passphrase).
+		WithSnitchProxyURL(os.Getenv("SNITCH_PROXY_URL")).
 		WithBrokerKey(brokerKey).
 		WithBrokerName(brokerName).
 		WithBrokerPartner(brokerPartner).
@@ -472,7 +473,10 @@ func ArbitrageStrategyExample() {
 		WithBrokerEndpoint(types.GlobalBrokerApiEndpoint).
 		WithTransportOption(httpOption).
 		Build()
-	client := api.NewClient(option)
+	client, err := api.NewClient(option)
+	if err != nil {
+		panic(err)
+	}
 	kuCoinRestService := client.RestService()
 	//  Amount to trade
 	amount := 100.0

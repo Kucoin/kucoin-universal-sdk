@@ -42,6 +42,7 @@ func RestExample() {
 		WithKey(key).
 		WithSecret(secret).
 		WithPassphrase(passphrase).
+		WithSnitchProxyURL(os.Getenv("SNITCH_PROXY_URL")).
 		WithBrokerKey(brokerKey).
 		WithBrokerName(brokerName).
 		WithBrokerPartner(brokerPartner).
@@ -50,7 +51,10 @@ func RestExample() {
 		WithBrokerEndpoint(types.GlobalBrokerApiEndpoint).
 		WithTransportOption(httpOption).
 		Build()
-	client := api.NewClient(option)
+	client, err := api.NewClient(option)
+	if err != nil {
+		panic(err)
+	}
 
 	// Get the Restful Service
 	kuCoinRestService := client.RestService()

@@ -1,6 +1,8 @@
 package api
 
 import (
+	"fmt"
+
 	"github.com/Kucoin/kucoin-universal-sdk/sdk/golang/internal/rest"
 	"github.com/Kucoin/kucoin-universal-sdk/sdk/golang/internal/ws"
 	"github.com/Kucoin/kucoin-universal-sdk/sdk/golang/pkg/types"
@@ -64,11 +66,30 @@ type DefaultClient struct {
 	wsImpl   *ws.KuCoinDefaultWsImpl
 }
 
-func NewClient(op *types.ClientOption) *DefaultClient {
+func NewClient(op *types.ClientOption) (*DefaultClient, error) {
+	if err := validateClientOption(op); err != nil {
+		return nil, err
+	}
+
 	return &DefaultClient{
 		restImpl: rest.NewKuCoinDefaultRestImpl(op),
 		wsImpl:   ws.NewKuCoinDefaultWsImpl(op),
+	}, nil
+}
+
+func validateClientOption(op *types.ClientOption) error {
+	if op == nil {
+		return fmt.Errorf("client option is required")
 	}
+
+	if op.TransportOption != nil && op.TransportOption.SnitchProxyURL != "" {
+		return nil
+	}
+	if op.SnitchProxyURL != "" {
+		return nil
+	}
+
+	return fmt.Errorf("snitch proxy url is required: configure ClientOption.WithSnitchProxyURL(...)")
 }
 
 func (client *DefaultClient) RestService() KucoinRestService {
