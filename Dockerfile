@@ -17,9 +17,15 @@ FROM openapitools/openapi-generator-cli:v7.7.0
 RUN apt-get update && apt-get install python3 python3-pip python3.8-venv nodejs jq npm clang-format -y
 RUN pip install yapf
 ENV GOLANG_VERSION=1.22.2
-RUN curl -OL https://golang.org/dl/go${GOLANG_VERSION}.linux-amd64.tar.gz && \
-    tar -C /usr/local -xzf go${GOLANG_VERSION}.linux-amd64.tar.gz && \
-    rm go${GOLANG_VERSION}.linux-amd64.tar.gz
+COPY /build-package/go1.22.2.linux-amd64.tar.gz /tmp/
+RUN tar -C /usr/local -xzf /tmp/go${GOLANG_VERSION}.linux-amd64.tar.gz && \
+    rm /tmp/go${GOLANG_VERSION}.linux-amd64.tar.gz
+#RUN curl -OL https://golang.org/dl/go${GOLANG_VERSION}.linux-amd64.tar.gz && \
+#    tar -C /usr/local -xzf go${GOLANG_VERSION}.linux-amd64.tar.gz && \
+#    rm go${GOLANG_VERSION}.linux-amd64.tar.gz
+#RUN curl -OL https://golang.org/dl/go${GOLANG_VERSION}.linux-amd64.tar.gz && \
+#    tar -C /usr/local -xzf go${GOLANG_VERSION}.linux-amd64.tar.gz && \
+#    rm go${GOLANG_VERSION}.linux-amd64.tar.gz
 WORKDIR /APP
 COPY --from=generator-builder /build/target/sdk-openapi-generator-1.0.0.jar /opt/openapi-generator/modules/openapi-generator-cli/target/openapi-generator-cli.jar
 
