@@ -15,7 +15,6 @@ import io.swagger.v3.oas.models.parameters.Parameter;
 import io.swagger.v3.oas.models.parameters.RequestBody;
 import lombok.extern.slf4j.Slf4j;
 import org.openapitools.codegen.utils.ModelUtils;
-import org.openapitools.codegen.utils.StringUtils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -158,6 +157,57 @@ public class SchemaServiceImpl implements SchemaService {
         metaMap.put(modelName, meta);
         log.info("create empty schema, name: {}", modelName);
         return emptySchema;
+    }
+
+    private String inlineResponseModelName(String prefix) {
+        return String.format("%s_%s", prefix.replace("/", "_"), "200_inline_content_response");
+    }
+
+    private void registerInlineResponseSchema(String modelName, Schema contentSchema, MediaType content) {
+        ModelUtils.getSchemas(openAPI).put(modelName, contentSchema);
+
+        Schema refSchema = new Schema();
+        refSchema.set$ref("#/components/schemas/" + modelName);
+        content.setSchema(refSchema);
+
+        log.info("register inline response schema, name: {}", modelName);
+    }
+
+    private void processResponseModel(String responseSchemaName, Schema responseSchema, Meta meta) {
+        Map<String, Schema> contentProperties = responseSchema.getProperties();
+        if (contentProperties == null || !contentProperties.containsKey("data")) {
+            throw new RuntimeException("can not find data field from content schema" + responseSchemaName);
+        }
+
+        // data field schema
+        Schema dataSchema = contentProperties.get("data");
+
+        // keep data properties only
+        contentProperties.clear();
+        contentProperties.put("data", dataSchema);
+
+        String dataRefName = dataSchema.get$ref();
+
+        // data is object
+        if (dataRefName != null) {
+            // use data schema as model
+            // mark x-internal flag to skip content schema generation
+            responseSchema.addExtension("x-internal", true);
+
+            String realDataModelName = ModelUtils.getSimpleRef(dataRefName);
+            Schema realDataSchema = ModelUtils.getSchema(openAPI, realDataModelName);
+            if (!"object".equalsIgnoreCase(realDataSchema.getType())) {
+                throw new RuntimeException("not a object schema for reference data");
+            }
+            realDataSchema.addExtension("x-response-model", true);
+            responseRootMeta.put(realDataModelName, meta);
+        } else {
+            // use response schema as model
+            responseRootMeta.put(responseSchemaName, meta);
+
+            responseSchema.addExtension("x-original-response", true);
+            responseSchema.addExtension("x-response-model", true);
+        }
     }
 
     private void collectSchema(PathItem.HttpMethod httpMethod, String path, Operation operation) {
@@ -351,50 +401,15 @@ public class SchemaServiceImpl implements SchemaService {
                         throw new RuntimeException("can not find responseSchema " + responseSchemaRefName);
                     }
 
-                    Map<String, Schema> contentProperties = responseSchema.getProperties();
-                    if (!contentProperties.containsKey("data")) {
-                        throw new RuntimeException("can not find data field from content schema" + responseSchemaRefName);
-                    }
-
-
-
-                    // data field schema
-                    Schema dataSchema = contentProperties.get("data");
-
-                    // keep data properties only
-                    contentProperties.clear();
-                    contentProperties.put("data", dataSchema);
-
-                    String dataRefName = dataSchema.get$ref();
-
-                    // data is object
-                    if (dataRefName != null) {
-                        // use data schema as model
-                        // mark x-internal flag to skip content schema generation
-                        responseSchema.addExtension("x-internal", true);
-
-                        String realDataModelName = ModelUtils.getSimpleRef(dataRefName);
-                        Schema realDataSchema = ModelUtils.getSchema(openAPI, realDataModelName);
-                        if (!"object".equalsIgnoreCase(realDataSchema.getType())) {
-                            throw new RuntimeException("not a object schema for reference data");
-                        }
-                        realDataSchema.addExtension("x-response-model", true);
-                        responseRootMeta.put(realDataModelName, meta);
-                    } else {
-                        // use response schema as model
-                        responseRootMeta.put(responseSchemaRefName, meta);
-
-                        responseSchema.addExtension("x-original-response", true);
-                        responseSchema.addExtension("x-response-model", true);
-                    }
+                    processResponseModel(responseSchemaRefName, responseSchema, meta);
                 } else {
                     if (meta.isWebSocket()) {
                         throw new IllegalArgumentException("unexpected ref for websocket schema");
                     }
 
-                    String modelName = String.format("%s_%s", prefix, "200_empty_content_response");
-                    Schema schema = generateEmptySchema(modelName, meta, responseRootMeta);
-                    schema.addExtension("x-response-model", true);
+                    String responseSchemaName = inlineResponseModelName(prefix);
+                    registerInlineResponseSchema(responseSchemaName, contentSchema, content);
+                    processResponseModel(responseSchemaName, contentSchema, meta);
                 }
             });
         });

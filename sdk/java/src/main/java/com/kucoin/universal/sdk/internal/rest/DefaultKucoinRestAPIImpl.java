@@ -2,24 +2,7 @@ package com.kucoin.universal.sdk.internal.rest;
 
 import com.kucoin.universal.sdk.api.KucoinRestService;
 import com.kucoin.universal.sdk.generate.Version;
-import com.kucoin.universal.sdk.generate.service.AccountService;
-import com.kucoin.universal.sdk.generate.service.AccountServiceImpl;
-import com.kucoin.universal.sdk.generate.service.AffiliateService;
-import com.kucoin.universal.sdk.generate.service.AffiliateServiceImpl;
-import com.kucoin.universal.sdk.generate.service.BrokerService;
-import com.kucoin.universal.sdk.generate.service.BrokerServiceImpl;
-import com.kucoin.universal.sdk.generate.service.CopyTradingService;
-import com.kucoin.universal.sdk.generate.service.CopyTradingServiceImpl;
-import com.kucoin.universal.sdk.generate.service.EarnService;
-import com.kucoin.universal.sdk.generate.service.EarnServiceImpl;
-import com.kucoin.universal.sdk.generate.service.FuturesService;
-import com.kucoin.universal.sdk.generate.service.FuturesServiceImpl;
-import com.kucoin.universal.sdk.generate.service.MarginService;
-import com.kucoin.universal.sdk.generate.service.MarginServiceImpl;
-import com.kucoin.universal.sdk.generate.service.SpotService;
-import com.kucoin.universal.sdk.generate.service.SpotServiceImpl;
-import com.kucoin.universal.sdk.generate.service.VIPLendingService;
-import com.kucoin.universal.sdk.generate.service.VIPLendingServiceImpl;
+import com.kucoin.universal.sdk.generate.service.*;
 import com.kucoin.universal.sdk.internal.infra.DefaultTransport;
 import com.kucoin.universal.sdk.internal.interfaces.Transport;
 import com.kucoin.universal.sdk.model.ClientOption;
@@ -32,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public final class DefaultKucoinRestAPIImpl implements KucoinRestService {
 
+    private final UTAService utaService;
   private final AccountService accountService;
   private final AffiliateService affiliateService;
   private final BrokerService brokerService;
@@ -48,7 +32,7 @@ public final class DefaultKucoinRestAPIImpl implements KucoinRestService {
       throw new RuntimeException("no transport option provided");
     }
     transport = new DefaultTransport(option, Version.SDK_VERSION);
-
+    this.utaService = new UTAServiceImpl(transport);
     this.accountService = new AccountServiceImpl(transport);
     this.affiliateService = new AffiliateServiceImpl(transport);
     this.brokerService = new BrokerServiceImpl(transport);
@@ -107,7 +91,12 @@ public final class DefaultKucoinRestAPIImpl implements KucoinRestService {
     return vipLendingService;
   }
 
-  @Override
+    @Override
+    public UTAService getUTAService() {
+        return utaService;
+    }
+
+    @Override
   public void closeService() {
     transport.close();
   }

@@ -176,12 +176,18 @@ public class JavaSdkGenerator extends AbstractJavaCodegen implements NameService
 
             List<Map<String, Object>> enumList;
             CodegenProperty realEnumProp = null;
+            Schema enumSchema = p;
             if (prop.openApiType.equalsIgnoreCase("array")) {
                 enumList = (List<Map<String, Object>>) prop.mostInnerItems.vendorExtensions.get("x-api-enum");
                 realEnumProp = prop.mostInnerItems;
+                enumSchema = getMostInnerItemsSchema(p);
             } else {
                 enumList = (List<Map<String, Object>>) prop.vendorExtensions.get("x-api-enum");
                 realEnumProp = prop;
+            }
+
+            if (enumList == null) {
+                enumList = buildEnumListFromStandardOpenApiEnum(enumSchema, realEnumProp);
             }
 
             String enumDataType = "String";
@@ -196,6 +202,7 @@ public class JavaSdkGenerator extends AbstractJavaCodegen implements NameService
             List<String> values = new ArrayList<>();
             List<String> description = new ArrayList<>();
 
+            String enumValueDataType = realEnumProp.isString ? "String" : "Integer";
             enumList.forEach(e -> {
                 Object enumValueOriginal = e.get("value");
 
@@ -214,13 +221,14 @@ public class JavaSdkGenerator extends AbstractJavaCodegen implements NameService
                 }
 
                 enumName = toVarName(enumName).toUpperCase();
-                String enumValue = toEnumValue(enumValueOriginal.toString().trim(), typeMapping.get(p.getType()));
+                String enumValue = toEnumValue(enumValueOriginal.toString().trim(), enumValueDataType);
+                String enumDescription = Objects.toString(e.get("description"), "");
 
                 names.add(enumName);
                 values.add(enumValueOriginal.toString().trim());
-                description.add(e.get("description").toString());
+                description.add(enumDescription);
 
-                enums.add(new EnumEntry(enumName, enumValue, enumValueOriginal, (String) e.get("description"), enumValueOriginal instanceof String));
+                enums.add(new EnumEntry(enumName, enumValue, enumValueOriginal, enumDescription, enumValueOriginal instanceof String));
             });
 
             // update internal enum support
@@ -235,6 +243,46 @@ public class JavaSdkGenerator extends AbstractJavaCodegen implements NameService
 
 
         return prop;
+    }
+
+    private Schema getMostInnerItemsSchema(Schema schema) {
+        Schema current = schema;
+        while (current != null && current.getItems() != null) {
+            current = current.getItems();
+        }
+        return current;
+    }
+
+    private List<Map<String, Object>> buildEnumListFromStandardOpenApiEnum(Schema enumSchema, CodegenProperty realEnumProp) {
+        List<?> values = enumSchema == null ? null : enumSchema.getEnum();
+        if (values == null || values.isEmpty()) {
+            values = realEnumProp._enum;
+        }
+        if (values == null || values.isEmpty()) {
+            return Collections.emptyList();
+        }
+
+        List<Map<String, Object>> enumList = new ArrayList<>();
+        for (Object value : values) {
+            Map<String, Object> entry = new HashMap<>();
+            entry.put("value", value);
+            entry.put("name", value == null ? "" : value.toString());
+            entry.put("description", "");
+            enumList.add(entry);
+        }
+        return enumList;
+    }
+
+    private void normalizePropertyType(CodegenProperty var) {
+        if (var == null || var.isEnum || var.isArray || var.isMap) {
+            return;
+        }
+
+        if ("integer".equalsIgnoreCase(var.openApiType)) {
+            var.dataType = "Long";
+            var.datatypeWithEnum = "Long";
+            var.baseType = "Long";
+        }
     }
 
     @Override
@@ -298,10 +346,29 @@ public class JavaSdkGenerator extends AbstractJavaCodegen implements NameService
     public String apiFilename(String templateName, String tag) {
         String suffix = apiTemplateFiles().get(templateName);
         if (modeSwitch.isEntry()) {
-            String entryType = service + "Service";
+            String entryType = resolveEntryServiceName() + "Service";
             return modelFileFolder() + File.separator + entryType + suffix;
         }
         return modelFileFolder() + File.separator + toApiFilename(tag) + suffix;
+    }
+
+    private String resolveEntryServiceName() {
+        if (operationService == null || operationService.getServiceMeta() == null || operationService.getServiceMeta().isEmpty()) {
+            return service;
+        }
+
+        Set<String> services = new TreeSet<>();
+        operationService.getServiceMeta().values().forEach(meta -> {
+            if (meta != null && StringUtils.isNotEmpty(meta.getService())) {
+                services.add(meta.getService());
+            }
+        });
+
+        if (services.size() == 1) {
+            return services.iterator().next();
+        }
+
+        return service;
     }
 
     @Override
@@ -365,6 +432,7 @@ public class JavaSdkGenerator extends AbstractJavaCodegen implements NameService
                 }
 
                 codegenModel.getVars().forEach(var -> {
+                    normalizePropertyType(var);
 
                     if (var.getVendorExtensions().containsKey("x-tag-path")) {
                         imports.add("import com.fasterxml.jackson.annotation.JsonIgnore;");
@@ -441,7 +509,7 @@ public class JavaSdkGenerator extends AbstractJavaCodegen implements NameService
                                 kv.put("target_service", formatService(k + "Api"));
                                 entryValue.add(kv);
                                 imports.add(String.format("import com.kucoin.universal.sdk.generate.%s.%s.%s;", v.getService().toLowerCase(), v.getSubService().toLowerCase(), k + "Api"));
-                                imports.add("import com.kucoin.universal.sdk.internal.interfaces.Transport;");
+                                implImports.add("import com.kucoin.universal.sdk.internal.interfaces.Transport;");
                                 implImports.add(String.format("import com.kucoin.universal.sdk.generate.%s.%s.%s;", v.getService().toLowerCase(), v.getSubService().toLowerCase(), k + "ApiImpl"));
                             }
                         });

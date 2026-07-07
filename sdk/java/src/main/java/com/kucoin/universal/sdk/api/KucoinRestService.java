@@ -1,14 +1,6 @@
 package com.kucoin.universal.sdk.api;
 
-import com.kucoin.universal.sdk.generate.service.AccountService;
-import com.kucoin.universal.sdk.generate.service.AffiliateService;
-import com.kucoin.universal.sdk.generate.service.BrokerService;
-import com.kucoin.universal.sdk.generate.service.CopyTradingService;
-import com.kucoin.universal.sdk.generate.service.EarnService;
-import com.kucoin.universal.sdk.generate.service.FuturesService;
-import com.kucoin.universal.sdk.generate.service.MarginService;
-import com.kucoin.universal.sdk.generate.service.SpotService;
-import com.kucoin.universal.sdk.generate.service.VIPLendingService;
+import com.kucoin.universal.sdk.generate.service.*;
 
 /**
  * Interface KucoinRestService Defines the contract for accessing KuCoin REST API service groups.
@@ -82,5 +74,8 @@ public interface KucoinRestService {
    * Closes the service and releases any resources held by the KucoinRestService. This method should
    * be called when the service is no longer needed to ensure proper cleanup.
    */
+
+  UTAService getUTAService();
+
   void closeService();
 }
