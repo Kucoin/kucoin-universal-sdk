@@ -6,9 +6,7 @@ import org.openapitools.codegen.CliOption;
 
 import java.util.Map;
 
-/**
- * @author isaac.tang
- */
+
 @Getter
 public class ModeSwitch {
 
@@ -23,7 +21,8 @@ public class ModeSwitch {
         ENTRY,
         WS,
         WS_TEST,
-        WS_TEST_TEMPLATE
+        WS_TEST_TEMPLATE,
+        AUTO_CASES,
     }
 
     private final ModeEnum mode;
@@ -39,6 +38,8 @@ public class ModeSwitch {
     private boolean testTemplate;
 
     private boolean wsTest;
+
+    private boolean autoCases;
 
     private boolean wsTestTemplate;
 
@@ -75,6 +76,10 @@ public class ModeSwitch {
             }
             case WS_TEST_TEMPLATE: {
                 wsTestTemplate = true;
+                break;
+            }
+            case AUTO_CASES: {
+                autoCases = true;
                 break;
             }
             default:

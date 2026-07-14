@@ -59,6 +59,9 @@ public class SchemaServiceImpl implements SchemaService {
 
     @Override
     public Meta getMeta(String modelName) {
+        // 先处理泛型类型名称
+        modelName = normalizeGenericTypeName(modelName);
+
         for (String key : requestRootMeta.keySet()) {
             if (modelName.contains(key)) {
                 return requestRootMeta.get(key);
@@ -77,6 +80,8 @@ public class SchemaServiceImpl implements SchemaService {
 
     @Override
     public String getGeneratedModelName(String modelName) {
+        // 先处理泛型类型名称
+        modelName = normalizeGenericTypeName(modelName);
 
         if (nameMappingCache.containsKey(modelName)) {
             return nameMappingCache.get(modelName);
@@ -149,8 +154,27 @@ public class SchemaServiceImpl implements SchemaService {
         return modelName;
     }
 
+    /**
+     * 处理泛型类型名称
+     * 将 GenericResult«AssetApiWithdrawApplyResponse» 转换为 GenericResultAssetApiWithdrawApplyResponse
+     * 将 Pagination«SubUserListResponse» 转换为 PaginationSubUserListResponse
+     */
+    private String normalizeGenericTypeName(String name) {
+        if (name == null) {
+            return null;
+        }
+        // 替换 « 和 » 为空
+        String result = name.replace("«", "").replace("»", "");
+        // 如果包含 < 和 > 也替换
+        result = result.replace("<", "").replace(">", "");
+        return result;
+    }
+
 
     private Schema generateEmptySchema(String modelName, Meta meta, Map<String, Meta> metaMap) {
+        // 处理泛型类型名称
+        modelName = normalizeGenericTypeName(modelName);
+
         Schema emptySchema = new Schema();
         emptySchema.setType("object");
         ModelUtils.getSchemas(openAPI).put(modelName, emptySchema);
@@ -164,6 +188,8 @@ public class SchemaServiceImpl implements SchemaService {
     }
 
     private void registerInlineResponseSchema(String modelName, Schema contentSchema, MediaType content) {
+        modelName = normalizeGenericTypeName(modelName);
+
         ModelUtils.getSchemas(openAPI).put(modelName, contentSchema);
 
         Schema refSchema = new Schema();
@@ -174,27 +200,44 @@ public class SchemaServiceImpl implements SchemaService {
     }
 
     private void processResponseModel(String responseSchemaName, Schema responseSchema, Meta meta) {
+        responseSchemaName = normalizeGenericTypeName(responseSchemaName);
+
         Map<String, Schema> contentProperties = responseSchema.getProperties();
+
+        // 如果没有 properties 或者没有 data 字段，说明响应本身就是数据
         if (contentProperties == null || !contentProperties.containsKey("data")) {
-            throw new RuntimeException("can not find data field from content schema" + responseSchemaName);
+            // 没有 data 字段，直接使用整个响应作为模型
+            responseRootMeta.put(responseSchemaName, meta);
+            responseSchema.addExtension("x-original-response", true);
+            responseSchema.addExtension("x-response-model", true);
+            log.info("no data field found in response schema: {}, use whole schema as response model", responseSchemaName);
+            return;
         }
 
-        // data field schema
+        // 有 data 字段，使用 data 作为响应模型
         Schema dataSchema = contentProperties.get("data");
 
-        // keep data properties only
+        if (dataSchema == null || "null".equalsIgnoreCase(dataSchema.getType())) {
+            contentProperties.remove("data");
+            log.info("data field type is null, removed from response schema: {}", responseSchemaName);
+            responseRootMeta.put(responseSchemaName, meta);
+            responseSchema.addExtension("x-original-response", true);
+            responseSchema.addExtension("x-response-model", true);
+            return;
+        }
+
+        // 保留 data 字段，清空其他字段
         contentProperties.clear();
         contentProperties.put("data", dataSchema);
 
         String dataRefName = dataSchema.get$ref();
 
-        // data is object
         if (dataRefName != null) {
-            // use data schema as model
-            // mark x-internal flag to skip content schema generation
+            // data 引用其他 schema
             responseSchema.addExtension("x-internal", true);
 
             String realDataModelName = ModelUtils.getSimpleRef(dataRefName);
+            realDataModelName = normalizeGenericTypeName(realDataModelName);
             Schema realDataSchema = ModelUtils.getSchema(openAPI, realDataModelName);
             if (!"object".equalsIgnoreCase(realDataSchema.getType())) {
                 throw new RuntimeException("not a object schema for reference data");
@@ -202,9 +245,7 @@ public class SchemaServiceImpl implements SchemaService {
             realDataSchema.addExtension("x-response-model", true);
             responseRootMeta.put(realDataModelName, meta);
         } else {
-            // use response schema as model
             responseRootMeta.put(responseSchemaName, meta);
-
             responseSchema.addExtension("x-original-response", true);
             responseSchema.addExtension("x-response-model", true);
         }
@@ -230,6 +271,7 @@ public class SchemaServiceImpl implements SchemaService {
         // link to ref
         if (request.get$ref() != null) {
             String contentSchemaRefName = ModelUtils.getSimpleRef(request.get$ref());
+            contentSchemaRefName = normalizeGenericTypeName(contentSchemaRefName);
             Schema contentSchema = ModelUtils.getSchema(openAPI, contentSchemaRefName);
             markRequestModel(contentSchema);
         }
@@ -258,6 +300,7 @@ public class SchemaServiceImpl implements SchemaService {
         }
 
         String modelName = String.format("%s_%s", prefix.replace("/","_"), "200_parameter_request");
+        modelName = normalizeGenericTypeName(modelName);
 
         boolean generated = false;
         String generatedSchemaName = "";
@@ -268,8 +311,12 @@ public class SchemaServiceImpl implements SchemaService {
             if (content != null) {
                 for (Map.Entry<String, MediaType> stringMediaTypeEntry : content.entrySet()) {
                     Schema schema = stringMediaTypeEntry.getValue().getSchema();
+                    if (schema == null) {
+                        continue;
+                    }
                     if (schema.get$ref() != null) {
                         String contentSchemaRefName = ModelUtils.getSimpleRef(schema.get$ref());
+                        contentSchemaRefName = normalizeGenericTypeName(contentSchemaRefName);
                         requestRootMeta.put(contentSchemaRefName, meta);
                         generatedSchemaName = contentSchemaRefName;
                         generated = true;
@@ -283,10 +330,18 @@ public class SchemaServiceImpl implements SchemaService {
                         break;
                     } else {
                         String type = schema.getType();
-                        if (type.equalsIgnoreCase("array")) {
+                        if (type == null) {
+                            // 如果 type 为 null，尝试判断是否是 object
+                            if (schema.getProperties() != null && !schema.getProperties().isEmpty()) {
+                                schema.addExtension("x-request-model", true);
+                            } else {
+                                log.warn("schema type is null and no properties found, skipping: {}", schema);
+                            }
+                        } else if (type.equalsIgnoreCase("array")) {
                             Schema itemSchema = schema.getItems();
-                            if (itemSchema.get$ref() != null) {
+                            if (itemSchema != null && itemSchema.get$ref() != null) {
                                 String realItemSchemaRefName = ModelUtils.getSimpleRef(itemSchema.get$ref());
+                                realItemSchemaRefName = normalizeGenericTypeName(realItemSchemaRefName);
                                 Schema realItemSchema = ModelUtils.getSchema(openAPI, realItemSchemaRefName);
                                 realItemSchema.addExtension("x-request-model", true);
                                 ModelUtils.getSchemas(openAPI).remove(realItemSchemaRefName);
@@ -304,7 +359,7 @@ public class SchemaServiceImpl implements SchemaService {
                         } else if (type.equalsIgnoreCase("object")) {
                             schema.addExtension("x-request-model", true);
                         } else {
-                            throw new RuntimeException("unsupported schema type" + type);
+                            throw new RuntimeException("unsupported schema type: " + type);
                         }
 
                     }
@@ -355,10 +410,12 @@ public class SchemaServiceImpl implements SchemaService {
                         throw new RuntimeException("target schema can not be null");
                     }
 
-                    parameter.getSchema().addExtension("x-tag-url", parameter.getName());
                     Schema pSchema = parameter.getSchema();
-                    pSchema.setDescription(parameter.getDescription());
-                    targetSchema.addProperty(parameter.getName(), pSchema);
+                    if (pSchema != null) {
+                        pSchema.addExtension("x-tag-url", parameter.getName());
+                        pSchema.setDescription(parameter.getDescription());
+                        targetSchema.addProperty(parameter.getName(), pSchema);
+                    }
                     targetSchema.addExtension("x-request-model", true);
                 } else {
                     throw new UnsupportedOperationException("unsupported parameter type " + parameter.getIn());
@@ -396,6 +453,7 @@ public class SchemaServiceImpl implements SchemaService {
                 if (contentSchema.get$ref() != null) {
 
                     String responseSchemaRefName = ModelUtils.getSimpleRef(contentSchema.get$ref());
+                    responseSchemaRefName = normalizeGenericTypeName(responseSchemaRefName);
                     Schema responseSchema = ModelUtils.getSchema(openAPI, responseSchemaRefName);
                     if (responseSchema == null) {
                         throw new RuntimeException("can not find responseSchema " + responseSchemaRefName);
@@ -408,6 +466,7 @@ public class SchemaServiceImpl implements SchemaService {
                     }
 
                     String responseSchemaName = inlineResponseModelName(prefix);
+                    responseSchemaName = normalizeGenericTypeName(responseSchemaName);
                     registerInlineResponseSchema(responseSchemaName, contentSchema, content);
                     processResponseModel(responseSchemaName, contentSchema, meta);
                 }

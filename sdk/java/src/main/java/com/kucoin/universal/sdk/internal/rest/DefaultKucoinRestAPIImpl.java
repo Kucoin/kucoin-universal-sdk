@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public final class DefaultKucoinRestAPIImpl implements KucoinRestService {
 
-    private final UTAService utaService;
+
   private final AccountService accountService;
   private final AffiliateService affiliateService;
   private final BrokerService brokerService;
@@ -26,6 +26,7 @@ public final class DefaultKucoinRestAPIImpl implements KucoinRestService {
   private final SpotService spotService;
   private final VIPLendingService vipLendingService;
   private final Transport transport;
+  private final UTAService utaService;
 
   public DefaultKucoinRestAPIImpl(ClientOption option) {
     if (option.getTransportOption() == null) {

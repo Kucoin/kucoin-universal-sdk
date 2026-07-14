@@ -8,10 +8,13 @@ import com.kucoin.universal.sdk.plugin.service.OperationService;
 import com.kucoin.universal.sdk.plugin.service.SchemaService;
 import com.kucoin.universal.sdk.plugin.service.impl.OperationServiceImpl;
 import com.kucoin.universal.sdk.plugin.service.impl.SchemaServiceImpl;
+import com.kucoin.universal.sdk.plugin.util.JavaAutoCasesGenerator;
 import com.kucoin.universal.sdk.plugin.util.KeywordsUtil;
 import com.kucoin.universal.sdk.plugin.util.SpecificationUtil;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.Operation;
+import io.swagger.v3.oas.models.PathItem;
+import io.swagger.v3.oas.models.Paths;
 import io.swagger.v3.oas.models.media.Schema;
 import io.swagger.v3.oas.models.servers.Server;
 import lombok.extern.slf4j.Slf4j;
@@ -32,9 +35,7 @@ import java.util.*;
 
 import static org.openapitools.codegen.utils.StringUtils.camelize;
 
-/**
- * @author isaac.tang
- */
+
 @Slf4j
 public class JavaSdkGenerator extends AbstractJavaCodegen implements NameService {
     private final Logger LOGGER = LoggerFactory.getLogger(JavaSdkGenerator.class);
@@ -78,6 +79,19 @@ public class JavaSdkGenerator extends AbstractJavaCodegen implements NameService
         subService = camelize(openAPI.getInfo().getDescription());
         apiPackage = String.format("com.kucoin.universal.sdk.generate.%s.%s", service.toLowerCase(), subService.toLowerCase());
         modelPackage = String.format("com.kucoin.universal.sdk.generate.%s.%s", service.toLowerCase(), subService.toLowerCase());
+
+        if (modeSwitch.getMode()== ModeSwitch.ModeEnum.AUTO_CASES) {
+            try {
+                filterPaths(openAPI);
+                String outputPath = outputFolder + File.separator + "AutoCases.java";
+                JavaAutoCasesGenerator.generate(openAPI, outputPath);
+                LOGGER.info("AutoCases.java generated successfully at: {}", outputPath);
+            } catch (Exception e) {
+                LOGGER.error("Failed to generate AutoCases.java", e);
+                throw new RuntimeException("Failed to generate AutoCases.java", e);
+            }
+            return;
+        }
 
         switch (modeSwitch.getMode()) {
             case API: {
@@ -124,8 +138,6 @@ public class JavaSdkGenerator extends AbstractJavaCodegen implements NameService
         supportingFiles.add(new SupportingFile("version.mustache", "Version.java"));
 
         templateDir = "java-sdk";
-
-        // override parent properties
         enablePostProcessFile = true;
         useBeanValidation = false;
 
@@ -136,7 +148,8 @@ public class JavaSdkGenerator extends AbstractJavaCodegen implements NameService
     public void preprocessOpenAPI(OpenAPI openAPI) {
         super.preprocessOpenAPI(openAPI);
 
-        // parse and update operations and models
+        filterPaths(openAPI);
+
         schemaService = new SchemaServiceImpl(openAPI);
         operationService = new OperationServiceImpl(openAPI, this);
 
@@ -385,7 +398,6 @@ public class JavaSdkGenerator extends AbstractJavaCodegen implements NameService
     public ModelsMap postProcessModels(ModelsMap objs) {
         objs = super.postProcessModels(objs);
 
-
         List<ModelMap> models = objs.getModels();
 
         if (models != null) {
@@ -412,6 +424,14 @@ public class JavaSdkGenerator extends AbstractJavaCodegen implements NameService
                     imports.add("import com.kucoin.universal.sdk.internal.interfaces.Request;");
                 }
 
+                // 检查是否有 data 字段
+                boolean hasDataField = false;
+                for (CodegenProperty var : codegenModel.getVars()) {
+                    if ("data".equals(var.name) || "Data".equals(var.name)) {
+                        hasDataField = true;
+                        break;
+                    }
+                }
 
                 if (vendorExtension.containsKey("x-response-model")) {
                     imports.add("import com.fasterxml.jackson.annotation.JsonIgnore;");
@@ -424,9 +444,14 @@ public class JavaSdkGenerator extends AbstractJavaCodegen implements NameService
                         imports.add("import com.kucoin.universal.sdk.model.RestResponse;");
                     }
 
+                    // 只添加 import，不添加到类注解
+                    if (vendorExtension.containsKey("x-original-response") && hasDataField) {
+                        imports.add("import com.fasterxml.jackson.annotation.JsonCreator;");
+                        imports.add("import com.fasterxml.jackson.annotation.JsonValue;");
+                    }
                 }
 
-                if (vendorExtension.containsKey("x-original-response") || vendorExtension.containsKey("x-request-raw-array")) {
+                if ((vendorExtension.containsKey("x-original-response") || vendorExtension.containsKey("x-request-raw-array")) && hasDataField) {
                     imports.add("import com.fasterxml.jackson.annotation.JsonCreator;");
                     imports.add("import com.fasterxml.jackson.annotation.JsonValue;");
                 }
@@ -443,6 +468,16 @@ public class JavaSdkGenerator extends AbstractJavaCodegen implements NameService
                         if (var.getDefaultValue() != null) {
                             List<String> varAnnotation = (List<String>) var.getVendorExtensions().computeIfAbsent("x-annotation", key -> new ArrayList<String>());
                             varAnnotation.add("@Builder.Default");
+                            String defaultValue = var.getDefaultValue();
+                            if ("Long".equals(var.dataType) && defaultValue != null) {
+                                try {
+                                    Long.parseLong(defaultValue);
+                                    // 如果是 Long 类型，添加 L 后缀
+                                    var.defaultValue = defaultValue + "L";
+                                } catch (NumberFormatException e) {
+                                    // 不是数字，保持原样
+                                }
+                            }
                         }
                     }
 
@@ -458,9 +493,7 @@ public class JavaSdkGenerator extends AbstractJavaCodegen implements NameService
                         imports.add("import com.fasterxml.jackson.annotation.JsonValue;");
                         imports.add("import com.fasterxml.jackson.annotation.JsonCreator;");
                     }
-
                 });
-
 
                 vendorExtension.put("x-imports", imports);
                 vendorExtension.put("x-annotation", annotation);
@@ -532,56 +565,78 @@ public class JavaSdkGenerator extends AbstractJavaCodegen implements NameService
                     case TEST_TEMPLATE: {
                         String reqName = String.format("%s.%s", modelPackage, meta.getMethodServiceFmt() + "Req");
                         String responseName = String.format("%s.%s", modelPackage, meta.getMethodServiceFmt() + "Resp");
+
+                        // 找到请求模型
                         allModels.stream().filter(m -> reqName.equalsIgnoreCase((String) m.get("importPath"))).
                                 forEach(m -> op.vendorExtensions.put("x-request-model", m.getModel()));
-                        allModels.stream().filter(m -> responseName.equalsIgnoreCase((String) m.get("importPath"))).
-                                forEach(m -> {
 
-                                    CodegenModel model = m.getModel();
-                                    for (CodegenProperty var : model.vars) {
-                                        if (var.isArray) {
-                                            String innerDataName = String.format("%s.%s", modelPackage, var.getComplexType());
-                                            CodegenModel innerClass = null;
-                                            for (ModelMap map : allModels) {
-                                                if (innerDataName.equalsIgnoreCase((String) map.get("importPath"))) {
-                                                    innerClass = map.getModel();
-                                                    break;
-                                                }
-                                            }
+                        // 查找响应模型
+                        Optional<ModelMap> responseModelOpt = allModels.stream()
+                                .filter(m -> responseName.equalsIgnoreCase((String) m.get("importPath")))
+                                .findFirst();
 
-                                            if (innerClass != null) {
-                                                var.vendorExtensions.put("x-response-inner-model", innerClass);
+                        if (responseModelOpt.isPresent()) {
+                            CodegenModel model = responseModelOpt.get().getModel();
+
+                            // 尝试找到 data 字段
+                            CodegenProperty dataField = null;
+                            for (CodegenProperty var : model.vars) {
+                                if ("data".equals(var.name) || "Data".equals(var.name)) {
+                                    dataField = var;
+                                    break;
+                                }
+                            }
+
+                            if (dataField != null) {
+                                // 有 data 字段，处理 data 的内部类型
+                                for (CodegenProperty var : model.vars) {
+                                    if (var.isArray) {
+                                        String innerDataName = String.format("%s.%s", modelPackage, var.getComplexType());
+                                        CodegenModel innerClass = null;
+                                        for (ModelMap map : allModels) {
+                                            if (innerDataName.equalsIgnoreCase((String) map.get("importPath"))) {
+                                                innerClass = map.getModel();
+                                                break;
                                             }
                                         }
+                                        if (innerClass != null) {
+                                            var.vendorExtensions.put("x-response-inner-model", innerClass);
+                                        }
                                     }
-
-                                    op.vendorExtensions.put("x-response-model", m.getModel());
-                                });
+                                }
+                                op.vendorExtensions.put("x-response-model", dataField);
+                            } else {
+                                // 没有 data 字段，直接使用整个响应模型
+                                op.vendorExtensions.put("x-response-model", model);
+                                // 标记没有 data 包装
+                                op.vendorExtensions.put("x-no-data-wrapper", true);
+                            }
+                        }
                         break;
                     }
                     case WS_TEST_TEMPLATE: {
                         String eventName = String.format("%s.%s", modelPackage, meta.getMethodServiceFmt() + "Event");
                         allModels.stream().filter(m -> eventName.equalsIgnoreCase((String) m.get("importPath"))).
                                 forEach(m -> {
-                                    CodegenModel model = m.getModel();
-                                    for (CodegenProperty var : model.vars) {
-                                        if (var.isArray) {
-                                            String innerDataName = String.format("%s.%s", modelPackage, var.getComplexType());
-                                            CodegenModel innerClass = null;
-                                            for (ModelMap map : allModels) {
-                                                if (innerDataName.equalsIgnoreCase((String) map.get("importPath"))) {
-                                                    innerClass = map.getModel();
-                                                    break;
-                                                }
-                                            }
-
-                                            if (innerClass != null) {
-                                                var.vendorExtensions.put("x-response-inner-model", innerClass);
-                                            }
+                            CodegenModel model = m.getModel();
+                            for (CodegenProperty var : model.vars) {
+                                if (var.isArray) {
+                                    String innerDataName = String.format("%s.%s", modelPackage, var.getComplexType());
+                                    CodegenModel innerClass = null;
+                                    for (ModelMap map : allModels) {
+                                        if (innerDataName.equalsIgnoreCase((String) map.get("importPath"))) {
+                                            innerClass = map.getModel();
+                                            break;
                                         }
                                     }
-                                    op.vendorExtensions.put("x-response-model", m.getModel());
-                                });
+
+                                    if (innerClass != null) {
+                                        var.vendorExtensions.put("x-response-inner-model", innerClass);
+                                    }
+                                }
+                            }
+                            op.vendorExtensions.put("x-response-model", m.getModel());
+                        });
                         break;
                     }
                 }
@@ -590,5 +645,50 @@ public class JavaSdkGenerator extends AbstractJavaCodegen implements NameService
         objs.put("imports", imports);
         objs.put("implImports", implImports);
         return objs;
+    }
+
+
+    private void filterPaths(OpenAPI openAPI) {
+        Paths paths = openAPI.getPaths();
+        if (paths == null) {
+            return;
+        }
+
+        Map<String, PathItem> filteredPaths = new LinkedHashMap<>();
+
+        for (Map.Entry<String, PathItem> pathEntry : paths.entrySet()) {
+            String path = pathEntry.getKey();
+            PathItem pathItem = pathEntry.getValue();
+
+            // 使用 readOperationsMap 遍历所有 Operation
+            Map<PathItem.HttpMethod, Operation> operations = pathItem.readOperationsMap();
+            boolean hasValidOperation = false;
+
+            for (Map.Entry<PathItem.HttpMethod, Operation> opEntry : operations.entrySet()) {
+                if (hasMainAndAllTags(opEntry.getValue())) {
+                    hasValidOperation = true;
+                    break;
+                }
+            }
+
+            if (hasValidOperation) {
+                filteredPaths.put(path, pathItem);
+            }
+        }
+
+        Paths newPaths = new Paths();
+        newPaths.putAll(filteredPaths);
+        openAPI.setPaths(newPaths);
+    }
+
+    /**
+     * 检查 Operation 是否同时包含 MAIN 和 ALL 标签
+     */
+    private boolean hasMainAndAllTags(Operation operation) {
+        List<String> tags = operation.getTags();
+        if (tags == null || tags.isEmpty()) {
+            return false;
+        }
+        return tags.contains("MAIN") && tags.contains("ALL");
     }
 }
