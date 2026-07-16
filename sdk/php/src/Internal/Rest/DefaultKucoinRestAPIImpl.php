@@ -20,6 +20,8 @@ use KuCoin\UniversalSDK\Generate\Service\MarginService;
 use KuCoin\UniversalSDK\Generate\Service\MarginServiceImpl;
 use KuCoin\UniversalSDK\Generate\Service\SpotService;
 use KuCoin\UniversalSDK\Generate\Service\SpotServiceImpl;
+use KuCoin\UniversalSDK\Generate\Service\UTAService;
+use KuCoin\UniversalSDK\Generate\Service\UTAServiceImpl;
 use KuCoin\UniversalSDK\Generate\Service\VIPLendingService;
 use KuCoin\UniversalSDK\Generate\Service\VIPLendingServiceImpl;
 use KuCoin\UniversalSDK\Generate\Version;
@@ -38,6 +40,7 @@ class DefaultKucoinRestAPIImpl implements KucoinRestService
     private $marginService;
     private $spotService;
     private $vipLendingService;
+    private $utaService;
 
     public function __construct(ClientOption $option)
     {
@@ -54,6 +57,7 @@ class DefaultKucoinRestAPIImpl implements KucoinRestService
         $this->marginService = new MarginServiceImpl($transport);
         $this->spotService = new SpotServiceImpl($transport);
         $this->vipLendingService = new VIPLendingServiceImpl($transport);
+        $this->utaService = new UTAServiceImpl($transport);
         Logger::info('SDK version: '.Version::SDK_VERSION);
     }
 
@@ -100,5 +104,10 @@ class DefaultKucoinRestAPIImpl implements KucoinRestService
     public function getVipLendingService(): VIPLendingService
     {
         return $this->vipLendingService;
+    }
+
+      public function getUTAService(): UTAService
+    {
+        return $this->utaService;
     }
 }

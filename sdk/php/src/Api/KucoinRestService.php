@@ -10,6 +10,7 @@ use KuCoin\UniversalSDK\Generate\Service\EarnService;
 use KuCoin\UniversalSDK\Generate\Service\FuturesService;
 use KuCoin\UniversalSDK\Generate\Service\MarginService;
 use KuCoin\UniversalSDK\Generate\Service\SpotService;
+use KuCoin\UniversalSDK\Generate\Service\UTAService;
 use KuCoin\UniversalSDK\Generate\Service\VIPLendingService;
 
 /**
@@ -80,4 +81,7 @@ interface KucoinRestService
      * @return VIPLendingService
      */
     public function getVipLendingService(): VIPLendingService;
+
+
+    public function getUTAService(): UTAService;
 }

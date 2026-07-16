@@ -20,9 +20,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @author isaac.tang
- */
 @Slf4j
 public class SchemaServiceImpl implements SchemaService {
 

@@ -9,9 +9,12 @@ import com.kucoin.universal.sdk.plugin.service.SchemaService;
 import com.kucoin.universal.sdk.plugin.service.impl.OperationServiceImpl;
 import com.kucoin.universal.sdk.plugin.service.impl.SchemaServiceImpl;
 import com.kucoin.universal.sdk.plugin.util.KeywordsUtil;
+import com.kucoin.universal.sdk.plugin.util.PhpAutoCasesGenerator;
 import com.kucoin.universal.sdk.plugin.util.SpecificationUtil;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.Operation;
+import io.swagger.v3.oas.models.PathItem;
+import io.swagger.v3.oas.models.Paths;
 import io.swagger.v3.oas.models.media.Schema;
 import io.swagger.v3.oas.models.media.StringSchema;
 import io.swagger.v3.oas.models.servers.Server;
@@ -33,9 +36,6 @@ import java.util.*;
 
 import static org.openapitools.codegen.utils.StringUtils.camelize;
 
-/**
- * @author isaac.tang
- */
 @Slf4j
 public class PhpSdkGenerator extends AbstractPhpCodegen implements NameService {
     private final Logger LOGGER = LoggerFactory.getLogger(PhpSdkGenerator.class);
@@ -68,6 +68,12 @@ public class PhpSdkGenerator extends AbstractPhpCodegen implements NameService {
         this.apiTestTemplateFiles.clear();
         this.modelDocTemplateFiles.clear();
         this.apiDocTemplateFiles.clear();
+        // 对齐 Java 的 typeMapping
+        typeMapping.put("number", "float");
+        typeMapping.put("integer", "int");
+        typeMapping.put("any", "mixed");
+        typeMapping.put("object", "mixed");
+        typeMapping.put("array", "array");
     }
 
     @Override
@@ -79,6 +85,25 @@ public class PhpSdkGenerator extends AbstractPhpCodegen implements NameService {
         subService = camelize(openAPI.getInfo().getDescription(), CamelizeOption.UPPERCASE_FIRST_CHAR);
         apiPackage = String.format("KuCoin\\UniversalSDK\\Generate\\%s\\%s", service, subService);
         modelPackage = String.format("KuCoin\\UniversalSDK\\Generate\\%s\\%s", service, subService);
+
+        // ==================== AUTO_CASES 模式 ====================
+        if (modeSwitch.getMode() == ModeSwitch.ModeEnum.AUTO_CASES) {
+            try {
+                // 先初始化 schemaService 避免 NPE
+                schemaService = new SchemaServiceImpl(openAPI);
+                String outputPath = outputFolder + File.separator + "AutoCases.php";
+                PhpAutoCasesGenerator.generate(openAPI, outputPath);
+                LOGGER.info("AutoCases.php generated successfully at: {}", outputPath);
+            } catch (Exception e) {
+                LOGGER.error("Failed to generate AutoCases.php", e);
+                throw new RuntimeException("Failed to generate AutoCases.php", e);
+            }
+            return;
+        }
+        // =============================================================
+
+        // 注意：这里不再直接初始化 schemaService，而是交给 preprocessOpenAPI
+        // 因为 preprocessOpenAPI 会在模型生成前被框架调用
 
         switch (modeSwitch.getMode()) {
             case API: {
@@ -131,16 +156,67 @@ public class PhpSdkGenerator extends AbstractPhpCodegen implements NameService {
         inlineSchemaOption.put("SKIP_SCHEMA_REUSE", "true");
     }
 
+    /**
+     * 重写 preprocessOpenAPI，与 Java 版本保持一致
+     * 在模型生成之前执行，初始化 schemaService 和 operationService
+     */
     @Override
     public void preprocessOpenAPI(OpenAPI openAPI) {
         super.preprocessOpenAPI(openAPI);
 
-        // parse and update operations and models
+        filterPaths(openAPI);
         schemaService = new SchemaServiceImpl(openAPI);
         operationService = new OperationServiceImpl(openAPI, this);
 
         operationService.parseOperation();
         schemaService.parseSchema();
+    }
+
+    /**
+     * 对齐 Java 的 filterPaths 逻辑
+     * 过滤 paths，只保留同时包含 MAIN 和 ALL 标签的接口
+     */
+    private void filterPaths(OpenAPI openAPI) {
+        Paths paths = openAPI.getPaths();
+        if (paths == null) {
+            return;
+        }
+
+        Map<String, PathItem> filteredPaths = new LinkedHashMap<>();
+
+        for (Map.Entry<String, PathItem> pathEntry : paths.entrySet()) {
+            String path = pathEntry.getKey();
+            PathItem pathItem = pathEntry.getValue();
+
+            Map<PathItem.HttpMethod, Operation> operations = pathItem.readOperationsMap();
+            boolean hasValidOperation = false;
+
+            for (Map.Entry<PathItem.HttpMethod, Operation> opEntry : operations.entrySet()) {
+                if (hasMainAndAllTags(opEntry.getValue())) {
+                    hasValidOperation = true;
+                    break;
+                }
+            }
+
+            if (hasValidOperation) {
+                filteredPaths.put(path, pathItem);
+            }
+        }
+
+        Paths newPaths = new Paths();
+        newPaths.putAll(filteredPaths);
+        openAPI.setPaths(newPaths);
+    }
+
+    /**
+     * 检查 Operation 是否同时包含 MAIN 和 ALL 标签
+     */
+    private boolean hasMainAndAllTags(Operation operation) {
+        List<String> tags = operation.getTags();
+        if (tags == null || tags.isEmpty()) {
+            return false;
+        }
+        return tags.contains("MAIN") && tags.contains("ALL");
     }
 
     @Override
@@ -165,21 +241,57 @@ public class PhpSdkGenerator extends AbstractPhpCodegen implements NameService {
 
     @Override
     public CodegenProperty fromProperty(String name, Schema p, boolean required) {
+        // 对齐 Java 的处理：处理 anytype
+        if (p.getType() != null) {
+            if (p.getType().equalsIgnoreCase("anytype") || p.getType().equalsIgnoreCase("any")) {
+                p.setType("object");
+            }
+        }
+
         CodegenProperty prop = super.fromProperty(name, p, required);
         if (prop.defaultValue != null && prop.defaultValue.equalsIgnoreCase("undefined")) {
             prop.defaultValue = null;
+        }
+
+        // 对齐 Java 的 Long 类型处理
+        if ("integer".equalsIgnoreCase(prop.openApiType)) {
+            prop.dataType = "int";
+            prop.datatypeWithEnum = "int";
+            prop.baseType = "int";
         }
 
         if (prop.isEnum) {
             List<EnumEntry> enums = new ArrayList<>();
 
             List<Map<String, Object>> enumList;
+            CodegenProperty realEnumProp = null;
+            Schema enumSchema = p;
             if (prop.openApiType.equalsIgnoreCase("array")) {
-                enumList = (List<Map<String, Object>>) prop.mostInnerItems.vendorExtensions.get("x-api-enum");
+                if (prop.mostInnerItems != null && prop.mostInnerItems.vendorExtensions != null) {
+                    enumList = (List<Map<String, Object>>) prop.mostInnerItems.vendorExtensions.get("x-api-enum");
+                } else {
+                    enumList = null;
+                }
+                realEnumProp = prop.mostInnerItems;
+                enumSchema = getMostInnerItemsSchema(p);
             } else {
-                enumList = (List<Map<String, Object>>) prop.vendorExtensions.get("x-api-enum");
+                if (prop.vendorExtensions != null) {
+                    enumList = (List<Map<String, Object>>) prop.vendorExtensions.get("x-api-enum");
+                } else {
+                    enumList = null;
+                }
+                realEnumProp = prop;
             }
 
+            // 如果 enumList 为 null，从标准 OpenAPI enum 构建
+            if (enumList == null) {
+                enumList = buildEnumListFromStandardOpenApiEnum(enumSchema, realEnumProp);
+            }
+
+            // 如果 enumList 仍然为 null，创建一个空的列表避免 NPE
+            if (enumList == null) {
+                enumList = new ArrayList<>();
+            }
 
             List<String> names = new ArrayList<>();
             List<String> values = new ArrayList<>();
@@ -224,6 +336,40 @@ public class PhpSdkGenerator extends AbstractPhpCodegen implements NameService {
         prop.vendorExtensions.put("annotationType", annoType);
 
         return prop;
+    }
+
+    /**
+     * 获取最内层的 Schema
+     */
+    private Schema getMostInnerItemsSchema(Schema schema) {
+        Schema current = schema;
+        while (current != null && current.getItems() != null) {
+            current = current.getItems();
+        }
+        return current;
+    }
+
+    /**
+     * 从标准 OpenAPI enum 构建 enumList
+     */
+    private List<Map<String, Object>> buildEnumListFromStandardOpenApiEnum(Schema enumSchema, CodegenProperty realEnumProp) {
+        List<?> values = enumSchema == null ? null : enumSchema.getEnum();
+        if (values == null || values.isEmpty()) {
+            values = realEnumProp._enum;
+        }
+        if (values == null || values.isEmpty()) {
+            return new ArrayList<>();
+        }
+
+        List<Map<String, Object>> enumList = new ArrayList<>();
+        for (Object value : values) {
+            Map<String, Object> entry = new HashMap<>();
+            entry.put("value", value);
+            entry.put("name", value == null ? "" : value.toString());
+            entry.put("description", "");
+            enumList.add(entry);
+        }
+        return enumList;
     }
 
     @Override
@@ -318,6 +464,10 @@ public class PhpSdkGenerator extends AbstractPhpCodegen implements NameService {
 
     @Override
     public String toModelName(String name) {
+        // AUTO_CASES 模式直接返回原名称，不依赖 schemaService
+        if (modeSwitch != null && modeSwitch.getMode() == ModeSwitch.ModeEnum.AUTO_CASES) {
+            return name;
+        }
         return formatService(schemaService.getGeneratedModelName(name));
     }
 
@@ -328,6 +478,10 @@ public class PhpSdkGenerator extends AbstractPhpCodegen implements NameService {
 
     @Override
     public String toModelFilename(String name) {
+        // AUTO_CASES 模式直接返回原名称，不依赖 schemaService
+        if (modeSwitch != null && modeSwitch.getMode() == ModeSwitch.ModeEnum.AUTO_CASES) {
+            return name;
+        }
         name = schemaService.getGeneratedModelName(name);
         name = formatService(name);
         return name;
@@ -335,6 +489,10 @@ public class PhpSdkGenerator extends AbstractPhpCodegen implements NameService {
 
     @Override
     public String modelFileFolder() {
+        // AUTO_CASES 模式返回默认值
+        if (modeSwitch != null && modeSwitch.getMode() == ModeSwitch.ModeEnum.AUTO_CASES) {
+            return outputFolder;
+        }
         switch (modeSwitch.getMode()) {
             case ENTRY:
                 return outputFolder + File.separator + "Service";
@@ -361,7 +519,6 @@ public class PhpSdkGenerator extends AbstractPhpCodegen implements NameService {
                 break;
             }
         }
-
         return apiName;
     }
 
@@ -373,6 +530,10 @@ public class PhpSdkGenerator extends AbstractPhpCodegen implements NameService {
 
     @Override
     public String apiFilename(String templateName, String tag) {
+        // AUTO_CASES 模式直接返回
+        if (modeSwitch != null && modeSwitch.getMode() == ModeSwitch.ModeEnum.AUTO_CASES) {
+            return outputFolder + File.separator + "AutoCases.php";
+        }
         String suffix = apiTemplateFiles().get(templateName);
         if (modeSwitch.isEntry()) {
             String entryType = service + "Service";
@@ -393,6 +554,10 @@ public class PhpSdkGenerator extends AbstractPhpCodegen implements NameService {
 
     @Override
     public ModelsMap postProcessModels(ModelsMap objs) {
+        // AUTO_CASES 模式跳过
+        if (modeSwitch != null && modeSwitch.getMode() == ModeSwitch.ModeEnum.AUTO_CASES) {
+            return objs;
+        }
         objs = super.postProcessModels(objs);
 
         Set<String> imports = new TreeSet<>();
@@ -406,6 +571,20 @@ public class PhpSdkGenerator extends AbstractPhpCodegen implements NameService {
         if (models != null) {
             for (ModelMap model : models) {
                 CodegenModel codegenModel = model.getModel();
+                // 检查是否有 data 字段
+                boolean hasDataField = false;
+                for (CodegenProperty var : codegenModel.getVars()) {
+                    if ("data".equals(var.name) || "Data".equals(var.name)) {
+                        hasDataField = true;
+                        break;
+                    }
+                }
+
+                // 如果是响应模型且有 data 字段，标记为包装响应
+                if (codegenModel.getVendorExtensions().containsKey("x-response-model") && hasDataField) {
+                    codegenModel.getVendorExtensions().put("x-has-data-wrapper", true);
+                }
+
                 codegenModel.getVendorExtensions().put("x-imports", imports);
             }
         }
@@ -414,10 +593,13 @@ public class PhpSdkGenerator extends AbstractPhpCodegen implements NameService {
 
     @Override
     public OperationsMap postProcessOperationsWithModels(OperationsMap objs, List<ModelMap> allModels) {
+        // AUTO_CASES 模式跳过
+        if (modeSwitch != null && modeSwitch.getMode() == ModeSwitch.ModeEnum.AUTO_CASES) {
+            return objs;
+        }
         objs = super.postProcessOperationsWithModels(objs, allModels);
 
         OperationMap operationMap = objs.getOperations();
-
 
         Set<String> imports = new TreeSet<>();
         Set<String> implImports = new TreeSet<>();
@@ -460,56 +642,78 @@ public class PhpSdkGenerator extends AbstractPhpCodegen implements NameService {
                     case TEST_TEMPLATE: {
                         String reqName = String.format("%s.%s", modelPackage, meta.getMethodServiceFmt() + "Req");
                         String responseName = String.format("%s.%s", modelPackage, meta.getMethodServiceFmt() + "Resp");
+
+                        // 找到请求模型
                         allModels.stream().filter(m -> reqName.equalsIgnoreCase((String) m.get("importPath"))).
                                 forEach(m -> op.vendorExtensions.put("x-request-model", m.getModel()));
-                        allModels.stream().filter(m -> responseName.equalsIgnoreCase((String) m.get("importPath"))).
-                                forEach(m -> {
 
-                                    CodegenModel model = m.getModel();
-                                    for (CodegenProperty var : model.vars) {
-                                        if (var.isArray) {
-                                            String innerDataName = String.format("%s.%s", modelPackage, var.getComplexType());
-                                            CodegenModel innerClass = null;
-                                            for (ModelMap map : allModels) {
-                                                if (innerDataName.equalsIgnoreCase((String) map.get("importPath"))) {
-                                                    innerClass = map.getModel();
-                                                    break;
-                                                }
-                                            }
+                        // 查找响应模型
+                        Optional<ModelMap> responseModelOpt = allModels.stream()
+                                .filter(m -> responseName.equalsIgnoreCase((String) m.get("importPath")))
+                                .findFirst();
 
-                                            if (innerClass != null) {
-                                                var.vendorExtensions.put("x-response-inner-model", innerClass);
+                        if (responseModelOpt.isPresent()) {
+                            CodegenModel model = responseModelOpt.get().getModel();
+
+                            // 尝试找到 data 字段
+                            CodegenProperty dataField = null;
+                            for (CodegenProperty var : model.vars) {
+                                if ("data".equals(var.name) || "Data".equals(var.name)) {
+                                    dataField = var;
+                                    break;
+                                }
+                            }
+
+                            if (dataField != null) {
+                                // 有 data 字段，处理 data 的内部类型
+                                for (CodegenProperty var : model.vars) {
+                                    if (var.isArray) {
+                                        String innerDataName = String.format("%s.%s", modelPackage, var.getComplexType());
+                                        CodegenModel innerClass = null;
+                                        for (ModelMap map : allModels) {
+                                            if (innerDataName.equalsIgnoreCase((String) map.get("importPath"))) {
+                                                innerClass = map.getModel();
+                                                break;
                                             }
                                         }
+                                        if (innerClass != null) {
+                                            var.vendorExtensions.put("x-response-inner-model", innerClass);
+                                        }
                                     }
-
-                                    op.vendorExtensions.put("x-response-model", m.getModel());
-                                });
+                                }
+                                op.vendorExtensions.put("x-response-model", dataField);
+                            } else {
+                                // 没有 data 字段，直接使用整个响应模型
+                                op.vendorExtensions.put("x-response-model", model);
+                                // 标记没有 data 包装
+                                op.vendorExtensions.put("x-no-data-wrapper", true);
+                            }
+                        }
                         break;
                     }
                     case WS_TEST_TEMPLATE: {
                         String eventName = String.format("%s.%s", modelPackage, meta.getMethodServiceFmt() + "Event");
                         allModels.stream().filter(m -> eventName.equalsIgnoreCase((String) m.get("importPath"))).
                                 forEach(m -> {
-                                    CodegenModel model = m.getModel();
-                                    for (CodegenProperty var : model.vars) {
-                                        if (var.isArray) {
-                                            String innerDataName = String.format("%s.%s", modelPackage, var.getComplexType());
-                                            CodegenModel innerClass = null;
-                                            for (ModelMap map : allModels) {
-                                                if (innerDataName.equalsIgnoreCase((String) map.get("importPath"))) {
-                                                    innerClass = map.getModel();
-                                                    break;
-                                                }
-                                            }
-
-                                            if (innerClass != null) {
-                                                var.vendorExtensions.put("x-response-inner-model", innerClass);
-                                            }
+                            CodegenModel model = m.getModel();
+                            for (CodegenProperty var : model.vars) {
+                                if (var.isArray) {
+                                    String innerDataName = String.format("%s.%s", modelPackage, var.getComplexType());
+                                    CodegenModel innerClass = null;
+                                    for (ModelMap map : allModels) {
+                                        if (innerDataName.equalsIgnoreCase((String) map.get("importPath"))) {
+                                            innerClass = map.getModel();
+                                            break;
                                         }
                                     }
-                                    op.vendorExtensions.put("x-response-model", m.getModel());
-                                });
+
+                                    if (innerClass != null) {
+                                        var.vendorExtensions.put("x-response-inner-model", innerClass);
+                                    }
+                                }
+                            }
+                            op.vendorExtensions.put("x-response-model", m.getModel());
+                        });
                         break;
                     }
                 }
@@ -519,4 +723,5 @@ public class PhpSdkGenerator extends AbstractPhpCodegen implements NameService {
         objs.put("implImports", implImports);
         return objs;
     }
+
 }
