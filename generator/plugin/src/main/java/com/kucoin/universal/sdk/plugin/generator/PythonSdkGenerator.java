@@ -8,10 +8,12 @@ import com.kucoin.universal.sdk.plugin.service.OperationService;
 import com.kucoin.universal.sdk.plugin.service.SchemaService;
 import com.kucoin.universal.sdk.plugin.service.impl.OperationServiceImpl;
 import com.kucoin.universal.sdk.plugin.service.impl.SchemaServiceImpl;
+import com.kucoin.universal.sdk.plugin.util.PythonAutoCasesGenerator;
 import com.kucoin.universal.sdk.plugin.util.SpecificationUtil;
-import com.opencsv.CSVReader;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.Operation;
+import io.swagger.v3.oas.models.PathItem;
+import io.swagger.v3.oas.models.Paths;
 import io.swagger.v3.oas.models.media.Schema;
 import io.swagger.v3.oas.models.servers.Server;
 import lombok.extern.slf4j.Slf4j;
@@ -22,22 +24,21 @@ import org.openapitools.codegen.model.ModelMap;
 import org.openapitools.codegen.model.ModelsMap;
 import org.openapitools.codegen.model.OperationMap;
 import org.openapitools.codegen.model.OperationsMap;
+import org.openapitools.codegen.utils.CamelizeOption;
 import org.openapitools.codegen.utils.ModelUtils;
 
 import javax.annotation.Nullable;
 import java.io.File;
-import java.io.FileReader;
 import java.util.*;
 
 import static org.openapitools.codegen.utils.CamelizeOption.LOWERCASE_FIRST_LETTER;
 import static org.openapitools.codegen.utils.StringUtils.camelize;
 import static org.openapitools.codegen.utils.StringUtils.underscore;
 
-/**
- * @author isaac.tang
- */
+
 @Slf4j
 public class PythonSdkGenerator extends AbstractPythonCodegen implements NameService {
+
     private SchemaService schemaService;
     private OperationService operationService;
     private ModeSwitch modeSwitch;
@@ -48,7 +49,6 @@ public class PythonSdkGenerator extends AbstractPythonCodegen implements NameSer
 
     // model export(init.py)
     private Set<String> exports = new LinkedHashSet<>();
-    private Set<String> serviceExports = new LinkedHashSet<>();
 
     private String service;
     private String subService;
@@ -71,6 +71,9 @@ public class PythonSdkGenerator extends AbstractPythonCodegen implements NameSer
         cliOptions.add(ModeSwitch.option);
         typeMapping.put("Bigint", "int");
         typeMapping.put("bigint", "int");
+        typeMapping.put("number", "float");
+        typeMapping.put("integer", "int");
+        typeMapping.put("anytype", "object");
     }
 
     @Override
@@ -80,6 +83,20 @@ public class PythonSdkGenerator extends AbstractPythonCodegen implements NameSer
 
         service = openAPI.getInfo().getTitle();
         subService = openAPI.getInfo().getDescription();
+
+        // AUTO_CASES 模式
+        if (modeSwitch.getMode() == ModeSwitch.ModeEnum.AUTO_CASES) {
+            try {
+                filterPaths(openAPI);
+                String outputPath = outputFolder + File.separator + "AutoCases.py";
+                PythonAutoCasesGenerator.generate(openAPI, outputPath);
+                log.info("AutoCases.py generated successfully at: {}", outputPath);
+            } catch (Exception e) {
+                log.error("Failed to generate AutoCases.py", e);
+                throw new RuntimeException("Failed to generate AutoCases.py", e);
+            }
+            return;
+        }
 
         switch (modeSwitch.getMode()) {
             case WS: {
@@ -126,20 +143,58 @@ public class PythonSdkGenerator extends AbstractPythonCodegen implements NameSer
         enablePostProcessFile = true;
         packageName = "";
 
-
         inlineSchemaOption.put("SKIP_SCHEMA_REUSE", "true");
     }
 
     @Override
     public void preprocessOpenAPI(OpenAPI openAPI) {
         super.preprocessOpenAPI(openAPI);
-
-        // parse and update operations and models
+        filterPaths(openAPI);
         schemaService = new SchemaServiceImpl(openAPI);
         operationService = new OperationServiceImpl(openAPI, this);
 
         operationService.parseOperation();
         schemaService.parseSchema();
+    }
+
+    private void filterPaths(OpenAPI openAPI) {
+        Paths paths = openAPI.getPaths();
+        if (paths == null) {
+            return;
+        }
+
+        Map<String, PathItem> filteredPaths = new LinkedHashMap<>();
+
+        for (Map.Entry<String, PathItem> pathEntry : paths.entrySet()) {
+            String path = pathEntry.getKey();
+            PathItem pathItem = pathEntry.getValue();
+
+            Map<PathItem.HttpMethod, Operation> operations = pathItem.readOperationsMap();
+            boolean hasValidOperation = false;
+
+            for (Map.Entry<PathItem.HttpMethod, Operation> opEntry : operations.entrySet()) {
+                if (hasMainAndAllTags(opEntry.getValue())) {
+                    hasValidOperation = true;
+                    break;
+                }
+            }
+
+            if (hasValidOperation) {
+                filteredPaths.put(path, pathItem);
+            }
+        }
+
+        Paths newPaths = new Paths();
+        newPaths.putAll(filteredPaths);
+        openAPI.setPaths(newPaths);
+    }
+
+    private boolean hasMainAndAllTags(Operation operation) {
+        List<String> tags = operation.getTags();
+        if (tags == null || tags.isEmpty()) {
+            return false;
+        }
+        return tags.contains("MAIN") && tags.contains("ALL");
     }
 
     @Override
@@ -154,7 +209,7 @@ public class PythonSdkGenerator extends AbstractPythonCodegen implements NameSer
 
     @Override
     public String formatService(String name) {
-        return camelize(name);
+        return cleanUsing(camelize(name));
     }
 
     @Override
@@ -197,7 +252,6 @@ public class PythonSdkGenerator extends AbstractPythonCodegen implements NameSer
             }
         }
 
-
         CodegenProperty prop = super.fromProperty(name, p, required);
         String cc = camelize(prop.name, LOWERCASE_FIRST_LETTER);
         if (isReservedWord(cc)) {
@@ -210,28 +264,48 @@ public class PythonSdkGenerator extends AbstractPythonCodegen implements NameSer
 
             Map<String, String> builderVars = new HashMap<>();
 
-            List<Map<String, Object>> enumList;
+            List<Map<String, Object>> enumList = null;
             if (prop.openApiType.equalsIgnoreCase("array")) {
-                enumList = (List<Map<String, Object>>) prop.mostInnerItems.vendorExtensions.get("x-api-enum");
-
+                if (prop.mostInnerItems != null && prop.mostInnerItems.vendorExtensions != null) {
+                    enumList = (List<Map<String, Object>>) prop.mostInnerItems.vendorExtensions.get("x-api-enum");
+                }
                 // list[XX.TypeEnum]
                 builderVars.put("prefix", "list[");
                 builderVars.put("suffix", "." + prop.enumName + "]");
 
             } else {
-                enumList = (List<Map<String, Object>>) prop.vendorExtensions.get("x-api-enum");
-
+                if (prop.vendorExtensions != null) {
+                    enumList = (List<Map<String, Object>>) prop.vendorExtensions.get("x-api-enum");
+                }
                 // XX.TypeEnum
                 builderVars.put("prefix", "");
                 builderVars.put("suffix", "." + prop.datatypeWithEnum);
             }
 
+            // 如果 enumList 为空，从标准 OpenAPI enum 构建
+            if (enumList == null || enumList.isEmpty()) {
+                enumList = buildEnumListFromStandardOpenApiEnum(p, prop);
+            }
+
+            // 如果 enumList 仍然为空，创建一个空的列表避免 NPE
+            if (enumList == null) {
+                enumList = new ArrayList<>();
+            }
+
+            // 获取字段的 PascalCase 名称
+            String fieldName = prop.nameInCamelCase;
+            if (fieldName == null || fieldName.isEmpty()) {
+                fieldName = prop.name;
+            }
+            String pascalName = fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1);
 
             List<String> names = new ArrayList<>();
             List<String> values = new ArrayList<>();
             List<String> description = new ArrayList<>();
 
-            enumList.forEach(e -> {
+            // 确保 enumList 不为 null
+            final List<Map<String, Object>> finalEnumList = enumList != null ? enumList : new ArrayList<>();
+            finalEnumList.forEach(e -> {
                 Object enumValueOriginal = e.get("value");
 
                 String enumValueNameGauss;
@@ -264,11 +338,34 @@ public class PythonSdkGenerator extends AbstractPythonCodegen implements NameSer
             prop.vendorExtensions.put("x-enum-varnames", names);
             prop.vendorExtensions.put("x-enum-descriptions", description);
             prop.vendorExtensions.put("x-enum-builder-vars", builderVars);
-
             prop.vendorExtensions.put("x-enums", enums);
+            prop.vendorExtensions.put("x-enums-datatype", typeMapping.get(p.getType()));
         }
 
         return prop;
+    }
+
+    /**
+     * 从标准 OpenAPI enum 构建 enumList
+     */
+    private List<Map<String, Object>> buildEnumListFromStandardOpenApiEnum(Schema enumSchema, CodegenProperty realEnumProp) {
+        List<?> values = enumSchema == null ? null : enumSchema.getEnum();
+        if (values == null || values.isEmpty()) {
+            values = realEnumProp._enum;
+        }
+        if (values == null || values.isEmpty()) {
+            return new ArrayList<>();
+        }
+
+        List<Map<String, Object>> enumList = new ArrayList<>();
+        for (Object value : values) {
+            Map<String, Object> entry = new HashMap<>();
+            entry.put("value", value);
+            entry.put("name", value == null ? "" : value.toString());
+            entry.put("description", "");
+            enumList.add(entry);
+        }
+        return enumList;
     }
 
     @Override
@@ -278,13 +375,12 @@ public class PythonSdkGenerator extends AbstractPythonCodegen implements NameSer
 
     @Override
     public String toEnumDefaultValue(CodegenProperty property, String value) {
-        // Use the datatype with the value.
         return toEnumDefaultValue(value, property.datatypeWithEnum);
     }
 
     @Override
     public String toModelName(String name) {
-        return super.toModelName(schemaService.getGeneratedModelName(name));
+        return super.toModelName(cleanUsing(schemaService.getGeneratedModelName(name)));
     }
 
     @Override
@@ -294,10 +390,8 @@ public class PythonSdkGenerator extends AbstractPythonCodegen implements NameSer
 
     @Override
     public String toModelFilename(String name) {
-        name = schemaService.getGeneratedModelName(name);
-        name = "model_" + name;
-        name = underscore(dropDots(name));
-        return name;
+        name = "model_" + cleanUsing(schemaService.getGeneratedModelName(name));
+        return underscore(dropDots(name));
     }
 
     @Override
@@ -340,8 +434,7 @@ public class PythonSdkGenerator extends AbstractPythonCodegen implements NameSer
         return modelFileFolder() + File.separator + toApiFilename(tag) + suffix;
     }
 
-
-    private String generateImport(String _package, String fileName, String... target) {
+     private String generateImport(String _package, String fileName, String... target) {
         return String.format("from %s.%s import %s", packageName, fileName, String.join(",", target));
     }
 
@@ -377,30 +470,6 @@ public class PythonSdkGenerator extends AbstractPythonCodegen implements NameSer
                 break;
 
             }
-            case WS_TEST: {
-                String suffix = "event";
-                imports.add(generateImport(meta.getService().toLowerCase(),
-                        toModelFilename(meta.getMethod()) + "_" + suffix,
-                        formatService(meta.getMethod() + camelize(suffix))));
-
-                if ((((Map<String, Object>) meta.getOtherProperties().getParas().getType()).containsKey("array"))) {
-                    imports.add(generateImportSimple("typing", "List"));
-                }
-
-                break;
-            }
-            case ENTRY: {
-                operationService.getServiceMeta().forEach((k, v) -> {
-                    if (v.getService().equalsIgnoreCase(meta.getService())) {
-                        imports.add(
-                                generateImportSimple(String.format("kucoin_universal_sdk.generate.%s.%s.%s", formatPackage(v.getService()),
-                                                formatPackage(v.getSubService()), toApiFilename(formatMethodName(k))),
-                                        formatService(k + "API"),
-                                        formatService(k + "APIImpl")));
-                    }
-                });
-                break;
-            }
             default: {
                 throw new RuntimeException("unsupported mode");
             }
@@ -424,6 +493,7 @@ public class PythonSdkGenerator extends AbstractPythonCodegen implements NameSer
         OperationMap operationMap = objs.getOperations();
 
         Set<String> modelImport = new TreeSet<>();
+        Set<String> exportsSet = new TreeSet<>();
 
         for (CodegenOperation op : operationMap.getOperation()) {
             Meta meta = SpecificationUtil.getMeta(op.vendorExtensions);
@@ -436,6 +506,7 @@ public class PythonSdkGenerator extends AbstractPythonCodegen implements NameSer
                             if (v.getService().equalsIgnoreCase(meta.getService())) {
                                 Map<String, String> kv = new HashMap<>();
                                 kv.put("method", formatMethodName(k));
+                                kv.put("method_upper", camelize(formatMethodName(k), CamelizeOption.UPPERCASE_FIRST_CHAR));
                                 kv.put("target_service", formatService(k + "API"));
                                 entryValue.add(kv);
                             }
@@ -455,14 +526,12 @@ public class PythonSdkGenerator extends AbstractPythonCodegen implements NameSer
                         allModels.forEach(m -> {
                             String importName = (String) m.get("importPath");
                             String fileName = m.getModel().getClassFilename();
-                            // from .model_get_part_order_book_req import GetPartOrderBookReqBuilder
-                            exports.add(String.format("from .%s import %s", fileName, importName));
+                            exportsSet.add(String.format("from .%s import %s", fileName, importName));
                             if (m.getModel().getVendorExtensions().containsKey("x-request-model")) {
-                                exports.add(String.format("from .%s import %s", fileName, importName + "Builder"));
+                                exportsSet.add(String.format("from .%s import %s", fileName, importName + "Builder"));
                             }
                         });
-                        exports.add(String.format("from .%s import %sAPI", toApiFilename(meta.getSubService()), formatService(meta.getSubService())));
-
+                        exportsSet.add(String.format("from .%s import %sAPI", toApiFilename(meta.getSubService()), formatService(meta.getSubService())));
 
                         if (op.hasParams) {
                             modelImport.addAll(generateApiImport(meta, true));
@@ -480,10 +549,9 @@ public class PythonSdkGenerator extends AbstractPythonCodegen implements NameSer
                         allModels.forEach(m -> {
                             String importName = (String) m.get("importPath");
                             String fileName = m.getModel().getClassFilename();
-                            // from .model_get_part_order_book_req import GetPartOrderBookReqBuilder
-                            exports.add(String.format("from .%s import %s", fileName, importName));
+                            exportsSet.add(String.format("from .%s import %s", fileName, importName));
                         });
-                        exports.add(String.format("from .%s import %sWS", toApiFilename(meta.getSubService()), formatService(meta.getSubService())));
+                        exportsSet.add(String.format("from .%s import %sWS", toApiFilename(meta.getSubService()), formatService(meta.getSubService())));
 
                         modelImport.addAll(generateApiImport(meta, false));
                         break;
@@ -499,6 +567,9 @@ public class PythonSdkGenerator extends AbstractPythonCodegen implements NameSer
         }
 
         objs.put("imports", modelImport);
+        // 保存到类成员变量和 additionalProperties
+        this.exports = exportsSet;
+        additionalProperties.put("exports", new ArrayList<>(exportsSet));
 
         return objs;
     }
@@ -523,10 +594,11 @@ public class PythonSdkGenerator extends AbstractPythonCodegen implements NameSer
                         codegenProperties = codegenModel.vars;
                     }
 
-                    codegenProperties.forEach(c -> {
-                        c.required = false;
-                    });
-
+                    if (codegenProperties != null) {
+                        codegenProperties.forEach(c -> {
+                            c.required = false;
+                        });
+                    }
 
                     Meta meta = schemaService.getMeta(codegenModel.getName());
                     if (meta != null) {
@@ -538,18 +610,48 @@ public class PythonSdkGenerator extends AbstractPythonCodegen implements NameSer
         return objs;
     }
 
-
     @Override
     public Map<String, ModelsMap> postProcessAllModels(Map<String, ModelsMap> objs) {
         final Map<String, ModelsMap> processed = super.postProcessAllModels(objs);
+
+        // ===== 修复父类生成的 x-py-model-imports（将 .models. 替换为 .model_）=====
+        for (Map.Entry<String, ModelsMap> entry : processed.entrySet()) {
+            ModelsMap modelsMap = entry.getValue();
+            if (modelsMap.getModels() != null) {
+                for (ModelMap model : modelsMap.getModels()) {
+                    CodegenModel codegenModel = model.getModel();
+                    if (codegenModel != null && codegenModel.getVendorExtensions() != null) {
+
+                        // 修复 x-py-model-imports
+                        if (codegenModel.getVendorExtensions().containsKey("x-py-model-imports")) {
+                            Set<String> oldImports = (Set<String>) codegenModel.getVendorExtensions().get("x-py-model-imports");
+                            Set<String> newImports = new TreeSet<>();
+                            for (String imp : oldImports) {
+                                newImports.add(imp.replace(".models.", ".model_"));
+                            }
+                            codegenModel.getVendorExtensions().put("x-py-model-imports", newImports);
+                        }
+
+                        // 修复 x-py-postponed-model-imports
+                        if (codegenModel.getVendorExtensions().containsKey("x-py-postponed-model-imports")) {
+                            Set<String> oldImports = (Set<String>) codegenModel.getVendorExtensions().get("x-py-postponed-model-imports");
+                            Set<String> newImports = new TreeSet<>();
+                            for (String imp : oldImports) {
+                                newImports.add(imp.replace(".models.", ".model_"));
+                            }
+                            codegenModel.getVendorExtensions().put("x-py-postponed-model-imports", newImports);
+                        }
+                    }
+                }
+            }
+        }
+        // ==========================================================
 
         for (Map.Entry<String, ModelsMap> entry : objs.entrySet()) {
             // create hash map of codegen model
             CodegenModel cm = ModelUtils.getModelByName(entry.getKey(), objs);
             codegenModelMap.put(cm.classname, ModelUtils.getModelByName(entry.getKey(), objs));
         }
-
-        // create circular import
         for (String m : codegenModelMap.keySet()) {
             createImportMapOfSet(m, codegenModelMap);
         }
@@ -600,9 +702,7 @@ public class PythonSdkGenerator extends AbstractPythonCodegen implements NameSer
         }
     }
 
-
     private ModelsMap postProcessModelsMap(ModelsMap objs) {
-        // process enum in models
         objs = postProcessModelsEnum(objs);
 
         TreeSet<String> modelImports = new TreeSet<>();
@@ -613,7 +713,6 @@ public class PythonSdkGenerator extends AbstractPythonCodegen implements NameSer
             TreeSet<String> postponedExampleImports = new TreeSet<>();
             List<String> readOnlyFields = new ArrayList<>();
             hasModelsToImport = false;
-            int property_count = 1;
 
             PythonImports moduleImports = new PythonImports();
             CodegenModel model = m.getModel();
@@ -638,6 +737,11 @@ public class PythonSdkGenerator extends AbstractPythonCodegen implements NameSer
                 }
             }
 
+            // 添加基础导入
+            moduleImports.add("pydantic", "BaseModel");
+            moduleImports.add("pydantic", "ConfigDict");
+            moduleImports.add("pydantic", "StrictStr");
+
             List<CodegenProperty> codegenProperties = model.vars;
 
             // if model_generic.mustache is used
@@ -650,46 +754,24 @@ public class PythonSdkGenerator extends AbstractPythonCodegen implements NameSer
                 }
             }
 
-            // if pydantic model
-            if (!model.isEnum) {
-                moduleImports.add("pydantic", "ConfigDict");
-            }
-
-            //loop through properties/schemas to set up typing, pydantic
+            // loop through properties/schemas to set up typing, pydantic
             for (CodegenProperty cp : codegenProperties) {
                 // is readOnly?
                 if (cp.isReadOnly) {
                     readOnlyFields.add(cp.name);
                 }
 
+                // 检查是否是枚举
                 if (cp.isEnum) {
+                    moduleImports.add("enum", "Enum");
+                }
+                // 检查数组内部元素是否是枚举
+                if (cp.mostInnerItems != null && cp.mostInnerItems.isEnum) {
                     moduleImports.add("enum", "Enum");
                 }
 
                 String typing = pydantic.generatePythonType(cp);
                 cp.vendorExtensions.put("x-py-typing", typing);
-            }
-
-            // add parent model to import
-            if (!model.isEnum) {
-                moduleImports.add("pydantic", "BaseModel");
-            }
-
-            // set enum type in extensions and update `name` in enumVars
-            if (model.isEnum) {
-                for (Map<String, Object> enumVars : (List<Map<String, Object>>) model.getAllowableValues().get("enumVars")) {
-                    if ((Boolean) enumVars.get("isString")) {
-                        model.vendorExtensions.putIfAbsent("x-py-enum-type", "str");
-                        // update `name`, e.g.
-                        enumVars.put("name", toEnumVariableName((String) enumVars.get("value"), "str"));
-                    } else {
-                        model.vendorExtensions.putIfAbsent("x-py-enum-type", "int");
-                        // Do not overwrite the variable name if already set through x-enum-varnames
-                        if (model.vendorExtensions.get("x-enum-varnames") == null) {
-                            enumVars.put("name", toEnumVariableName((String) enumVars.get("value"), "int"));
-                        }
-                    }
-                }
             }
 
             // set the extensions if the key is absent
@@ -700,14 +782,13 @@ public class PythonSdkGenerator extends AbstractPythonCodegen implements NameSer
                 modelImports.removeAll(postponedModelImports);
             }
 
-            // import models one by one
             if (!modelImports.isEmpty()) {
                 Set<String> modelsToImport = new TreeSet<>();
                 for (String modelImport : modelImports) {
                     if (modelImport.equals(model.classname)) {
-                        // skip self import
                         continue;
                     }
+
                     Meta meta = schemaService.getMeta(model.getName());
                     if (meta != null) {
                         modelsToImport.add(generateImport(meta.getService().toLowerCase(), toModelFilename(modelImport), modelImport));
@@ -715,7 +796,6 @@ public class PythonSdkGenerator extends AbstractPythonCodegen implements NameSer
                 }
 
                 if (!modelsToImport.isEmpty()) {
-
                     model.getVendorExtensions().put("x-py-model-imports", modelsToImport);
                 }
             }
@@ -723,7 +803,6 @@ public class PythonSdkGenerator extends AbstractPythonCodegen implements NameSer
             if (!moduleImports.isEmpty()) {
                 model.getVendorExtensions().put("x-py-other-imports", moduleImports.exports());
             }
-
 
             if (!postponedModelImports.isEmpty()) {
                 Set<String> modelsToImport = new TreeSet<>();
@@ -745,75 +824,16 @@ public class PythonSdkGenerator extends AbstractPythonCodegen implements NameSer
         return objs;
     }
 
-
     @Override
-    public Map<String, Object> postProcessSupportingFileData(Map<String, Object> objs) {
-        Map<String, Object> data = super.postProcessSupportingFileData(objs);
-        data.put("exports", exports);
-
-        if (!modeSwitch.isEntry()) {
-            return data;
+    public String toEnumValue(String value, String datatype) {
+        if ("int".equals(datatype) || "float".equals(datatype)) {
+            return value;
+        } else {
+            return "'" + escapeText(value) + "'";
         }
-
-        String csvPath = (String) additionalProperties.get("CSV_PATH");
-        if (csvPath == null) {
-            log.error("no csv path found");
-            return data;
-        }
-
-        String apiCsvFile = csvPath + "/apis.csv";
-
-        Set<String> services = new TreeSet<>();
-        try {
-
-            CSVReader reader = new CSVReader(new FileReader(apiCsvFile));
-            List<String[]> rows = reader.readAll();
-            for (int i = 1; i < rows.size(); i++) {
-                services.add(rows.get(i)[0].toLowerCase());
-            }
-        } catch (Exception e) {
-            throw new RuntimeException("read csv fail", e);
-        }
-
-        services.forEach(s -> {
-            Map<String, String> specialKeywords = Map.of("copytrading", "CopyTrading", "viplending", "VIPLending");
-            String service = formatService(specialKeywords.getOrDefault(s, s));
-            serviceExports.add(String.format("from .%s_api import %sService", s, service));
-        });
-        data.put("serviceExports", serviceExports);
-
-        return data;
     }
 
-    private PythonType getPydanticType(CodegenProperty cp,
-                                       Set<String> modelImports,
-                                       Set<String> exampleImports,
-                                       Set<String> postponedModelImports,
-                                       Set<String> postponedExampleImports,
-                                       PythonImports moduleImports,
-                                       String classname) {
-        PydanticType pt = new PydanticType(
-                modelImports,
-                exampleImports,
-                postponedModelImports,
-                postponedExampleImports,
-                moduleImports,
-                classname
-        );
 
-        return pt.getType(cp);
-    }
-
-    /* Track the list of resources to imports from where.
-     *
-     * PythonImports are tracked as a set of modules to import from, and actual
-     * resources (classes, functions, etc.) to import.
-     *
-     * The same resource can be safely "imported" many times from the same
-     * module; during the rendering of the actual Python imports, duplicated
-     * entries will be automatically removed.
-     *
-     * */
     class PythonImports {
         private Map<String, Set<String>> imports;
 
@@ -821,11 +841,7 @@ public class PythonSdkGenerator extends AbstractPythonCodegen implements NameSer
             imports = new HashMap<>();
         }
 
-        /* Add a new import:
-         *
-         *      from $from import $what
-         *
-         */
+
         private void add(String from, String what) {
             // Fetch the set of all the objects already imported from `from` (if any).
             Set<String> allImportsFrom = imports.get(from);
@@ -837,11 +853,6 @@ public class PythonSdkGenerator extends AbstractPythonCodegen implements NameSer
             imports.put(from, allImportsFrom);
         }
 
-        /* Export a list of import statements as:
-         *
-         *      from $from import $what
-         *
-         */
         public Set<String> exports() {
             Set<String> results = new TreeSet<>();
 
@@ -915,7 +926,6 @@ public class PythonSdkGenerator extends AbstractPythonCodegen implements NameSer
 
         public PythonType constrain(String name, String value, boolean quote) {
             if (quote) {
-                // TODO:jon proper quoting
                 value = "\"" + value + "\"";
             }
             constraints.put(name, value);
@@ -949,7 +959,6 @@ public class PythonSdkGenerator extends AbstractPythonCodegen implements NameSer
 
         public PythonType annotate(String name, String value, boolean quote) {
             if (quote) {
-                // TODO:jon proper quoting
                 value = "\"" + value + "\"";
             }
             annotations.put(name, value);
@@ -1031,7 +1040,6 @@ public class PythonSdkGenerator extends AbstractPythonCodegen implements NameSer
             }
 
             String currentType = this.type + typeParam;
-
 
             // Build the parameters for the `Field`, possibly associated with
             // the type definition.
@@ -1136,14 +1144,6 @@ public class PythonSdkGenerator extends AbstractPythonCodegen implements NameSer
                 pt.constrain("min_length", cp.getMinItems());
             }
             if (cp.getUniqueItems()) {
-                // A unique "array" is a set
-                // TODO: pydantic v2: Pydantic suggest to convert this to a set, but this has some implications:
-                // https://github.com/pydantic/pydantic-core/issues/296
-                // Also, having a set instead of list creates complications:
-                // random JSON serialization order, unable to easily serialize
-                // to JSON, etc.
-                //pt.setType("Set");
-                //moduleImports.add("typing", "Set");
                 pt.setType("List");
                 moduleImports.add("typing", "List");
             } else {
@@ -1186,7 +1186,6 @@ public class PythonSdkGenerator extends AbstractPythonCodegen implements NameSer
         }
 
         private PythonType binaryType(IJsonSchemaValidationProperties cp) {
-            // same as above which has validation
             moduleImports.add("pydantic", "StrictBytes");
             moduleImports.add("pydantic", "StrictStr");
             moduleImports.add("typing", "Union");
@@ -1229,7 +1228,6 @@ public class PythonSdkGenerator extends AbstractPythonCodegen implements NameSer
 
         private PythonType fromCommon(CodegenProperty cp) {
             if (cp == null) {
-                // if codegen property (e.g. map/dict of undefined type) is null, default to string
                 log.warn("Codegen property is null (e.g. map/dict of undefined type). Default to typing.Any.");
                 moduleImports.add("typing", "Any");
                 return new PythonType("Any");
@@ -1272,23 +1270,7 @@ public class PythonSdkGenerator extends AbstractPythonCodegen implements NameSer
         private PythonType getType(CodegenProperty cp) {
             PythonType result = fromCommon(cp);
 
-            /* comment out the following since Literal requires python 3.8
-               also need to put cp.isEnum check after isArray, isMap check
-            if (cp.isEnum) {
-                // use Literal for inline enum
-                moduleImports.add("typing", "Literal");
-                List<String> values = new ArrayList<>();
-                List<Map<String, Object>> enumVars = (List<Map<String, Object>>) cp.allowableValues.get("enumVars");
-                if (enumVars != null) {
-                    for (Map<String, Object> enumVar : enumVars) {
-                        values.add((String) enumVar.get("value"));
-                    }
-                }
-                return String.format(Locale.ROOT, "%sEnum", cp.nameInPascalCase);
-            } else*/
-
             if (result == null) {
-                // TODO: Cleanup
                 if (!cp.isPrimitiveType || cp.isModel) { // model
                     // skip import if it's a circular reference
                     if (classname == null) {
@@ -1310,8 +1292,6 @@ public class PythonSdkGenerator extends AbstractPythonCodegen implements NameSer
                                 modelImports.add(cp.getDataType());
                                 exampleImports.add(cp.getDataType());
                             }
-                        } else {
-                            log.error("Failed to look up {} from the imports (map of set) of models.", cp.getDataType());
                         }
                     }
                     result = new PythonType(cp.getDataType());
@@ -1331,12 +1311,12 @@ public class PythonSdkGenerator extends AbstractPythonCodegen implements NameSer
                 pt = opt;
             }
 
-            if (!StringUtils.isEmpty(cp.description)) { // has description
+            if (!StringUtils.isEmpty(cp.description)) {
                 pt.annotate("description", cp.description);
             }
 
             // field
-            if (cp.baseName != null && !cp.baseName.equals(cp.name)) { // base name not the same as name
+            if (cp.baseName != null && !cp.baseName.equals(cp.name)) {
                 pt.annotate("alias", cp.baseName);
             }
 
@@ -1344,21 +1324,26 @@ public class PythonSdkGenerator extends AbstractPythonCodegen implements NameSer
                 pt.annotate("path_variable", "True");
             }
 
-            /* TODO review as example may break the build
-            if (!StringUtils.isEmpty(cp.getExample())) { // has example
-                fields.add(String.format(Locale.ROOT, "example=%s", cp.getExample()));
-            }*/
-
-            //String defaultValue = null;
-            if (!cp.required) { //optional
+            if (!cp.required) {
                 if (cp.defaultValue == null) {
                     pt.setDefaultValue("None");
                 } else {
                     if (cp.isArray || cp.isMap) {
-                        // TODO handle default value for array/map
                         pt.setDefaultValue("None");
                     } else {
-                        pt.setDefaultValue(cp.defaultValue);
+                        // 对于枚举类型的默认值，使用枚举类名作为前缀
+                        String defaultValue = cp.defaultValue;
+                        if (cp.isEnum && defaultValue != null) {
+                            // 获取枚举类名
+                            String enumName = getEnumClassName(cp);
+                            if (enumName != null && !enumName.isEmpty()) {
+                                // 检查是否已经是完整路径
+                                if (!defaultValue.contains(".")) {
+                                    defaultValue = enumName + "." + defaultValue;
+                                }
+                            }
+                        }
+                        pt.setDefaultValue(defaultValue);
                     }
                 }
             }
@@ -1374,4 +1359,37 @@ public class PythonSdkGenerator extends AbstractPythonCodegen implements NameSer
         }
     }
 
+    private String getEnumClassName(CodegenProperty var) {
+        if (var == null) {
+            return "Enum";
+        }
+
+        CodegenProperty target = var;
+        if (var.mostInnerItems != null && var.mostInnerItems.isEnum) {
+            target = var.mostInnerItems;
+        }
+
+        String fieldName = target.nameInCamelCase;
+        if (fieldName == null || fieldName.isEmpty()) {
+            fieldName = target.name;
+        }
+        if (fieldName != null && !fieldName.isEmpty()) {
+            return fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1) + "Enum";
+        }
+
+        return "Enum";
+    }
+
+    private String cleanUsing(String name) {
+        if (name == null) {
+            return null;
+        }
+
+        String result = name.replaceAll("(?i)Using(?:GET|POST|PUT|DELETE|PATCH)(.*?)(Response|Req|Event|Data)", "$2");
+        // 清理 using_get 下划线格式
+        result = result.replaceAll("(?i)using_(?:get|post|put|delete|patch).*?_(response|req|event|data)", "$1");
+        result = result.replaceAll("_\\d+_200", "");
+        result = result.replaceAll("_200", "");
+        return result;
+    }
 }
