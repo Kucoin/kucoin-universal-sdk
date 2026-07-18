@@ -35,9 +35,6 @@ import java.util.stream.Collectors;
 import static org.openapitools.codegen.utils.StringUtils.camelize;
 import static org.openapitools.codegen.utils.StringUtils.underscore;
 
-/**
- * @author isaac.tang
- */
 @Slf4j
 public class NodeSdkGenerator extends AbstractTypeScriptClientCodegen implements NameService {
 
@@ -102,31 +99,12 @@ public class NodeSdkGenerator extends AbstractTypeScriptClientCodegen implements
                 supportingFiles.add(new SupportingFile("module_exports_template.mustache", String.format("./%s/%s/export.template", service, formatPackage(subService))));
                 break;
             }
-            case TEST: {
-                apiTemplateFiles.put("api_test.mustache", ".ts");
-                break;
-            }
-            case TEST_TEMPLATE: {
-                apiTemplateFiles.put("api_test_template.mustache", ".template");
-                break;
-            }
-            case ENTRY: {
-                apiTemplateFiles.put("api_entry.mustache", ".ts");
-                supportingFiles.add(new SupportingFile("module.mustache", String.format("./%s/index.ts", service)));
-                supportingFiles.add(new SupportingFile("module_service.mustache", "./service/index.ts"));
-                supportingFiles.add(new SupportingFile("module_generated.mustache", "index.ts"));
-                break;
-            }
             case WS: {
                 modelTemplateFiles.put("model_ws.mustache", ".ts");
                 apiTemplateFiles.put("api_ws.mustache", ".ts");
                 additionalProperties.put("WS_MODE", "true");
                 supportingFiles.add(new SupportingFile("module.mustache", String.format("./%s/%s/index.ts", service, formatPackage(subService))));
                 supportingFiles.add(new SupportingFile("module_exports_template.mustache", String.format("./%s/%s/export.template", service, formatPackage(subService))));
-                break;
-            }
-            case WS_TEST: {
-                apiTemplateFiles.put("api_ws_test.mustache", ".ts");
                 break;
             }
             default:
@@ -639,50 +617,4 @@ public class NodeSdkGenerator extends AbstractTypeScriptClientCodegen implements
         return objs;
     }
 
-    @Override
-    public Map<String, Object> postProcessSupportingFileData(Map<String, Object> objs) {
-        Map<String, Object> data = super.postProcessSupportingFileData(objs);
-        data.put("exports", exports);
-        data.put("template-exports", serviceExportsTemplate);
-
-        String csvPath = (String) additionalProperties.get("CSV_PATH");
-        if (csvPath == null) {
-            log.error("no csv path found");
-            return data;
-        }
-
-        Set<String> serviceExports = new TreeSet<>();
-        Set<String> generatedExports = new TreeSet<>();
-
-        String apiCsvFile = csvPath + "/apis.csv";
-
-        Set<String> services = new TreeSet<>();
-        try {
-
-            CSVReader reader = new CSVReader(new FileReader(apiCsvFile));
-            List<String[]> rows = reader.readAll();
-            for (int i = 1; i < rows.size(); i++) {
-                services.add(rows.get(i)[0].toLowerCase());
-            }
-        } catch (Exception e) {
-            throw new RuntimeException("read csv fail", e);
-        }
-
-        services.forEach(s -> {
-            serviceExports.add(String.format("export * from \"./%s_api\"", s));
-
-            Map<String,String> specialKeywords = Map.of("copytrading", "CopyTrading", "viplending", "VIPLending");
-            String service = formatService(specialKeywords.getOrDefault(s, s));
-
-            serviceExports.add(String.format("export type {%s} from \"./%s_api\"", service+"Service", s));
-            generatedExports.add(String.format("export * from \"./%s\"", s));
-        });
-
-        generatedExports.add("export * from \"./service\"");
-
-        data.put("service-exports", serviceExports);
-        data.put("generated-exports", generatedExports);
-
-        return data;
-    }
 }
