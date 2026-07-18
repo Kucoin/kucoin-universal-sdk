@@ -9,6 +9,7 @@ from kucoin_universal_sdk.generate.service.futures_api import FuturesService
 from kucoin_universal_sdk.generate.service.margin_api import MarginService
 from kucoin_universal_sdk.generate.service.spot_api import SpotService
 from kucoin_universal_sdk.generate.service.viplending_api import VIPLendingService
+from kucoin_universal_sdk.generate.service.uta_api import UTAService
 
 
 class KucoinRestService(ABC):
@@ -56,4 +57,8 @@ class KucoinRestService(ABC):
     @abstractmethod
     def get_vip_lending_service(self) -> VIPLendingService:
         """Provides functions to access and manage VIP lending-related data."""
+        pass
+
+    @abstractmethod
+    def get_uta_service(self) -> UTAService:
         pass
