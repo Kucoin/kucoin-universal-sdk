@@ -219,7 +219,7 @@ public class GolangSdkGenerator extends AbstractGoCodegen implements NameService
 
     @Override
     public String formatService(String name) {
-        return camelize(name);
+        return cleanUsing(camelize(name));
     }
 
     @Override
@@ -670,4 +670,14 @@ public class GolangSdkGenerator extends AbstractGoCodegen implements NameService
         }
         return objs;
     }
+
+    private String cleanUsing(String name) {
+        if (name == null) {
+            return null;
+        }
+        return name.replaceAll("(?i)Using(?:GET|POST|PUT|DELETE|PATCH)\\d+", "")
+                .replaceAll("_+", "_")
+                .replaceAll("^_|_$", "");
+    }
+
 }
