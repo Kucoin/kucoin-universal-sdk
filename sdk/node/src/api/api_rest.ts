@@ -7,6 +7,8 @@ import { MarginService } from '@generate/service/margin_api';
 import { SpotService } from '@generate/service/spot_api';
 import { VIPLendingService } from '@generate/service/viplending_api';
 import { CopyTradingService } from '@src/generate';
+import { UTAService } from '@generate/service/uta_api';
+
 
 export interface KucoinRestService {
     /**
@@ -53,4 +55,7 @@ export interface KucoinRestService {
      * VipLendingService provides functions to access and manage VIP lending-related data.
      */
     getVipLendingService(): VIPLendingService;
+
+
+    getUtaService():UTAService;
 }

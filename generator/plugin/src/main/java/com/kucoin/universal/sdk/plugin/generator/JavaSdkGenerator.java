@@ -169,7 +169,7 @@ public class JavaSdkGenerator extends AbstractJavaCodegen implements NameService
 
     @Override
     public String formatService(String name) {
-        return camelize(name);
+        return cleanUsing(camelize(name));
     }
 
     @Override
@@ -690,5 +690,14 @@ public class JavaSdkGenerator extends AbstractJavaCodegen implements NameService
             return false;
         }
         return tags.contains("MAIN") && tags.contains("ALL");
+    }
+
+    private String cleanUsing(String name) {
+        if (name == null) {
+            return null;
+        }
+        return name.replaceAll("(?i)Using(?:GET|POST|PUT|DELETE|PATCH)\\d+", "")
+                .replaceAll("_+", "_")
+                .replaceAll("^_|_$", "");
     }
 }
