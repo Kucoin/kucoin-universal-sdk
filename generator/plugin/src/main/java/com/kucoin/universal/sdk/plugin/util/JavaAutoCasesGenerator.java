@@ -508,7 +508,10 @@ public class JavaAutoCasesGenerator {
             out.println();
 
             for (ApiInfo api : apiList) {
-                if (api.requestExample == null || api.requestExample.isEmpty()) {
+                // main() invokes a request factory for every API that has request parameters.
+                // Generate the factory even when the OpenAPI parameters do not provide examples;
+                // in that case it intentionally returns an empty ObjectNode for users to fill in.
+                if (!api.hasRequest) {
                     continue;
                 }
 

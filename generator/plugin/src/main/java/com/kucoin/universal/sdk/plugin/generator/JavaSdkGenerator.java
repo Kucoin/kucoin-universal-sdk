@@ -697,6 +697,7 @@ public class JavaSdkGenerator extends AbstractJavaCodegen implements NameService
             return null;
         }
         return name.replaceAll("(?i)Using(?:GET|POST|PUT|DELETE|PATCH)\\d+", "")
+                .replaceAll("(?i)(?:GET|POST|PUT|DELETE|PATCH)200(?=Response)", "")
                 .replaceAll("_+", "_")
                 .replaceAll("^_|_$", "");
     }
