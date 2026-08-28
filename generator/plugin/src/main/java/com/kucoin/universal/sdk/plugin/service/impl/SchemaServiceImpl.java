@@ -450,7 +450,6 @@ public class SchemaServiceImpl implements SchemaService {
                 if (contentSchema.get$ref() != null) {
 
                     String responseSchemaRefName = ModelUtils.getSimpleRef(contentSchema.get$ref());
-                    responseSchemaRefName = normalizeGenericTypeName(responseSchemaRefName);
                     Schema responseSchema = ModelUtils.getSchema(openAPI, responseSchemaRefName);
                     if (responseSchema == null) {
                         throw new RuntimeException("can not find responseSchema " + responseSchemaRefName);

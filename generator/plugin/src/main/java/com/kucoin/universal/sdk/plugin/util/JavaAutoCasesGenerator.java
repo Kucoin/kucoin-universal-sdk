@@ -10,6 +10,7 @@ import io.swagger.v3.oas.models.parameters.Parameter;
 import io.swagger.v3.oas.models.responses.ApiResponse;
 import io.swagger.v3.oas.models.responses.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.FileWriter;
@@ -302,7 +303,29 @@ public class JavaAutoCasesGenerator {
         if (value == null) {
             return null;
         }
-        return value.toString();
+        return value.toString().trim();
+    }
+
+    private static String toJavaStringLiteral(String value) {
+        return "\"" + StringEscapeUtils.escapeJava(value) + "\"";
+    }
+
+    private static boolean isStructuredJsonValue(Object value) {
+        return value instanceof JsonNode
+                || value instanceof Collection<?>
+                || value instanceof Map<?, ?>
+                || value != null && value.getClass().isArray();
+    }
+
+    private static void writeStructuredRequestField(PrintWriter out, String key, Object value) throws Exception {
+        String json = value instanceof JsonNode
+                ? value.toString()
+                : mapper.writeValueAsString(value);
+        out.println("        try {");
+        out.println("            request.set(" + toJavaStringLiteral(key) + ", mapper.readTree(" + toJavaStringLiteral(json) + "));");
+        out.println("        } catch (Exception e) {");
+        out.println("            throw new RuntimeException(\"Failed to parse JSON for field: " + StringEscapeUtils.escapeJava(key) + "\", e);");
+        out.println("        }");
     }
 
     private static String getApiVariableName(String subService) {
@@ -527,30 +550,29 @@ public class JavaAutoCasesGenerator {
                 for (Map.Entry<String, Object> entry : api.requestExample.entrySet()) {
                     String key = entry.getKey();
                     Object value = entry.getValue();
-                    if (value instanceof String) {
+                    if (value == null) {
+                        out.println("        request.putNull(" + toJavaStringLiteral(key) + ");");
+                    } else if (isStructuredJsonValue(value)) {
+                        writeStructuredRequestField(out, key, value);
+                    } else if (value instanceof String) {
                         String strValue = (String) value;
                         if ((strValue.startsWith("[") && strValue.endsWith("]")) ||
                                 (strValue.startsWith("{") && strValue.endsWith("}"))) {
-                            out.println("        try {");
-                            out.println("            JsonNode jsonNode = mapper.readTree(\"" + strValue.replace("\"", "\\\"") + "\");");
-                            out.println("            request.set(\"" + key + "\", jsonNode);");
-                            out.println("        } catch (Exception e) {");
-                            out.println("            throw new RuntimeException(\"Failed to parse JSON for field: " + key + "\", e);");
-                            out.println("        }");
+                            writeStructuredRequestField(out, key, mapper.readTree(strValue));
                         } else {
-                            out.println("        request.put(\"" + key + "\", \"" + strValue + "\");");
+                            out.println("        request.put(" + toJavaStringLiteral(key) + ", " + toJavaStringLiteral(strValue) + ");");
                         }
                     } else if (value instanceof Number) {
                         Number num = (Number) value;
                         if (num instanceof Long || num.longValue() > Integer.MAX_VALUE || num.longValue() < Integer.MIN_VALUE) {
-                            out.println("        request.put(\"" + key + "\", " + num + "L);");
+                            out.println("        request.put(" + toJavaStringLiteral(key) + ", " + num + "L);");
                         } else {
-                            out.println("        request.put(\"" + key + "\", " + num + ");");
+                            out.println("        request.put(" + toJavaStringLiteral(key) + ", " + num + ");");
                         }
                     } else if (value instanceof Boolean) {
-                        out.println("        request.put(\"" + key + "\", " + value + ");");
+                        out.println("        request.put(" + toJavaStringLiteral(key) + ", " + value + ");");
                     } else {
-                        out.println("        request.put(\"" + key + "\", \"" + value + "\");");
+                        out.println("        request.put(" + toJavaStringLiteral(key) + ", " + toJavaStringLiteral(value.toString()) + ");");
                     }
                 }
 

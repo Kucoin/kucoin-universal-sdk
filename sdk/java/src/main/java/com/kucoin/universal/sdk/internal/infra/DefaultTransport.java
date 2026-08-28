@@ -186,12 +186,7 @@ public final class DefaultTransport implements Transport {
             Map<String, Object> map = mapper.convertValue(reqObj, Map.class);
             for (Map.Entry<String, Object> e : map.entrySet()) {
               if (excludeField.contains(e.getKey()) || e.getValue() == null) continue;
-              String key = e.getKey();
-              Object valObj = e.getValue();
-              String val =
-                  valObj instanceof Enum<?> ? ((Enum<?>) valObj).name() : String.valueOf(valObj);
-              urlBuilder.addQueryParameter(key, val);
-              queryParam.add(new Pair<>(key, val));
+              addQueryParameters(urlBuilder, queryParam, e.getKey(), e.getValue());
             }
           }
           break;
@@ -229,6 +224,42 @@ public final class DefaultTransport implements Transport {
     sig.forEach(qb::header);
 
     return qb.build();
+  }
+
+  /** Adds a query parameter, expanding collection and array values into repeated parameters. */
+  private void addQueryParameters(
+      HttpUrl.Builder urlBuilder,
+      List<Pair<String, String>> queryParam,
+      String key,
+      Object value) {
+    if (value instanceof Iterable<?>) {
+      for (Object item : (Iterable<?>) value) {
+        addQueryParameter(urlBuilder, queryParam, key, item);
+      }
+      return;
+    }
+
+    if (value.getClass().isArray()) {
+      int length = java.lang.reflect.Array.getLength(value);
+      for (int i = 0; i < length; i++) {
+        addQueryParameter(urlBuilder, queryParam, key, java.lang.reflect.Array.get(value, i));
+      }
+      return;
+    }
+
+    addQueryParameter(urlBuilder, queryParam, key, value);
+  }
+
+  private void addQueryParameter(
+      HttpUrl.Builder urlBuilder,
+      List<Pair<String, String>> queryParam,
+      String key,
+      Object value) {
+    if (value == null) return;
+
+    String serializedValue = value instanceof Enum<?> ? value.toString() : String.valueOf(value);
+    urlBuilder.addQueryParameter(key, serializedValue);
+    queryParam.add(new Pair<>(key, serializedValue));
   }
 
   private <T extends Response<T, RestResponse<T>>> T doRequest(
