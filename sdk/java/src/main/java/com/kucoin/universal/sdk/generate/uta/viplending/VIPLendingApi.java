@@ -18,7 +18,6 @@ public interface VIPLendingApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 20
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetAccountsResp getAccounts(GetAccountsReq req);
@@ -38,7 +37,6 @@ public interface VIPLendingApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 10
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetDiscountRateConfigsResp getDiscountRateConfigs(GetDiscountRateConfigsReq req);
@@ -58,7 +56,6 @@ public interface VIPLendingApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 5
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetLoanInfoResp getLoanInfo(GetLoanInfoReq req);

@@ -18,7 +18,6 @@ public interface AffiliateApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 30
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetInvitedResp getInvited(GetInvitedReq req);
@@ -38,7 +37,6 @@ public interface AffiliateApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 30
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetKuminingResp getKumining(GetKuminingReq req);
@@ -58,7 +56,6 @@ public interface AffiliateApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 30
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetCommissionResp getCommission(GetCommissionReq req);
@@ -78,7 +75,6 @@ public interface AffiliateApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 30
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetTransactionResp getTransaction(GetTransactionReq req);
@@ -98,7 +94,6 @@ public interface AffiliateApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 30
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetTradeHistoryResp getTradeHistory(GetTradeHistoryReq req);

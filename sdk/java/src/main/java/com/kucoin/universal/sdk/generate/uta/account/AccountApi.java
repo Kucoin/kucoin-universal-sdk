@@ -20,7 +20,6 @@ public interface AccountApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 15
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetInterestHistoryResp getInterestHistory(GetInterestHistoryReq req);
@@ -40,7 +39,6 @@ public interface AccountApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 10
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetBorrowingRatesAndLimitsResp getBorrowingRatesAndLimits(GetBorrowingRatesAndLimitsReq req);
@@ -60,7 +58,6 @@ public interface AccountApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 30
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetAccountModeResp getAccountMode();
@@ -80,7 +77,6 @@ public interface AccountApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 30
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     SetAccountModeResp setAccountMode(SetAccountModeReq req);
@@ -100,7 +96,6 @@ public interface AccountApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 20
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetOESCustodyQuotaResp getOESCustodyQuota(GetOESCustodyQuotaReq req);
@@ -120,7 +115,6 @@ public interface AccountApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 5
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     SetSubAccountTransferPermissionResp setSubAccountTransferPermission(SetSubAccountTransferPermissionReq req);
@@ -140,7 +134,6 @@ public interface AccountApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 5
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetAccountResp getAccount();
@@ -160,7 +153,6 @@ public interface AccountApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 10
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetLeverageResp getLeverage(GetLeverageReq req);
@@ -180,7 +172,6 @@ public interface AccountApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 20
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     ModifyMarginCrossLeverageResp modifyMarginCrossLeverage(ModifyMarginCrossLeverageReq req);
@@ -200,7 +191,6 @@ public interface AccountApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 20
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     ModifyLeverageResp modifyLeverage(ModifyLeverageReq req);
@@ -220,7 +210,6 @@ public interface AccountApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 5
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetAccountOverviewResp getAccountOverview();
@@ -240,7 +229,6 @@ public interface AccountApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 30
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetApikeyInfoResp getApikeyInfo();
@@ -260,7 +248,6 @@ public interface AccountApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 20
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     AddSubAccountApiResp addSubAccountApi(AddSubAccountApiReq req);
@@ -280,7 +267,6 @@ public interface AccountApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 3
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetFeeRateResp getFeeRate(GetFeeRateReq req);
@@ -300,7 +286,6 @@ public interface AccountApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 30
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     ModifySubAccountApiResp modifySubAccountApi(ModifySubAccountApiReq req);
@@ -320,7 +305,6 @@ public interface AccountApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 30
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     DeleteSubAccountApiResp deleteSubAccountApi(DeleteSubAccountApiReq req);
@@ -340,7 +324,6 @@ public interface AccountApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 20
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetSubAccountApiListResp getSubAccountApiList(GetSubAccountApiListReq req);
@@ -360,7 +343,6 @@ public interface AccountApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 15
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     AddSubAccountResp addSubAccount(AddSubAccountReq req);
@@ -380,7 +362,6 @@ public interface AccountApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 2
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetAccountLedgerResp getAccountLedger(GetAccountLedgerReq req);
@@ -400,7 +381,6 @@ public interface AccountApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 5
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetClassicAccountBalanceResp getClassicAccountBalance(GetClassicAccountBalanceReq req);
@@ -420,7 +400,6 @@ public interface AccountApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 5
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetDepositAddressResp getDepositAddress(GetDepositAddressReq req);
@@ -440,7 +419,6 @@ public interface AccountApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 2
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetDepositHistoryResp getDepositHistory(GetDepositHistoryReq req);
@@ -460,7 +438,6 @@ public interface AccountApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 5
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetSubAccountBalanceResp getSubAccountBalance(GetSubAccountBalanceReq req);
@@ -480,7 +457,6 @@ public interface AccountApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 20
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetTransferQuotaResp getTransferQuota(GetTransferQuotaReq req);
@@ -500,7 +476,6 @@ public interface AccountApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 1
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetWithdrawalQuotasResp getWithdrawalQuotas(GetWithdrawalQuotasReq req);
@@ -520,7 +495,6 @@ public interface AccountApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 2
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetWithdrawalHistoryResp getWithdrawalHistory(GetWithdrawalHistoryReq req);
@@ -540,7 +514,6 @@ public interface AccountApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 20
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetAllRateLimitResp getAllRateLimit();
@@ -560,7 +533,6 @@ public interface AccountApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 5
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetRateLimitCapResp getRateLimitCap();
@@ -580,7 +552,6 @@ public interface AccountApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 2
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetSubAccountListResp getSubAccountList(GetSubAccountListReq req);
@@ -600,7 +571,6 @@ public interface AccountApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 3
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetRateLimitResp getRateLimit(GetRateLimitReq req);
@@ -620,7 +590,6 @@ public interface AccountApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 15
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     SetRateLimitResp setRateLimit(SetRateLimitReq req);
@@ -640,7 +609,6 @@ public interface AccountApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 4
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     FlexTransferResp flexTransfer(FlexTransferReq req);
@@ -660,7 +628,6 @@ public interface AccountApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 5
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     SetKcsFeeDeductionResp setKcsFeeDeduction(SetKcsFeeDeductionReq req);
@@ -680,7 +647,6 @@ public interface AccountApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 5
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     CancelWithdrawalResp cancelWithdrawal(CancelWithdrawalReq req);
@@ -700,7 +666,6 @@ public interface AccountApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 5
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     WithdrawalV3Resp withdrawalV3(WithdrawalV3Req req);

@@ -18,7 +18,6 @@ public interface PositionsApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 15
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetPrivateFundingFeeHistoryResp getPrivateFundingFeeHistory(GetPrivateFundingFeeHistoryReq req);
@@ -38,7 +37,6 @@ public interface PositionsApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 2
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetPositionsHistoryResp getPositionsHistory(GetPositionsHistoryReq req);
@@ -58,7 +56,6 @@ public interface PositionsApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 10
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetMarginModeResp getMarginMode(GetMarginModeReq req);
@@ -78,7 +75,6 @@ public interface PositionsApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 3
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetPositionListResp getPositionList(GetPositionListReq req);
@@ -98,7 +94,6 @@ public interface PositionsApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 10
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     ModifyMarginModeResp modifyMarginMode(ModifyMarginModeReq req);
@@ -118,7 +113,6 @@ public interface PositionsApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 5
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     ModifyIsolatedFuturesMarginResp modifyIsolatedFuturesMargin(ModifyIsolatedFuturesMarginReq req);

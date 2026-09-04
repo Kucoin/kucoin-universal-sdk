@@ -18,7 +18,6 @@ public interface MarketApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 20
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetAnnouncementsResp getAnnouncements(GetAnnouncementsReq req);
@@ -38,7 +37,6 @@ public interface MarketApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 15
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetBorrowableCurrenciesResp getBorrowableCurrencies();
@@ -58,7 +56,6 @@ public interface MarketApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 10
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetCollateralRatioResp getCollateralRatio();
@@ -78,7 +75,6 @@ public interface MarketApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 5
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetHistoryFundingRateResp getHistoryFundingRate(GetHistoryFundingRateReq req);
@@ -98,7 +94,6 @@ public interface MarketApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 2
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetIndexPriceResp getIndexPrice(GetIndexPriceReq req);
@@ -118,7 +113,6 @@ public interface MarketApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 3
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetKlinesResp getKlines(GetKlinesReq req);
@@ -138,7 +132,6 @@ public interface MarketApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 10
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetOpenInterestResp getOpenInterest(GetOpenInterestReq req);
@@ -158,7 +151,6 @@ public interface MarketApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 3
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetOrderBookResp getOrderBook(GetOrderBookReq req);
@@ -178,7 +170,6 @@ public interface MarketApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 15
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetPositionTiersResp getPositionTiers(GetPositionTiersReq req);
@@ -198,7 +189,6 @@ public interface MarketApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 15
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetTickerResp getTicker(GetTickerReq req);
@@ -218,7 +208,6 @@ public interface MarketApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 3
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetTradeResp getTrade(GetTradeReq req);
@@ -238,7 +227,6 @@ public interface MarketApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 15
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetOEScurrencyResp getOEScurrency(GetOEScurrencyReq req);
@@ -258,7 +246,6 @@ public interface MarketApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 3
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetServiceStatusResp getServiceStatus(GetServiceStatusReq req);
@@ -278,7 +265,6 @@ public interface MarketApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 20
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetKYCRegionsResp getKYCRegions();
@@ -298,7 +284,6 @@ public interface MarketApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 10
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetClientIPAddressResp getClientIPAddress();
@@ -318,7 +303,6 @@ public interface MarketApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 2
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetCallAuctionInfoResp getCallAuctionInfo(GetCallAuctionInfoReq req);
@@ -338,7 +322,6 @@ public interface MarketApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 3
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetCurrenciesResp getCurrencies(GetCurrenciesReq req);
@@ -358,7 +341,6 @@ public interface MarketApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 3
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetCurrencyResp getCurrency(GetCurrencyReq req);
@@ -378,7 +360,6 @@ public interface MarketApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 10
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetMaxOrderQuantityResp getMaxOrderQuantity(GetMaxOrderQuantityReq req);
@@ -398,7 +379,6 @@ public interface MarketApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 3
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetFiatPriceResp getFiatPrice(GetFiatPriceReq req);
@@ -418,7 +398,6 @@ public interface MarketApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 4
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetSymbolResp getSymbol(GetSymbolReq req);
@@ -438,7 +417,6 @@ public interface MarketApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 3
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetTradeStatisticsResp getTradeStatistics();
@@ -458,7 +436,6 @@ public interface MarketApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 3
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetCurrentFundingRatesResp getCurrentFundingRates(GetCurrentFundingRatesReq req);
@@ -478,7 +455,6 @@ public interface MarketApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 5
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetInterestRateIndexResp getInterestRateIndex(GetInterestRateIndexReq req);

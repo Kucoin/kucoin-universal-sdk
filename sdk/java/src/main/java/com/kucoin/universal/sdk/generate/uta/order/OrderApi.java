@@ -18,7 +18,6 @@ public interface OrderApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 20
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     BatchCancelOrdersBySymbolResp batchCancelOrdersBySymbol(BatchCancelOrdersBySymbolReq req);
@@ -38,7 +37,6 @@ public interface OrderApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 4
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     BatchCancelOrdersByIdResp batchCancelOrdersById(BatchCancelOrdersByIdReq req);
@@ -58,7 +56,6 @@ public interface OrderApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 1
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     CancelOrderResp cancelOrder(CancelOrderReq req);
@@ -78,7 +75,6 @@ public interface OrderApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 4
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetOrderDetailsResp getOrderDetails(GetOrderDetailsReq req);
@@ -98,7 +94,6 @@ public interface OrderApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 4
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetTradeHistoryResp getTradeHistory(GetTradeHistoryReq req);
@@ -118,7 +113,6 @@ public interface OrderApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 4
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetOrderHistoryResp getOrderHistory(GetOrderHistoryReq req);
@@ -138,7 +132,6 @@ public interface OrderApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 4
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     GetOpenOrderListResp getOpenOrderList(GetOpenOrderListReq req);
@@ -158,7 +151,6 @@ public interface OrderApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 1
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     PlaceOrderResp placeOrder(PlaceOrderReq req);
@@ -178,7 +170,6 @@ public interface OrderApi {
     * <li>API-RATE-LIMIT-WEIGHT  : 2
     * </ul>
     *
-    * @see <a href="">docs</a>
     */
 
     AmendOrderResp amendOrder(AmendOrderReq req);
