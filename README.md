@@ -164,33 +164,6 @@ The KuCoin Universal SDK is built with a code-generation-first approach to ensur
 
 This design ensures that developers can rely on the SDK for high-quality, up-to-date, and consistent integrations across all languages.
 
-### 🔧 Code Generation Workflow
-```mermaid
-graph LR
-    A[Documentation Description Meta File] --> B[Preprocessor]
-    style B fill:#f9f,stroke:#333,stroke-width:2
-    B --> C1[OpenAPI Specification 1]
-    B --> C2[OpenAPI Specification 2]
-    style C1 fill:#f96,stroke:#333,stroke-width:2
-    style C2 fill:#f96,stroke:#333,stroke-width:2
-    style D fill:#f9f,stroke:#333,stroke-width:2
-    C1 --> D[Code Generator]
-    C2 --> D[Code Generator]
-    D --> E[Final Code]
-```
-
-1. **OpenAPI Specification**:
-   - All SDKs are generated based on the official KuCoin OpenAPI specifications.
-   - This ensures that the SDK always aligns with the latest API updates.
-
-2. **Code Generator**:
-   - The SDK leverages a custom code generator built on top of the OpenAPI Generator.
-   - The generator is tailored to produce idiomatic code for each target language, adhering to its conventions and best practices.
-
-3. **Generated Code Structure**:
-   - Each language SDK is organized into specific modules to provide clear separation of concerns and ease of use.
-   - Consistent abstractions ensure similar functionality and design principles across all supported languages.
-
 
 ## 🤝 Contribution Guidelines
 
