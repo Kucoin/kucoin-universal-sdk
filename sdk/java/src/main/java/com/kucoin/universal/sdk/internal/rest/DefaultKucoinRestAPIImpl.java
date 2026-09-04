@@ -92,10 +92,10 @@ public final class DefaultKucoinRestAPIImpl implements KucoinRestService {
     return vipLendingService;
   }
 
-    @Override
-    public UTAService getUTAService() {
+  @Override
+  public UTAService getUTAService() {
         return utaService;
-    }
+  }
 
     @Override
   public void closeService() {
