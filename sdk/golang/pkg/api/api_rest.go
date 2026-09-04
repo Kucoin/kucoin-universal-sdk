@@ -40,4 +40,6 @@ type KucoinRestService interface {
 	// GetVipLendingService
 	// VipLendingService provides functions to access and manage VIP lending-related data.
 	GetVipLendingService() service.ViplendingService
+
+	GetUTAService() service.UTAService
 }

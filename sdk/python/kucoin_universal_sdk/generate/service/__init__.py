@@ -7,3 +7,4 @@ from .futures_api import FuturesService
 from .margin_api import MarginService
 from .spot_api import SpotService
 from .viplending_api import VIPLendingService
+from .uta_api import UTAService

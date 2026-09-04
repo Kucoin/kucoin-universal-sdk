@@ -18,6 +18,7 @@ type KuCoinDefaultRestImpl struct {
 	marginService      service.MarginService
 	spotService        service.SpotService
 	vipLendingService  service.ViplendingService
+	utaService         service.UTAService
 }
 
 func NewKuCoinDefaultRestImpl(op *types.ClientOption) *KuCoinDefaultRestImpl {
@@ -39,6 +40,7 @@ func NewKuCoinDefaultRestImpl(op *types.ClientOption) *KuCoinDefaultRestImpl {
 		marginService:      service.NewMarginService(transport),
 		spotService:        service.NewSpotService(transport),
 		vipLendingService:  service.NewViplendingService(transport),
+		utaService:         service.NewUTAService(transport),
 	}
 }
 
@@ -76,4 +78,8 @@ func (impl *KuCoinDefaultRestImpl) GetSpotService() service.SpotService {
 
 func (impl *KuCoinDefaultRestImpl) GetVipLendingService() service.ViplendingService {
 	return impl.vipLendingService
+}
+
+func (impl *KuCoinDefaultRestImpl) GetUTAService() service.UTAService {
+	return impl.utaService
 }

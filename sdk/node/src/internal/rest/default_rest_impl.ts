@@ -13,6 +13,7 @@ import { DefaultTransport } from '@internal/infra/default_transport';
 import { DEFAULT_TRANSPORT_OPTION } from '@src/model';
 import { CopyTradingService, CopyTradingServiceImpl } from '@src/generate';
 import { logger } from '@src/common';
+import { UTAService, UTAServiceImpl } from '@src/generate/service/uta_api';
 
 export class DefaultKucoinRestAPIImpl implements KucoinRestService {
     private readonly accountService: AccountService;
@@ -24,6 +25,7 @@ export class DefaultKucoinRestAPIImpl implements KucoinRestService {
     private readonly marginService: MarginService;
     private readonly spotService: SpotService;
     private readonly vipLendingService: VIPLendingService;
+    private readonly utaService: UTAService
 
     constructor(options: ClientOption) {
         if (!options) {
@@ -47,6 +49,7 @@ export class DefaultKucoinRestAPIImpl implements KucoinRestService {
         this.marginService = new MarginServiceImpl(transport);
         this.spotService = new SpotServiceImpl(transport);
         this.vipLendingService = new VIPLendingServiceImpl(transport);
+        this.utaService = new UTAServiceImpl(transport);
     }
 
     getAccountService(): AccountService {
@@ -83,5 +86,9 @@ export class DefaultKucoinRestAPIImpl implements KucoinRestService {
 
     getVipLendingService(): VIPLendingService {
         return this.vipLendingService;
+    }
+
+    getUtaService():UTAService{
+        return this.utaService;
     }
 }

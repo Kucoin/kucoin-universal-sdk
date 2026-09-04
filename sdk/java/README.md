@@ -8,57 +8,56 @@ For an overview of the project and SDKs in other languages, refer to the [Main R
 
 ## 📦 Installation
 
-### Latest Version: `0.1.1-alpha`
+### Latest Version: `0.1.2-alpha`
 
 **Note**: This SDK is currently in the Alpha phase. We are actively iterating and improving its features, stability, and documentation. Feedback and contributions are highly encouraged to help us refine the SDK.
+
+### Requirements
+
+- JDK 8 or later
+- Maven 3.6 or later
 
 ```xml
 <dependency>
     <groupId>com.kucoin</groupId>
     <artifactId>kucoin-universal-sdk</artifactId>
-    <version>0.1.1-alpha</version>
+    <version>0.1.2-alpha</version>
 </dependency>
 ```
 
 ## 📖 Getting Started
 
-Here's a quick example to get you started with the SDK in **Java**.
+The following examples use the Unified Trading Account (UTA) APIs.
 
-```JAVA
+### UTA REST API
+
+Set your API credentials as environment variables. Do not hard-code them in source code.
+
+```bash
+export API_KEY="your-api-key"
+export API_SECRET="your-api-secret"
+export API_PASSPHRASE="your-api-passphrase"
+```
+
+```java
 package com.kucoin.example;
 
 import com.kucoin.universal.sdk.api.DefaultKucoinClient;
 import com.kucoin.universal.sdk.api.KucoinClient;
 import com.kucoin.universal.sdk.api.KucoinRestService;
-import com.kucoin.universal.sdk.generate.spot.market.GetPartOrderBookReq;
-import com.kucoin.universal.sdk.generate.spot.market.GetPartOrderBookResp;
-import com.kucoin.universal.sdk.generate.spot.market.MarketApi;
+import com.kucoin.universal.sdk.generate.uta.account.AccountApi;
+import com.kucoin.universal.sdk.generate.uta.account.GetAccountOverviewResp;
 import com.kucoin.universal.sdk.model.ClientOption;
 import com.kucoin.universal.sdk.model.Constants;
 import com.kucoin.universal.sdk.model.TransportOption;
-import java.util.List;
-import java.util.stream.Collectors;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
-public class ExampleGetStarted {
-
-  public static String stringifyDepth(List<List<String>> depth) {
-    return depth.stream()
-        .map(row -> "[" + String.join(", ", row) + "]")
-        .collect(Collectors.joining(", "));
-  }
-
-  public static void example() {
-    // Retrieve API secret information from environment variables
+public final class UtaRestExample {
+  public static void main(String[] args) {
     String key = System.getenv("API_KEY");
     String secret = System.getenv("API_SECRET");
     String passphrase = System.getenv("API_PASSPHRASE");
 
-    // Set specific options, others will fall back to default values
     TransportOption httpTransportOption = TransportOption.builder().keepAlive(true).build();
-
-    // Create a client using the specified options
     ClientOption clientOption =
         ClientOption.builder()
             .key(key)
@@ -71,32 +70,52 @@ public class ExampleGetStarted {
             .build();
 
     KucoinClient client = new DefaultKucoinClient(clientOption);
-
-    // Get the Restful Service
     KucoinRestService kucoinRestService = client.getRestService();
+    AccountApi accountApi = kucoinRestService.getUTAService().getAccountApi();
 
-    MarketApi spotMarketApi = kucoinRestService.getSpotService().getMarketApi();
-
-    // Query partial order book depth data (aggregated by price).
-    // Build the request using the builder pattern.
-    GetPartOrderBookReq request =
-        GetPartOrderBookReq.builder().symbol("BTC-USDT").size("20").build();
-
-    GetPartOrderBookResp response = spotMarketApi.getPartOrderBook(request);
-
-    log.info(
-        "time={}, sequence={}, bids={}, asks={}",
-        response.getTime(),
-        response.getSequence(),
-        stringifyDepth(response.getBids()),
-        stringifyDepth(response.getAsks()));
-  }
-
-  public static void main(String[] args) {
-    example();
+    GetAccountOverviewResp response = accountApi.getAccountOverview();
+    System.out.println(response);
   }
 }
 ```
+
+### UTA Public WebSocket API
+
+Public UTA WebSocket subscriptions do not require API credentials. The following example subscribes
+to the Spot ticker for `BTC-USDT` and keeps receiving messages until you stop the process.
+
+```java
+package com.kucoin.example;
+
+import com.kucoin.universal.sdk.api.DefaultKucoinClient;
+import com.kucoin.universal.sdk.api.KucoinClient;
+import com.kucoin.universal.sdk.generate.uta.publicws.UtaPublicWs;
+import com.kucoin.universal.sdk.model.ClientOption;
+import com.kucoin.universal.sdk.model.PushTradeType;
+import com.kucoin.universal.sdk.model.TransportOption;
+import com.kucoin.universal.sdk.model.WebSocketClientOption;
+
+public final class UtaPublicWebSocketExample {
+  public static void main(String[] args) throws InterruptedException {
+    ClientOption clientOption =
+        ClientOption.builder()
+            // DefaultKucoinClient also initializes its REST service.
+            .transportOption(TransportOption.defaults())
+            .websocketClientOption(WebSocketClientOption.defaults())
+            .build();
+    KucoinClient client = new DefaultKucoinClient(clientOption);
+    UtaPublicWs websocket = client.getWsService().newUtaPublicWS(PushTradeType.SPOT);
+
+    Runtime.getRuntime().addShutdownHook(new Thread(websocket::stop));
+    websocket.start();
+    websocket.ticker("BTC-USDT", event -> System.out.println("Ticker: " + event));
+
+    System.out.println("Subscribed to BTC-USDT. Press Ctrl+C to stop.");
+    Thread.currentThread().join();
+  }
+}
+```
+
 ## 📚 Documentation
 Official Documentation: [KuCoin API Docs](https://www.kucoin.com/docs-new)
 
@@ -126,12 +145,22 @@ This section provides specific considerations and recommendations for using the 
 
 ### WebSocket API Notes
 
+#### UTA Direct Public WebSocket
+
+- UTA public push streams use the direct WebSocket API, rather than the legacy token/topic API.
+- Create a UTA public service with `newUtaPublicWS(PushTradeType.SPOT)` or
+  `newUtaPublicWS(PushTradeType.FUTURES)`.
+- UTA public subscriptions do not require API credentials. Call `start()` before subscribing and
+  `stop()` during application shutdown.
+
 #### Client Features
 - **Flexible Service Creation**:
     - Supports creating services for public/private channels in Spot, Futures, or Margin trading as needed.
     - Multiple services can be created independently.
 - **Service Lifecycle**:
-    - If a service is closed, create a new service instead of reusing it to avoid undefined behavior.
+    - Register `stop()` in an application shutdown hook to close WebSocket resources cleanly.
+    - UTA direct push services can be started again after `stop()`. For legacy WebSocket services,
+      create a new service after closing it.
 - **Connection-to-Channel Mapping**:
     - Each WebSocket connection corresponds to a specific channel type. For example:
         - Spot public/private and Futures public/private services require 4 active WebSocket connections.

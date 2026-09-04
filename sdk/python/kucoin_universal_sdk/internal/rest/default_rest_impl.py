@@ -10,6 +10,8 @@ from kucoin_universal_sdk.generate.service.futures_api import FuturesService, Fu
 from kucoin_universal_sdk.generate.service.margin_api import MarginService, MarginServiceImpl
 from kucoin_universal_sdk.generate.service.spot_api import SpotService, SpotServiceImpl
 from kucoin_universal_sdk.generate.service.viplending_api import VIPLendingService, VIPLendingServiceImpl
+from kucoin_universal_sdk.generate.service.uta_api import UTAService,UTAServiceImpl
+
 from kucoin_universal_sdk.generate.version import sdk_version
 from kucoin_universal_sdk.internal.infra.default_transport import DefaultTransport
 from kucoin_universal_sdk.model.client_option import ClientOption
@@ -33,6 +35,8 @@ class DefaultKucoinRestAPIImpl(KucoinRestService):
         self.margin_service = MarginServiceImpl(transport)
         self.spot_service = SpotServiceImpl(transport)
         self.vip_lending_service = VIPLendingServiceImpl(transport)
+        self.uta_service = UTAServiceImpl(transport)
+
 
     def get_account_service(self) -> AccountService:
         return self.account_service
@@ -60,3 +64,6 @@ class DefaultKucoinRestAPIImpl(KucoinRestService):
 
     def get_vip_lending_service(self) -> VIPLendingService:
         return self.vip_lending_service
+
+    def get_uta_service(self) -> UTAService:
+        return self.uta_service
