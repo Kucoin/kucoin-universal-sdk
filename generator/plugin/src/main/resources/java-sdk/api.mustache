@@ -17,7 +17,9 @@ public interface {{classname}} {
     {{/vendorExtensions.x-extra-comment-kv}}
     * </ul>
     *
+    {{#vendorExtensions.x-api-doc}}
     * @see <a href="{{vendorExtensions.x-api-doc}}">docs</a>
+    {{/vendorExtensions.x-api-doc}}
     */
     {{#isDeprecated}}
     @Deprecated{{/isDeprecated}}
