@@ -9,6 +9,7 @@ import com.kucoin.universal.sdk.generate.spot.spotpublic.SpotPublicWs;
 import com.kucoin.universal.sdk.generate.uta.publicws.UtaPublicWs;
 import com.kucoin.universal.sdk.generate.uta.privatews.UtaPrivateWs;
 import com.kucoin.universal.sdk.generate.uta.privatews.UtaPrivateTradeWs;
+import com.kucoin.universal.sdk.model.ClientOption;
 import com.kucoin.universal.sdk.model.PushTradeType;
 
 /** KucoinWSService provides WebSocket interfaces for Spot, Margin, and Futures trading. */
