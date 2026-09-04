@@ -137,7 +137,6 @@ For other languages, refer to the [Examples](#-examples) section.
 - **[Node.js Documentation](sdk/node/README.md)**
 - **[PHP Documentation](sdk/php/README.md)**
 - **[Java Documentation](sdk/java/README.md)**
-- **[Postman Documentation](sdk/postman/README.md)**
 
 ## 📂 Examples
 Find usage examples for your desired language by selecting the corresponding link below:
@@ -192,52 +191,6 @@ graph LR
    - Each language SDK is organized into specific modules to provide clear separation of concerns and ease of use.
    - Consistent abstractions ensure similar functionality and design principles across all supported languages.
 
-### 📂 Directory Structure
-
-The following table describes the key components of the project directory:
-
-| Path                    | Description                                                                 |
-|-------------------------|-----------------------------------------------------------------------------|
-| `Dockerfile`            | Docker configuration for building and testing the SDK.                     |
-| `LICENSE`               | The MIT license file.                                                      |
-| `Makefile`              | Makefile for project automation (e.g., building, testing, generating code).|
-| `README.md`             | Main documentation file.                                                   |
-| `generate.mk`           | Additional Makefile specifically for code generation tasks.                |
-| `generator/`            | Directory containing the code generation logic.                            |
-| `sdk/`                  | Directory for generated SDKs organized by language.                        |
-| `spec/`                 | Directory containing API specification files.                              |
-
-## ⚙️ Build and Test Guide
-
-### Prerequisites
-
-Before you begin, ensure the following dependencies are installed:
-- Docker: For containerized builds and tools.
-- Make: To execute the provided Makefile targets.
-
----
-
-### Steps
-
-1. **Build the Tools**  
-   Build the Docker image used for code generation and validation.  
-   Command: `make build-tools`
-
-2. **Preprocess Specifications**  
-   Clean up old API files and run the preprocessor to process new API specifications.  
-   Command: `make preprocessor`
-
-3. **Validate API Specifications**  
-   Validate all REST and WebSocket specifications to ensure correctness.  
-   Command: `make validate`
-
-4. **Generate SDK Code**  
-   Generate SDK code for all supported languages.  
-   Command: `make generate`
-
-5. **Run Tests**  
-   Run automatically generated tests for all SDKs.
-   Command: `make auto-test`
 
 ## 🤝 Contribution Guidelines
 
