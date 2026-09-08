@@ -10,6 +10,8 @@ import (
 	"github.com/Kucoin/kucoin-universal-sdk/sdk/golang/pkg/generate/margin/marginpublic"
 	"github.com/Kucoin/kucoin-universal-sdk/sdk/golang/pkg/generate/spot/spotprivate"
 	"github.com/Kucoin/kucoin-universal-sdk/sdk/golang/pkg/generate/spot/spotpublic"
+	"github.com/Kucoin/kucoin-universal-sdk/sdk/golang/pkg/generate/uta/privatews"
+	"github.com/Kucoin/kucoin-universal-sdk/sdk/golang/pkg/generate/uta/publicws"
 	"github.com/Kucoin/kucoin-universal-sdk/sdk/golang/pkg/types"
 )
 
@@ -18,9 +20,13 @@ type KuCoinDefaultWsImpl struct {
 }
 
 func NewKuCoinDefaultWsImpl(op *types.ClientOption) *KuCoinDefaultWsImpl {
-	if op == nil || op.WebSocketClientOption == nil {
-		logger.GetLogger().Warnf("no websocket option provided")
+	if op == nil {
+		logger.GetLogger().Warnf("no client option provided")
 		return nil
+	}
+	if op.WebSocketClientOption == nil {
+		logger.GetLogger().Warnf("no websocket option provided; using defaults")
+		op.WebSocketClientOption = types.NewWebSocketClientOption()
 	}
 
 	return &KuCoinDefaultWsImpl{
@@ -51,4 +57,16 @@ func (impl *KuCoinDefaultWsImpl) NewMarginPublicWS() marginpublic.MarginPublicWS
 
 func (impl *KuCoinDefaultWsImpl) NewMarginPrivateWS() marginprivate.MarginPrivateWS {
 	return marginprivate.NewMarginPrivateWSImp(infra.NewDefaultWsService(impl.option, types.DomainTypeSpot, true, generate.SdkVersion))
+}
+
+func (impl *KuCoinDefaultWsImpl) NewUtaPublicWS(tradeType publicws.PushTradeType) publicws.UtaPublicWS {
+	return publicws.NewUtaPublicWSImpl(impl.option.WebSocketClientOption, tradeType)
+}
+
+func (impl *KuCoinDefaultWsImpl) NewUtaPrivateWS() privatews.UtaPrivateWS {
+	return privatews.NewUtaPrivateWSImpl(impl.option)
+}
+
+func (impl *KuCoinDefaultWsImpl) NewUtaPrivateTradeWS() privatews.UtaPrivateTradeWS {
+	return privatews.NewUtaPrivateTradeWSImpl(impl.option)
 }

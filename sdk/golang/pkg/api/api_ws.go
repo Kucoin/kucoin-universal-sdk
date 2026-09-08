@@ -7,6 +7,8 @@ import (
 	"github.com/Kucoin/kucoin-universal-sdk/sdk/golang/pkg/generate/margin/marginpublic"
 	"github.com/Kucoin/kucoin-universal-sdk/sdk/golang/pkg/generate/spot/spotprivate"
 	"github.com/Kucoin/kucoin-universal-sdk/sdk/golang/pkg/generate/spot/spotpublic"
+	"github.com/Kucoin/kucoin-universal-sdk/sdk/golang/pkg/generate/uta/privatews"
+	"github.com/Kucoin/kucoin-universal-sdk/sdk/golang/pkg/generate/uta/publicws"
 )
 
 type KucoinWSService interface {
@@ -33,4 +35,13 @@ type KucoinWSService interface {
 	// NewFuturesPrivateWS returns the interface to interact with
 	// the Futures Trading websocket(private channel) API of Kucoin.
 	NewFuturesPrivateWS() futuresprivate.FuturesPrivateWS
+
+	// NewUtaPublicWS returns a direct UTA public push WebSocket service for SPOT or FUTURES.
+	NewUtaPublicWS(tradeType publicws.PushTradeType) publicws.UtaPublicWS
+
+	// NewUtaPrivateWS returns the authenticated direct UTA private push WebSocket service.
+	NewUtaPrivateWS() privatews.UtaPrivateWS
+
+	// NewUtaPrivateTradeWS returns the authenticated direct UTA WebSocket trading service.
+	NewUtaPrivateTradeWS() privatews.UtaPrivateTradeWS
 }
