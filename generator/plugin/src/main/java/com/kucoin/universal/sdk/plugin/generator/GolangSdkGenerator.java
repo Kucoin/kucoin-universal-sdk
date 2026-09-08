@@ -9,7 +9,6 @@ import com.kucoin.universal.sdk.plugin.service.OperationService;
 import com.kucoin.universal.sdk.plugin.service.SchemaService;
 import com.kucoin.universal.sdk.plugin.service.impl.OperationServiceImpl;
 import com.kucoin.universal.sdk.plugin.service.impl.SchemaServiceImpl;
-import com.kucoin.universal.sdk.plugin.util.GoAutoCasesGenerator;
 import com.kucoin.universal.sdk.plugin.util.KeywordsUtil;
 import com.kucoin.universal.sdk.plugin.util.SpecificationUtil;
 import io.swagger.v3.oas.models.OpenAPI;
@@ -80,22 +79,6 @@ public class GolangSdkGenerator extends AbstractGoCodegen implements NameService
 
         additionalProperties.put("packageName", subService.toLowerCase());
         modelPackage = String.format("%s.%s", service.toLowerCase(), subService.toLowerCase());
-
-        if (modeSwitch.getMode() == ModeSwitch.ModeEnum.AUTO_CASES) {
-            try {
-                String outputDir = outputFolder + File.separator + "testcase";
-                File dir = new File(outputDir);
-                if (!dir.exists()) {
-                    dir.mkdirs();
-                }
-                String outputPath = outputDir + File.separator + "AutoCases.go";
-                GoAutoCasesGenerator.generate(openAPI, outputPath);
-             } catch (Exception e) {
-                throw new RuntimeException("Failed to generate AutoCases.go", e);
-            }
-            return;
-        }
-        // =============================================================
 
         switch (modeSwitch.getMode()) {
             case API: {

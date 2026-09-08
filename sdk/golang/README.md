@@ -9,7 +9,7 @@ For an overview of the project and SDKs in other languages, refer to the [Main R
 
 ## 📦 Installation
 
-### Latest Version: `1.3.1`
+### Latest Version: `1.3.2`
 Install the Golang SDK using `go get`:
 
 ```bash
@@ -19,41 +19,40 @@ go mod tidy
 
 ## 📖 Getting Started
 
-Here's a quick example to get you started with the SDK in **Go**.
+The examples below use the Unified Trading Account (UTA) APIs. For authenticated REST and private WebSocket APIs, configure credentials through environment variables rather than hard-coding them:
+
+```bash
+export API_KEY="your-api-key"
+export API_SECRET="your-api-secret"
+export API_PASSPHRASE="your-api-passphrase"
+```
+
+### UTA REST API
+
+This example queries the UTA account overview with `GET /api/ua/v2/unified/account/overview`.
 
 ```golang
 package main
 
 import (
 	"context"
-	"github.com/Kucoin/kucoin-universal-sdk/sdk/golang/pkg/api"
-	"github.com/Kucoin/kucoin-universal-sdk/sdk/golang/pkg/common/logger"
-	"github.com/Kucoin/kucoin-universal-sdk/sdk/golang/pkg/generate/spot/market"
-	"github.com/Kucoin/kucoin-universal-sdk/sdk/golang/pkg/types"
+	"fmt"
 	"os"
+
+	"github.com/Kucoin/kucoin-universal-sdk/sdk/golang/pkg/api"
+	"github.com/Kucoin/kucoin-universal-sdk/sdk/golang/pkg/types"
 )
 
-func example() {
-	// Use the default logger or supply your custom logger
-	defaultLogger := logger.NewDefaultLogger()
-	logger.SetLogger(defaultLogger)
-
-	// Retrieve API secret information from environment variables
-	key := os.Getenv("API_KEY")
-	secret := os.Getenv("API_SECRET")
-	passphrase := os.Getenv("API_PASSPHRASE")
-
-	// Set specific options, others will fall back to default values
+func main() {
 	httpOption := types.NewTransportOptionBuilder().
 		SetKeepAlive(true).
 		SetMaxIdleConnsPerHost(10).
 		Build()
 
-	// Create a client using the specified options
 	option := types.NewClientOptionBuilder().
-		WithKey(key).
-		WithSecret(secret).
-		WithPassphrase(passphrase).
+		WithKey(os.Getenv("API_KEY")).
+		WithSecret(os.Getenv("API_SECRET")).
+		WithPassphrase(os.Getenv("API_PASSPHRASE")).
 		WithSpotEndpoint(types.GlobalApiEndpoint).
 		WithFuturesEndpoint(types.GlobalFuturesApiEndpoint).
 		WithBrokerEndpoint(types.GlobalBrokerApiEndpoint).
@@ -61,33 +60,166 @@ func example() {
 		Build()
 	client := api.NewClient(option)
 
-	// Get the Restful Service
-	kuCoinRestService := client.RestService()
-
-	// Get Spot Market API
-	spotMarketAPI := kuCoinRestService.GetSpotService().GetMarketAPI()
-
-	request := market.NewGetPartOrderBookReqBuilder().
-		SetSymbol("BTC-USDT").
-		SetSize("20").
-		Build()
-
-	// Query for part orderbook depth data. (aggregated by price)
-	response, err := spotMarketAPI.GetPartOrderBook(request, context.Background())
+	accountAPI := client.RestService().GetUTAService().GetAccountAPI()
+	response, err := accountAPI.GetAccountOverview(context.Background())
 	if err != nil {
-		logger.GetLogger().Errorf("failed to get part order book: %v", err)
-		return
+		panic(err)
 	}
-	logger.GetLogger().Infof("time=%d, sequence=%s, bids=%v, asks=%v", response.Time, response.Sequence, response.Bids, response.Asks)
+	fmt.Printf("UTA account overview: %+v\n", response)
 }
 ```
+
+### UTA Public WebSocket API
+
+UTA public WebSocket channels do not require API credentials. Start the service before subscribing and keep the process alive to receive events.
+
+```golang
+package main
+
+import (
+	"fmt"
+	"os"
+	"os/signal"
+	"syscall"
+
+	"github.com/Kucoin/kucoin-universal-sdk/sdk/golang/pkg/api"
+	"github.com/Kucoin/kucoin-universal-sdk/sdk/golang/pkg/generate/uta/publicws"
+	"github.com/Kucoin/kucoin-universal-sdk/sdk/golang/pkg/types"
+)
+
+func main() {
+	client := api.NewClient(types.NewClientOptionBuilder().
+		WithTransportOption(types.NewTransportOption()).
+		WithWebSocketClientOption(types.NewWebSocketClientOption()).
+		Build())
+
+	ws := client.WsService().NewUtaPublicWS(publicws.PushTradeTypeSpot)
+	if err := ws.Start(); err != nil {
+		panic(err)
+	}
+	defer ws.Stop()
+
+	if _, err := ws.Ticker("BTC-USDT", func(topic string, event *publicws.TickerEvent) error {
+		fmt.Printf("[%s] %s last=%s\n", topic, event.Data.Symbol, event.Data.LastPrice)
+		return nil
+	}); err != nil {
+		panic(err)
+	}
+
+	fmt.Println("Subscribed to UTA SPOT ticker. Press Ctrl+C to stop.")
+	stop := make(chan os.Signal, 1)
+	signal.Notify(stop, os.Interrupt, syscall.SIGTERM)
+	<-stop
+}
+```
+
+Use `publicws.PushTradeTypeFutures` for Futures channels. The UTA public service also supports `Kline`, `Trade`, `Orderbook`, `OrderbookWithRpi`, `MarkPrice`, `FundingFee`, `FundingFees`, `FundingFeeAllSymbols`, and `CallAuctionInfo` subscriptions.
+
+### UTA Private Push WebSocket API
+
+Private push channels require the API credentials configured above. The following example listens for UTA execution events; it receives events only after a matching account event occurs and does not provide an initial snapshot.
+
+```golang
+package main
+
+import (
+	"fmt"
+	"os"
+	"os/signal"
+	"syscall"
+
+	"github.com/Kucoin/kucoin-universal-sdk/sdk/golang/pkg/api"
+	"github.com/Kucoin/kucoin-universal-sdk/sdk/golang/pkg/generate/uta/privatews"
+	"github.com/Kucoin/kucoin-universal-sdk/sdk/golang/pkg/types"
+)
+
+func main() {
+	client := api.NewClient(types.NewClientOptionBuilder().
+		WithKey(os.Getenv("API_KEY")).
+		WithSecret(os.Getenv("API_SECRET")).
+		WithPassphrase(os.Getenv("API_PASSPHRASE")).
+		WithTransportOption(types.NewTransportOption()).
+		WithWebSocketClientOption(types.NewWebSocketClientOption()).
+		Build())
+
+	ws := client.WsService().NewUtaPrivateWS()
+	if err := ws.Start(); err != nil {
+		panic(err)
+	}
+	defer ws.Stop()
+
+	if _, err := ws.Execution(func(topic string, event *privatews.ExecutionEvent) error {
+		fmt.Printf("[%s] order=%s symbol=%s price=%s size=%s\n",
+			topic, event.Data.OrderID, event.Data.Symbol, event.Data.Price, event.Data.Quantity)
+		return nil
+	}); err != nil {
+		panic(err)
+	}
+
+	fmt.Println("Subscribed to UTA execution events. Press Ctrl+C to stop.")
+	stop := make(chan os.Signal, 1)
+	signal.Notify(stop, os.Interrupt, syscall.SIGTERM)
+	<-stop
+}
+```
+
+The UTA private push service also supports `ExecutionLite`, `OrderAll`, `Order`, `Balance`, `PositionAll`, `Position`, `Leverage`, and `LiquidationWarning`.
+
+### UTA Private Trade WebSocket API
+
+`NewUtaPrivateTradeWS` sends authenticated `uta.order`, `uta.cancel`, and `uta.amend` commands. Calling `PlaceOrder` creates a real order. The safe example below only opens the connection; replace the request values and explicitly uncomment the call after verifying the account, symbol, price, and size.
+
+```golang
+package main
+
+import (
+	"fmt"
+	"os"
+
+	"github.com/Kucoin/kucoin-universal-sdk/sdk/golang/pkg/api"
+	"github.com/Kucoin/kucoin-universal-sdk/sdk/golang/pkg/generate/uta/order"
+	"github.com/Kucoin/kucoin-universal-sdk/sdk/golang/pkg/types"
+)
+
+func main() {
+	client := api.NewClient(types.NewClientOptionBuilder().
+		WithKey(os.Getenv("API_KEY")).
+		WithSecret(os.Getenv("API_SECRET")).
+		WithPassphrase(os.Getenv("API_PASSPHRASE")).
+		WithTransportOption(types.NewTransportOption()).
+		WithWebSocketClientOption(types.NewWebSocketClientOption()).
+		Build())
+
+	ws := client.WsService().NewUtaPrivateTradeWS()
+	if err := ws.Start(); err != nil {
+		panic(err)
+	}
+	defer ws.Stop()
+
+	request := &order.PlaceOrderReq{
+		TradeType:  "SPOT",
+		Symbol:     "BTC-USDT",
+		ClientOid:  "replace-with-a-unique-client-oid",
+		Side:       "BUY",
+		OrderType:  "LIMIT",
+		Price:      "replace-with-a-safe-limit-price",
+		Size:       "replace-with-a-valid-size",
+		SizeUnit:   "BASECCY",
+		PostOnly:   true,
+		TimeInForce: "GTC",
+	}
+
+	// response, err := ws.PlaceOrder(request) // Sends a real order.
+	// if err != nil { panic(err) }
+	// fmt.Printf("UTA order response: %+v\n", response)
+	_ = request
+	fmt.Println("UTA private trading WebSocket connected; no order was sent.")
+}
+```
+
 ## 📚 Documentation
-Official Documentation: [KuCoin API Docs](https://www.kucoin.com/docs-new)  
-
-## 📂 Examples
-
-Explore more examples in the [example/](example/) directory for advanced usage.
-
+Official Documentation: [KuCoin API Docs](https://www.kucoin.com/docs-new)
+ 
 ## 📋 Changelog
 
 For a detailed list of changes, see the [Changelog](./CHANGELOG.md).
@@ -111,6 +243,12 @@ This section provides specific considerations and recommendations for using the 
 ---
 
 ### WebSocket API Notes
+
+#### UTA Direct WebSocket Services
+- **Public Push**: Create a service with `NewUtaPublicWS(publicws.PushTradeTypeSpot)` or `NewUtaPublicWS(publicws.PushTradeTypeFutures)`. Public channels do not require API credentials.
+- **Private Push**: Create a service with `NewUtaPrivateWS()`. API key, secret, and passphrase are required; subscriptions deliver account changes and do not return an initial state snapshot.
+- **Private Trading**: Create a service with `NewUtaPrivateTradeWS()`. Its `PlaceOrder`, `CancelOrder`, and `AmendOrder` methods send real trading commands rather than subscriptions.
+- **Lifecycle**: Call `Start()` successfully before subscribing or sending a trading command, and call `Stop()` when the application exits. `UnSubscribe(id)` removes a public or private push subscription by the ID returned from the subscribe method.
 
 #### Client Features
 - **Flexible Service Creation**:
