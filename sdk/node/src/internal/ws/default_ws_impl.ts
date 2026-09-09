@@ -21,6 +21,11 @@ import {
 } from '@generate/futures/futuresprivate/api_futures_private';
 import { DefaultWsService } from '../infra/default_ws_service';
 import { SdkVersion } from '@generate/version';
+import { UtaPublicWS, UtaPublicWSImpl } from '@generate/uta/publicws';
+import { UtaPrivateTradeWS, UtaPrivateTradeWSImpl, UtaPrivateWS, UtaPrivateWSImpl } from '@generate/uta/privatews';
+import { UtaPushWsService } from '@internal/infra/uta_push_ws_service';
+import { UtaPrivateTradeWsService } from '@internal/infra/uta_private_trade_ws_service';
+import { PushTradeType } from '@model/push_trade_type';
 
 export class KucoinDefaultWsImpl implements KucoinWSService {
     private readonly options: ClientOption;
@@ -57,5 +62,17 @@ export class KucoinDefaultWsImpl implements KucoinWSService {
     newFuturesPrivateWS(): FuturesPrivateWS {
         const wsService = new DefaultWsService(this.options, DomainType.Futures, true, SdkVersion);
         return new FuturesPrivateWSImpl(wsService);
+    }
+
+    newUtaPublicWS(tradeType: PushTradeType): UtaPublicWS {
+        return new UtaPublicWSImpl(UtaPushWsService.public(this.options, tradeType), tradeType);
+    }
+
+    newUtaPrivateWS(): UtaPrivateWS {
+        return new UtaPrivateWSImpl(UtaPushWsService.private(this.options));
+    }
+
+    newUtaPrivateTradeWS(): UtaPrivateTradeWS {
+        return new UtaPrivateTradeWSImpl(new UtaPrivateTradeWsService(this.options));
     }
 }

@@ -8,7 +8,7 @@ For an overview of the project and SDKs in other languages, refer to the [Main R
 
 ## 📦 Installation
 
-### Latest Version: `1.3.1`
+### Latest Version: `1.3.2`
 Install the SDK using `npm`:
 
 ```bash
@@ -81,6 +81,88 @@ function example() {
 
 example()
 ```
+
+## UTA APIs
+
+UTA REST responses keep the server's original `data` shape. This is intentional: some endpoints
+return an array in one account mode and an object in another, and numeric fields can be represented
+as either JSON numbers or strings.
+
+```ts
+import {
+    ClientOptionBuilder,
+    DefaultClient,
+    GlobalApiEndpoint,
+    GlobalBrokerApiEndpoint,
+    GlobalFuturesApiEndpoint,
+    TransportOptionBuilder,
+} from 'kucoin-universal-sdk';
+
+async function main() {
+    const client = new DefaultClient(
+        new ClientOptionBuilder()
+            .setKey(process.env.API_KEY || '')
+            .setSecret(process.env.API_SECRET || '')
+            .setPassphrase(process.env.API_PASSPHRASE || '')
+            .setSpotEndpoint(GlobalApiEndpoint)
+            .setFuturesEndpoint(GlobalFuturesApiEndpoint)
+            .setBrokerEndpoint(GlobalBrokerApiEndpoint)
+            .setTransportOption(new TransportOptionBuilder().setKeepAlive(true).build())
+            .build(),
+    );
+
+    const utaMarketApi = client.restService().getUTAService().getMarketApi();
+    const ticker = await utaMarketApi.getTicker({ tradeType: 'SPOT', symbol: 'BTC-USDT' });
+    console.log(ticker.data);
+}
+
+void main();
+```
+
+### UTA Public WebSocket
+
+UTA public streams use direct push endpoints instead of the legacy token WebSocket. Call `start()`
+before subscribing and `stop()` when the connection is no longer needed.
+
+```ts
+import {
+    ClientOptionBuilder,
+    DefaultClient,
+    GlobalApiEndpoint,
+    GlobalBrokerApiEndpoint,
+    GlobalFuturesApiEndpoint,
+    PushTradeType,
+    WebSocketClientOptionBuilder,
+} from 'kucoin-universal-sdk';
+
+async function main() {
+    const client = new DefaultClient(
+        new ClientOptionBuilder()
+            .setSpotEndpoint(GlobalApiEndpoint)
+            .setFuturesEndpoint(GlobalFuturesApiEndpoint)
+            .setBrokerEndpoint(GlobalBrokerApiEndpoint)
+            .setWebSocketClientOption(new WebSocketClientOptionBuilder().build())
+            .build(),
+    );
+
+    const ws = client.wsService().newUtaPublicWS(PushTradeType.SPOT);
+    await ws.start();
+    await ws.ticker('BTC-USDT', (event) => {
+        console.log(event.T, event.d);
+    });
+
+    // Stop later, for example during application shutdown.
+    // await ws.stop();
+}
+
+void main();
+```
+
+`newUtaPrivateWS()` provides private push subscriptions (`execution`, `order`, `balance`,
+`position`, `leverage`, and `lw`). `newUtaPrivateTradeWS()` provides `uta.order`, `uta.cancel`,
+and `uta.amend`; those methods can create, cancel, or amend real orders and therefore require API
+credentials with the appropriate permission.
+
 ## 📚 Documentation
 Official Documentation: [KuCoin API Docs](https://www.kucoin.com/docs-new)
 

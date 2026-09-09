@@ -8,7 +8,6 @@ import com.kucoin.universal.sdk.plugin.service.OperationService;
 import com.kucoin.universal.sdk.plugin.service.SchemaService;
 import com.kucoin.universal.sdk.plugin.service.impl.OperationServiceImpl;
 import com.kucoin.universal.sdk.plugin.service.impl.SchemaServiceImpl;
-import com.kucoin.universal.sdk.plugin.util.NodeAutoCasesGenerator;
 import com.kucoin.universal.sdk.plugin.util.SpecificationUtil;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.Operation;
@@ -96,19 +95,6 @@ public class NodeSdkGenerator extends AbstractTypeScriptClientCodegen implements
         modeSwitch = new ModeSwitch(additionalProperties);
         service = openAPI.getInfo().getTitle();
         subService = openAPI.getInfo().getDescription();
-
-        if (modeSwitch.getMode() == ModeSwitch.ModeEnum.AUTO_CASES) {
-            try {
-                filterPaths(openAPI);
-                String outputPath = outputFolder + File.separator + "AutoCases.ts";
-                NodeAutoCasesGenerator.generate(openAPI, outputPath);
-                log.info("AutoCases.ts generated successfully at: {}", outputPath);
-            } catch (Exception e) {
-                log.error("Failed to generate AutoCases.ts", e);
-                throw new RuntimeException("Failed to generate AutoCases.ts", e);
-            }
-            return;
-        }
 
         switch (modeSwitch.getMode()) {
             case API: {

@@ -2,7 +2,10 @@
 
 API documentation [Changelog](https://www.kucoin.com/docs-new/change-log)
 
-Current synchronized API documentation version [20250529](https://www.kucoin.com/docs-new/change-log#20250529)
+Current synchronized API documentation version [20250904](https://www.kucoin.com/docs-new/change-log#20250904)
+
+## 2026-09-09(1.3.2)
+- UTA interface update
 
 ## 2026-05-29(1.3.1)
 - Modify broker signature parameters

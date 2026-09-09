@@ -91,4 +91,8 @@ export class DefaultKucoinRestAPIImpl implements KucoinRestService {
     getUtaService():UTAService{
         return this.utaService;
     }
+
+    getUTAService(): UTAService {
+        return this.utaService;
+    }
 }
