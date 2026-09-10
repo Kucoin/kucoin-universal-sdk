@@ -57,5 +57,9 @@ export interface KucoinRestService {
     getVipLendingService(): VIPLendingService;
 
 
-    getUtaService():UTAService;
+    /** Returns the UTA REST API service. */
+    getUtaService(): UTAService;
+
+    /** Java-style alias retained for cross-language API parity. */
+    getUTAService(): UTAService;
 }

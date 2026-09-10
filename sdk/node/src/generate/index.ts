@@ -7,4 +7,5 @@ export * from './futures';
 export * from './margin';
 export * from './service';
 export * from './spot';
+export * from './uta';
 export * from './viplending';
