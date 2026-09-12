@@ -13,105 +13,121 @@ For an overview of the project and SDKs in other languages, refer to the [Main R
 
 ## 📦 Installation
 
-### Latest Version: `0.1.3-alpha`
+### Latest Version: `0.1.4-alpha`
 
 **Note**: This SDK is currently in the Alpha phase. We are actively iterating and improving its features, stability, and documentation. Feedback and contributions are highly encouraged to help us refine the SDK.
 
 Install the SDK using `composer`:
 
 ```bash
-composer require kucoin/kucoin-universal-sdk=0.1.3-alpha
+composer require kucoin/kucoin-universal-sdk=0.1.4-alpha
 ```
 
 ## 📖 Getting Started
 
-Here's a quick example to get you started with the SDK in **PHP**.
+The examples below use the Unified Trading Account (UTA) APIs. Set credentials only for authenticated APIs; never hard-code them in source files.
+
+### UTA REST: Get Unified Account Overview
 
 ```php
 <?php
 
+require __DIR__ . '/vendor/autoload.php';
 
 use KuCoin\UniversalSDK\Api\DefaultClient;
-use KuCoin\UniversalSDK\Common\Logger;
-use KuCoin\UniversalSDK\Generate\Spot\Market\GetPartOrderBookReq;
 use KuCoin\UniversalSDK\Model\ClientOptionBuilder;
 use KuCoin\UniversalSDK\Model\Constants;
 use KuCoin\UniversalSDK\Model\TransportOptionBuilder;
 
-include '../vendor/autoload.php';
+$transportOption = (new TransportOptionBuilder())
+    ->setKeepAlive(true)
+    ->setMaxConnections(10)
+    ->build();
 
+$clientOption = (new ClientOptionBuilder())
+    ->setKey(getenv('API_KEY') ?: '')
+    ->setSecret(getenv('API_SECRET') ?: '')
+    ->setPassphrase(getenv('API_PASSPHRASE') ?: '')
+    ->setSpotEndpoint(Constants::GLOBAL_API_ENDPOINT)
+    ->setFuturesEndpoint(Constants::GLOBAL_FUTURES_API_ENDPOINT)
+    ->setBrokerEndpoint(Constants::GLOBAL_BROKER_API_ENDPOINT)
+    ->setTransportOption($transportOption)
+    ->build();
 
-function stringifyDepth($depth): string
-{
-    return implode(', ', array_map(function ($row) {
-        return '[' . implode(', ', $row) . ']';
-    }, $depth));
-}
+$client = new DefaultClient($clientOption);
+$accountApi = $client->restService()->getUTAService()->getAccountApi();
 
-function example()
-{
-    // Retrieve API secret information from environment variables
-    $key = getenv('API_KEY') ?: '';
-    $secret = getenv('API_SECRET') ?: '';
-    $passphrase = getenv('API_PASSPHRASE') ?: '';
-
-    // Set specific options, others will fall back to default values
-    $httpTransportOption = (new TransportOptionBuilder())
-        ->setKeepAlive(true)
-        ->setMaxConnections(10)
-        ->build();
-
-    // Create a client using the specified options
-    $clientOption = (new ClientOptionBuilder())
-        ->setKey($key)
-        ->setSecret($secret)
-        ->setPassphrase($passphrase)
-        ->setSpotEndpoint(Constants::GLOBAL_API_ENDPOINT)
-        ->setFuturesEndpoint(Constants::GLOBAL_FUTURES_API_ENDPOINT)
-        ->setBrokerEndpoint(Constants::GLOBAL_BROKER_API_ENDPOINT)
-        ->setTransportOption($httpTransportOption)
-        ->build();
-
-    $client = new DefaultClient($clientOption);
-
-    // Get the Restful Service
-    $kucoinRestService = $client->restService();
-
-    $spotMarketApi = $kucoinRestService->getSpotService()->getMarketApi();
-
-    // Query partial order book depth data (aggregated by price).
-    // Build the request using the builder pattern.
-    $request = GetPartOrderBookReq::builder()
-        ->setSymbol("BTC-USDT")
-        ->setSize("20")
-        ->build();
-
-    // Or build the request using an array.
-    // Ensure that the keys in the array match the field names in the API documentation,
-    // not the variable names in the class. This is useful when migrating code from an older SDK.
-    $request = GetPartOrderBookReq::create(["symbol" => "BTC-USDT", "size" => "20"]);
-
-    $response = $spotMarketApi->getPartOrderBook($request);
-
-    Logger::info(sprintf(
-        "time=%d, sequence=%d, bids=%s, asks=%s",
-        $response->time,
-        $response->sequence,
-        stringifyDepth($response->bids),
-        stringifyDepth($response->asks)
-    ));
-}
-
-if (php_sapi_name() === 'cli') {
-    example();
-}
+// GET /api/ua/v2/unified/account/overview
+$response = $accountApi->getAccountOverview();
+echo json_encode($response->data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . PHP_EOL;
 ```
+
+UTA methods accept either an associative array or `UtaRequest`. The response `data` is intentionally flexible: some endpoints return objects and others return arrays.
+
+### UTA Public WebSocket: Subscribe to a Spot Ticker
+
+Public UTA WebSocket channels do not require API credentials. The process stays open to receive events; stop it with `Ctrl+C`.
+
+```php
+<?php
+
+require __DIR__ . '/vendor/autoload.php';
+
+use KuCoin\UniversalSDK\Api\DefaultClient;
+use KuCoin\UniversalSDK\Model\ClientOptionBuilder;
+use KuCoin\UniversalSDK\Model\Constants;
+use KuCoin\UniversalSDK\Model\TransportOptionBuilder;
+use KuCoin\UniversalSDK\Model\WebSocketClientOptionBuilder;
+use React\EventLoop\Loop;
+
+$loop = Loop::get();
+$transportOption = (new TransportOptionBuilder())
+    ->setKeepAlive(true)
+    ->build();
+$webSocketOption = (new WebSocketClientOptionBuilder())
+    ->setReconnect(true)
+    ->setReconnectAttempts(-1)
+    ->setReconnectInterval(3.0)
+    ->setDialTimeout(20.0)
+    ->setWriteTimeout(10.0)
+    ->build();
+
+$clientOption = (new ClientOptionBuilder())
+    ->setSpotEndpoint(Constants::GLOBAL_API_ENDPOINT)
+    ->setFuturesEndpoint(Constants::GLOBAL_FUTURES_API_ENDPOINT)
+    ->setBrokerEndpoint(Constants::GLOBAL_BROKER_API_ENDPOINT)
+    ->setTransportOption($transportOption)
+    ->setWebSocketClientOption($webSocketOption)
+    ->build();
+
+$client = new DefaultClient($clientOption, $loop);
+$ticker = $client->wsService()->newUtaPublicWS('SPOT');
+
+$ticker->start()
+    ->then(function () use ($ticker) {
+        return $ticker->ticker(['BTC-USDT'], function (array $event) {
+            echo json_encode($event, JSON_UNESCAPED_SLASHES) . PHP_EOL;
+        });
+    })
+    ->then(
+        function (string $subscriptionId) {
+            echo "Subscribed: {$subscriptionId}. Press Ctrl+C to stop." . PHP_EOL;
+        },
+        function ($error) use ($loop, $ticker) {
+            fwrite(STDERR, 'UTA public WebSocket failed: ' . $error->getMessage() . PHP_EOL);
+            $ticker->stop()->then(function () use ($loop) {
+                $loop->stop();
+            });
+        }
+    );
+
+$loop->run();
+```
+
+Create the public WebSocket with `SPOT` for ticker, kline, trade, orderbook, and call-auction channels. Use `FUTURES` for mark-price and funding-fee channels.
+
 ## 📚 Documentation
 Official Documentation: [KuCoin API Docs](https://www.kucoin.com/docs-new)
-
-## 📂 Examples
-
-Explore more examples in the [example/](example/) directory for advanced usage.
 
 ## 📋 Changelog
 
@@ -140,7 +156,7 @@ This section provides specific considerations and recommendations for using the 
 
 #### Client Features
 - **Flexible Service Creation**:
-    - Supports creating services for public/private channels in Spot, Futures, or Margin trading as needed.
+    - Supports creating services for public/private channels in Spot, Futures, Margin, and UTA trading as needed.
     - Multiple services can be created independently.
 - **Service Lifecycle**:
     - If a service is closed, create a new service instead of reusing it to avoid undefined behavior.
