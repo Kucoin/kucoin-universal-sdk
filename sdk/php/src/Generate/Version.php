@@ -4,5 +4,5 @@ namespace KuCoin\UniversalSDK\Generate;
 
 class Version {
     const SDK_VERSION = "0.1.4-alpha";
-    const SDK_GENERATE_DATE = "2026-07-07";
+    const SDK_GENERATE_DATE = "2026-09-12";
 }

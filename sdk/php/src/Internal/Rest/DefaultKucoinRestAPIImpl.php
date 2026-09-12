@@ -27,7 +27,7 @@ use KuCoin\UniversalSDK\Generate\Service\VIPLendingServiceImpl;
 use KuCoin\UniversalSDK\Generate\Version;
 use KuCoin\UniversalSDK\Internal\Infra\DefaultTransport;
 use KuCoin\UniversalSDK\Model\ClientOption;
-use RuntimeException;
+use KuCoin\UniversalSDK\Model\TransportOption;
 
 class DefaultKucoinRestAPIImpl implements KucoinRestService
 {
@@ -44,8 +44,11 @@ class DefaultKucoinRestAPIImpl implements KucoinRestService
 
     public function __construct(ClientOption $option)
     {
+        // DefaultClient always creates both REST and WebSocket services. Supplying only a
+        // WebSocket option for a public UTA stream must not fail while the unused REST service is
+        // being constructed.
         if ($option->transportOption == null) {
-            throw new RuntimeException("no transport option provided");
+            $option->transportOption = new TransportOption();
         }
         $transport = new DefaultTransport($option, Version::SDK_VERSION);
         $this->accountService = new AccountServiceImpl($transport);

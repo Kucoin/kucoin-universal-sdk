@@ -8,6 +8,9 @@ use KuCoin\UniversalSDK\Generate\Margin\MarginPrivate\MarginPrivateWs;
 use KuCoin\UniversalSDK\Generate\Margin\MarginPublic\MarginPublicWs;
 use KuCoin\UniversalSDK\Generate\Spot\SpotPrivate\SpotPrivateWs;
 use KuCoin\UniversalSDK\Generate\Spot\SpotPublic\SpotPublicWs;
+use KuCoin\UniversalSDK\Generate\Uta\PrivateWs\UtaPrivateTradeWs;
+use KuCoin\UniversalSDK\Generate\Uta\PrivateWs\UtaPrivateWs;
+use KuCoin\UniversalSDK\Generate\Uta\PublicWs\UtaPublicWs;
 use React\EventLoop\LoopInterface;
 
 /**
@@ -74,4 +77,13 @@ interface KucoinWSService
      * @return FuturesPrivateWS
      */
     public function newFuturesPrivateWS(): FuturesPrivateWS;
+
+    /** Creates a direct UTA public push WebSocket for SPOT or FUTURES. */
+    public function newUtaPublicWS(string $tradeType): UtaPublicWs;
+
+    /** Creates an authenticated direct UTA private push WebSocket. */
+    public function newUtaPrivateWS(): UtaPrivateWs;
+
+    /** Creates an authenticated direct UTA order WebSocket (uta.order/cancel/amend). */
+    public function newUtaPrivateTradeWS(): UtaPrivateTradeWs;
 }

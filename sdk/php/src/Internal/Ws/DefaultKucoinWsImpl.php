@@ -15,8 +15,16 @@ use KuCoin\UniversalSDK\Generate\Spot\SpotPrivate\SpotPrivateWs;
 use KuCoin\UniversalSDK\Generate\Spot\SpotPrivate\SpotPrivateWsImpl;
 use KuCoin\UniversalSDK\Generate\Spot\SpotPublic\SpotPublicWs;
 use KuCoin\UniversalSDK\Generate\Spot\SpotPublic\SpotPublicWsImpl;
+use KuCoin\UniversalSDK\Generate\Uta\PrivateWs\UtaPrivateTradeWs;
+use KuCoin\UniversalSDK\Generate\Uta\PrivateWs\UtaPrivateTradeWsImpl;
+use KuCoin\UniversalSDK\Generate\Uta\PrivateWs\UtaPrivateWs;
+use KuCoin\UniversalSDK\Generate\Uta\PrivateWs\UtaPrivateWsImpl;
+use KuCoin\UniversalSDK\Generate\Uta\PublicWs\UtaPublicWs;
+use KuCoin\UniversalSDK\Generate\Uta\PublicWs\UtaPublicWsImpl;
 use KuCoin\UniversalSDK\Generate\Version;
 use KuCoin\UniversalSDK\Internal\Infra\DefaultWsService;
+use KuCoin\UniversalSDK\Internal\Infra\UtaPrivateTradeWsService;
+use KuCoin\UniversalSDK\Internal\Infra\UtaPushWsService;
 use KuCoin\UniversalSDK\Model\ClientOption;
 use KuCoin\UniversalSDK\Model\Constants;
 use React\EventLoop\Loop;
@@ -128,5 +136,23 @@ class DefaultKucoinWsImpl implements KucoinWSService
             Version::SDK_VERSION);
 
         return new FuturesPrivateWsImpl($wsService);
+    }
+
+    public function newUtaPublicWS(string $tradeType): UtaPublicWs
+    {
+        return new UtaPublicWsImpl(
+            new UtaPushWsService($this->clientOption, $this->loop, false, $tradeType),
+            $tradeType
+        );
+    }
+
+    public function newUtaPrivateWS(): UtaPrivateWs
+    {
+        return new UtaPrivateWsImpl(new UtaPushWsService($this->clientOption, $this->loop, true));
+    }
+
+    public function newUtaPrivateTradeWS(): UtaPrivateTradeWs
+    {
+        return new UtaPrivateTradeWsImpl(new UtaPrivateTradeWsService($this->clientOption, $this->loop));
     }
 }

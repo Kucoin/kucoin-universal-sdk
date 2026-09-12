@@ -127,6 +127,30 @@ class DefaultTransport implements Transport
         $queryParts = [];
         $rawParts = [];
 
+        // UTA requests intentionally use an associative-array wrapper: response schemas are
+        // flexible and some request fields are arrays. Do not reflect the wrapper itself.
+        if (method_exists($requestObj, 'queryParameters')) {
+            $parameters = $requestObj->queryParameters();
+            foreach ($parameters as $serializedName => $value) {
+                if ($value === null) {
+                    continue;
+                }
+                $values = is_array($value) ? $value : [$value];
+                foreach ($values as $item) {
+                    if ($item === null) {
+                        continue;
+                    }
+                    if (!is_scalar($item)) {
+                        throw new RuntimeException("Unexpected value type for '{$serializedName}'");
+                    }
+                    $stringValue = is_bool($item) ? ($item ? 'true' : 'false') : (string)$item;
+                    $queryParts[] = urlencode($serializedName) . '=' . urlencode($stringValue);
+                    $rawParts[] = $serializedName . '=' . $stringValue;
+                }
+            }
+            return empty($queryParts) ? [] : [implode('&', $queryParts), implode('&', $rawParts)];
+        }
+
         $ref = new ReflectionObject($requestObj);
         foreach ($ref->getProperties() as $prop) {
             $prop->setAccessible(true);
