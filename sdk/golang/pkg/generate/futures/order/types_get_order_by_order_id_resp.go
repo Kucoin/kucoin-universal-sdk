@@ -37,7 +37,7 @@ type GetOrderByOrderIdResp struct {
 	// Mark to show whether the stop order is triggered
 	StopTriggered bool `json:"stopTriggered,omitempty"`
 	// Trigger price of stop orders
-	StopPrice float64 `json:"stopPrice,omitempty"`
+	StopPrice string `json:"stopPrice,omitempty"`
 	// Time in force policy type
 	TimeInForce string `json:"timeInForce,omitempty"`
 	// Mark of post only
@@ -90,7 +90,7 @@ type GetOrderByOrderIdResp struct {
 
 // NewGetOrderByOrderIdResp instantiates a new GetOrderByOrderIdResp object
 // This constructor will assign default values to properties that have it defined
-func NewGetOrderByOrderIdResp(id string, symbol string, Type_ string, side string, price string, size int32, value string, dealValue string, dealSize int32, stp string, stop string, stopPriceType string, stopTriggered bool, stopPrice float64, timeInForce string, postOnly bool, hidden bool, iceberg bool, leverage string, forceHold bool, closeOrder bool, visibleSize int32, clientOid string, remark string, tags string, isActive bool, cancelExist bool, createdAt int64, updatedAt int64, orderTime int64, settleCurrency string, marginMode string, avgDealPrice string, filledSize int32, filledValue string, status string, reduceOnly bool) *GetOrderByOrderIdResp {
+func NewGetOrderByOrderIdResp(id string, symbol string, Type_ string, side string, price string, size int32, value string, dealValue string, dealSize int32, stp string, stop string, stopPriceType string, stopTriggered bool, stopPrice string, timeInForce string, postOnly bool, hidden bool, iceberg bool, leverage string, forceHold bool, closeOrder bool, visibleSize int32, clientOid string, remark string, tags string, isActive bool, cancelExist bool, createdAt int64, updatedAt int64, orderTime int64, settleCurrency string, marginMode string, avgDealPrice string, filledSize int32, filledValue string, status string, reduceOnly bool) *GetOrderByOrderIdResp {
 	this := GetOrderByOrderIdResp{}
 	this.Id = id
 	this.Symbol = symbol
